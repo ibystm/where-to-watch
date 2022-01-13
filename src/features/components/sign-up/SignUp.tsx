@@ -10,10 +10,11 @@ import {
   InputLeftElement,
   InputRightElement,
   Link,
-  Stack,
+  Stack
 } from "@chakra-ui/react";
-import { useFormik } from "formik";
-import React, { useState } from "react";
+import {useFormik} from "formik";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import * as Yup from "yup";
 
 const validationScheme = {
@@ -34,6 +35,10 @@ export const SiginUp: React.VFC = () => {
   const formik = useFormik(validationScheme);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handleShowClick = () => setShowPassword(!showPassword);
+  const navigate = useNavigate();
+  const toSignInPage = () => {
+    navigate("/signin");
+  };
 
   return (
     <Flex
@@ -115,9 +120,9 @@ export const SiginUp: React.VFC = () => {
       </Stack>
       <Box>
         New to use ?{" "}
-        <Link color="purple.500" href="#">
-          Sign Up
-        </Link>
+        <Button color="purple.500" onClick={toSignInPage}>
+          Sign In
+        </Button>
       </Box>
     </Flex>
   );
