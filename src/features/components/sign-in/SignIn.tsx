@@ -111,7 +111,7 @@ export const SiginIn: React.VFC = () => {
               </FormControl>
               <Button
                 borderRadius="8px"
-                type="submit"
+                // type="submit"
                 variant="solid"
                 colorScheme="purple"
                 width="full"
