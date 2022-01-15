@@ -28,9 +28,20 @@ const validationScheme = {
       .required("必須です")
       .min(5, "5文字以上にしてください")
       .max(8, "8文字以上にしてください"),
-    email: Yup.string().email().required(),
-    password: Yup.string().required().min(8, "8文字以上にしてください"),
-    confirmPassword: Yup.string().required().min(8, "8文字以上にしてください"),
+    email: Yup.string()
+      .email("正しい形式のemailを設定してください")
+      .required("必須です"),
+    password: Yup.string()
+      .required("必須です")
+      .min(8, "8文字以上にしてください")
+      .max(24, "24文字以下にしてください"),
+    // .matches(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)$/, {
+    //   message: "大文字・小文字・数字を含むパスワードを指定してください",
+    // }),
+    confirmPassword: Yup.string()
+      .required("必須です")
+      .min(8, "8文字以上にしてください")
+      .max(24, "24文字以下にしてください"),
   }),
   onSubmit: () => {
     console.log("submit is Done!!");
@@ -45,8 +56,7 @@ export const SiginUp: React.VFC = () => {
   const toSignInPage = () => {
     navigate("/signin");
   };
-  console.log("##########", formik.errors.email);
-  console.log("##########", formik.errors.username);
+
   return (
     <Flex
       flexDirection="column"
@@ -100,6 +110,9 @@ export const SiginUp: React.VFC = () => {
                   borderRadius="8px"
                 />
               </InputGroup>
+              {formik.errors.email && (
+                <ErrorMessage message={formik.errors.email} />
+              )}
             </FormControl>
             <FormControl>
               <InputGroup>
@@ -118,6 +131,9 @@ export const SiginUp: React.VFC = () => {
                   </Button>
                 </InputRightElement>
               </InputGroup>
+              {formik.errors.password && (
+                <ErrorMessage message={formik.errors.password} />
+              )}
             </FormControl>
             <FormControl>
               <InputGroup>
@@ -136,6 +152,9 @@ export const SiginUp: React.VFC = () => {
                   </Button>
                 </InputRightElement>
               </InputGroup>
+              {formik.errors.confirmPassword && (
+                <ErrorMessage message={formik.errors.confirmPassword} />
+              )}
             </FormControl>
             <Button
               borderRadius="8px"
