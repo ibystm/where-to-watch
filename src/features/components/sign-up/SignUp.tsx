@@ -96,10 +96,11 @@ export const SiginUp: React.VFC = () => {
                   name="username"
                   placeholder="User name"
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   borderRadius="8px"
                 />
               </InputGroup>
-              {formik.errors.username && (
+              {formik.touched.username && formik.errors.username && (
                 <ErrorMessage message={formik.errors.username} />
               )}
             </FormControl>
@@ -110,11 +111,12 @@ export const SiginUp: React.VFC = () => {
                   name="email"
                   value={formik.values.email}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   placeholder="email address"
                   borderRadius="8px"
                 />
               </InputGroup>
-              {formik.errors.email && (
+              {formik.touched.email && formik.errors.email && (
                 <ErrorMessage message={formik.errors.email} />
               )}
             </FormControl>
@@ -127,6 +129,7 @@ export const SiginUp: React.VFC = () => {
                   placeholder="Password"
                   value={formik.values.password}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   borderRadius="8px"
                 />
                 <InputRightElement width="4.5rem">
@@ -135,7 +138,7 @@ export const SiginUp: React.VFC = () => {
                   </Button>
                 </InputRightElement>
               </InputGroup>
-              {formik.errors.password && (
+              {formik.errors.password && formik.touched.password && (
                 <ErrorMessage message={formik.errors.password} />
               )}
             </FormControl>
@@ -148,6 +151,7 @@ export const SiginUp: React.VFC = () => {
                   placeholder="Password"
                   value={formik.values.confirmPassword}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   borderRadius="8px"
                 />
                 <InputRightElement width="4.5rem">
@@ -156,9 +160,10 @@ export const SiginUp: React.VFC = () => {
                   </Button>
                 </InputRightElement>
               </InputGroup>
-              {formik.errors.confirmPassword && (
-                <ErrorMessage message={formik.errors.confirmPassword} />
-              )}
+              {formik.touched.confirmPassword &&
+                formik.errors.confirmPassword && (
+                  <ErrorMessage message={formik.errors.confirmPassword} />
+                )}
             </FormControl>
             <Button
               borderRadius="8px"
