@@ -14,6 +14,7 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { useAuth } from "../../../contexts/AuthContext";
 import { ErrorMessage } from "../error-message/ErrorMessage";
 
 const passwordRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[!-~]{10,}$/;
@@ -56,10 +57,19 @@ const validationScheme = {
 export const SiginUp: React.VFC = () => {
   const formik = useFormik(validationScheme);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { signUp, currentUser } = useAuth();
   const handleShowClick = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
   const toSignInPage = () => {
     navigate("/signin");
+  };
+  const handleSubmit = async () => {
+    if (formik.errors) return;
+    try {
+      await signUp(formik.values.email, formik.values.password);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -78,7 +88,7 @@ export const SiginUp: React.VFC = () => {
         alignItems="center"
       >
         <Heading size="2xl" color="purple.400" mb="32px">
-          Create a Account
+          Create a Account {currentUser ? currentUser.email : ""}
         </Heading>
         <Box minW={{ base: "90%", md: "468px" }}>
           <Stack
@@ -171,8 +181,9 @@ export const SiginUp: React.VFC = () => {
               variant="solid"
               colorScheme="purple"
               width="full"
+              onClick={handleSubmit}
             >
-              Signin
+              SignUp
             </Button>
           </Stack>
         </Box>
