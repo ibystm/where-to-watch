@@ -15,6 +15,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useSignUp } from "../../hooks/useSignUp";
 import { ErrorMessage } from "../error-message/ErrorMessage";
 
 const passwordRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[!-~]{10,}$/;
@@ -54,17 +55,18 @@ const validationScheme = {
   },
 };
 
-export const SiginUp: React.VFC = () => {
+export const SignUp: React.VFC = () => {
   const formik = useFormik(validationScheme);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { signUp, currentUser } = useAuth();
+  const { currentUser } = useAuth();
+  const { signUp } = useSignUp();
   const handleShowClick = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
   const toSignInPage = () => {
     navigate("/signin");
   };
   const handleSubmit = async () => {
-    if (formik.errors) return;
+    // if (formik.errors) return;
     try {
       await signUp(formik.values.email, formik.values.password);
     } catch (e) {
