@@ -65,13 +65,18 @@ export const SignUp: React.VFC = () => {
   const toSignInPage = () => {
     navigate("/signin");
   };
+  const hasError = () => {
+    const errorObj = formik.errors;
+    return (
+      errorObj.confirmPassword ||
+      errorObj.email ||
+      errorObj.password ||
+      errorObj.username
+    );
+  };
   const handleSubmit = async () => {
-    // if (formik.errors) return;
-    try {
-      await signUp(formik.values.email, formik.values.password);
-    } catch (e) {
-      console.error(e);
-    }
+    if (hasError()) return;
+    await signUp(formik.values.email, formik.values.password);
   };
 
   return (
