@@ -6,25 +6,19 @@ import { AppDispatch } from "../../store/store";
 export const useSignUp = () => {
   const dispatch: AppDispatch = useDispatch();
   const signUp = async (email: string, password: string) => {
-    await auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((res) => {
-        const fbUser = res.user;
-        if (fbUser === null) {
-          throw new Error("No user found.");
-        }
-        console.log("fbUser", fbUser.email);
-        dispatch(
-          storeUser({
-            id: fbUser.uid,
-            email: fbUser.email,
-            userName: fbUser.displayName,
-          })
-        );
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    await auth.createUserWithEmailAndPassword(email, password).then((res) => {
+      const fbUser = res.user;
+      if (fbUser === null) {
+        throw new Error("No user found.");
+      }
+      dispatch(
+        storeUser({
+          id: fbUser.uid,
+          email: fbUser.email,
+          userName: fbUser.displayName,
+        })
+      );
+    });
   };
   return { signUp };
 };

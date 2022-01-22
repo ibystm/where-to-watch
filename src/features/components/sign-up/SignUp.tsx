@@ -15,6 +15,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useHandleFBErrors } from "../../hooks/useHandleFBErrors";
 import { useSignUp } from "../../hooks/useSignUp";
 import { ErrorMessage } from "../error-message/ErrorMessage";
 
@@ -58,7 +59,9 @@ const validationScheme = {
 export const SignUp: React.VFC = () => {
   const formik = useFormik(validationScheme);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<string>("");
   const { currentUser } = useAuth();
+  const { handleErrorByCodes } = useHandleFBErrors();
   const { signUp } = useSignUp();
   const handleShowClick = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
@@ -76,7 +79,12 @@ export const SignUp: React.VFC = () => {
   };
   const handleSubmit = async () => {
     if (hasError()) return;
-    await signUp(formik.values.email, formik.values.password);
+    await signUp(formik.values.email, formik.values.password).catch((e) => {
+      if (e.code && typeof e.code) {
+        setSubmitError(handleErrorByCodes(e.code));
+      }
+      console.log(e);
+    });
   };
 
   return (
@@ -95,7 +103,7 @@ export const SignUp: React.VFC = () => {
         alignItems="center"
       >
         <Heading size="2xl" color="purple.400" mb="32px">
-          Create a Account {currentUser ? currentUser.email : ""}
+          Create a Account {currentUser ? "" : ""}
         </Heading>
         <Box minW={{ base: "90%", md: "468px" }}>
           <Stack
@@ -192,6 +200,7 @@ export const SignUp: React.VFC = () => {
             >
               SignUp
             </Button>
+            {submitError && <ErrorMessage message={submitError} />}
           </Stack>
         </Box>
       </Stack>
