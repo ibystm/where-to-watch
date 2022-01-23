@@ -79,12 +79,16 @@ export const SignUp: React.VFC = () => {
   };
   const handleSubmit = async () => {
     if (hasError()) return;
-    await signUp(formik.values.email, formik.values.password).catch((e) => {
-      if (e.code && typeof e.code) {
-        setSubmitError(handleErrorByCodes(e.code));
-      }
-      console.log(e);
-    });
+    await signUp(formik.values.email, formik.values.password)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((e) => {
+        if (e.code && typeof e.code) {
+          setSubmitError(handleErrorByCodes(e.code));
+        }
+        console.log(e);
+      });
   };
 
   return (
