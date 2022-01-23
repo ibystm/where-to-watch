@@ -8,7 +8,6 @@ export const routes = (isSignIn: boolean): RouteObject[] => [
     path: "/",
     element: !isSignIn ? <Navigate to="/signin" /> : <Home />,
   },
-
   {
     path: "/signin",
     element: <SiginIn />,
