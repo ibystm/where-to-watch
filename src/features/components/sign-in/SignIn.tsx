@@ -16,13 +16,16 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { useHandleFBErrors } from "../../hooks/useHandleFBErrors";
+import { useSignIn } from "../../hooks/useSignIn";
+import { ErrorMessage } from "../error-message/ErrorMessage";
 
 const validationScheme = {
   initialValues: {
     email: "",
     password: "",
   },
-  validationScheme: Yup.object({
+  validationSchema: Yup.object({
     email: Yup.string().email().required(),
     password: Yup.string().required().min(8, "8文字以上にしてください"),
   }),
@@ -34,10 +37,25 @@ const validationScheme = {
 export const SiginIn: React.VFC = () => {
   const formik = useFormik(validationScheme);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const { handleErrorByCodes } = useHandleFBErrors();
+  const { signIn } = useSignIn();
   const handleShowClick = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
   const toSignUpPage = () => {
     navigate("/signup");
+  };
+  const handleSubmit = async () => {
+    if (formik.errors.email && formik.errors.password) {
+      return;
+    }
+    await signIn(formik.values.email, formik.values.password).catch((e) => {
+      console.log(typeof e.code);
+      if (e.code && e.code === 400) {
+        const msg = handleErrorByCodes(e.code);
+        setErrorMessage(msg);
+      }
+    });
   };
 
   return (
@@ -83,6 +101,9 @@ export const SiginIn: React.VFC = () => {
                     borderRadius="8px"
                   />
                 </InputGroup>
+                {formik.errors.email && (
+                  <ErrorMessage message={formik.errors.email} />
+                )}
               </FormControl>
               <FormControl>
                 <InputGroup>
@@ -108,6 +129,9 @@ export const SiginIn: React.VFC = () => {
                 <FormHelperText textAlign="right">
                   <Link>forgot password?</Link>
                 </FormHelperText>
+                {formik.errors.email && (
+                  <ErrorMessage message={formik.errors.email} />
+                )}
               </FormControl>
               <Button
                 borderRadius="8px"
@@ -115,9 +139,12 @@ export const SiginIn: React.VFC = () => {
                 variant="solid"
                 colorScheme="purple"
                 width="full"
+                onClick={handleSubmit}
+                disabled={!formik.isValid}
               >
                 Signin
               </Button>
+              <ErrorMessage message={errorMessage} />
             </Stack>
           </form>
         </Box>
