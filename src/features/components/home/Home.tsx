@@ -2,9 +2,16 @@ import { Box, Button, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import { selectUser } from "../../../store/slices/usersSlice";
 import { useSelector } from "../../../store/store";
+import { useSignOut } from "../../hooks/useSignOut";
 
 export const Home: React.VFC = () => {
   const user = useSelector(selectUser);
+  const { signOut } = useSignOut();
+  const handleSubmit = async () => {
+    signOut().catch((e) => {
+      console.log(e);
+    });
+  };
   return (
     <VStack justify="center" align="center" mt="160px">
       <Box p={2}>
@@ -30,9 +37,9 @@ export const Home: React.VFC = () => {
             p="24px"
             fontSize="large"
             borderRadius="8px"
-            variant="solid"
             colorScheme="purple"
             width="full"
+            onClick={handleSubmit}
           >
             Sign Out
           </Button>

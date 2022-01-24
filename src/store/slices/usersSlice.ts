@@ -20,9 +20,12 @@ export const usersSlice = createSlice({
     storeUser: (state, action: PayloadAction<UserState>) => {
       return action.payload;
     },
+    signOutUser: (state) => {
+      return initialState;
+    },
   },
 });
 
-export const { storeUser } = usersSlice.actions;
+export const { storeUser, signOutUser } = usersSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;

@@ -14,7 +14,6 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { useAuth } from "../../../contexts/AuthContext";
 import { useHandleFBErrors } from "../../hooks/useHandleFBErrors";
 import { useSignUp } from "../../hooks/useSignUp";
 import { ErrorMessage } from "../error-message/ErrorMessage";
@@ -60,7 +59,6 @@ export const SignUp: React.VFC = () => {
   const formik = useFormik(validationScheme);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string>("");
-  const { currentUser } = useAuth();
   const { handleErrorByCodes } = useHandleFBErrors();
   const { signUp } = useSignUp();
   const handleShowClick = () => setShowPassword(!showPassword);
@@ -107,7 +105,7 @@ export const SignUp: React.VFC = () => {
         alignItems="center"
       >
         <Heading size="2xl" color="purple.400" mb="32px">
-          Create a Account {currentUser ? "" : ""}
+          Create a Account
         </Heading>
         <Box minW={{ base: "90%", md: "468px" }}>
           <Stack

@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate, useRoutes } from "react-router-dom";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useGetAuth } from "../../../contexts/AuthContext";
+import { selectUser } from "../../../store/slices/usersSlice";
+import { useSelector } from "../../../store/store";
 import { routes } from "../../routes";
 
 export const RoutesWrapper: React.VFC = () => {
-  const { currentUser } = useAuth();
+  useGetAuth();
+  const user = useSelector(selectUser);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("user!!!", currentUser);
-  const routing = useRoutes(routes(!!currentUser));
+  const routing = useRoutes(routes(!!user));
   console.log("location.pathname", location.pathname);
 
   useEffect(() => {
-    if (!!currentUser) {
+    if (!!user) {
       navigate("/");
     }
-  }, [currentUser, location.pathname, navigate]);
+  }, [location.pathname, navigate, user]);
 
   return <>{routing}</>;
 };
