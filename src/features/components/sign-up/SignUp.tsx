@@ -94,7 +94,7 @@ export const SignUp: React.VFC = () => {
       flexDirection="column"
       width="100wh"
       height="100vh"
-      backgroundColor="gray.200"
+      // backgroundColor="gray.200"
       justifyContent="center"
       alignItems="center"
     >
@@ -200,7 +200,7 @@ export const SignUp: React.VFC = () => {
               width="full"
               onClick={handleSubmit}
             >
-              SignUp
+              Sign Up
             </Button>
             {submitError && <ErrorMessage message={submitError} />}
           </Stack>

@@ -17,7 +17,7 @@ export const routes = (isSignIn: boolean): RouteObject[] => [
     element: <SignUp />,
   },
   {
-    path: "*",
+    path: "/*",
     element: isSignIn ? <Navigate to="/" /> : <Navigate to="signin" />,
   },
 ];

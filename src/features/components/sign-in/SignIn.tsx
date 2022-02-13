@@ -63,7 +63,7 @@ export const SiginIn: React.VFC = () => {
       flexDirection="column"
       width="100wh"
       height="100vh"
-      backgroundColor="gray.200"
+      // backgroundColor="gray.200"
       justifyContent="center"
       alignItems="center"
     >
@@ -80,9 +80,10 @@ export const SiginIn: React.VFC = () => {
         <Box minW={{ base: "90%", md: "468px" }}>
           <form>
             <Stack
+              // backgroundColor="gray.200"
               spacing={8}
               p="1rem"
-              backgroundColor="whiteAlpha.900"
+              // backgroundColor="whiteAlpha.900"
               boxShadow="md"
               borderRadius="8px"
             >
@@ -151,7 +152,7 @@ export const SiginIn: React.VFC = () => {
       </Stack>
       <Box>
         New to use ?{" "}
-        <Button color="purple.500" onClick={toSignUpPage}>
+        <Button color="purple.500" onClick={toSignUpPage} variant="link">
           Sign Up
         </Button>
       </Box>
