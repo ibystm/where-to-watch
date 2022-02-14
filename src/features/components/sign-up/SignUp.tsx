@@ -113,7 +113,7 @@ export const SignUp: React.VFC = () => {
             p="1rem"
             backgroundColor="whiteAlpha.900"
             boxShadow="md"
-            borderRadius="8px"
+            borderRadius="20px"
           >
             <FormControl>
               <InputGroup>
@@ -124,7 +124,7 @@ export const SignUp: React.VFC = () => {
                   placeholder="User name"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  borderRadius="8px"
+                  borderRadius="20px"
                 />
               </InputGroup>
               {formik.touched.username && formik.errors.username && (
@@ -140,7 +140,7 @@ export const SignUp: React.VFC = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   placeholder="email address"
-                  borderRadius="8px"
+                  borderRadius="20px"
                 />
               </InputGroup>
               {formik.touched.email && formik.errors.email && (
@@ -157,7 +157,7 @@ export const SignUp: React.VFC = () => {
                   value={formik.values.password}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  borderRadius="8px"
+                  borderRadius="20px"
                 />
                 <InputRightElement width="4.5rem">
                   <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -179,7 +179,7 @@ export const SignUp: React.VFC = () => {
                   value={formik.values.confirmPassword}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  borderRadius="8px"
+                  borderRadius="20px"
                 />
                 <InputRightElement width="4.5rem">
                   <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -193,7 +193,7 @@ export const SignUp: React.VFC = () => {
                 )}
             </FormControl>
             <Button
-              borderRadius="8px"
+              borderRadius="20px"
               type="submit"
               variant="solid"
               colorScheme="purple"
@@ -208,7 +208,7 @@ export const SignUp: React.VFC = () => {
       </Stack>
       <Box>
         You have a account ?{" "}
-        <Button color="purple.500" onClick={toSignInPage}>
+        <Button color="purple.500" onClick={toSignInPage} variant="link">
           Sign In
         </Button>
       </Box>
