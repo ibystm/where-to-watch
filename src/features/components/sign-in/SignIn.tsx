@@ -79,27 +79,17 @@ export const SiginIn: React.VFC = () => {
         </Heading>
         <Box minW={{ base: "90%", md: "468px" }}>
           <form>
-            <Stack
-              // backgroundColor="gray.200"
-              spacing={8}
-              p="1rem"
-              // backgroundColor="whiteAlpha.900"
-              boxShadow="md"
-              borderRadius="8px"
-            >
+            <Stack spacing={8} p="1rem" boxShadow="2xl" borderRadius="20px">
               <FormControl>
                 <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    // children={<CFaUserAlt color="gray.300" />}
-                  />
+                  <InputLeftElement pointerEvents="none" />
                   <Input
                     value={formik.values.email}
                     type="email"
                     name="email"
                     placeholder="email address"
                     onChange={formik.handleChange}
-                    borderRadius="8px"
+                    borderRadius="20px"
                   />
                 </InputGroup>
                 {formik.errors.email && (
@@ -108,18 +98,14 @@ export const SiginIn: React.VFC = () => {
               </FormControl>
               <FormControl>
                 <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    color="gray.300"
-                    // children={<CFaLock color="gray.300" />}
-                  />
+                  <InputLeftElement pointerEvents="none" color="gray.300" />
                   <Input
                     type={showPassword ? "text" : "password"}
                     name="password"
                     placeholder="Password"
                     value={formik.values.password}
                     onChange={formik.handleChange}
-                    borderRadius="8px"
+                    borderRadius="20px"
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -135,7 +121,7 @@ export const SiginIn: React.VFC = () => {
                 )}
               </FormControl>
               <Button
-                borderRadius="8px"
+                borderRadius="20px"
                 // type="submit"
                 variant="solid"
                 colorScheme="purple"

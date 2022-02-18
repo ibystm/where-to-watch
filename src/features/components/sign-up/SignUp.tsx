@@ -94,7 +94,6 @@ export const SignUp: React.VFC = () => {
       flexDirection="column"
       width="100wh"
       height="100vh"
-      // backgroundColor="gray.200"
       justifyContent="center"
       alignItems="center"
     >
@@ -113,20 +112,13 @@ export const SignUp: React.VFC = () => {
             validationSchema={validationScheme}
             onSubmit={onSubmit}
           >
-            {({
-              values,
-              handleSubmit,
-              handleChange,
-              touched,
-              errors,
-              handleBlur,
-            }) => (
+            {({ values, handleChange, touched, errors, handleBlur }) => (
               <Form>
                 <Stack
                   spacing={6}
                   p="1rem"
                   backgroundColor="whiteAlpha.900"
-                  boxShadow="md"
+                  boxShadow="2xl"
                   borderRadius="20px"
                 >
                   <FormControl>
