@@ -122,7 +122,9 @@ export const SignUp: React.VFC = () => {
                   boxShadow="2xl"
                   borderRadius="20px"
                 >
-                  <FormControl isInvalid={!!errors.username}>
+                  <FormControl
+                    isInvalid={!!errors.username && !!touched.username}
+                  >
                     <InputGroup>
                       <InputLeftElement pointerEvents="none" />
                       <Input
@@ -138,7 +140,7 @@ export const SignUp: React.VFC = () => {
                       <FormErrorMessage>{errors.username}</FormErrorMessage>
                     )}
                   </FormControl>
-                  <FormControl isInvalid={!!errors.email}>
+                  <FormControl isInvalid={!!(errors.email && touched.email)}>
                     <InputGroup>
                       <InputLeftElement pointerEvents="none" />
                       <Input
@@ -154,7 +156,9 @@ export const SignUp: React.VFC = () => {
                       <FormErrorMessage>{errors.email}</FormErrorMessage>
                     )}
                   </FormControl>
-                  <FormControl isInvalid={!!errors.password}>
+                  <FormControl
+                    isInvalid={!!(errors.password && touched.password)}
+                  >
                     <InputGroup>
                       <InputLeftElement pointerEvents="none" color="gray.300" />
                       <Input
@@ -176,7 +180,11 @@ export const SignUp: React.VFC = () => {
                       <FormErrorMessage>{errors.password}</FormErrorMessage>
                     )}
                   </FormControl>
-                  <FormControl isInvalid={!!errors.confirmPassword}>
+                  <FormControl
+                    isInvalid={
+                      !!(errors.confirmPassword && touched.confirmPassword)
+                    }
+                  >
                     <InputGroup>
                       <InputLeftElement pointerEvents="none" color="gray.300" />
                       <Input
