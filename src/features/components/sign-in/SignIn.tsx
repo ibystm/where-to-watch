@@ -3,6 +3,7 @@ import {
   Button,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormHelperText,
   Heading,
   Input,
@@ -73,38 +74,41 @@ export const SiginIn: React.VFC = () => {
         justifyContent="center"
         alignItems="center"
       >
-        {/* <Avatar bg="purple.500" /> */}
         <Heading size="2xl" color="purple.400" mb="32px">
           Welcome Back !!
         </Heading>
         <Box minW={{ base: "90%", md: "468px" }}>
           <form>
             <Stack spacing={8} p="1rem" boxShadow="2xl" borderRadius="20px">
-              <FormControl>
+              <FormControl isInvalid={!!formik.errors.email}>
                 <InputGroup>
                   <InputLeftElement pointerEvents="none" />
                   <Input
+                    id="email"
                     value={formik.values.email}
                     type="email"
-                    name="email"
                     placeholder="email address"
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     borderRadius="20px"
                   />
                 </InputGroup>
-                {formik.errors.email && (
-                  <ErrorMessage message={formik.errors.email} />
+                {formik.errors.email && formik.touched.email && (
+                  <FormErrorMessage fontSize="14px">
+                    {formik.errors.email}
+                  </FormErrorMessage>
                 )}
               </FormControl>
-              <FormControl>
+              <FormControl isInvalid={!!formik.errors.password}>
                 <InputGroup>
                   <InputLeftElement pointerEvents="none" color="gray.300" />
                   <Input
+                    id="password"
                     type={showPassword ? "text" : "password"}
-                    name="password"
                     placeholder="Password"
                     value={formik.values.password}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     borderRadius="20px"
                   />
                   <InputRightElement width="4.5rem">
@@ -113,16 +117,17 @@ export const SiginIn: React.VFC = () => {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
+                {formik.errors.password && formik.touched.password && (
+                  <FormErrorMessage fontSize="14px">
+                    {formik.errors.password}
+                  </FormErrorMessage>
+                )}
                 <FormHelperText textAlign="right">
                   <Link>forgot password?</Link>
                 </FormHelperText>
-                {formik.errors.email && (
-                  <ErrorMessage message={formik.errors.email} />
-                )}
               </FormControl>
               <Button
                 borderRadius="20px"
-                // type="submit"
                 variant="solid"
                 colorScheme="purple"
                 width="full"

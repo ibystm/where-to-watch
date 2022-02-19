@@ -3,6 +3,7 @@ import {
   Button,
   Flex,
   FormControl,
+  FormErrorMessage,
   Heading,
   Input,
   InputGroup,
@@ -121,12 +122,12 @@ export const SignUp: React.VFC = () => {
                   boxShadow="2xl"
                   borderRadius="20px"
                 >
-                  <FormControl>
+                  <FormControl isInvalid={!!errors.username}>
                     <InputGroup>
                       <InputLeftElement pointerEvents="none" />
                       <Input
                         value={values.username}
-                        name="username"
+                        id="username"
                         placeholder="User name"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -134,14 +135,14 @@ export const SignUp: React.VFC = () => {
                       />
                     </InputGroup>
                     {touched.username && errors.username && (
-                      <ErrorMessage message={errors.username} />
+                      <FormErrorMessage>{errors.username}</FormErrorMessage>
                     )}
                   </FormControl>
-                  <FormControl>
+                  <FormControl isInvalid={!!errors.email}>
                     <InputGroup>
                       <InputLeftElement pointerEvents="none" />
                       <Input
-                        name="email"
+                        id="email"
                         value={values.email}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -150,15 +151,15 @@ export const SignUp: React.VFC = () => {
                       />
                     </InputGroup>
                     {touched.email && errors.email && (
-                      <ErrorMessage message={errors.email} />
+                      <FormErrorMessage>{errors.email}</FormErrorMessage>
                     )}
                   </FormControl>
-                  <FormControl>
+                  <FormControl isInvalid={!!errors.password}>
                     <InputGroup>
                       <InputLeftElement pointerEvents="none" color="gray.300" />
                       <Input
                         type={showPassword ? "text" : "password"}
-                        name="password"
+                        id="password"
                         placeholder="Password"
                         value={values.password}
                         onChange={handleChange}
@@ -172,15 +173,15 @@ export const SignUp: React.VFC = () => {
                       </InputRightElement>
                     </InputGroup>
                     {errors.password && touched.password && (
-                      <ErrorMessage message={errors.password} />
+                      <FormErrorMessage>{errors.password}</FormErrorMessage>
                     )}
                   </FormControl>
-                  <FormControl>
+                  <FormControl isInvalid={!!errors.confirmPassword}>
                     <InputGroup>
                       <InputLeftElement pointerEvents="none" color="gray.300" />
                       <Input
                         type={showPassword ? "text" : "password"}
-                        name="confirmPassword"
+                        id="confirmPassword"
                         placeholder="Password"
                         value={values.confirmPassword}
                         onChange={handleChange}
@@ -194,7 +195,9 @@ export const SignUp: React.VFC = () => {
                       </InputRightElement>
                     </InputGroup>
                     {touched.confirmPassword && errors.confirmPassword && (
-                      <ErrorMessage message={errors.confirmPassword} />
+                      <FormErrorMessage>
+                        {errors.confirmPassword}
+                      </FormErrorMessage>
                     )}
                   </FormControl>
                   <Button
