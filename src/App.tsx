@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
-import { RoutesWrapper } from "./features/components/wrapper/RoutesWrapper";
+import { RoutesWrapper } from "./features/wrapper/RoutesWrapper";
 
 function App() {
   return (

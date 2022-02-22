@@ -17,9 +17,9 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { useHandleFBErrors } from "../../hooks/useHandleFBErrors";
-import { useSignIn } from "../../hooks/useSignIn";
 import { ErrorMessage } from "../error-message/ErrorMessage";
+import { useHandleFBErrors } from "../hooks/useHandleFBErrors";
+import { useSignIn } from "../hooks/useSignIn";
 
 const validationScheme = {
   initialValues: {
