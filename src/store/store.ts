@@ -3,11 +3,13 @@ import {
   TypedUseSelectorHook,
   useSelector as rawUseSelector,
 } from "react-redux";
-import { usersSlice } from "./slices/usersSlice";
+import { reducer as contentsReducer } from "../features/home/slice/contents";
+import { reducer as userReducer } from "./slices/usersSlice";
 
 export const store = configureStore({
   reducer: {
-    user: usersSlice.reducer,
+    user: userReducer,
+    contens: contentsReducer,
   },
 });
 

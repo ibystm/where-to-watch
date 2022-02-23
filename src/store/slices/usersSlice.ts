@@ -13,7 +13,7 @@ const initialState: UserState = {
   email: null,
 };
 
-export const usersSlice = createSlice({
+export const slice = createSlice({
   name: "users",
   initialState,
   reducers: {
@@ -26,6 +26,8 @@ export const usersSlice = createSlice({
   },
 });
 
-export const { storeUser, signOutUser } = usersSlice.actions;
+export const { reducer } = slice;
+
+export const { storeUser, signOutUser } = slice.actions;
 
 export const selectUser = (state: RootState) => state.user;
