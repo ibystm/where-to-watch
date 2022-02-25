@@ -1,5 +1,5 @@
 import { baseRepository } from "./axios";
-import { API_KEY_QUERY_STRINGS, LANG_IS_JA } from "./constans";
+import { API_KEY_QUERY_STRINGS, LANG_IS_JA } from "./constants";
 import { DiscoverMovieResponse } from "./types/discovers";
 
 export const fetchDiscoverMoviesAPI =
