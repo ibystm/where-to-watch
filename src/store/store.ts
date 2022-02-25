@@ -9,7 +9,7 @@ import { reducer as userReducer } from "./slices/usersSlice";
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    contens: contentsReducer,
+    contents: contentsReducer,
   },
 });
 

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchDiscoverMoviesAPI } from "../../../apis/fetchContents";
 import { ContentsState } from "../../../apis/types/discovers";
+import { RootState } from "../../../store/store";
 
 const SLICE_NAME = "contents";
 
@@ -63,3 +64,5 @@ export const contentsActions = {
 };
 
 export const { reducer } = slice;
+
+export const selectContents = (state: RootState) => state.contents;
