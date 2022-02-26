@@ -49,12 +49,9 @@ const slice = createSlice({
         }
       }
     );
-    builder.addCase(
-      asyncActions.fetchDiscoverMovies.rejected,
-      (_state, payload) => {
-        throw payload;
-      }
-    );
+    builder.addCase(asyncActions.fetchDiscoverMovies.rejected, (_, payload) => {
+      throw payload;
+    });
   },
 });
 
