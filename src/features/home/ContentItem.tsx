@@ -14,7 +14,7 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
   };
 
   return (
-    <Button height="240px" maxW="192px" variant="unstyled" borderRadius="20px">
+    <Button height="256px" maxW="192px" variant="unstyled" borderRadius="20px">
       <Image
         src={poster_path ? pathBuilder(poster_path) : undefined}
         alt={title ? title : "movie poster"}
