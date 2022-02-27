@@ -5,6 +5,7 @@ const languages = {
 };
 
 export const requests = {
+  configuration: `/configuration?${API_KEY_QUERY_STRINGS}`,
   discoverMovie: `/discover/movie?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
 };
 
