@@ -1,16 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchConfigurations } from "../../../apis/fetchConfigurations";
-import { FetchConfigurationResponse } from "../../../apis/types/configurations";
+import { fetchConfigurations as fetchConfigurationsAPI } from "../../../apis/fetchConfigurations";
+import { ImageConfigurations } from "../../../apis/types/configurations";
 import { RootState } from "../../../store/store";
 const SLICE_NAME = "configuration";
 
-type ConfigurationState = FetchConfigurationResponse & {
+type ConfigurationState = {
   loading: boolean;
+  images: ImageConfigurations | null;
+  changeKeys: string[];
 };
 
 export const initialState: ConfigurationState = {
-  images: [],
-  change_keys: [],
+  images: null,
+  changeKeys: [],
   loading: false,
 };
 
@@ -19,7 +21,7 @@ const asyncActions = {
     `${SLICE_NAME}/fetchConfiguration`,
     (_, { rejectWithValue }) => {
       try {
-        return fetchConfigurations();
+        return fetchConfigurationsAPI();
       } catch (e) {
         return rejectWithValue(e);
       }
@@ -43,7 +45,7 @@ const slice = createSlice({
           state.images = images;
         }
         if (change_keys) {
-          state.change_keys = change_keys;
+          state.changeKeys = change_keys;
         }
         state.loading = false;
       }
