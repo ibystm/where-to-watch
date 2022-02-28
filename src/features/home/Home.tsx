@@ -1,10 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
+import { useFetchConfigs } from "./hooks/useFetchConfigs";
 import { useFetchContents } from "./hooks/useFetchContents";
 import { MainContens } from "./MainContents";
 
 export const Home: React.VFC = () => {
+  // initial process
   useFetchContents();
+  useFetchConfigs();
+
   // TODO
   // const {signOut} = useSignOut();
   // const handleSubmit = async () => {
