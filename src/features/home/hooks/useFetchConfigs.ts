@@ -9,7 +9,7 @@ export const useFetchConfigs = () => {
 
   useEffect(() => {
     const storeConfigs = async () => {
-      let storedUrl = sessionStorage.getItem("secureBaseUrl");
+      const storedUrl = sessionStorage.getItem("secureBaseUrl");
       if (storedUrl === null) {
         await fetchConfigurations()
           .then((res) => {

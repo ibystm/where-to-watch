@@ -9,8 +9,9 @@ type P = {
 export const ContentItem: React.VFC<P> = ({ contentItem }) => {
   const { title, poster_path } = contentItem;
 
-  const pathBuilder = (path: string): string => {
-    return `${IMAGE_BASE_URL}/${path}`;
+  const pathBuilder = (path: string): string | undefined => {
+    const url = sessionStorage.getItem("secureBaseUrl");
+    return url ? `${IMAGE_BASE_URL}/${path}` : "";
   };
 
   return (
