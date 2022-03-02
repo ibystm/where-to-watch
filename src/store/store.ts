@@ -5,10 +5,12 @@ import {
 } from "react-redux";
 import { reducer as configurationsReducer } from "../features/configurations/slice/configurations";
 import { reducer as contentsReducer } from "../features/home/slice/contents";
+import { reducer as loadingReducer } from "../features/loading/slice/loading";
 import { reducer as userReducer } from "./slices/usersSlice";
 
 export const store = configureStore({
   reducer: {
+    loading: loadingReducer,
     user: userReducer,
     contents: contentsReducer,
     configurations: configurationsReducer,
