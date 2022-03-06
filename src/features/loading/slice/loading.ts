@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../../store/store";
 import { LoadingState } from "../../../types/loading/loading";
 
 const SLICE_NAME = "loading";
@@ -31,7 +30,3 @@ export const loadingActions = {
 };
 
 export const { reducer } = slice;
-
-export const selectLoadingState = (state: RootState) => state.loading.isLoading;
-export const selectLoadingMessage = (state: RootState) =>
-  state.loading.displayMessage;

@@ -1,9 +1,9 @@
 import { Button, Image } from "@chakra-ui/react";
 import { IMAGE_BASE_URL } from "../../apis/constants";
-import { ContentsState } from "../../apis/types/discovers";
+import { ActualContentData } from "../../types/redux/discovers";
 
 type P = {
-  contentItem: ContentsState;
+  contentItem: ActualContentData;
 };
 
 export const ContentItem: React.VFC<P> = ({ contentItem }) => {
