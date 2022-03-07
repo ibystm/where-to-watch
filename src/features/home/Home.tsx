@@ -1,4 +1,4 @@
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "../../store/store";
 import { useFetchConfigs } from "./hooks/useFetchConfigs";
@@ -20,7 +20,9 @@ export const Home: React.VFC = () => {
   //   });
   // };
   return loadingContents ? (
-    <Spinner color="red.500" size="xl" />
+    <Flex w="100%" h="100%" justifyContent="center" alignItems="center">
+      <Spinner color="purple.500" size="xl" thickness="4px" />
+    </Flex>
   ) : (
     <Box mt="160px" w="100%" h="100%">
       <MainContens />
