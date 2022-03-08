@@ -17,7 +17,7 @@ export const Home: React.VFC = () => {
   //   });
   // };
   return (
-    <Box mt="160px" w="100%" h="100%">
+    <Box w="100%" h="100%">
       <MainContens />
     </Box>
   );

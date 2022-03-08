@@ -14,8 +14,9 @@ export const MainContens: React.FC = () => {
           <ContentItem contentItem={item} key={idx} />
         ))}
       {loadingContents &&
-        [...Array(100)].map((a) => (
+        [...Array(100)].map((a, idx) => (
           <Skeleton
+            key={idx.toString()}
             height="256px"
             maxW="192px"
             variant="unstyled"

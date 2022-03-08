@@ -17,12 +17,12 @@ export const Header: React.VFC = () => {
     <Box
       w="100%"
       borderBottom="1px"
-      height="75px"
       boxShadow="md"
       borderColor="purple.100"
+      mb="24px"
     >
       <Flex
-        h="100%"
+        h="64px"
         marginX="48px"
         justifyContent="space-between"
         alignItems="center"
