@@ -1,5 +1,5 @@
 import { SearchIcon } from "@chakra-ui/icons";
-import { Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Input } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React from "react";
 
@@ -14,31 +14,38 @@ export const GlobalSearchBox = () => {
     }
   };
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={(values) => alert(values.searchName)}
-    >
-      {({ values, handleSubmit }) => {
-        console.log("values", values);
-        return (
-          <Form>
-            <InputGroup>
-              <InputRightElement
-                pointerEvents="none"
-                children={<SearchIcon color="purple.500" as="button" />}
-              />
-              <Input
-                type="search"
-                placeholder="Movie Name"
-                borderRadius="20px"
-                name="searchBox"
-                onKeyDown={onKeyDown}
-                value={values.searchName}
-              />
-            </InputGroup>
-          </Form>
-        );
-      }}
-    </Formik>
+    <Box width="100%">
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values) => alert(values.searchName)}
+      >
+        {({ values, handleSubmit, handleChange }) => {
+          console.log("values", values);
+          return (
+            <Form>
+              <Flex>
+                <Input
+                  type="search"
+                  placeholder="Movie Name"
+                  // borderRadius="20px"
+                  name="searchName"
+                  onKeyDown={onKeyDown}
+                  value={values.searchName}
+                  onChange={handleChange}
+                />
+
+                <IconButton
+                  ml="2px"
+                  width="24px"
+                  colorScheme="purple"
+                  aria-label="Search database"
+                  icon={<SearchIcon />}
+                />
+              </Flex>
+            </Form>
+          );
+        }}
+      </Formik>
+    </Box>
   );
 };
