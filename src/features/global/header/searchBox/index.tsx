@@ -20,7 +20,6 @@ export const GlobalSearchBox = () => {
         onSubmit={(values) => alert(values.searchName)}
       >
         {({ values, handleSubmit, handleChange }) => {
-          console.log("values", values);
           return (
             <Form>
               <Flex>
@@ -33,8 +32,8 @@ export const GlobalSearchBox = () => {
                   value={values.searchName}
                   onChange={handleChange}
                 />
-
                 <IconButton
+                  type="submit"
                   ml="2px"
                   width="24px"
                   colorScheme="purple"
