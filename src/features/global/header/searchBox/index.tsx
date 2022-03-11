@@ -20,6 +20,7 @@ export const GlobalSearchBox = () => {
   const onSubmit = (values: FormValues) => {
     alert(values.searchName);
   };
+
   return (
     <Box width="100%">
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
