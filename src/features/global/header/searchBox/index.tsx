@@ -3,6 +3,10 @@ import { Box, Flex, IconButton, Input } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React from "react";
 
+type FormValues = {
+  searchName: string;
+};
+
 export const GlobalSearchBox = () => {
   const initialValues = {
     searchName: "",
@@ -13,20 +17,19 @@ export const GlobalSearchBox = () => {
       alert(e.currentTarget.value);
     }
   };
+  const onSubmit = (values: FormValues) => {
+    alert(values.searchName);
+  };
   return (
     <Box width="100%">
-      <Formik
-        initialValues={initialValues}
-        onSubmit={(values) => alert(values.searchName)}
-      >
-        {({ values, handleSubmit, handleChange }) => {
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        {({ values, handleChange }) => {
           return (
             <Form>
               <Flex>
                 <Input
                   type="search"
                   placeholder="Movie Name"
-                  // borderRadius="20px"
                   name="searchName"
                   onKeyDown={onKeyDown}
                   value={values.searchName}

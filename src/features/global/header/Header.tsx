@@ -1,10 +1,12 @@
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useSwitchAuthButton } from "./hooks/useSwitchAuthButton";
 import { GlobalSearchBox } from "./searchBox";
 
 export const Header: React.VFC = () => {
   const { buttonText, onPressButton } = useSwitchAuthButton();
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -20,9 +22,9 @@ export const Header: React.VFC = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Box>
+        <Button onClick={() => navigate("/signup")}>
           <Heading size="xl">Can I watch ?</Heading>
-        </Box>
+        </Button>
         <Flex minW="400px">
           <GlobalSearchBox />
         </Flex>
