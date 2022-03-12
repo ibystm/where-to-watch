@@ -1,9 +1,3 @@
-import { ActualContentData } from "../../types/redux/discovers";
+import { DiscoverMovieResponse } from "./discovers";
 
-export type SearchMovieState = {
-  loading: {
-    isProcessing: boolean;
-    message: string | null;
-  };
-  searchMovies: ActualContentData[];
-};
+export type SearchMoviesResponse = DiscoverMovieResponse;

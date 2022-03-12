@@ -2,23 +2,27 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { Box, Flex, IconButton, Input } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React from "react";
+import { useSearchMoviesByKeyword } from "../hooks/useSearchContentsByKeyword";
 
 type FormValues = {
   searchName: string;
 };
 
+const initialValues = {
+  searchName: "",
+};
+
 export const GlobalSearchBox = () => {
-  const initialValues = {
-    searchName: "",
-  };
+  const { serchByKeyword } = useSearchMoviesByKeyword();
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log(e);
     if (e.keyCode === 13) {
       alert(e.currentTarget.value);
     }
   };
-  const onSubmit = (values: FormValues) => {
-    alert(values.searchName);
+  const onSubmit = async (values: FormValues) => {
+    if (values.searchName) {
+      await serchByKeyword(values.searchName);
+    }
   };
 
   return (
