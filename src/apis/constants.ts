@@ -7,6 +7,8 @@ const languages = {
 export const requests = {
   configuration: `/configuration?${API_KEY_QUERY_STRINGS}`,
   discoverMovie: `/discover/movie?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
+  searchMovie: (keyword: string) =>
+    `/search/movie?${languages.ja}&${API_KEY_QUERY_STRINGS}&query=${keyword}`,
 };
 
 // TODO configuration APIから返却されたURLをしようするべき

@@ -4,6 +4,7 @@ import { SearchMovieState } from "../../../../types/redux/searchMovies";
 
 const SLICE_NAME = "searcMovie";
 const initialState: SearchMovieState = {
+  searchMode: false,
   loading: {
     isProcessing: false,
     message: null,
@@ -28,10 +29,15 @@ const asyncActions = {
 export const slice = createSlice({
   name: SLICE_NAME,
   initialState,
-  reducers: {},
+  reducers: {
+    resetSearchMode: (state) => {
+      state.searchMode = false;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(searchMoviesActions.searchMovies.pending, (state) => {
       state.loading.isProcessing = true;
+      state.searchMode = true;
     });
     builder.addCase(
       searchMoviesActions.searchMovies.fulfilled,
@@ -66,6 +72,7 @@ export const slice = createSlice({
 
 export const searchMoviesActions = {
   ...asyncActions,
+  ...slice.actions,
 };
 
 export const { reducer } = slice;

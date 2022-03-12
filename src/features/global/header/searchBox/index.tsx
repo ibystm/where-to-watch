@@ -1,7 +1,7 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import { Box, Flex, IconButton, Input } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
-import React from "react";
+import { Form, Formik, FormikProps } from "formik";
+import React, { useRef } from "react";
 import { useSearchMoviesByKeyword } from "../hooks/useSearchContentsByKeyword";
 
 type FormValues = {
@@ -14,6 +14,7 @@ const initialValues = {
 
 export const GlobalSearchBox = () => {
   const { serchByKeyword } = useSearchMoviesByKeyword();
+  const formikRef = useRef<FormikProps<FormValues>>(null);
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.keyCode === 13) {
       alert(e.currentTarget.value);
@@ -27,7 +28,11 @@ export const GlobalSearchBox = () => {
 
   return (
     <Box width="100%">
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        innerRef={formikRef}
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+      >
         {({ values, handleChange }) => {
           return (
             <Form>
