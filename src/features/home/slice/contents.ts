@@ -1,10 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchDiscoverMoviesAPI } from "../../../apis/fetchContents";
 import { RootState } from "../../../store/store";
-import {
-  ActualContentData,
-  ContentsState,
-} from "../../../types/redux/discovers";
+import { ContentsState } from "../../../types/redux/discovers";
 
 const SLICE_NAME = "contents";
 const initialState: ContentsState = {
@@ -23,7 +20,7 @@ const asyncActions = {
         const res = await fetchDiscoverMoviesAPI();
         return res;
       } catch (e) {
-        rejectWithValue(e);
+        return rejectWithValue(e);
       }
     }
   ),
@@ -43,28 +40,30 @@ const slice = createSlice({
         if (payload) {
           const { results } = payload;
           if (results) {
-            results.forEach((item) => {
-              const content: ActualContentData = {
-                id: item.id,
-                adult: item.adult,
-                overview: item.overview,
-                original_title: item.original_title,
-                original_language: item.original_language,
-                title: item.title,
-                poster_path: item.poster_path ?? null,
-                backdrop_path: item.backdrop_path ?? null,
-                video: item.video,
-              };
-              state.data.push(content);
-            });
+            const contents = results.map((item) => ({
+              id: item.id,
+              adult: item.adult,
+              overview: item.overview,
+              original_title: item.original_title,
+              original_language: item.original_language,
+              title: item.title,
+              poster_path: item.poster_path ?? null,
+              backdrop_path: item.backdrop_path ?? null,
+              video: item.video,
+            }));
+            state.data = contents;
           }
-          state.loading.isProcessing = false;
         }
+        state.loading.isProcessing = false;
       }
     );
-    builder.addCase(asyncActions.fetchDiscoverMovies.rejected, (_, payload) => {
-      throw payload;
-    });
+    builder.addCase(
+      asyncActions.fetchDiscoverMovies.rejected,
+      (state, payload) => {
+        state.loading.isProcessing = false;
+        throw payload;
+      }
+    );
   },
 });
 
