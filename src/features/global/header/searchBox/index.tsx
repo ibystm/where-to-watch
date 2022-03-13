@@ -1,62 +1,25 @@
-import { SearchIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Input } from "@chakra-ui/react";
-import { Form, Formik, FormikProps } from "formik";
+import { Box } from "@chakra-ui/react";
+import { Formik, FormikProps } from "formik";
 import React, { useRef } from "react";
 import { useSearchMoviesByKeyword } from "../hooks/useSearchContentsByKeyword";
-
-type FormValues = {
-  searchName: string;
-};
+import { SearchForm, SearchMovieFormValues } from "./SearchForm";
 
 const initialValues = {
   searchName: "",
 };
 
 export const GlobalSearchBox = () => {
-  const { serchByKeyword } = useSearchMoviesByKeyword();
-  const formikRef = useRef<FormikProps<FormValues>>(null);
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.keyCode === 13) {
-      alert(e.currentTarget.value);
-    }
-  };
-  const onSubmit = async (values: FormValues) => {
-    if (values.searchName) {
-      await serchByKeyword(values.searchName);
-    }
-  };
+  const { handleSubmit } = useSearchMoviesByKeyword();
+  const formikRef = useRef<FormikProps<SearchMovieFormValues>>(null);
 
   return (
     <Box width="100%">
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
       >
-        {({ values, handleChange }) => {
-          return (
-            <Form>
-              <Flex>
-                <Input
-                  type="search"
-                  placeholder="Movie Name"
-                  name="searchName"
-                  onKeyDown={onKeyDown}
-                  value={values.searchName}
-                  onChange={handleChange}
-                />
-                <IconButton
-                  type="submit"
-                  ml="2px"
-                  width="24px"
-                  colorScheme="purple"
-                  aria-label="Search database"
-                  icon={<SearchIcon />}
-                />
-              </Flex>
-            </Form>
-          );
-        }}
+        <SearchForm />
       </Formik>
     </Box>
   );

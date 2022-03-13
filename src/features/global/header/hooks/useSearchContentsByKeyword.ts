@@ -1,16 +1,36 @@
 import { useDispatch } from "react-redux";
 import { searchMoviesActions } from "../slice/searchMovie";
-type UseSearchContentsByKeyword = {
-  serchByKeyword: (keyword: string) => Promise<void>;
+
+export type SearchMovieFormValues = {
+  searchName: string;
 };
 
-export const useSearchMoviesByKeyword = (): UseSearchContentsByKeyword => {
-  const dispatch = useDispatch();
-  const serchByKeyword = async (keyword: string): Promise<void> => {
-    dispatch(searchMoviesActions.searchMovies(keyword));
-  };
-
-  return {
-    serchByKeyword,
-  };
+type UseSearchContentsByKeywordReturnType = {
+  handleSubmit: (values: SearchMovieFormValues) => void;
+  onEnterKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
+
+export const useSearchMoviesByKeyword =
+  (): UseSearchContentsByKeywordReturnType => {
+    const dispatch = useDispatch();
+
+    const handleSubmit = (values: SearchMovieFormValues): void => {
+      if (!values.searchName) {
+        console.log("No search movie name parameter");
+        return;
+      }
+
+      dispatch(searchMoviesActions.searchMovies(values.searchName));
+    };
+
+    const onEnterKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.code === "Enter") {
+        alert(e.currentTarget.value);
+      }
+    };
+
+    return {
+      handleSubmit,
+      onEnterKeyDown,
+    };
+  };
