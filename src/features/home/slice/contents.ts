@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchDiscoverMoviesAPI } from "../../../apis/fetchContents";
-import { RootState } from "../../../store/store";
 import { ContentsState } from "../../../types/redux/discovers";
 
 const SLICE_NAME = "contents";
@@ -73,8 +72,3 @@ export const contentsActions = {
 };
 
 export const { reducer } = slice;
-
-// ======== selectors ========
-export const selectContents = (state: RootState) => state.contents.data;
-export const selectLoadingState = (state: RootState) =>
-  state.contents.loading.isProcessing;

@@ -3,11 +3,11 @@ import React from "react";
 import { useSelector } from "../../store/store";
 import { searchMovieSelectors } from "../global/header/selectors/searchMovies";
 import { ContentItem } from "./ContentItem";
-import { selectContents, selectLoadingState } from "./slice/contents";
+import { contentsSelectors } from "./selectors/contents";
 
 export const MainContens: React.FC = () => {
-  const contents = useSelector(selectContents);
-  const loadingContents = useSelector(selectLoadingState);
+  const contents = useSelector(contentsSelectors.selectContents);
+  const loadingContents = useSelector(contentsSelectors.selectLoadingState);
   const searchMovieLoading = useSelector(searchMovieSelectors.loadingState);
   const searchMode = useSelector(searchMovieSelectors.searchMode);
   const searchMovies = useSelector(searchMovieSelectors.searchedMovies);
