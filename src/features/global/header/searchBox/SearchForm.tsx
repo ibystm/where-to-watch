@@ -16,9 +16,19 @@ export const SearchForm: React.FC = () => {
   const { onEnterKeyDown } = useSearchMoviesByKeyword();
 
   useEffect(() => {
-    if (values.searchName === "") {
-      dispatch(searchMoviesActions.resetSearchMode());
-    }
+    // 0.5秒以上入力がない場合に、search requestをする
+    const timerId = setTimeout(() => {
+      if (values.searchName === "") {
+        dispatch(searchMoviesActions.resetSearchMode());
+        return;
+      }
+      dispatch(searchMoviesActions.searchMovies(values.searchName));
+    }, 500);
+
+    return () => {
+      console.log(`timerid ${timerId} is cleared!`);
+      clearTimeout(timerId);
+    };
   }, [dispatch, values.searchName]);
 
   return (
@@ -31,6 +41,7 @@ export const SearchForm: React.FC = () => {
           onKeyDown={onEnterKeyDown}
           value={values.searchName}
           onChange={handleChange}
+          focusBorderColor="purple.400"
         />
         <IconButton
           type="submit"
