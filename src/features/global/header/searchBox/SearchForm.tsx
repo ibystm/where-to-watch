@@ -3,7 +3,6 @@ import { Flex, IconButton, Input } from "@chakra-ui/react";
 import { Form, useFormikContext } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useSearchMoviesByKeyword } from "../hooks/useSearchContentsByKeyword";
 import { searchMoviesActions } from "../slice/searchMovie";
 
 export type SearchMovieFormValues = {
@@ -13,7 +12,6 @@ export type SearchMovieFormValues = {
 export const SearchForm: React.FC = () => {
   const dispatch = useDispatch();
   const { values, handleChange } = useFormikContext<SearchMovieFormValues>();
-  const { onEnterKeyDown } = useSearchMoviesByKeyword();
 
   useEffect(() => {
     // 0.5秒以上入力がない場合に、search requestをする
@@ -38,7 +36,6 @@ export const SearchForm: React.FC = () => {
           type="search"
           placeholder="Movie Name"
           name="searchName"
-          onKeyDown={onEnterKeyDown}
           value={values.searchName}
           onChange={handleChange}
           focusBorderColor="purple.400"

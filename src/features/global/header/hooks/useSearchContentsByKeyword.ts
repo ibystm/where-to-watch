@@ -7,7 +7,6 @@ export type SearchMovieFormValues = {
 
 type UseSearchContentsByKeywordReturnType = {
   handleSubmit: (values: SearchMovieFormValues) => void;
-  onEnterKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 export const useSearchMoviesByKeyword =
@@ -23,14 +22,7 @@ export const useSearchMoviesByKeyword =
       dispatch(searchMoviesActions.searchMovies(values.searchName));
     };
 
-    const onEnterKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.code === "Enter" && e.currentTarget.value) {
-        dispatch(searchMoviesActions.searchMovies(e.currentTarget.value));
-      }
-    };
-
     return {
       handleSubmit,
-      onEnterKeyDown,
     };
   };
