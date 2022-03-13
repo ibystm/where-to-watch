@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
 
 type UserState = {
   id: string | null;
@@ -29,5 +28,3 @@ export const slice = createSlice({
 export const { reducer } = slice;
 
 export const { storeUser, signOutUser } = slice.actions;
-
-export const selectUser = (state: RootState) => state.user;

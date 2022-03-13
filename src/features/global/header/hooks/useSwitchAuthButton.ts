@@ -1,19 +1,20 @@
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { selectUser } from "../../../../store/slices/usersSlice";
+import { userSelectors } from "../../../../store/selectors/users";
 
 export const useSwitchAuthButton = () => {
-  const user = useSelector(selectUser);
+  const userId = useSelector(userSelectors.id);
   const location = useLocation();
   const navigate = useNavigate();
-  const buttonText = !!user.id
+
+  const buttonText = !!userId
     ? "Signout"
     : location.pathname === "/signin"
     ? "Sign Up"
     : "Sign In";
 
   const onPressButton = () => {
-    if (!!user.id) {
+    if (!!userId) {
       // logout
     }
     if (location.pathname === "/signin") {
