@@ -24,8 +24,8 @@ export const useSearchMoviesByKeyword =
     };
 
     const onEnterKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.code === "Enter") {
-        alert(e.currentTarget.value);
+      if (e.code === "Enter" && e.currentTarget.value) {
+        dispatch(searchMoviesActions.searchMovies(e.currentTarget.value));
       }
     };
 
