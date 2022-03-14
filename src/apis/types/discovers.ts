@@ -17,4 +17,8 @@ export type DiscoverMovieResults = {
   backdrop_path?: string | null;
   popularity?: number;
   video?: boolean;
+  release_date?: string;
+  genre_ids?: string[];
+  vote_count?: number;
+  vote_average?: number;
 };

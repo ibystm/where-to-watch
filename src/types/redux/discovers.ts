@@ -16,4 +16,8 @@ export type ActualContentData = {
   poster_path: string | null;
   backdrop_path: string | null;
   video?: boolean;
+  releaseDate?: string;
+  voteCount?: number;
+  voteAverage?: number;
+  genre_ids?: string[];
 };

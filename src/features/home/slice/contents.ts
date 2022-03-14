@@ -49,6 +49,10 @@ const slice = createSlice({
               poster_path: item.poster_path ?? null,
               backdrop_path: item.backdrop_path ?? null,
               video: item.video,
+              voteAverage: item.vote_average,
+              voteCount: item.vote_count,
+              genreIds: item.genre_ids,
+              releaseDate: item.release_date,
             }));
             state.data = contents;
           }
