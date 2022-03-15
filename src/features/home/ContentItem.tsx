@@ -16,13 +16,21 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
 
   return (
     <Button
-      height="256px"
-      maxW="192px"
+      height="288px"
+      maxW="200px"
       variant="unstyled"
       borderRadius="20px"
       display="flex"
       flexDirection="column"
+      padding="16px"
+      backgroundColor="white"
       _focus={{ _focus: "none" }}
+      _hover={{
+        transition: "0.5s all",
+        transform: "scale(1.3, 1.3)",
+        zIndex: 10,
+        boxShadow: "1px 0.5px 1px grey",
+      }}
     >
       <Image
         src={poster_path ? pathBuilder(poster_path) : undefined}
