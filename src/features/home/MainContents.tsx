@@ -1,9 +1,10 @@
-import { SimpleGrid, Skeleton } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "../../store/store";
 import { searchMovieSelectors } from "../global/header/selectors/searchMovies";
 import { ContentItem } from "./ContentItem";
 import { contentsSelectors } from "./selectors/contents";
+import { SkeltonContentItem } from "./SkeltonContentItem";
 
 export const MainContens: React.FC = () => {
   const contents = useSelector(contentsSelectors.selectContents);
@@ -26,15 +27,7 @@ export const MainContens: React.FC = () => {
           <ContentItem key={idx} contentItem={item} />
         ))}
       {(loadingContents || searchMovieLoading) &&
-        [...Array(100)].map((a, idx) => (
-          <Skeleton
-            key={idx.toString()}
-            height="256px"
-            maxW="192px"
-            variant="unstyled"
-            borderRadius="20px"
-          />
-        ))}
+        [...Array(100)].map((a, idx) => <SkeltonContentItem key={idx} />)}
     </SimpleGrid>
   );
 };

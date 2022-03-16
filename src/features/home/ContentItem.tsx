@@ -16,29 +16,28 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
 
   return (
     <Button
-      height="288px"
-      maxW="200px"
+      height="296px"
+      maxW="240px"
       variant="unstyled"
       borderRadius="20px"
-      display="flex"
-      flexDirection="column"
-      padding="16px"
+      padding="8px 16px"
       backgroundColor="white"
       _focus={{ _focus: "none" }}
       _hover={{
         transition: "0.5s all",
         transform: "scale(1.3, 1.3)",
         zIndex: 10,
-        boxShadow: "1px 0.5px 1px grey",
+        boxShadow: "0.5px 0.5px 0.5px grey",
       }}
     >
       <Image
+        marginX="auto"
         src={poster_path ? pathBuilder(poster_path) : undefined}
         alt={title ? title : "movie poster"}
         boxSize="85%"
         borderRadius="inherit"
       />
-      <Box w="100%">
+      <Box w="100%" mt="4px">
         <Text
           fontSize="sm"
           fontWeight="bold"
