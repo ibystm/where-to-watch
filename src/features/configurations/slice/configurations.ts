@@ -53,13 +53,14 @@ const slice = createSlice({
     builder.addCase(
       asyncActions.fetchConfigurations.rejected,
       (state, { payload }) => {
+        state.loading = false;
         throw payload;
       }
     );
   },
 });
 
-export const actions = {
+export const configurationActions = {
   ...asyncActions,
 };
 

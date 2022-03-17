@@ -1,6 +1,7 @@
 import { Box, Button, Image, Text } from "@chakra-ui/react";
-import { IMAGE_BASE_URL } from "../../apis/constants";
+import { useSelector } from "../../store/store";
 import { ActualContentData } from "../../types/redux/discovers";
+import { configurationsSelector } from "../configurations/selectors/configurations";
 
 type P = {
   contentItem: ActualContentData;
@@ -8,10 +9,13 @@ type P = {
 
 export const ContentItem: React.VFC<P> = ({ contentItem }) => {
   const { title, poster_path, releaseDate } = contentItem;
-
+  const imageUrl = useSelector(configurationsSelector.secureImageUrl);
+  const posterSizes = useSelector(configurationsSelector.posterSizes);
   const pathBuilder = (path: string): string | undefined => {
-    const url = sessionStorage.getItem("secureBaseUrl");
-    return url ? `${IMAGE_BASE_URL}/${path}` : "";
+    if (!posterSizes || !imageUrl) return;
+    const size = posterSizes.slice(-1)[0];
+
+    return `${imageUrl}/${size}/${poster_path}`;
   };
 
   return (
@@ -36,6 +40,7 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
         alt={title ? title : "movie poster"}
         boxSize="85%"
         borderRadius="inherit"
+        loading="lazy"
       />
       <Box w="100%" mt="4px">
         <Text
