@@ -9,8 +9,6 @@ export const requests = {
   discoverMovie: `/discover/movie?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
   searchMovie: (keyword: string) =>
     `/search/movie?${languages.ja}&${API_KEY_QUERY_STRINGS}&query=${keyword}`,
+  getMovieVideos: (movieId: string) =>
+    `/movie/${movieId}/videos?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
 };
-
-// TODO configuration APIから返却されたURLをしようするべき
-// @see https://developers.themoviedb.org/3/configuration/get-api-configuration
-export const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
