@@ -2,14 +2,7 @@ import { Box, Skeleton, SkeletonText } from "@chakra-ui/react";
 
 export const SkeltonContentItem = () => {
   return (
-    <Box
-      height="296px"
-      maxW="240px"
-      padding="8px 16px"
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-    >
+    <Box height="296px" maxW="240px" padding="8px 16px">
       <Skeleton
         variant="unstyled"
         borderRadius="20px"
