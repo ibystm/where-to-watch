@@ -53,7 +53,7 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
           {title ? title : "タイトルなし"}
         </Text>
         <Text fontSize="sm">
-          {releaseDate ? releaseDate : "リリース日未定"}
+          {releaseDate ? releaseDate : "リリース日不明"}
         </Text>
       </Box>
     </Button>
