@@ -1,4 +1,6 @@
-import { Box, Button, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Image, Text } from "@chakra-ui/react";
+import { MdOutlineHideImage } from "react-icons/md";
+import { commonDictionaries } from "../../commons/constants/dictionaries";
 import { useSelector } from "../../store/store";
 import { ActualContentData } from "../../types/redux/discovers";
 import { configurationsSelector } from "../configurations/selectors/configurations";
@@ -34,14 +36,33 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
         boxShadow: "0.5px 0.5px 0.5px grey",
       }}
     >
-      <Image
-        marginX="auto"
-        src={poster_path ? pathBuilder(poster_path) : undefined}
-        alt={title ? title : "movie poster"}
-        boxSize="85%"
-        borderRadius="inherit"
-        loading="lazy"
-      />
+      {poster_path ? (
+        <Image
+          marginX="auto"
+          src={poster_path ? pathBuilder(poster_path) : undefined}
+          alt={title ? title : "movie poster"}
+          boxSize="85%"
+          borderRadius="inherit"
+          loading="lazy"
+        />
+      ) : (
+        <Flex
+          boxSize="85%"
+          backgroundColor="gray.200"
+          borderRadius="inherit"
+          flexDir="column"
+          justify="center"
+          alignItems="center"
+        >
+          <Icon
+            as={MdOutlineHideImage}
+            height="100px"
+            width="100px"
+            color="gray.400"
+          />
+          <Text color="gray.400">{commonDictionaries.noImageIcon}</Text>
+        </Flex>
+      )}
       <Box w="100%" mt="4px">
         <Text
           fontSize="sm"
@@ -50,10 +71,10 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
           whiteSpace="nowrap"
           overflow="hidden"
         >
-          {title ? title : "タイトルなし"}
+          {title ? title : commonDictionaries.noTitle}
         </Text>
         <Text fontSize="sm">
-          {releaseDate ? releaseDate : "リリース日不明"}
+          {releaseDate ? releaseDate : commonDictionaries.noReleaseDate}
         </Text>
       </Box>
     </Button>
