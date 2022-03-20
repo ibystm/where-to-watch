@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { searchMoviesAPI } from "../../../../apis/searchMovies";
+import { ActualContentData } from "../../../../types/redux/discovers";
 import { SearchMovieState } from "../../../../types/redux/searchMovies";
 
 const SLICE_NAME = "searcMovie";
@@ -44,17 +45,21 @@ export const slice = createSlice({
       (state, { payload }) => {
         const { results } = payload;
         if (results) {
-          const searchMovies = results.map((item) => ({
-            id: item.id,
-            adult: item.adult,
-            overview: item.overview,
-            original_title: item.original_title,
-            original_language: item.original_language,
-            title: item.title,
-            poster_path: item.poster_path ?? null,
-            backdrop_path: item.backdrop_path ?? null,
-            video: item.video,
-          }));
+          const searchMovies = results.map(
+            (item) =>
+              ({
+                id: item.id,
+                adult: item.adult,
+                overview: item.overview,
+                original_title: item.original_title,
+                original_language: item.original_language,
+                title: item.title,
+                poster_path: item.poster_path ?? null,
+                backdrop_path: item.backdrop_path ?? null,
+                video: item.video,
+                releaseDate: item.release_date,
+              } as ActualContentData)
+          );
           state.searchMovies = searchMovies;
         }
         state.loading.isProcessing = false;
