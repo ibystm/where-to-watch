@@ -8,7 +8,7 @@ export const MainContens: React.FC = () => {
   const { isLoading, displayContents } = useDisplayContentsControl();
 
   return (
-    <SimpleGrid minChildWidth="192px" spacing="24px" marginX="40px">
+    <SimpleGrid minChildWidth="240px" spacing="24px" marginX="40px">
       {!isLoading &&
         displayContents.map((item, idx) => (
           <ContentItem key={idx} contentItem={item} />

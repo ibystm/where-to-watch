@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { discoverMovieShowsAPI } from "../../../apis/discoverTVShows";
+import { ActualContentData } from "../../../types/redux/discovers";
 import { DiscoverTVShowsState } from "../../../types/redux/discoverTVShows";
 
 const SLICE_NAME = "discoverTVShows";
@@ -37,7 +38,18 @@ const slice = createSlice({
       asyncActions.discoverTVShows.fulfilled,
       (state, { payload }) => {
         if (payload.results) {
-          state.data = payload.results;
+          const contents = payload.results.map(
+            (item) =>
+              ({
+                id: item.id,
+                genre_ids: item.genre_ids,
+                title: item.name,
+                poster_path: item.poster_path,
+                releaseDate: item.first_air_date,
+                overview: item.overview,
+              } as ActualContentData)
+          );
+          state.data = contents;
         }
         state.loading.isProcessing = false;
       }

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { ActualContentData } from "../../../types/redux/discovers";
 import { searchMovieSelectors } from "../../global/header/selectors/searchMovies";
 import { contentsSelectors } from "../selectors/contents";
+import { discoverTVShowsSelectors } from "../selectors/discoverTVShows";
 
 type useDisplayContentsControlReturnType = {
   displayContents: ActualContentData[];
@@ -11,26 +12,38 @@ type useDisplayContentsControlReturnType = {
 
 export const useDisplayContentsControl =
   (): useDisplayContentsControlReturnType => {
+    // ===== selectors =====
     const isLoadingContents = useSelector(contentsSelectors.selectLoadingState);
     const searchMovieLoading = useSelector(searchMovieSelectors.loadingState);
     const searchMode = useSelector(searchMovieSelectors.searchMode);
     const contents = useSelector(contentsSelectors.selectContents);
     const searchMovies = useSelector(searchMovieSelectors.searchedMovies);
+    const discoverTVShows = useSelector(
+      discoverTVShowsSelectors.discoverTVShows
+    );
+    const isLoadingdiscoverTVShows = useSelector(
+      discoverTVShowsSelectors.isDiscoverTVShowsLoading
+    );
+    // =====  =====
+
     const [displayContents, setDisplayContents] = useState<ActualContentData[]>(
       []
     );
 
-    const shouldDislayTopContents = !searchMode && !isLoadingContents;
+    const shouldDislayTopContents =
+      !searchMode && !isLoadingContents && !isLoadingdiscoverTVShows;
     const shoulDisplaySearchedContents = searchMode && !searchMovieLoading;
 
     const isLoading = useMemo(
-      () => isLoadingContents || searchMovieLoading,
-      [isLoadingContents, searchMovieLoading]
+      () => isLoadingContents || searchMovieLoading || isLoadingdiscoverTVShows,
+      [isLoadingContents, isLoadingdiscoverTVShows, searchMovieLoading]
     );
 
     useEffect(() => {
       if (shouldDislayTopContents) {
-        setDisplayContents(contents);
+        // TODO: 一緒に表示させる必要はなし
+        const res = [...contents, ...discoverTVShows];
+        setDisplayContents(res);
       }
 
       if (shoulDisplaySearchedContents) {
@@ -38,6 +51,7 @@ export const useDisplayContentsControl =
       }
     }, [
       contents,
+      discoverTVShows,
       searchMovies,
       shoulDisplaySearchedContents,
       shouldDislayTopContents,

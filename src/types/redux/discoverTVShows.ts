@@ -1,9 +1,9 @@
-import { TVListResults } from "../../apis/types/discoverTVShows";
+import { ActualContentData } from "./discovers";
 
 export type DiscoverTVShowsState = {
   loading: {
     isProcessing: boolean;
     message: string | null;
   };
-  data: TVListResults[];
+  data: ActualContentData[];
 };
