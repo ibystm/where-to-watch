@@ -22,7 +22,7 @@ export const Header: React.VFC = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Button onClick={() => navigate("/signup")}>
+        <Button onClick={() => navigate("/signup")} backgroundColor="white">
           <Heading size="xl">Can I watch ?</Heading>
         </Button>
         <Flex minW="400px">

@@ -70,10 +70,11 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
           textOverflow="ellipsis"
           whiteSpace="nowrap"
           overflow="hidden"
+          color="gray.600"
         >
           {title ? title : commonDictionaries.noTitle}
         </Text>
-        <Text fontSize="sm">
+        <Text fontSize="sm" color="gray.600">
           {releaseDate ? releaseDate : commonDictionaries.noReleaseDate}
         </Text>
       </Box>
