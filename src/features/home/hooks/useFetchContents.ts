@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store/store";
-import { contentsActions } from "../slice/contents";
+import { contentsActions } from "../slice/discoverMovies";
 
 export const useFetchContents = () => {
   const dispatch: AppDispatch = useDispatch();

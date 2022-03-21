@@ -3,6 +3,7 @@ import { Flex, IconButton, Input } from "@chakra-ui/react";
 import { Form, useFormikContext } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { commonDictionaries } from "../../../../commons/constants/dictionaries";
 import { searchMoviesActions } from "../slice/searchMovie";
 
 export type SearchMovieFormValues = {
@@ -34,7 +35,7 @@ export const SearchForm: React.FC = () => {
       <Flex>
         <Input
           type="search"
-          placeholder="Movie Name"
+          placeholder={commonDictionaries.titleName}
           name="searchName"
           value={values.searchName}
           onChange={handleChange}

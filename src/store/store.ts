@@ -5,7 +5,7 @@ import {
 } from "react-redux";
 import { reducer as configurationsReducer } from "../features/configurations/slice/configurations";
 import { reducer as searchMovieReducer } from "../features/global/header/slice/searchMovie";
-import { reducer as contentsReducer } from "../features/home/slice/contents";
+import { reducer as contentsReducer } from "../features/home/slice/discoverMovies";
 import { reducer as loadingReducer } from "../features/loading/slice/loading";
 import { reducer as userReducer } from "./slices/usersSlice";
 
