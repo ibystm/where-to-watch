@@ -6,59 +6,69 @@ import { contentsSelectors } from "../selectors/contents";
 import { discoverTVShowsSelectors } from "../selectors/discoverTVShows";
 
 type useDisplayContentsControlReturnType = {
-  displayContents: ActualContentData[];
+  contentsList: {
+    discoverMovies: ActualContentData[];
+    discoverTVShows: ActualContentData[];
+    searchedContents: ActualContentData[];
+  };
   isLoading: boolean;
 };
 
 export const useDisplayContentsControl =
   (): useDisplayContentsControlReturnType => {
     // ===== selectors =====
-    const isLoadingContents = useSelector(contentsSelectors.selectLoadingState);
     const searchMovieLoading = useSelector(searchMovieSelectors.loadingState);
     const searchMode = useSelector(searchMovieSelectors.searchMode);
-    const contents = useSelector(contentsSelectors.selectContents);
-    const searchMovies = useSelector(searchMovieSelectors.searchedMovies);
+    const discoverMovies = useSelector(contentsSelectors.selectContents);
     const discoverTVShows = useSelector(
       discoverTVShowsSelectors.discoverTVShows
+    );
+    const searchMovies = useSelector(searchMovieSelectors.searchedMovies);
+    const isLoadingDiscoverMovies = useSelector(
+      contentsSelectors.selectLoadingState
     );
     const isLoadingdiscoverTVShows = useSelector(
       discoverTVShowsSelectors.isDiscoverTVShowsLoading
     );
     // =====  =====
 
-    const [displayContents, setDisplayContents] = useState<ActualContentData[]>(
-      []
-    );
+    const [searchedContents, setSearchedContents] = useState<
+      ActualContentData[]
+    >([]);
 
-    const shouldDislayTopContents =
-      !searchMode && !isLoadingContents && !isLoadingdiscoverTVShows;
     const shoulDisplaySearchedContents = searchMode && !searchMovieLoading;
 
     const isLoading = useMemo(
-      () => isLoadingContents || searchMovieLoading || isLoadingdiscoverTVShows,
-      [isLoadingContents, isLoadingdiscoverTVShows, searchMovieLoading]
+      () =>
+        isLoadingDiscoverMovies ||
+        searchMovieLoading ||
+        isLoadingdiscoverTVShows,
+      [isLoadingDiscoverMovies, isLoadingdiscoverTVShows, searchMovieLoading]
     );
 
     useEffect(() => {
-      if (shouldDislayTopContents) {
-        // TODO: 一緒に表示させる必要はなし
-        const res = [...contents, ...discoverTVShows];
-        setDisplayContents(res);
-      }
+      // if (shouldDislayTopContents) {
+      //   // TODO: 一緒に表示させる必要はなし
+      //   const res = [...contents, ...discoverTVShows];
+      //   setDisplayContents(res);
+      // }
 
       if (shoulDisplaySearchedContents) {
-        setDisplayContents(searchMovies);
+        setSearchedContents(searchMovies);
       }
-    }, [
-      contents,
-      discoverTVShows,
-      searchMovies,
-      shoulDisplaySearchedContents,
-      shouldDislayTopContents,
-    ]);
+    }, [discoverTVShows, searchMovies, shoulDisplaySearchedContents]);
+
+    const contentsList = useMemo(
+      () => ({
+        discoverMovies,
+        discoverTVShows,
+        searchedContents,
+      }),
+      [discoverMovies, discoverTVShows, searchedContents]
+    );
 
     return {
-      displayContents,
+      contentsList,
       isLoading,
     };
   };

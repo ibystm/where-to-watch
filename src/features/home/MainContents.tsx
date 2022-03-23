@@ -1,20 +1,21 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
-import { ContentItem } from "./ContentItem";
-import { useDisplayContentsControl } from "./hooks/useDisplayContentsControl";
-import { SkeltonContentItem } from "./SkeltonContentItem";
+import { ContentItemRow } from "./ContentItemRow";
+
+const ContentCategories = {
+  DiscoverMovies: "DiscoverMovies",
+  DiscoverTVShows: "DiscoverTVShows",
+} as const;
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export type ContentCategories =
+  typeof ContentCategories[keyof typeof ContentCategories];
 
 export const MainContens: React.FC = () => {
-  const { isLoading, displayContents } = useDisplayContentsControl();
-
   return (
-    <SimpleGrid minChildWidth="240px" spacing="24px" marginX="40px">
-      {!isLoading &&
-        displayContents.map((item, idx) => (
-          <ContentItem key={idx} contentItem={item} />
-        ))}
-      {isLoading &&
-        [...Array(100)].map((a, idx) => <SkeltonContentItem key={idx} />)}
-    </SimpleGrid>
+    <Box paddingX="40px">
+      {Object.keys(ContentCategories).map((name) => (
+        <ContentItemRow categoryName={name as ContentCategories} />
+      ))}
+    </Box>
   );
 };
