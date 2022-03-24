@@ -26,12 +26,12 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
       maxW="320px"
       variant="unstyled"
       borderRadius="20px"
-      padding="8px 16px"
+      padding="8px 8px"
       backgroundColor="white"
       _focus={{ _focus: "none" }}
       _hover={{
-        transition: "0.5s all",
-        transform: "scale(1.3, 1.3)",
+        transition: "all 0.5s 0.5s",
+        transform: "scale(1.15, 1.15)",
         zIndex: 10,
         boxShadow: "0.5px 0.5px 0.5px grey",
       }}

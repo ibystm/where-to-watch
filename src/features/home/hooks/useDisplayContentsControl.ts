@@ -7,8 +7,14 @@ import { discoverTVShowsSelectors } from "../selectors/discoverTVShows";
 
 type useDisplayContentsControlReturnType = {
   contentsList: {
-    discoverMovies: ActualContentData[];
-    discoverTVShows: ActualContentData[];
+    discoverMovies: {
+      loading: boolean;
+      contents: ActualContentData[];
+    };
+    discoverTVShows: {
+      loading: boolean;
+      contents: ActualContentData[];
+    };
     searchedContents: ActualContentData[];
   };
   isLoading: boolean;
@@ -60,11 +66,23 @@ export const useDisplayContentsControl =
 
     const contentsList = useMemo(
       () => ({
-        discoverMovies,
-        discoverTVShows,
+        discoverMovies: {
+          loading: isLoadingDiscoverMovies,
+          contents: discoverMovies,
+        },
+        discoverTVShows: {
+          loading: isLoadingdiscoverTVShows,
+          contents: discoverTVShows,
+        },
         searchedContents,
       }),
-      [discoverMovies, discoverTVShows, searchedContents]
+      [
+        discoverMovies,
+        discoverTVShows,
+        isLoadingDiscoverMovies,
+        isLoadingdiscoverTVShows,
+        searchedContents,
+      ]
     );
 
     return {
