@@ -46,7 +46,7 @@ export const ContentItemRow: VFC<P> = ({ categoryName }) => {
           {contentsMaps.name}
         </Text>
       </Box>
-      <SimpleGrid minChildWidth="240px" spacing="24px">
+      <SimpleGrid minChildWidth="240px" spacing="24px" marginTop="8px">
         {contents}
       </SimpleGrid>
     </Box>

@@ -11,24 +11,36 @@ export const Header: React.VFC = () => {
   return (
     <Box
       w="100%"
-      borderBottom="1px"
-      boxShadow="md"
+      boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
       borderColor="purple.100"
-      mb="24px"
+      mb="8px"
     >
       <Flex
-        h="64px"
+        h="80px"
         marginX="48px"
         justifyContent="space-between"
         alignItems="center"
       >
-        <Button onClick={() => navigate("/signup")} backgroundColor="white">
+        <Button
+          onClick={() => navigate("/signup")}
+          backgroundColor="white"
+          height="70%"
+        >
           <Heading size="xl">Can I watch ?</Heading>
         </Button>
-        <Flex minW="400px">
+        <Flex
+          minW="400px"
+          boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
+        >
           <GlobalSearchBox />
         </Flex>
-        <Button colorScheme="purple" variant="outline" onClick={onPressButton}>
+        <Button
+          // colorScheme="purple"
+          variant="outline"
+          boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
+          onClick={onPressButton}
+          color="purple.500"
+        >
           {buttonText}
         </Button>
       </Flex>

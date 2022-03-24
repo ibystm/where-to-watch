@@ -13,7 +13,10 @@ export const GlobalSearchBox = () => {
   const formikRef = useRef<FormikProps<SearchMovieFormValues>>(null);
 
   return (
-    <Box width="100%">
+    <Box
+      width="100%"
+      boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
+    >
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}

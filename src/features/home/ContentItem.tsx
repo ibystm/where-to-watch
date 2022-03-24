@@ -25,15 +25,16 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
       height="360px"
       maxW="320px"
       variant="unstyled"
-      borderRadius="20px"
+      borderRadius="24px"
       padding="8px 8px"
       backgroundColor="white"
+      boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
       _focus={{ _focus: "none" }}
       _hover={{
         transition: "all 0.5s 0.5s",
         transform: "scale(1.15, 1.15)",
         zIndex: 10,
-        boxShadow: "0.5px 0.5px 0.5px grey",
+        boxShadow: "10px 10px 20px #dedede -10px -10px 20px #ffffff",
       }}
     >
       {poster_path ? (
