@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Icon, Image, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import { MdOutlineHideImage } from "react-icons/md";
 import { commonDictionaries } from "../../commons/constants/dictionaries";
 import { useSelector } from "../../store/store";
@@ -11,6 +12,7 @@ type P = {
 
 export const ContentItem: React.VFC<P> = ({ contentItem }) => {
   const { title, poster_path, releaseDate } = contentItem;
+  const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
   const imageUrl = useSelector(configurationsSelector.secureImageUrl);
   const posterSizes = useSelector(configurationsSelector.posterSizes);
   const pathBuilder = (path: string): string | undefined => {
@@ -42,9 +44,12 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
           marginX="auto"
           src={poster_path ? pathBuilder(poster_path) : undefined}
           alt={title ? title : "movie poster"}
+          opacity={isImgLoaded ? 10 : 0}
+          transition="all 1s"
           boxSize="85%"
           borderRadius="inherit"
           loading="lazy"
+          onLoad={() => setIsImgLoaded(true)}
         />
       ) : (
         <Flex
