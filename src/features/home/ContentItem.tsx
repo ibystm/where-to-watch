@@ -76,7 +76,9 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
           {title ? title : commonDictionaries.noTitle}
         </Text>
         <Text fontSize="sm" color="gray.600">
-          {releaseDate ? releaseDate : commonDictionaries.noReleaseDate}
+          {releaseDate
+            ? "公開日: " + releaseDate
+            : commonDictionaries.noReleaseDate}
         </Text>
       </Box>
     </Button>
