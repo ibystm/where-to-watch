@@ -27,7 +27,13 @@ export const ContentItemRow: VFC<P> = ({ categoryName }) => {
           loading: contentsList.discoverTVShows.loading,
         };
     }
-  }, [categoryName, contentsList.discoverMovies, contentsList.discoverTVShows]);
+  }, [
+    categoryName,
+    contentsList.discoverMovies.contents,
+    contentsList.discoverMovies.loading,
+    contentsList.discoverTVShows.contents,
+    contentsList.discoverTVShows.loading,
+  ]);
 
   const contents = useMemo(
     () =>

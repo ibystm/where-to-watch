@@ -15,16 +15,17 @@ type useDisplayContentsControlReturnType = {
       loading: boolean;
       contents: ActualContentData[];
     };
-    searchedContents: ActualContentData[];
+    searchedContents: {
+      loading: boolean;
+      contents: ActualContentData[];
+    };
   };
-  isLoading: boolean;
 };
 
 export const useDisplayContentsControl =
   (): useDisplayContentsControlReturnType => {
     // ===== selectors =====
-    const searchMovieLoading = useSelector(searchMovieSelectors.loadingState);
-    const searchMode = useSelector(searchMovieSelectors.searchMode);
+    const isSearchMovieLoading = useSelector(searchMovieSelectors.loadingState);
     const discoverMovies = useSelector(contentsSelectors.selectContents);
     const discoverTVShows = useSelector(
       discoverTVShowsSelectors.discoverTVShows
@@ -42,27 +43,9 @@ export const useDisplayContentsControl =
       ActualContentData[]
     >([]);
 
-    const shoulDisplaySearchedContents = searchMode && !searchMovieLoading;
-
-    const isLoading = useMemo(
-      () =>
-        isLoadingDiscoverMovies ||
-        searchMovieLoading ||
-        isLoadingdiscoverTVShows,
-      [isLoadingDiscoverMovies, isLoadingdiscoverTVShows, searchMovieLoading]
-    );
-
     useEffect(() => {
-      // if (shouldDislayTopContents) {
-      //   // TODO: 一緒に表示させる必要はなし
-      //   const res = [...contents, ...discoverTVShows];
-      //   setDisplayContents(res);
-      // }
-
-      if (shoulDisplaySearchedContents) {
-        setSearchedContents(searchMovies);
-      }
-    }, [discoverTVShows, searchMovies, shoulDisplaySearchedContents]);
+      setSearchedContents(searchMovies);
+    }, [searchMovies]);
 
     const contentsList = useMemo(
       () => ({
@@ -74,19 +57,22 @@ export const useDisplayContentsControl =
           loading: isLoadingdiscoverTVShows,
           contents: discoverTVShows,
         },
-        searchedContents,
+        searchedContents: {
+          loading: isSearchMovieLoading,
+          contents: searchedContents,
+        },
       }),
       [
         discoverMovies,
         discoverTVShows,
         isLoadingDiscoverMovies,
         isLoadingdiscoverTVShows,
+        isSearchMovieLoading,
         searchedContents,
       ]
     );
 
     return {
       contentsList,
-      isLoading,
     };
   };
