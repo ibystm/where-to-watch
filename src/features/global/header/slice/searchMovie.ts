@@ -6,6 +6,7 @@ import { SearchMovieState } from "../../../../types/redux/searchMovies";
 const SLICE_NAME = "searcMovie";
 const initialState: SearchMovieState = {
   searchMode: false,
+  keyword: "",
   loading: {
     isProcessing: false,
     message: null,
@@ -33,17 +34,23 @@ export const slice = createSlice({
   reducers: {
     resetSearchMode: (state) => {
       state.searchMode = false;
+      state.keyword = "";
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(searchMoviesActions.searchMovies.pending, (state) => {
-      state.loading.isProcessing = true;
-      state.searchMode = true;
-    });
+    builder.addCase(
+      searchMoviesActions.searchMovies.pending,
+      (state, { meta }) => {
+        state.loading.isProcessing = true;
+        state.searchMode = true;
+        state.keyword = meta.arg;
+      }
+    );
     builder.addCase(
       searchMoviesActions.searchMovies.fulfilled,
-      (state, { payload }) => {
+      (state, { payload, meta }) => {
         const { results } = payload;
+
         if (results) {
           const searchMovies = results.map(
             (item) =>
