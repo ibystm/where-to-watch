@@ -14,7 +14,7 @@ export const useSearchMoviesByKeyword =
     const dispatch = useDispatch();
 
     const handleSubmit = (values: SearchMovieFormValues): void => {
-      if (!values.searchName) {
+      if (values.searchName === "") {
         console.log("No search movie name parameter");
         return;
       }
