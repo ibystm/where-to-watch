@@ -3,7 +3,7 @@ import { fetchDiscoverMoviesAPI } from "../../../apis/fetchContents";
 import { ContentsState } from "../../../types/redux/discovers";
 
 const SLICE_NAME = "contents";
-const initialState: ContentsState = {
+export const initialState: ContentsState = {
   loading: {
     isProcessing: false,
     message: null,

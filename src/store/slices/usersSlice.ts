@@ -6,7 +6,7 @@ type UserState = {
   email: string | null;
 };
 
-const initialState: UserState = {
+export const initialState: UserState = {
   id: null,
   userName: null,
   email: null,

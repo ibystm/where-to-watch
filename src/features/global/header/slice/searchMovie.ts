@@ -4,7 +4,7 @@ import { ActualContentData } from "../../../../types/redux/discovers";
 import { SearchMovieState } from "../../../../types/redux/searchMovies";
 
 const SLICE_NAME = "searcMovie";
-const initialState: SearchMovieState = {
+export const initialState: SearchMovieState = {
   searchMode: false,
   keyword: "",
   loading: {

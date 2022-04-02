@@ -5,7 +5,7 @@ import { DiscoverTVShowsState } from "../../../types/redux/discoverTVShows";
 
 const SLICE_NAME = "discoverTVShows";
 
-const initialState: DiscoverTVShowsState = {
+export const initialState: DiscoverTVShowsState = {
   loading: {
     isProcessing: false,
     message: null,
