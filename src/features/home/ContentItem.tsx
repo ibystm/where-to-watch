@@ -24,8 +24,9 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
 
   return (
     <Button
-      height="360px"
-      maxW="320px"
+      height="320px"
+      minW="200px"
+      width="100%"
       variant="unstyled"
       borderRadius="24px"
       padding="8px 8px"

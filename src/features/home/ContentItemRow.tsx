@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import React, { useMemo, VFC } from "react";
 import { commonDictionaries } from "../../commons/constants/dictionaries";
 import { ContentItem } from "./ContentItem";
@@ -52,9 +52,14 @@ export const ContentItemRow: VFC<P> = ({ categoryName }) => {
           {contentsMaps.name}
         </Text>
       </Box>
-      <SimpleGrid minChildWidth="240px" spacing="24px" marginTop="8px">
+      <Box
+        spacing="24px"
+        marginTop="8px"
+        display="flex"
+        overflow="scroll hidden"
+      >
         {contents}
-      </SimpleGrid>
+      </Box>
     </Box>
   );
 };
