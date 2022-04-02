@@ -24,7 +24,6 @@ type useDisplayContentsControlReturnType = {
 
 export const useDisplayContentsControl =
   (): useDisplayContentsControlReturnType => {
-    // ===== selectors =====
     const isSearchMovieLoading = useSelector(searchMovieSelectors.loadingState);
     const discoverMovies = useSelector(contentsSelectors.selectContents);
     const discoverTVShows = useSelector(
@@ -37,7 +36,6 @@ export const useDisplayContentsControl =
     const isLoadingdiscoverTVShows = useSelector(
       discoverTVShowsSelectors.isDiscoverTVShowsLoading
     );
-    // =====  =====
 
     const [searchedContents, setSearchedContents] = useState<
       ActualContentData[]
