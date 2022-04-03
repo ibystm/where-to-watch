@@ -12,4 +12,7 @@ export const requests = {
     `/search/movie?${languages.ja}&${API_KEY_QUERY_STRINGS}&query=${keyword}`,
   getMovieVideos: (movieId: string) =>
     `/movie/${movieId}/videos?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
+  getMovieGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
+  getTVGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
+  // getTrendings: (mediaType: MediaType, timeWindow: TimeWindow) => `/trending/${mediaType}/`
 };
