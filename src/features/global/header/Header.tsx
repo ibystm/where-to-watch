@@ -26,7 +26,7 @@ export const Header: React.VFC = () => {
           backgroundColor="white"
           height="70%"
         >
-          <Heading size="xl">Can I watch ?</Heading>
+          <Heading size="xl">Where to watch ?</Heading>
         </Button>
         <Flex
           minW="400px"
