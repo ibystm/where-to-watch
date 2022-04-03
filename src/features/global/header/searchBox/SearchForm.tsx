@@ -1,6 +1,5 @@
-import { SearchIcon } from "@chakra-ui/icons";
-import { Flex, IconButton, Input } from "@chakra-ui/react";
-import { Form, useFormikContext } from "formik";
+import { Input } from "@chakra-ui/react";
+import { useFormikContext } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { commonDictionaries } from "../../../../commons/constants/dictionaries";
@@ -31,25 +30,14 @@ export const SearchForm: React.FC = () => {
   }, [dispatch, values.searchName]);
 
   return (
-    <Form>
-      <Flex>
-        <Input
-          type="search"
-          placeholder={commonDictionaries.titleName}
-          name="searchName"
-          value={values.searchName}
-          onChange={handleChange}
-          focusBorderColor="purple.400"
-        />
-        <IconButton
-          type="submit"
-          ml="2px"
-          width="24px"
-          colorScheme="purple"
-          aria-label="Search database"
-          icon={<SearchIcon />}
-        />
-      </Flex>
-    </Form>
+    <Input
+      placeholder={commonDictionaries.titleName}
+      name="searchName"
+      value={values.searchName}
+      onChange={handleChange}
+      focusBorderColor="purple.400"
+      boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
+      borderRadius="20px"
+    />
   );
 };

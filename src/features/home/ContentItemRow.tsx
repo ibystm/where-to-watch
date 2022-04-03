@@ -46,17 +46,17 @@ export const ContentItemRow: VFC<P> = ({ categoryName }) => {
   );
 
   return (
-    <Box marginY="24px">
+    <Box height="360px" marginBottom="32px">
       <Box marginLeft="32px">
         <Text fontSize="2xl" fontWeight="bold" color="gray.800">
           {contentsMaps.name}
         </Text>
       </Box>
       <Box
-        spacing="24px"
-        marginTop="8px"
+        height="100%"
         display="flex"
         overflow="scroll hidden"
+        paddingY="16px"
       >
         {contents}
       </Box>

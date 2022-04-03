@@ -31,6 +31,7 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
       borderRadius="24px"
       padding="8px 8px"
       backgroundColor="white"
+      marginRight="24px"
       boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
       _focus={{ _focus: "none" }}
       _hover={{
