@@ -56,7 +56,7 @@ export const ContentItemRow: VFC<P> = ({ categoryName }) => {
         height="100%"
         display="flex"
         overflow="scroll hidden"
-        paddingY="16px"
+        paddingY="1rem"
       >
         {contents}
       </Box>
