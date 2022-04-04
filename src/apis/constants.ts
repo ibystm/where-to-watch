@@ -14,5 +14,9 @@ export const requests = {
     `/movie/${movieId}/videos?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
   getMovieGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
   getTVGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
+  getUpComingMovie: (page: number = 1) =>
+    `/movie/upcoming?${languages.ja}&${API_KEY_QUERY_STRINGS}&page=${page}`,
+  getUpComingTVs: (page: number = 1) =>
+    `/tv/upcoming?${languages.ja}&${API_KEY_QUERY_STRINGS}&page=${page}`,
   // getTrendings: (mediaType: MediaType, timeWindow: TimeWindow) => `/trending/${mediaType}/`
 };
