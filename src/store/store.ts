@@ -8,6 +8,7 @@ import { reducer as searchMovieReducer } from "../features/global/header/slice/s
 import { reducer as discoverMoviesReducer } from "../features/home/slice/discoverMovies";
 import { reducer as discoverTVShowsReducer } from "../features/home/slice/discoverTVs";
 import { genresReducer } from "../features/home/slice/genres/index";
+import { upcomingReducer } from "../features/home/slice/upcomings/index";
 import { reducer as loadingReducer } from "../features/loading/slice/loading";
 import { reducer as userReducer } from "./slices/usersSlice";
 
@@ -18,6 +19,7 @@ export const store = configureStore({
     contents: discoverMoviesReducer,
     discoverTVShows: discoverTVShowsReducer,
     searchMovies: searchMovieReducer,
+    upcomingReducer: upcomingReducer,
     configurations: configurationsReducer,
     genres: genresReducer,
   },
