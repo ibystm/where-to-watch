@@ -4,6 +4,7 @@ import { AppDispatch } from "../../../store/store";
 import { contentsActions } from "../slice/discoverMovies";
 import { discoverTVShowsActions } from "../slice/discoverTVs";
 import { genresActions } from "../slice/genres/index";
+import { upcomingActions } from "../slice/upcomings/index";
 
 export const useFetchContents = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -12,6 +13,7 @@ export const useFetchContents = () => {
     dispatch(genresActions.getTVGenres());
     dispatch(contentsActions.fetchDiscoverMovies());
     dispatch(discoverTVShowsActions.discoverTVShows());
+    dispatch(upcomingActions.fetchUpcomingMovies());
   }, [dispatch]);
 
   React.useEffect(() => {
