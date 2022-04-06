@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store/store";
+import { popularitiesActions } from "../../loading/slice/popularities/index";
 import { contentsActions } from "../slice/discoverMovies";
 import { discoverTVShowsActions } from "../slice/discoverTVs";
 import { genresActions } from "../slice/genres/index";
@@ -14,6 +15,7 @@ export const useFetchContents = () => {
     dispatch(contentsActions.fetchDiscoverMovies());
     dispatch(discoverTVShowsActions.discoverTVShows());
     dispatch(upcomingActions.fetchUpcomingMovies());
+    dispatch(popularitiesActions.getPopularMovies());
   }, [dispatch]);
 
   React.useEffect(() => {

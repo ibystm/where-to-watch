@@ -7,6 +7,7 @@ export const commonDictionaries = {
   discoverMovie: "Discover/映画",
   discoverTVShows: "Discover/テレビ・ドラマ",
   upconmingMovies: "近日公開予定映画",
+  popuolarMovies: "人気映画",
 };
 
 export const ISO_3166_1_CODES = {

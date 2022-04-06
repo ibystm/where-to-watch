@@ -32,6 +32,13 @@ export const ContentItemRow: VFC<P> = ({ categoryName }) => {
           contents: contentsList.upcomingMovies.contents,
           loading: contentsList.upcomingMovies.loading,
         };
+      case "POPULAR_MOVIES": {
+        return {
+          name: commonDictionaries.popuolarMovies,
+          contents: contentsList.popularMovies.contents,
+          loading: contentsList.popularMovies.loading,
+        };
+      }
       default: {
         const strangeValue: never = categoryName;
         throw new Error(`${strangeValue} is not categoryName`);
@@ -43,6 +50,8 @@ export const ContentItemRow: VFC<P> = ({ categoryName }) => {
     contentsList.discoverMovies.loading,
     contentsList.discoverTVShows.contents,
     contentsList.discoverTVShows.loading,
+    contentsList.popularMovies.contents,
+    contentsList.popularMovies.loading,
     contentsList.upcomingMovies.contents,
     contentsList.upcomingMovies.loading,
   ]);

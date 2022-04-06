@@ -24,6 +24,10 @@ type useDisplayContentsControlReturnType = {
       loading: boolean;
       contents: ActualContentData[];
     };
+    popularMovies: {
+      loading: boolean;
+      contents: ActualContentData[];
+    };
   };
 };
 
@@ -37,6 +41,9 @@ export const useDisplayContentsControl =
     const searchMovies = useSelector(searchMovieSelectors.searchedMovies);
     const upcomingMovies = useSelector(
       (state: RootState) => state.upcomings.movie.data
+    );
+    const popularMovies = useSelector(
+      (state: RootState) => state.popularities.movies
     );
     const isLoadingUpcomingMovie = useSelector(
       (state: RootState) => state.upcomings.movie.loading
@@ -74,6 +81,10 @@ export const useDisplayContentsControl =
           loading: isLoadingUpcomingMovie,
           contents: upcomingMovies,
         },
+        popularMovies: {
+          loading: false,
+          contents: popularMovies,
+        },
       }),
       [
         discoverMovies,
@@ -82,6 +93,7 @@ export const useDisplayContentsControl =
         isLoadingUpcomingMovie,
         isLoadingdiscoverTVShows,
         isSearchMovieLoading,
+        popularMovies,
         searchedContents,
         upcomingMovies,
       ]

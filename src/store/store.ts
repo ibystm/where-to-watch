@@ -10,6 +10,7 @@ import { reducer as discoverTVShowsReducer } from "../features/home/slice/discov
 import { genresReducer } from "../features/home/slice/genres/index";
 import { upcomingReducer } from "../features/home/slice/upcomings/index";
 import { reducer as loadingReducer } from "../features/loading/slice/loading";
+import { popularitiesReducer } from "../features/loading/slice/popularities/index";
 import { reducer as userReducer } from "./slices/usersSlice";
 
 export const store = configureStore({
@@ -18,6 +19,7 @@ export const store = configureStore({
     user: userReducer,
     contents: discoverMoviesReducer,
     discoverTVShows: discoverTVShowsReducer,
+    popularities: popularitiesReducer,
     searchMovies: searchMovieReducer,
     upcomings: upcomingReducer,
     configurations: configurationsReducer,
