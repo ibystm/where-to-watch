@@ -32,6 +32,10 @@ export const ContentItemRow: VFC<P> = ({ categoryName }) => {
           contents: contentsList.upcomingMovies.contents,
           loading: contentsList.upcomingMovies.loading,
         };
+      default: {
+        const strangeValue: never = categoryName;
+        throw new Error(`${strangeValue} is not categoryName`);
+      }
     }
   }, [
     categoryName,
