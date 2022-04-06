@@ -8,6 +8,7 @@ import { SearchContentsArea } from "./SearchContentsArea";
 const ContentCategories = {
   DiscoverMovies: "DiscoverMovies",
   DiscoverTVShows: "DiscoverTVShows",
+  UPCOMING_MOVIES: "UPCOMING_MOVIES",
   // SearchContents: "SearchContents",
 } as const;
 // eslint-disable-next-line @typescript-eslint/no-redeclare

@@ -26,6 +26,12 @@ export const ContentItemRow: VFC<P> = ({ categoryName }) => {
           contents: contentsList.discoverTVShows.contents,
           loading: contentsList.discoverTVShows.loading,
         };
+      case "UPCOMING_MOVIES":
+        return {
+          name: commonDictionaries.upconmingMovies,
+          contents: contentsList.upcomingMovies.contents,
+          loading: contentsList.upcomingMovies.loading,
+        };
     }
   }, [
     categoryName,
@@ -33,6 +39,8 @@ export const ContentItemRow: VFC<P> = ({ categoryName }) => {
     contentsList.discoverMovies.loading,
     contentsList.discoverTVShows.contents,
     contentsList.discoverTVShows.loading,
+    contentsList.upcomingMovies.contents,
+    contentsList.upcomingMovies.loading,
   ]);
 
   const contents = useMemo(

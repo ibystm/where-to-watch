@@ -19,7 +19,7 @@ export const store = configureStore({
     contents: discoverMoviesReducer,
     discoverTVShows: discoverTVShowsReducer,
     searchMovies: searchMovieReducer,
-    upcomingReducer: upcomingReducer,
+    upcomings: upcomingReducer,
     configurations: configurationsReducer,
     genres: genresReducer,
   },

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 import { ActualContentData } from "../../../types/redux/discovers";
 import { searchMovieSelectors } from "../../global/header/selectors/searchMovies";
 import { contentsSelectors } from "../selectors/contents";
@@ -19,6 +20,10 @@ type useDisplayContentsControlReturnType = {
       loading: boolean;
       contents: ActualContentData[];
     };
+    upcomingMovies: {
+      loading: boolean;
+      contents: ActualContentData[];
+    };
   };
 };
 
@@ -30,6 +35,12 @@ export const useDisplayContentsControl =
       discoverTVShowsSelectors.discoverTVShows
     );
     const searchMovies = useSelector(searchMovieSelectors.searchedMovies);
+    const upcomingMovies = useSelector(
+      (state: RootState) => state.upcomings.movie.data
+    );
+    const isLoadingUpcomingMovie = useSelector(
+      (state: RootState) => state.upcomings.movie.loading
+    );
     const isLoadingDiscoverMovies = useSelector(
       contentsSelectors.selectLoadingState
     );
@@ -59,14 +70,20 @@ export const useDisplayContentsControl =
           loading: isSearchMovieLoading,
           contents: searchedContents,
         },
+        upcomingMovies: {
+          loading: isLoadingUpcomingMovie,
+          contents: upcomingMovies,
+        },
       }),
       [
         discoverMovies,
         discoverTVShows,
         isLoadingDiscoverMovies,
+        isLoadingUpcomingMovie,
         isLoadingdiscoverTVShows,
         isSearchMovieLoading,
         searchedContents,
+        upcomingMovies,
       ]
     );
 

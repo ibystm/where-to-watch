@@ -1,3 +1,4 @@
+import { ISOCodes31661 } from "../commons/constants/dictionaries";
 export const API_KEY_QUERY_STRINGS = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
 
 const languages = {
@@ -14,9 +15,9 @@ export const requests = {
     `/movie/${movieId}/videos?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
   getMovieGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
   getTVGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
-  getUpComingMovie: (page: number = 1) =>
-    `/movie/upcoming?${languages.ja}&${API_KEY_QUERY_STRINGS}&page=${page}`,
-  getUpComingTVs: (page: number = 1) =>
-    `/tv/upcoming?${languages.ja}&${API_KEY_QUERY_STRINGS}&page=${page}`,
+  getUpComingMovie: (region: ISOCodes31661, page: number = 1) =>
+    `/movie/upcoming?${languages.ja}&${API_KEY_QUERY_STRINGS}&region=${region}&page=${page}`,
+  // getUpComingTVs: (page: number = 1) =>
+  //   `/tv/upcoming?${languages.ja}&${API_KEY_QUERY_STRINGS}&page=${page}`,
   // getTrendings: (mediaType: MediaType, timeWindow: TimeWindow) => `/trending/${mediaType}/`
 };
