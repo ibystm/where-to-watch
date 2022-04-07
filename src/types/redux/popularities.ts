@@ -1,5 +1,5 @@
 import { ActualContentData } from "./discovers";
 export type PopularitiesState = {
-  tvs: {};
+  tvs: ActualContentData[];
   movies: ActualContentData[];
 };

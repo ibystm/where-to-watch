@@ -1,4 +1,4 @@
-import { MovieListResults } from "../../apis/types/commons";
+import { MovieListResults, TVListResults } from "../../apis/types/commons";
 import { ActualContentData } from "../../types/redux/discovers";
 
 export const reducerFormatUtil = {
@@ -19,5 +19,21 @@ export const reducerFormatUtil = {
       voteAverage: item.vote_average,
       genre_ids: item.genre_ids,
     }));
+  },
+
+  tvListResultToReduxStoreData: (
+    lists: TVListResults[]
+  ): ActualContentData[] => {
+    return lists.map(
+      (item) =>
+        ({
+          id: item.id,
+          genre_ids: item.genre_ids,
+          title: item.name,
+          poster_path: item.poster_path,
+          releaseDate: item.first_air_date,
+          overview: item.overview,
+        } as ActualContentData)
+    );
   },
 };

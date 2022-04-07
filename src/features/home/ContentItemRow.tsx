@@ -26,19 +26,24 @@ export const ContentItemRow: VFC<P> = ({ categoryName }) => {
           contents: contentsList.discoverTVShows.contents,
           loading: contentsList.discoverTVShows.loading,
         };
-      case "UPCOMING_MOVIES":
-        return {
-          name: commonDictionaries.upconmingMovies,
-          contents: contentsList.upcomingMovies.contents,
-          loading: contentsList.upcomingMovies.loading,
-        };
-      case "POPULAR_MOVIES": {
+      // case "UPCOMING_MOVIES":
+      //   return {
+      //     name: commonDictionaries.upconmingMovies,
+      //     contents: contentsList.upcomingMovies.contents,
+      //     loading: contentsList.upcomingMovies.loading,
+      //   };
+      case "POPULAR_MOVIES":
         return {
           name: commonDictionaries.popuolarMovies,
           contents: contentsList.popularMovies.contents,
           loading: contentsList.popularMovies.loading,
         };
-      }
+      case "POPULAR_TVS":
+        return {
+          name: commonDictionaries.popularTVs,
+          contents: contentsList.popularTVs.contents,
+          loading: contentsList.popularTVs.loading,
+        };
       default: {
         const strangeValue: never = categoryName;
         throw new Error(`${strangeValue} is not categoryName`);
@@ -52,8 +57,8 @@ export const ContentItemRow: VFC<P> = ({ categoryName }) => {
     contentsList.discoverTVShows.loading,
     contentsList.popularMovies.contents,
     contentsList.popularMovies.loading,
-    contentsList.upcomingMovies.contents,
-    contentsList.upcomingMovies.loading,
+    contentsList.popularTVs.contents,
+    contentsList.popularTVs.loading,
   ]);
 
   const contents = useMemo(

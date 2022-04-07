@@ -16,10 +16,20 @@ const asyncActions = {
       }
     }
   ),
+  getPopularTVs: createAsyncThunk(
+    `${SLICE_NAME}/getPopularTVs`,
+    async (_, { rejectWithValue }) => {
+      try {
+        return API.getPopularTVs();
+      } catch (e) {
+        return rejectWithValue(e);
+      }
+    }
+  ),
 };
 
 export const initialState: PopularitiesState = {
-  tvs: {},
+  tvs: [],
   movies: [],
 };
 
@@ -32,6 +42,14 @@ const slice = createSlice({
       asyncActions.getPopularMovies.fulfilled,
       (state, { payload }) => {
         state.movies = reducerFormatUtil.movieListResultToReduxStoreData(
+          payload.results
+        );
+      }
+    );
+    builder.addCase(
+      asyncActions.getPopularTVs.fulfilled,
+      (state, { payload }) => {
+        state.tvs = reducerFormatUtil.tvListResultToReduxStoreData(
           payload.results
         );
       }

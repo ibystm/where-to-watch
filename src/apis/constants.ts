@@ -19,6 +19,9 @@ export const requests = {
     `/movie/upcoming?${languages.ja}&${API_KEY_QUERY_STRINGS}&region=${region}&page=${page}`,
   getPopularMovies: (region: ISOCodes31661, page: number = 1) =>
     `/movie/popular?${languages.ja}&${API_KEY_QUERY_STRINGS}&region=${region}&page=${page}`,
+  getPopularTVs: (region: ISOCodes31661, page: number = 1) =>
+    `/tv/popular?${languages.ja}&${API_KEY_QUERY_STRINGS}&region=${region}&page=${page}`,
+
   // getUpComingTVs: (page: number = 1) =>
   //   `/tv/upcoming?${languages.ja}&${API_KEY_QUERY_STRINGS}&page=${page}`,
   // getTrendings: (mediaType: MediaType, timeWindow: TimeWindow) => `/trending/${mediaType}/`

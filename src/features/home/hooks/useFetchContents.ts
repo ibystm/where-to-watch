@@ -16,6 +16,7 @@ export const useFetchContents = () => {
     dispatch(discoverTVShowsActions.discoverTVShows());
     dispatch(upcomingActions.fetchUpcomingMovies());
     dispatch(popularitiesActions.getPopularMovies());
+    dispatch(popularitiesActions.getPopularTVs());
   }, [dispatch]);
 
   React.useEffect(() => {
