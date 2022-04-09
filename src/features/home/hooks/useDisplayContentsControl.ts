@@ -7,27 +7,9 @@ import { contentsSelectors } from "../selectors/contents";
 import { discoverTVShowsSelectors } from "../selectors/discoverTVShows";
 
 type useDisplayContentsControlReturnType = {
-  contentsList: {
-    discoverMovies: {
-      loading: boolean;
-      contents: ActualContentData[];
-    };
-    discoverTVShows: {
-      loading: boolean;
-      contents: ActualContentData[];
-    };
-    searchedContents: {
-      loading: boolean;
-      contents: ActualContentData[];
-    };
-    popularTVs: {
-      loading: boolean;
-      contents: ActualContentData[];
-    };
-    popularMovies: {
-      loading: boolean;
-      contents: ActualContentData[];
-    };
+  results: {
+    loading: boolean;
+    data: ActualContentData[];
   };
 };
 
@@ -60,42 +42,15 @@ export const useDisplayContentsControl =
       setSearchedContents(searchMovies);
     }, [searchMovies]);
 
-    const contentsList = useMemo(
+    const results = useMemo(
       () => ({
-        discoverMovies: {
-          loading: isLoadingDiscoverMovies,
-          contents: discoverMovies,
-        },
-        discoverTVShows: {
-          loading: isLoadingdiscoverTVShows,
-          contents: discoverTVShows,
-        },
-        searchedContents: {
-          loading: isSearchMovieLoading,
-          contents: searchedContents,
-        },
-        popularTVs: {
-          loading: false,
-          contents: popularTVs,
-        },
-        popularMovies: {
-          loading: false,
-          contents: popularMovies,
-        },
+        loading: false,
+        data: popularMovies,
       }),
-      [
-        discoverMovies,
-        discoverTVShows,
-        isLoadingDiscoverMovies,
-        isLoadingdiscoverTVShows,
-        isSearchMovieLoading,
-        popularMovies,
-        popularTVs,
-        searchedContents,
-      ]
+      [popularMovies]
     );
 
     return {
-      contentsList,
+      results,
     };
   };
