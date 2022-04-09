@@ -12,11 +12,9 @@ export const GenreChipsArea: React.VFC = () => {
             marginY="2"
             key={idx}
             height="12"
-            // w="100px"
             variant="outline"
             borderRadius="20px"
             padding="8px 16px"
-            width="fit-content"
             flexShrink="0"
           >
             {item.name}
