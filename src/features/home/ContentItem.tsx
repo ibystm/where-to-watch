@@ -15,7 +15,7 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
   const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
   const imageUrl = useSelector(configurationsSelector.secureImageUrl);
   const posterSizes = useSelector(configurationsSelector.posterSizes);
-  const pathBuilder = (path: string): string | undefined => {
+  const pathBuilder = (): string | undefined => {
     if (!posterSizes || !imageUrl) return;
     const size = posterSizes.slice(-1)[0];
 
@@ -45,7 +45,7 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
       {poster_path ? (
         <Image
           marginX="auto"
-          src={poster_path ? pathBuilder(poster_path) : undefined}
+          src={poster_path ? pathBuilder() : undefined}
           alt={title ? title : "movie poster"}
           opacity={isImgLoaded ? 10 : 0}
           transition="all 1s"
