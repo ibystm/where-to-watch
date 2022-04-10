@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { ChoiceTabs } from "./choices/index";
 import { useSwitchAuthButton } from "./hooks/useSwitchAuthButton";
 import { GlobalSearchBox } from "./searchBox";
 
@@ -26,7 +27,7 @@ export const Header: React.VFC = () => {
           backgroundColor="white"
           height="70%"
         >
-          <Heading size="xl">Where to watch ?</Heading>
+          <Heading size="lg">Where to watch ?</Heading>
         </Button>
         <Flex
           minW="400px"
@@ -34,15 +35,16 @@ export const Header: React.VFC = () => {
         >
           <GlobalSearchBox />
         </Flex>
-        <Button
-          // colorScheme="purple"
+        {/* <Button // ログインを実装するか要検討
+          colorScheme="purple"
           variant="outline"
           boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
           onClick={onPressButton}
           color="purple.500"
         >
           {buttonText}
-        </Button>
+        </Button> */}
+        <ChoiceTabs />
       </Flex>
     </Box>
   );
