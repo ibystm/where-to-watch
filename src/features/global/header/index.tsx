@@ -17,7 +17,7 @@ export const Header: React.VFC = () => {
       mb="8px"
     >
       <Flex
-        h="80px"
+        h="100px"
         marginX="48px"
         justifyContent="space-between"
         alignItems="center"
