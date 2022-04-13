@@ -4,6 +4,7 @@ import {
   useSelector as rawUseSelector,
 } from "react-redux";
 import { reducer as configurationsReducer } from "../features/configurations/slice/configurations";
+import { contentsModeReducer } from "../features/global/header/slice/contentsMode";
 import { reducer as searchMovieReducer } from "../features/global/header/slice/searchMovie";
 import { reducer as discoverMoviesReducer } from "../features/home/slice/discoverMovies";
 import { reducer as discoverTVShowsReducer } from "../features/home/slice/discoverTVs";
@@ -14,6 +15,7 @@ import { reducer as userReducer } from "./slices/usersSlice";
 
 export const store = configureStore({
   reducer: {
+    contentsMode: contentsModeReducer,
     loading: loadingReducer,
     user: userReducer,
     contents: discoverMoviesReducer,
@@ -28,5 +30,5 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-// typed useSelector
+
 export const useSelector: TypedUseSelectorHook<RootState> = rawUseSelector;

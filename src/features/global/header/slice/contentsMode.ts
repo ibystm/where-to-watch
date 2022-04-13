@@ -20,4 +20,5 @@ const slice = createSlice({
   },
 });
 
-export const contentsModeReducer = slice;
+export const contentModeActions = slice.actions;
+export const contentsModeReducer = slice.reducer;
