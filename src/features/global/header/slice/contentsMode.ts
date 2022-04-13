@@ -1,21 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type ModeType = "Movie" | "TV";
-
-type ContentsMode = {
-  mode: ModeType;
-};
+import { ContentsMode } from "../../../../types/redux/contentsMode";
 
 export const initialState: ContentsMode = {
-  mode: "Movie",
+  modeIndex: 0,
 };
 
 const slice = createSlice({
   name: "contentsMode",
   initialState,
   reducers: {
-    changeMode: (state, actions: PayloadAction<ModeType>) => {
-      state.mode = actions.payload;
+    changeMode: (state, actions: PayloadAction<number>) => {
+      state.modeIndex = actions.payload;
     },
   },
 });
