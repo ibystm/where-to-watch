@@ -19,7 +19,7 @@ export const useSearchMoviesByKeyword =
         return;
       }
 
-      dispatch(searchMoviesActions.searchMovies(values.searchName));
+      dispatch(searchMoviesActions.search(values.searchName));
     };
 
     return {

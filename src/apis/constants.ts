@@ -26,3 +26,10 @@ export const requests = {
   //   `/tv/upcoming?${languages.ja}&${API_KEY_QUERY_STRINGS}&page=${page}`,
   // getTrendings: (mediaType: MediaType, timeWindow: TimeWindow) => `/trending/${mediaType}/`
 };
+
+export const TVURLs = {
+  discover: `/discover/tv?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
+  search: (keyword: string) =>
+    `/search/tv?${languages.ja}&${API_KEY_QUERY_STRINGS}&query=${keyword}`,
+  getGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
+};

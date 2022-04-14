@@ -20,7 +20,7 @@ export const SearchForm: React.FC = () => {
         dispatch(searchMoviesActions.resetSearchMode());
         return;
       }
-      dispatch(searchMoviesActions.searchMovies(values.searchName));
+      dispatch(searchMoviesActions.search(values.searchName));
     }, 500);
 
     return () => {
