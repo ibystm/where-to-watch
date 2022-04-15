@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-import { searchMoviesActions } from "../slice/searchMovie";
+import { useSelector } from "../../../../store/store";
+import { searchActions } from "../slice/searchMovie";
 
 export type SearchMovieFormValues = {
   searchName: string;
@@ -12,14 +13,18 @@ type UseSearchContentsByKeywordReturnType = {
 export const useSearchMoviesByKeyword =
   (): UseSearchContentsByKeywordReturnType => {
     const dispatch = useDispatch();
+    const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
 
     const handleSubmit = (values: SearchMovieFormValues): void => {
       if (values.searchName === "") {
         console.log("No search movie name parameter");
         return;
       }
-
-      dispatch(searchMoviesActions.search(values.searchName));
+      if (modeIndex === 0) {
+        dispatch(searchActions.searchMovie(values.searchName));
+      } else {
+        dispatch(searchActions.searchTV(values.searchName));
+      }
     };
 
     return {

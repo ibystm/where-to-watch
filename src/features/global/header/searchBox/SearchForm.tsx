@@ -3,7 +3,8 @@ import { useFormikContext } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { commonDictionaries } from "../../../../commons/constants/dictionaries";
-import { searchMoviesActions } from "../slice/searchMovie";
+import { useSelector } from "../../../../store/store";
+import { searchActions } from "../slice/searchMovie";
 
 export type SearchMovieFormValues = {
   searchName: string;
@@ -12,22 +13,28 @@ export type SearchMovieFormValues = {
 export const SearchForm: React.FC = () => {
   const dispatch = useDispatch();
   const { values, handleChange } = useFormikContext<SearchMovieFormValues>();
+  const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
 
   useEffect(() => {
     // 0.5秒以上入力がない場合に、search requestをする
     const timerId = setTimeout(() => {
       if (values.searchName === "") {
-        dispatch(searchMoviesActions.resetSearchMode());
+        dispatch(searchActions.resetSearchMode());
         return;
       }
-      dispatch(searchMoviesActions.search(values.searchName));
+
+      if (modeIndex === 0) {
+        dispatch(searchActions.searchMovie(values.searchName));
+      } else {
+        dispatch(searchActions.searchTV(values.searchName));
+      }
     }, 500);
 
     return () => {
       console.log(`timerid ${timerId} is cleared!`);
       clearTimeout(timerId);
     };
-  }, [dispatch, values.searchName]);
+  }, [dispatch, modeIndex, values.searchName]);
 
   return (
     <Input

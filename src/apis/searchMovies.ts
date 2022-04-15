@@ -1,6 +1,6 @@
 import { baseRepository } from "./axios";
 import { requests, TVURLs } from "./constants";
-import { SearchMoviesResponse } from "./types/searchMovie";
+import { SearchMoviesResponse, SearchTVsResponse } from "./types/searchMovie";
 
 export const searchMoviesAPI = async (
   keyword: string
@@ -11,7 +11,7 @@ export const searchMoviesAPI = async (
 
 export const searchTVAPI = async (
   keyword: string
-): Promise<SearchMoviesResponse> => {
+): Promise<SearchTVsResponse> => {
   const res = await baseRepository.get(TVURLs.search(keyword));
   return res.data;
 };
