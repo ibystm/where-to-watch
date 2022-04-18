@@ -1,5 +1,8 @@
-export type ModeType = "Movie" | "TV";
+export const ModeType = {
+  Movie: 0,
+  TV: 1,
+} as const;
 
 export type ContentsMode = {
-  modeIndex: number;
+  modeIndex: typeof ModeType.Movie | typeof ModeType.TV;
 };

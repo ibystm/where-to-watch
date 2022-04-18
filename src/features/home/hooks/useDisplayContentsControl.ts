@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { RootState, useSelector } from "../../../store/store";
+import { ModeType } from "../../../types/redux/contentsMode";
 import { ActualContentData } from "../../../types/redux/discovers";
 
 type useDisplayContentsControlReturnType = {
@@ -20,7 +21,7 @@ export const useDisplayContentsControl =
     const results = useMemo(
       () => ({
         loading: false,
-        data: modeIndex === 0 ? popularMovies : popularTVs,
+        data: modeIndex === ModeType.Movie ? popularMovies : popularTVs,
       }),
       [modeIndex, popularMovies, popularTVs]
     );

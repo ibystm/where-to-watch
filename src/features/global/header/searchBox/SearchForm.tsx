@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { commonDictionaries } from "../../../../commons/constants/dictionaries";
 import { useSelector } from "../../../../store/store";
+import { ModeType } from "../../../../types/redux/contentsMode";
 import { searchActions } from "../slice/searchMovie";
 
 export type SearchMovieFormValues = {
@@ -23,7 +24,7 @@ export const SearchForm: React.FC = () => {
         return;
       }
 
-      if (modeIndex === 0) {
+      if (modeIndex === ModeType.Movie) {
         dispatch(searchActions.searchMovie(values.searchName));
       } else {
         dispatch(searchActions.searchTV(values.searchName));
