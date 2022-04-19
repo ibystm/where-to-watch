@@ -2,11 +2,16 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Button, Flex, IconButton } from "@chakra-ui/react";
 import { useSelector } from "../../store/store";
 import { ModeType } from "../../types/redux/contentsMode";
+import { modeIndexSelector } from "../global/header/selectors/contentsMode";
+import {
+  movieGenresSelector,
+  tvGenresSelector,
+} from "./slice/genres/selectors";
 
 export const GenreChipsArea: React.VFC = () => {
-  const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
-  const movieGenres = useSelector((state) => state.genres.movie);
-  const tvGenres = useSelector((state) => state.genres.tv);
+  const modeIndex = useSelector(modeIndexSelector);
+  const movieGenres = useSelector(movieGenresSelector);
+  const tvGenres = useSelector(tvGenresSelector);
   const genres = modeIndex === ModeType.Movie ? movieGenres : tvGenres;
 
   return genres.length > 0 ? (
