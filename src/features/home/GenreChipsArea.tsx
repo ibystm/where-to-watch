@@ -4,7 +4,7 @@ import { useSelector } from "../../store/store";
 
 export const GenreChipsArea: React.VFC = () => {
   const genres = useSelector((state) => state.genres.movie);
-  return (
+  return genres.length > 0 ? (
     <Flex w="100%" justify="space-around" alignItems="center" padding="4">
       <Flex overflowX="hidden" gap="4">
         {genres.map((item, idx) => (
@@ -28,5 +28,5 @@ export const GenreChipsArea: React.VFC = () => {
         fontSize="2xl"
       />
     </Flex>
-  );
+  ) : null;
 };
