@@ -1,13 +1,9 @@
-import { createSelector } from "reselect";
 import { RootState } from "../../../../store/store";
+import { genreAdopter } from "./index";
 
-export const genreSelector = (state: RootState) => state.genres;
-
-export const tvGenresSelector = createSelector(
-  genreSelector,
-  (genre) => genre.tv
+export const movieGenresSelector = genreAdopter.getSelectors(
+  (state: RootState) => state.genres.movie
 );
-export const movieGenresSelector = createSelector(
-  genreSelector,
-  (genre) => genre.movie
+export const tvGenresSelector = genreAdopter.getSelectors(
+  (state: RootState) => state.genres.tv
 );

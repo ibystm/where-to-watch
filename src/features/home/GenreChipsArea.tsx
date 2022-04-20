@@ -10,8 +10,8 @@ import {
 
 export const GenreChipsArea: React.VFC = () => {
   const modeIndex = useSelector(modeIndexSelector);
-  const movieGenres = useSelector(movieGenresSelector);
-  const tvGenres = useSelector(tvGenresSelector);
+  const movieGenres = useSelector(movieGenresSelector.selectAll);
+  const tvGenres = useSelector(tvGenresSelector.selectAll);
   const genres = modeIndex === ModeType.Movie ? movieGenres : tvGenres;
 
   return genres.length > 0 ? (
