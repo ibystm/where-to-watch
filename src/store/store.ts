@@ -5,9 +5,8 @@ import {
 } from "react-redux";
 import { reducer as configurationsReducer } from "../features/configurations/slice/configurations";
 import { contentsModeReducer } from "../features/global/header/slice/contentsMode";
-import { reducer as searchMovieReducer } from "../features/global/header/slice/searchMovie";
+import { searchContentsReducer } from "../features/global/header/slice/searchMovie";
 import { reducer as discoverMoviesReducer } from "../features/home/slice/discoverMovies";
-import { reducer as discoverTVShowsReducer } from "../features/home/slice/discoverTVs";
 import { genresReducer } from "../features/home/slice/genres/index";
 import { reducer as loadingReducer } from "../features/loading/slice/loading";
 import { popularitiesReducer } from "../features/loading/slice/popularities/index";
@@ -19,12 +18,10 @@ export const store = configureStore({
     loading: loadingReducer,
     user: userReducer,
     contents: discoverMoviesReducer,
-    discoverTVShows: discoverTVShowsReducer,
     popularities: popularitiesReducer,
-    searchMovies: searchMovieReducer,
+    searchContents: searchContentsReducer,
     configurations: configurationsReducer,
     genres: genresReducer,
-    // upcomings: upcomingReducer,
   },
 });
 

@@ -1,7 +1,11 @@
 import { useMemo } from "react";
-import { RootState, useSelector } from "../../../store/store";
+import { useSelector } from "../../../store/store";
 import { ModeType } from "../../../types/redux/contentsMode";
 import { ActualContentData } from "../../../types/redux/discovers";
+import {
+  popularMovieSelector,
+  popularTVsSelector,
+} from "../selectors/popularities";
 
 type useDisplayContentsControlReturnType = {
   results: {
@@ -13,10 +17,8 @@ type useDisplayContentsControlReturnType = {
 export const useDisplayContentsControl =
   (): useDisplayContentsControlReturnType => {
     const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
-    const popularMovies = useSelector(
-      (state: RootState) => state.popularities.movies
-    );
-    const popularTVs = useSelector((state) => state.popularities.tvs);
+    const popularMovies = useSelector(popularMovieSelector.selectAll);
+    const popularTVs = useSelector(popularTVsSelector.selectAll);
 
     const results = useMemo(
       () => ({

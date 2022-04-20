@@ -3,17 +3,52 @@ import { searchMoviesAPI, searchTVAPI } from "../../../../apis/searchMovies";
 import { SearchMovieState } from "../../../../types/redux/searchMovies";
 import { reducerFormatUtil } from "../../../../utils/redux/reducerUtil";
 
-const SLICE_NAME = "searcMovie";
+const SLICE_NAME = "searcContents";
 export const initialState: SearchMovieState = {
   searchMode: false,
   keyword: "",
-  loading: {
-    isProcessing: false,
-    message: null,
-  },
-  searchMovies: [],
+  searchedContents: [],
 };
 
+export const slice = createSlice({
+  name: SLICE_NAME,
+  initialState,
+  reducers: {
+    resetSearchMode: (state) => {
+      state.searchMode = false;
+      state.keyword = "";
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(searchActions.searchMovie.pending, (state, { meta }) => {
+      state.searchMode = true;
+      state.keyword = meta.arg;
+    });
+    builder.addCase(searchActions.searchMovie.fulfilled, (state, action) => {
+      const { results } = action.payload;
+      if (results === undefined) return;
+      const searchMovies =
+        reducerFormatUtil.movieListResultToReduxStoreData(results);
+      state.searchedContents = searchMovies;
+    });
+    builder.addCase(
+      searchActions.searchMovie.rejected,
+      (state, { payload }) => {
+        throw payload;
+      }
+    );
+    builder.addCase(searchActions.searchTV.pending, (state, { meta }) => {
+      state.searchMode = true;
+      state.keyword = meta.arg;
+    });
+    builder.addCase(searchActions.searchTV.fulfilled, (state, { payload }) => {
+      if (payload.results === undefined) return;
+      state.searchedContents = reducerFormatUtil.tvListResultToReduxStoreData(
+        payload.results
+      );
+    });
+  },
+});
 const asyncActions = {
   searchMovie: createAsyncThunk(
     `${SLICE_NAME}/searchMovies`,
@@ -37,54 +72,9 @@ const asyncActions = {
   ),
 };
 
-export const slice = createSlice({
-  name: SLICE_NAME,
-  initialState,
-  reducers: {
-    resetSearchMode: (state) => {
-      state.searchMode = false;
-      state.keyword = "";
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(searchActions.searchMovie.pending, (state, { meta }) => {
-      state.loading.isProcessing = true;
-      state.searchMode = true;
-      state.keyword = meta.arg;
-    });
-    builder.addCase(searchActions.searchMovie.fulfilled, (state, action) => {
-      const { results } = action.payload;
-      if (results === undefined) return;
-      const searchMovies =
-        reducerFormatUtil.movieListResultToReduxStoreData(results);
-      state.searchMovies = searchMovies;
-      state.loading.isProcessing = false;
-    });
-    builder.addCase(
-      searchActions.searchMovie.rejected,
-      (state, { payload }) => {
-        state.loading.isProcessing = false;
-        throw payload;
-      }
-    );
-    builder.addCase(searchActions.searchTV.pending, (state, { meta }) => {
-      state.loading.isProcessing = true;
-      state.searchMode = true;
-      state.keyword = meta.arg;
-    });
-    builder.addCase(searchActions.searchTV.fulfilled, (state, { payload }) => {
-      if (payload.results === undefined) return;
-      state.searchMovies = reducerFormatUtil.tvListResultToReduxStoreData(
-        payload.results
-      );
-      state.loading.isProcessing = false;
-    });
-  },
-});
-
 export const searchActions = {
   ...asyncActions,
   ...slice.actions,
 };
 
-export const { reducer } = slice;
+export const searchContentsReducer = slice.reducer;

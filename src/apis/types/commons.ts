@@ -1,6 +1,6 @@
 export type MovieListResults = {
   // tmdbのものを全部記載しているわけではない
-  id?: number;
+  id: number;
   adult?: boolean;
   overview?: string;
   original_title?: string;
@@ -19,7 +19,7 @@ export type MovieListResults = {
 export type TVListResults = {
   poster_path?: string | null;
   popularity?: number;
-  id?: number;
+  id: number;
   backdrop_path?: string | null;
   vote_average?: number;
   overview?: string;

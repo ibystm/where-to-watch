@@ -7,7 +7,7 @@ export type ContentsState = {
 };
 
 export type ActualContentData = {
-  id?: number;
+  id: number; // 一旦optional外してみる
   adult?: boolean;
   overview?: string;
   original_title?: string;

@@ -1,8 +1,7 @@
 import { RootState } from "../../../../store/store";
 
 export const searchMovieSelectors = {
-  loadingState: (state: RootState) => state.searchMovies.loading.isProcessing,
-  searchedMovies: (state: RootState) => state.searchMovies.searchMovies,
-  searchMode: (state: RootState) => state.searchMovies.searchMode,
-  searchKeyword: (state: RootState) => state.searchMovies.keyword,
+  searchedMovies: (state: RootState) => state.searchContents.searchedContents,
+  searchMode: (state: RootState) => state.searchContents.searchMode,
+  searchKeyword: (state: RootState) => state.searchContents.keyword,
 };
