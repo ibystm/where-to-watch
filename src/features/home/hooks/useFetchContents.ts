@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store/store";
 import { popularitiesActions } from "../../loading/slice/popularities/index";
 import { contentsActions } from "../slice/discoverMovies";
-import { discoverTVShowsActions } from "../slice/discoverTVs";
 import { genresActions } from "../slice/genres/index";
 import { upcomingActions } from "../slice/upcomings/index";
 
@@ -13,7 +12,6 @@ export const useFetchContents = () => {
     dispatch(genresActions.getMovieGenres());
     dispatch(genresActions.getTVGenres());
     dispatch(contentsActions.fetchDiscoverMovies());
-    dispatch(discoverTVShowsActions.discoverTVShows());
     dispatch(upcomingActions.fetchUpcomingMovies());
     dispatch(popularitiesActions.getPopularMovies());
     dispatch(popularitiesActions.getPopularTVs());

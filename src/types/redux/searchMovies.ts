@@ -1,6 +1,6 @@
 import { ActualContentData } from "./discovers";
 
-export type SearchMovieState = {
+export type SearchContentsState = {
   searchMode: boolean;
   keyword: string;
   searchedContents: ActualContentData[];

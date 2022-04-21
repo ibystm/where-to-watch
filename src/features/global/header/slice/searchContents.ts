@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { searchMoviesAPI, searchTVAPI } from "../../../../apis/searchMovies";
-import { SearchMovieState } from "../../../../types/redux/searchMovies";
+import type { SearchContentsState } from "../../../../types/redux/searchMovies";
 import { reducerFormatUtil } from "../../../../utils/redux/reducerUtil";
 
 const SLICE_NAME = "searcContents";
-export const initialState: SearchMovieState = {
+export const initialState: SearchContentsState = {
   searchMode: false,
   keyword: "",
   searchedContents: [],

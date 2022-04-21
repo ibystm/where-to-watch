@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { commonDictionaries } from "../../../../commons/constants/dictionaries";
 import { useSelector } from "../../../../store/store";
 import { ModeType } from "../../../../types/redux/contentsMode";
-import { searchActions } from "../slice/searchMovie";
+import { searchActions } from "../slice/searchContents";
 
 export type SearchMovieFormValues = {
   searchName: string;

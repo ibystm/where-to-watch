@@ -5,7 +5,7 @@ import {
 } from "react-redux";
 import { reducer as configurationsReducer } from "../features/configurations/slice/configurations";
 import { contentsModeReducer } from "../features/global/header/slice/contentsMode";
-import { searchContentsReducer } from "../features/global/header/slice/searchMovie";
+import { searchContentsReducer } from "../features/global/header/slice/searchContents";
 import { reducer as discoverMoviesReducer } from "../features/home/slice/discoverMovies";
 import { genresReducer } from "../features/home/slice/genres/index";
 import { reducer as loadingReducer } from "../features/loading/slice/loading";
