@@ -1,6 +1,9 @@
 import { baseRepository } from "./axios";
 import { requests, TVURLs } from "./constants";
-import { SearchMoviesResponse, SearchTVsResponse } from "./types/searchMovie";
+import {
+  SearchMoviesResponse,
+  SearchTVsResponse,
+} from "./types/searchContents";
 
 export const searchMoviesAPI = async (
   keyword: string

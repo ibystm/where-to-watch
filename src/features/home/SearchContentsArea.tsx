@@ -1,12 +1,15 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 import { useSelector } from "../../store/store";
-import { searchMovieSelectors } from "../global/header/selectors/searchMovies";
+import {
+  searchedContentsSelector,
+  searchKeywordSelector,
+} from "../global/header/selectors/searchContents";
 import { ContentItem } from "./ContentItem";
 import { SkeltonContentItem } from "./SkeltonContentItem";
 
 export const SearchContentsArea: React.VFC = () => {
-  const contents = useSelector(searchMovieSelectors.searchedMovies);
-  const searchedKeyword = useSelector(searchMovieSelectors.searchKeyword);
+  const contents = useSelector(searchedContentsSelector.selectAll);
+  const searchedKeyword = useSelector(searchKeywordSelector);
   const searchedContentsArea = false
     ? [...Array(100)].map((_, idx) => <SkeltonContentItem key={idx} />)
     : contents.map((item, idx) => <ContentItem key={idx} contentItem={item} />);
@@ -24,3 +27,6 @@ export const SearchContentsArea: React.VFC = () => {
     </Box>
   );
 };
+function searchedMovies(searchedMovies: any) {
+  throw new Error("Function not implemented.");
+}

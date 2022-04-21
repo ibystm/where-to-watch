@@ -1,13 +1,21 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { searchMoviesAPI, searchTVAPI } from "../../../../apis/searchMovies";
-import type { SearchContentsState } from "../../../../types/redux/searchMovies";
+import {
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+} from "@reduxjs/toolkit";
+import { searchMoviesAPI, searchTVAPI } from "../../../../apis/searchContents";
+import { ActualContentData } from "../../../../types/redux/discovers";
 import { reducerFormatUtil } from "../../../../utils/redux/reducerUtil";
 
 const SLICE_NAME = "searcContents";
-export const initialState: SearchContentsState = {
+
+export const searchContentsAdoptor = createEntityAdapter<ActualContentData>();
+const initialSearchedContentsState = searchContentsAdoptor.getInitialState();
+
+export const initialState = {
   searchMode: false,
   keyword: "",
-  searchedContents: [],
+  searchedContents: initialSearchedContentsState,
 };
 
 export const slice = createSlice({
@@ -20,31 +28,30 @@ export const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(searchActions.searchMovie.pending, (state, { meta }) => {
+    builder.addCase(searchMovie.pending, (state, { meta }) => {
       state.searchMode = true;
       state.keyword = meta.arg;
     });
-    builder.addCase(searchActions.searchMovie.fulfilled, (state, action) => {
+    builder.addCase(searchMovie.fulfilled, (state, action) => {
       const { results } = action.payload;
       if (results === undefined) return;
       const searchMovies =
         reducerFormatUtil.movieListResultToReduxStoreData(results);
-      state.searchedContents = searchMovies;
+      searchContentsAdoptor.setAll(state.searchedContents, searchMovies);
     });
-    builder.addCase(
-      searchActions.searchMovie.rejected,
-      (state, { payload }) => {
-        throw payload;
-      }
-    );
-    builder.addCase(searchActions.searchTV.pending, (state, { meta }) => {
+    builder.addCase(searchMovie.rejected, (state, { payload }) => {
+      throw payload;
+    });
+    builder.addCase(searchTV.pending, (state, { meta }) => {
       state.searchMode = true;
       state.keyword = meta.arg;
     });
-    builder.addCase(searchActions.searchTV.fulfilled, (state, { payload }) => {
+    builder.addCase(searchTV.fulfilled, (state, { payload }) => {
       if (payload.results === undefined) return;
-      state.searchedContents = reducerFormatUtil.tvListResultToReduxStoreData(
-        payload.results
+
+      searchContentsAdoptor.setAll(
+        state.searchedContents,
+        reducerFormatUtil.tvListResultToReduxStoreData(payload.results)
       );
     });
   },
@@ -72,7 +79,7 @@ const asyncActions = {
   ),
 };
 
-export const searchActions = {
+export const { searchMovie, searchTV, resetSearchMode } = {
   ...asyncActions,
   ...slice.actions,
 };

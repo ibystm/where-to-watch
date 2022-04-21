@@ -5,7 +5,11 @@ import { useDispatch } from "react-redux";
 import { commonDictionaries } from "../../../../commons/constants/dictionaries";
 import { useSelector } from "../../../../store/store";
 import { ModeType } from "../../../../types/redux/contentsMode";
-import { searchActions } from "../slice/searchContents";
+import {
+  resetSearchMode,
+  searchMovie,
+  searchTV,
+} from "../slice/searchContents";
 
 export type SearchMovieFormValues = {
   searchName: string;
@@ -20,14 +24,14 @@ export const SearchForm: React.FC = () => {
     // 0.5秒以上入力がない場合に、search requestをする
     const timerId = setTimeout(() => {
       if (values.searchName === "") {
-        dispatch(searchActions.resetSearchMode());
+        dispatch(resetSearchMode());
         return;
       }
 
       if (modeIndex === ModeType.Movie) {
-        dispatch(searchActions.searchMovie(values.searchName));
+        dispatch(searchMovie(values.searchName));
       } else {
-        dispatch(searchActions.searchTV(values.searchName));
+        dispatch(searchTV(values.searchName));
       }
     }, 500);
 
