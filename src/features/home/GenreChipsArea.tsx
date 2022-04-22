@@ -1,8 +1,9 @@
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { Button, Flex, IconButton } from "@chakra-ui/react";
+import { Flex, IconButton } from "@chakra-ui/react";
 import { useSelector } from "../../store/store";
 import { ModeType } from "../../types/redux/contentsMode";
 import { modeIndexSelector } from "../global/header/selectors/contentsMode";
+import { GenreChip } from "./GenreChip";
 import {
   movieGenresSelector,
   tvGenresSelector,
@@ -17,18 +18,8 @@ export const GenreChipsArea: React.VFC = () => {
   return genres.length > 0 ? (
     <Flex w="100%" justify="space-around" alignItems="center" padding="4">
       <Flex overflowX="hidden" gap="4">
-        {genres.map((item, idx) => (
-          <Button
-            marginY="2"
-            key={idx}
-            height="12"
-            variant="outline"
-            borderRadius="20px"
-            padding="8px 16px"
-            flexShrink="0"
-          >
-            {item.name}
-          </Button>
+        {genres.map((item) => (
+          <GenreChip key={item.id} genre={item} />
         ))}
       </Flex>
       <IconButton

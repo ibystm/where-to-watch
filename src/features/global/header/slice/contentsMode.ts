@@ -7,6 +7,7 @@ import {
 
 export const initialState: ContentsMode = {
   modeIndex: ModeType.Movie,
+  selectedGenreId: 0,
 };
 
 const slice = createSlice({
@@ -15,6 +16,9 @@ const slice = createSlice({
   reducers: {
     changeMode: (state, actions: PayloadAction<ModeIndex>) => {
       state.modeIndex = actions.payload;
+    },
+    selectGenre: (state, action: PayloadAction<number>) => {
+      state.selectedGenreId = action.payload;
     },
   },
 });
