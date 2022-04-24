@@ -34,7 +34,7 @@ export const ContentItem: React.VFC<P> = ({ contentItem }) => {
       backgroundColor="white"
       marginRight="24px"
       boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
-      _focus={{ _focus: "none" }}
+      _focus={{ boxShadow: "none" }}
       _hover={{
         transition: "all 0.5s 0.5s",
         transform: "scale(1.15, 1.15)",
