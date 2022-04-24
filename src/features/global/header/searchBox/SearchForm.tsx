@@ -47,7 +47,7 @@ export const SearchForm: React.FC = () => {
       name="searchName"
       value={values.searchName}
       onChange={handleChange}
-      focusBorderColor="purple.400"
+      focusBorderColor="purple.300"
       boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
       borderRadius="20px"
     />

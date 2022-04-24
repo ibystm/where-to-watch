@@ -27,6 +27,7 @@ export const ChoiceTabs: React.FC = () => {
                 ? "10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
                 : undefined
             }
+            _focus={{ boxShadow: "none" }}
           >
             {m}
           </Tab>
