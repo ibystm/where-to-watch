@@ -1,7 +1,7 @@
-import { Genres } from "../../types/redux/genres";
+import { Genre } from "../../types/redux/genres";
 
 export type GetMovieGenresResponse = {
-  genres: Genres[];
+  genres: Genre[];
 };
 
 export type GetTVGenresResponse = GetMovieGenresResponse;

@@ -4,11 +4,11 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import { getMovieGenres, getTVGenres } from "../../../../apis/genres";
-import { Genres } from "../../../../types/redux/genres";
+import { Genre } from "../../../../types/redux/genres";
 
 const GENRE_SLICE_NAME = "genres";
 
-export const genreAdopter = createEntityAdapter<Genres>({
+export const genreAdopter = createEntityAdapter<Genre>({
   sortComparer: (a, b) => {
     if (a.id > b.id) {
       return 1;

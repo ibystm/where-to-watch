@@ -2,11 +2,11 @@ import { Button } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "../../store/store";
-import { Genres } from "../../types/redux/genres";
+import { Genre } from "../../types/redux/genres";
 import { contentModeActions } from "../global/header/slice/contentsMode";
 
 type Props = {
-  genre: Genres;
+  genre: Genre;
 };
 
 export const GenreChip: React.FC<Props> = ({ genre }) => {

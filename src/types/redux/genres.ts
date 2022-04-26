@@ -1,9 +1,9 @@
 export type GenreState = {
-  tv: Genres[];
-  movie: Genres[];
+  tv: Genre[];
+  movie: Genre[];
 };
 
-export type Genres = {
+export type Genre = {
   id: number;
   name: string;
 };
