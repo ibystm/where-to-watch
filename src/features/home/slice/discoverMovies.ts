@@ -14,9 +14,9 @@ export const initialState: ContentsState = {
 const asyncActions = {
   fetchDiscoverMovies: createAsyncThunk(
     `${SLICE_NAME}/fetchDiscoverMovies`,
-    async (_, { rejectWithValue }) => {
+    async (genreId: number, { rejectWithValue }) => {
       try {
-        const res = await fetchDiscoverMoviesAPI();
+        const res = await fetchDiscoverMoviesAPI(genreId);
         return res;
       } catch (e) {
         return rejectWithValue(e);

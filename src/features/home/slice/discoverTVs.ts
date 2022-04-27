@@ -16,9 +16,9 @@ export const initialState: DiscoverTVShowsState = {
 const asyncActions = {
   discoverTVShows: createAsyncThunk(
     `${SLICE_NAME}/discoverTVShows`,
-    (_, { rejectWithValue }) => {
+    (genreId: number, { rejectWithValue }) => {
       try {
-        return discoverMovieShowsAPI();
+        return discoverMovieShowsAPI(genreId);
       } catch (e) {
         return rejectWithValue(e);
       }

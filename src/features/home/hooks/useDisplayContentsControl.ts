@@ -16,16 +16,20 @@ type useDisplayContentsControlReturnType = {
 
 export const useDisplayContentsControl =
   (): useDisplayContentsControlReturnType => {
-    const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
+    const { modeIndex, selectedGenreId } = useSelector(
+      (state) => state.contentsMode
+    );
+    const moviesByGenres = useSelector((state) => state.contents.data);
     const popularMovies = useSelector(popularMovieSelector.selectAll);
     const popularTVs = useSelector(popularTVsSelector.selectAll);
+    const movie = selectedGenreId === 0 ? popularMovies : moviesByGenres;
 
     const results = useMemo(
       () => ({
         loading: false,
-        data: modeIndex === ModeType.Movie ? popularMovies : popularTVs,
+        data: modeIndex === ModeType.Movie ? movie : popularTVs,
       }),
-      [modeIndex, popularMovies, popularTVs]
+      [modeIndex, movie, popularTVs]
     );
 
     return {
