@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useSelector } from "../../../store/store";
 import { loadingActions } from "../../loading/slice/loading";
@@ -8,29 +8,31 @@ import { genresActions } from "../slice/genres/index";
 
 export const useFetchContents = () => {
   const dispatch: AppDispatch = useDispatch();
-  const currentgGenreId = useSelector(
-    (state) => state.contentsMode.selectedGenreId
+  const { modeIndex, selectedGenreId } = useSelector(
+    (state) => state.contentsMode
   );
 
-  const fetchGenres = useCallback(() => {
+  const fetchGenres = (): void => {
     dispatch(genresActions.getMovieGenres());
     dispatch(genresActions.getTVGenres());
-  }, [dispatch]);
+  };
   // for Genres
-  React.useEffect(() => {
+  useEffect(() => {
     fetchGenres();
-  }, [fetchGenres]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const fetchContents = useCallback(async () => {
+    dispatch(popularitiesActions.getPopularMovies());
+    dispatch(popularitiesActions.getPopularTVs());
+    dispatch(contentsActions.fetchDiscoverMovies(selectedGenreId));
+  }, [selectedGenreId, dispatch]);
 
   // for display contents
   useEffect(() => {
     dispatch(loadingActions.startLoading());
-    const fetchContents = async () => {
-      dispatch(popularitiesActions.getPopularMovies());
-      dispatch(popularitiesActions.getPopularTVs());
-      dispatch(contentsActions.fetchDiscoverMovies(currentgGenreId));
-    };
     fetchContents().finally(() => {
       dispatch(loadingActions.endLoading());
     });
-  }, [currentgGenreId, dispatch]);
+  }, [selectedGenreId, dispatch, modeIndex, fetchContents]);
 };
