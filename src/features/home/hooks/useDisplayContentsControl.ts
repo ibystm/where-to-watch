@@ -20,7 +20,7 @@ export const useDisplayContentsControl =
       (state) => state.contentsMode
     );
     const loading = useSelector((s) => s.loading.isLoading);
-    const moviesByGenres = useSelector((state) => state.contents.data);
+    const moviesByGenres = useSelector((state) => state.discovers.data);
     const popularMovies = useSelector(popularMovieSelector.selectAll);
     const popularTVs = useSelector(popularTVsSelector.selectAll);
     const movie = selectedGenreId === 0 ? popularMovies : moviesByGenres;

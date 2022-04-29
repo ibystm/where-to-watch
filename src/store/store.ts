@@ -17,7 +17,7 @@ export const store = configureStore({
     contentsMode: contentsModeReducer,
     loading: loadingReducer,
     user: userReducer,
-    contents: discoverContentsReducer,
+    discovers: discoverContentsReducer,
     popularities: popularitiesReducer,
     searchContents: searchContentsReducer,
     configurations: configurationsReducer,
