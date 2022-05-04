@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchDiscoverMoviesAPI } from "../../../apis/fetchContents";
 import { ContentsState } from "../../../types/redux/discovers";
+import { reducerFormatUtil } from "../../../utils/redux/reducerUtil";
 
 const SLICE_NAME = "contents";
 export const initialState: ContentsState = {
@@ -39,22 +40,8 @@ const slice = createSlice({
         if (payload) {
           const { results } = payload;
           if (results) {
-            const contents = results.map((item) => ({
-              id: item.id,
-              adult: item.adult,
-              overview: item.overview,
-              original_title: item.original_title,
-              original_language: item.original_language,
-              title: item.title,
-              poster_path: item.poster_path ?? null,
-              backdrop_path: item.backdrop_path ?? null,
-              video: item.video,
-              voteAverage: item.vote_average,
-              voteCount: item.vote_count,
-              genreIds: item.genre_ids,
-              releaseDate: item.release_date,
-            }));
-            state.data = contents;
+            state.data =
+              reducerFormatUtil.movieListResultToReduxStoreData(results);
           }
         }
         state.loading.isProcessing = false;
