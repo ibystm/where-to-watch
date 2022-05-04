@@ -11,7 +11,7 @@ import {
   tvGenresSelector,
 } from "./slice/genres/selectors";
 
-export const GenreChipsArea: React.VFC = () => {
+export const GenreChipsArea: React.FC = () => {
   const modeIndex = useSelector(modeIndexSelector);
   const movieGenres = useSelector(movieGenresSelector.selectAll);
   const tvGenres = useSelector(tvGenresSelector.selectAll);

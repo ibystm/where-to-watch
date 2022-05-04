@@ -10,7 +10,7 @@ type P = {
   contentItem: ActualContentData;
 };
 
-export const ContentItem: React.VFC<P> = ({ contentItem }) => {
+export const ContentItem: React.FC<P> = ({ contentItem }) => {
   const { title, poster_path, releaseDate } = contentItem;
   const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
   const imageUrl = useSelector(configurationsSelector.secureImageUrl);

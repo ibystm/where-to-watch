@@ -6,7 +6,7 @@ import { useSelector } from "../../store/store";
 import { GlobalTop } from "../global/GlobalTop";
 import { routes } from "../routes";
 
-export const RoutesWrapper: React.VFC = () => {
+export const RoutesWrapper: React.FC = () => {
   useGetAuth();
   const userId = useSelector(userSelectors.id);
   const navigate = useNavigate();

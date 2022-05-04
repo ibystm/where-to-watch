@@ -35,7 +35,7 @@ const validationScheme = {
   },
 };
 
-export const SiginIn: React.VFC = () => {
+export const SiginIn: React.FC = () => {
   const formik = useFormik(validationScheme);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");

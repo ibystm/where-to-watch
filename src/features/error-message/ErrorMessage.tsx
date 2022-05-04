@@ -5,7 +5,7 @@ type P = {
   message: string;
 };
 
-export const ErrorMessage: React.VFC<P> = (props) => {
+export const ErrorMessage: React.FC<P> = (props) => {
   const { message } = props;
   return (
     <Text color="red" fontSize="12px" textAlign="right" mt="4px" mr="8px">

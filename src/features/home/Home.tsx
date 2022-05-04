@@ -4,7 +4,7 @@ import { useFetchConfigs } from "./hooks/useFetchConfigs";
 import { useFetchContents } from "./hooks/useFetchContents";
 import { MainContens } from "./MainContents";
 
-export const Home: React.VFC = () => {
+export const Home: React.FC = () => {
   // initial process
   useFetchContents();
   useFetchConfigs();

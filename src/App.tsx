@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { RoutesWrapper } from "./features/wrapper/RoutesWrapper";
 
-export const App = () => {
+export const App: React.FC = () => {
   return (
     <AuthProvider>
       <BrowserRouter>

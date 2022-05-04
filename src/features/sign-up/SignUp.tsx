@@ -59,7 +59,7 @@ const initialValues: SignUpValue = {
   confirmPassword: "",
 };
 
-export const SignUp: React.VFC = () => {
+export const SignUp: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string>("");
   const { handleErrorByCodes } = useHandleFBErrors();

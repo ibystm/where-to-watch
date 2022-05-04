@@ -7,7 +7,7 @@ import {
 import { ContentItem } from "./ContentItem";
 import { SkeltonContentItem } from "./SkeltonContentItem";
 
-export const SearchContentsArea: React.VFC = () => {
+export const SearchContentsArea: React.FC = () => {
   const contents = useSelector(searchedContentsSelector.selectAll);
   const searchedKeyword = useSelector(searchKeywordSelector);
   const searchedContentsArea = false

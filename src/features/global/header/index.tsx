@@ -5,7 +5,7 @@ import { ChoiceTabs } from "./choices/index";
 import { useSwitchAuthButton } from "./hooks/useSwitchAuthButton";
 import { GlobalSearchBox } from "./searchBox";
 
-export const Header: React.VFC = () => {
+export const Header: React.FC = () => {
   const { buttonText, onPressButton } = useSwitchAuthButton();
   const navigate = useNavigate();
 
