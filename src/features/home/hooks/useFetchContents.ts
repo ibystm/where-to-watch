@@ -26,6 +26,7 @@ export const useFetchContents = () => {
     dispatch(popularitiesActions.getPopularMovies());
     dispatch(popularitiesActions.getPopularTVs());
     dispatch(contentsActions.fetchDiscoverMovies(selectedGenreId));
+    dispatch(contentsActions.fetchDiscoverTVs(selectedGenreId));
   }, [selectedGenreId, dispatch]);
 
   // for display contents

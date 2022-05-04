@@ -21,16 +21,18 @@ export const useDisplayContentsControl =
     );
     const loading = useSelector((s) => s.loading.isLoading);
     const moviesByGenres = useSelector((state) => state.discovers.data);
+    const tvsByGenres = useSelector((state) => state.discovers.data);
     const popularMovies = useSelector(popularMovieSelector.selectAll);
     const popularTVs = useSelector(popularTVsSelector.selectAll);
-    const movie = selectedGenreId === 0 ? popularMovies : moviesByGenres;
+    const movies = selectedGenreId === 0 ? popularMovies : moviesByGenres;
+    const tvs = selectedGenreId === 0 ? popularTVs : tvsByGenres;
 
     const results = useMemo(
       () => ({
         loading,
-        data: modeIndex === ModeType.Movie ? movie : popularTVs,
+        data: modeIndex === ModeType.Movie ? movies : tvs,
       }),
-      [loading, modeIndex, movie, popularTVs]
+      [loading, modeIndex, movies, tvs]
     );
 
     return {

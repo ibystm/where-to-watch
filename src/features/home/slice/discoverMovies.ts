@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchDiscoverMoviesAPI } from "../../../apis/fetchContents";
+import {
+  fetchDiscoverMoviesAPI,
+  fetchDiscoverTVsAPI,
+} from "../../../apis/fetchContents";
 import { ContentsState } from "../../../types/redux/discovers";
 import { reducerFormatUtil } from "../../../utils/redux/reducerUtil";
 
@@ -24,6 +27,17 @@ const asyncActions = {
       }
     }
   ),
+  fetchDiscoverTVs: createAsyncThunk(
+    `${SLICE_NAME}/fetchDiscoverTVs`,
+    async (genreId: number, { rejectWithValue }) => {
+      try {
+        const res = await fetchDiscoverTVsAPI(genreId);
+        return res;
+      } catch (e) {
+        return rejectWithValue(e);
+      }
+    }
+  ),
 };
 
 const slice = createSlice({
@@ -39,7 +53,7 @@ const slice = createSlice({
       (state, { payload }) => {
         if (payload) {
           const { results } = payload;
-          if (results) {
+          if (typeof results !== "undefined") {
             state.data =
               reducerFormatUtil.movieListResultToReduxStoreData(results);
           }
@@ -49,6 +63,29 @@ const slice = createSlice({
     );
     builder.addCase(
       asyncActions.fetchDiscoverMovies.rejected,
+      (state, payload) => {
+        state.loading.isProcessing = false;
+        throw payload;
+      }
+    );
+    builder.addCase(asyncActions.fetchDiscoverTVs.pending, (state) => {
+      state.loading.isProcessing = true;
+    });
+    builder.addCase(
+      asyncActions.fetchDiscoverTVs.fulfilled,
+      (state, { payload }) => {
+        if (payload) {
+          const { results } = payload;
+          if (typeof results !== "undefined") {
+            state.data =
+              reducerFormatUtil.tvListResultToReduxStoreData(results);
+          }
+        }
+        // state.loading.isProcessing = false;
+      }
+    );
+    builder.addCase(
+      asyncActions.fetchDiscoverTVs.rejected,
       (state, payload) => {
         state.loading.isProcessing = false;
         throw payload;
