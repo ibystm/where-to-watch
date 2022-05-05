@@ -16,7 +16,7 @@ export const requests = {
   getMovieVideos: (movieId: string) =>
     `/movie/${movieId}/videos?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
   getMovieGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
-  getTVGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
+  getTVGenres: `/genre/tv/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
   getUpComingMovie: (region: ISOCodes31661, page: number = 1) =>
     `/movie/upcoming?${languages.ja}&${API_KEY_QUERY_STRINGS}&region=${region}&page=${page}`,
   getPopularMovies: (region: ISOCodes31661, page: number = 1) =>
