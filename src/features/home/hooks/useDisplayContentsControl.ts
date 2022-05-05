@@ -1,41 +1,30 @@
 import { useMemo } from "react";
 import { useSelector } from "../../../store/store";
 import { ModeType } from "../../../types/redux/contentsMode";
-import { ActualContentData } from "../../../types/redux/discovers";
 import {
   popularMovieSelector,
   popularTVsSelector,
 } from "../selectors/popularities";
 
-type useDisplayContentsControlReturnType = {
-  results: {
-    loading: boolean;
-    data: ActualContentData[];
-  };
+export const useDisplayContentsControl = (): typeof result => {
+  const { modeIndex, selectedGenreId } = useSelector(
+    (state) => state.contentsMode
+  );
+  const loading = useSelector((s) => s.loading.isLoading);
+  const moviesByGenres = useSelector((state) => state.discovers.data);
+  const tvsByGenres = useSelector((state) => state.discovers.data);
+  const popularMovies = useSelector(popularMovieSelector.selectAll);
+  const popularTVs = useSelector(popularTVsSelector.selectAll);
+  const movies = selectedGenreId === 0 ? popularMovies : moviesByGenres;
+  const tvs = selectedGenreId === 0 ? popularTVs : tvsByGenres;
+
+  const result = useMemo(
+    () => ({
+      loading,
+      data: modeIndex === ModeType.Movie ? movies : tvs,
+    }),
+    [loading, modeIndex, movies, tvs]
+  );
+
+  return result;
 };
-
-export const useDisplayContentsControl =
-  (): useDisplayContentsControlReturnType => {
-    const { modeIndex, selectedGenreId } = useSelector(
-      (state) => state.contentsMode
-    );
-    const loading = useSelector((s) => s.loading.isLoading);
-    const moviesByGenres = useSelector((state) => state.discovers.data);
-    const tvsByGenres = useSelector((state) => state.discovers.data);
-    const popularMovies = useSelector(popularMovieSelector.selectAll);
-    const popularTVs = useSelector(popularTVsSelector.selectAll);
-    const movies = selectedGenreId === 0 ? popularMovies : moviesByGenres;
-    const tvs = selectedGenreId === 0 ? popularTVs : tvsByGenres;
-
-    const results = useMemo(
-      () => ({
-        loading,
-        data: modeIndex === ModeType.Movie ? movies : tvs,
-      }),
-      [loading, modeIndex, movies, tvs]
-    );
-
-    return {
-      results,
-    };
-  };

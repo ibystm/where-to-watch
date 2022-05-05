@@ -6,16 +6,14 @@ import { useDisplayContentsControl } from "./hooks/useDisplayContentsControl";
 import { SkeltonContentItem } from "./SkeltonContentItem";
 
 export const ContentsArea: VFC = () => {
-  const { results } = useDisplayContentsControl();
+  const { loading, data } = useDisplayContentsControl();
 
   const contents = useMemo(
     () =>
-      results.loading
+      loading
         ? [...Array(20)].map((_, idx) => <SkeltonContentItem key={idx} />)
-        : results.data.map((item, idx) => (
-            <ContentItem key={idx} contentItem={item} />
-          )),
-    [results.data, results.loading]
+        : data.map((item, idx) => <ContentItem key={idx} contentItem={item} />),
+    [data, loading]
   );
 
   return (
