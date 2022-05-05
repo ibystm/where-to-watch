@@ -4,7 +4,6 @@ import { commonDictionaries } from "../../commons/constants/dictionaries";
 import { useSelector } from "../../store/store";
 import { ModeType } from "../../types/redux/contentsMode";
 import { Genre } from "../../types/redux/genres";
-import { modeIndexSelector } from "../global/header/selectors/contentsMode";
 import { GenreChip } from "./GenreChip";
 import {
   movieGenresSelector,
@@ -12,7 +11,7 @@ import {
 } from "./slice/genres/selectors";
 
 export const GenreChipsArea: React.FC = () => {
-  const modeIndex = useSelector(modeIndexSelector);
+  const modeIndex = useSelector((s) => s.contentsMode.modeIndex);
   const movieGenres = useSelector(movieGenresSelector.selectAll);
   const tvGenres = useSelector(tvGenresSelector.selectAll);
   const genres = modeIndex === ModeType.Movie ? movieGenres : tvGenres;
