@@ -14,6 +14,9 @@ const slice = createSlice({
   name: "contentsMode",
   initialState,
   reducers: {
+    resetSelectedGenre: (state) => {
+      state.selectedGenreId = 0;
+    },
     changeMode: (state, actions: PayloadAction<ModeIndex>) => {
       state.modeIndex = actions.payload;
     },
