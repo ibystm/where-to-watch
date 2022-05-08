@@ -1,6 +1,7 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useSelector } from "../../../store/store";
+import { ModeType } from "../../../types/redux/contentsMode";
 import { loadingActions } from "../../loading/slice/loading";
 import { popularitiesActions } from "../../loading/slice/popularities/index";
 import { contentsActions } from "../slice/discoverMovies";
@@ -12,28 +13,31 @@ export const useFetchContents = () => {
     (state) => state.contentsMode
   );
 
-  const fetchGenres = (): void => {
-    dispatch(genresActions.getMovieGenres());
-    dispatch(genresActions.getTVGenres());
-  };
   // for Genres
   useEffect(() => {
-    fetchGenres();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const fetchGenres = (): void => {
+      dispatch(genresActions.getMovieGenres());
+      dispatch(genresActions.getTVGenres());
+    };
 
-  const fetchContents = useCallback(async () => {
-    dispatch(popularitiesActions.getPopularMovies());
-    dispatch(popularitiesActions.getPopularTVs());
-    dispatch(contentsActions.fetchDiscoverMovies(selectedGenreId));
-    dispatch(contentsActions.fetchDiscoverTVs(selectedGenreId));
-  }, [selectedGenreId, dispatch]);
+    fetchGenres();
+  }, [dispatch]);
 
   // for display contents
   useEffect(() => {
+    const fetch = async (): Promise<void> => {
+      if (modeIndex === ModeType.Movie) {
+        dispatch(popularitiesActions.getPopularMovies());
+        dispatch(contentsActions.fetchDiscoverMovies(selectedGenreId));
+        return;
+      }
+      dispatch(popularitiesActions.getPopularTVs());
+      dispatch(contentsActions.fetchDiscoverTVs(selectedGenreId));
+    };
+
     dispatch(loadingActions.startLoading());
-    fetchContents().finally(() => {
+    fetch().finally(() => {
       dispatch(loadingActions.endLoading());
     });
-  }, [selectedGenreId, dispatch, modeIndex, fetchContents]);
+  }, [dispatch, modeIndex, selectedGenreId]);
 };
