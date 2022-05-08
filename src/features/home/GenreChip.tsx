@@ -1,5 +1,4 @@
 import { Button } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "../../store/store";
 import { Genre } from "../../types/redux/genres";
@@ -10,15 +9,9 @@ type Props = {
 };
 
 export const GenreChip: React.FC<Props> = ({ genre }) => {
-  const { selectedGenreId, modeIndex } = useSelector(
-    (state) => state.contentsMode
-  );
+  const { selectedGenreId } = useSelector((state) => state.contentsMode);
   const dispatch = useDispatch();
   const shouldFocus = selectedGenreId === genre.id;
-
-  useEffect(() => {
-    contentModeActions.resetSelectedGenre();
-  }, [modeIndex]);
 
   return (
     <Button

@@ -15,6 +15,7 @@ export const ChoiceTabs: React.FC = () => {
       colorScheme="purple"
       onChange={(index) => {
         dispatch(contentModeActions.changeMode(index as ModeIndex));
+        dispatch(contentModeActions.resetSelectedGenre());
       }}
       index={modeIndex}
     >
