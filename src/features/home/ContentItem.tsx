@@ -8,9 +8,10 @@ import { configurationsSelector } from "../configurations/selectors/configuratio
 
 type P = {
   contentItem: ActualContentData;
+  modalOpen: () => void;
 };
 
-export const ContentItem: React.FC<P> = ({ contentItem }) => {
+export const ContentItem: React.FC<P> = ({ contentItem, modalOpen }) => {
   const { title, poster_path, releaseDate } = contentItem;
   const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
   const imageUrl = useSelector(configurationsSelector.secureImageUrl);
@@ -24,6 +25,7 @@ export const ContentItem: React.FC<P> = ({ contentItem }) => {
 
   return (
     <Button
+      onClick={modalOpen}
       height="320px"
       minW="200px"
       maxW="240px"
