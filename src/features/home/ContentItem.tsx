@@ -8,7 +8,7 @@ import { configurationsSelector } from "../configurations/selectors/configuratio
 
 type P = {
   contentItem: ActualContentData;
-  modalOpen: () => void;
+  modalOpen: (contentItem: ActualContentData) => void;
 };
 
 export const ContentItem: React.FC<P> = ({ contentItem, modalOpen }) => {
@@ -25,7 +25,9 @@ export const ContentItem: React.FC<P> = ({ contentItem, modalOpen }) => {
 
   return (
     <Button
-      onClick={modalOpen}
+      onClick={() => {
+        modalOpen(contentItem);
+      }}
       height="320px"
       minW="200px"
       maxW="240px"

@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 import { useSelector } from "../../store/store";
 import {
   searchedContentsSelector,
@@ -6,16 +6,17 @@ import {
 } from "../global/header/selectors/searchContents";
 import { ContentDetailModal } from "./ContentDetailModal";
 import { ContentItem } from "./ContentItem";
+import { useModalControl } from "./hooks/useModalControl";
 import { SkeltonContentItem } from "./SkeltonContentItem";
 
 export const SearchContentsArea: React.FC = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, handleClose, handleOpen, currentContent } = useModalControl();
   const contents = useSelector(searchedContentsSelector.selectAll);
   const searchedKeyword = useSelector(searchKeywordSelector);
   const searchedContentsArea = false
     ? [...Array(100)].map((_, idx) => <SkeltonContentItem key={idx} />)
     : contents.map((item, idx) => (
-        <ContentItem key={idx} contentItem={item} modalOpen={onOpen} />
+        <ContentItem key={idx} contentItem={item} modalOpen={handleOpen} />
       ));
 
   return (
@@ -30,7 +31,13 @@ export const SearchContentsArea: React.FC = () => {
           {searchedContentsArea}
         </SimpleGrid>
       </Box>
-      <ContentDetailModal isOpen={isOpen} onClose={onClose} />
+      {currentContent !== null && (
+        <ContentDetailModal
+          isOpen={isOpen}
+          onClose={handleClose}
+          currentItem={currentContent}
+        />
+      )}
     </>
   );
 };

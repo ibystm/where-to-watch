@@ -7,23 +7,35 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { commonDictionaries } from "../../commons/constants/dictionaries";
+import { ActualContentData } from "../../types/redux/discovers";
 
 interface P {
   isOpen: boolean;
   onClose: () => void;
+  currentItem: ActualContentData;
 }
 
-export const ContentDetailModal: React.FC<P> = ({ isOpen, onClose }) => {
+export const ContentDetailModal: React.FC<P> = ({
+  isOpen,
+  onClose,
+  currentItem,
+}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
+        <ModalHeader marginRight="32px">{currentItem.title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <div>This is Modal body</div>
+          <Text>
+            {currentItem.overview
+              ? currentItem.overview
+              : commonDictionaries.noOverview}
+          </Text>
         </ModalBody>
 
         <ModalFooter>
