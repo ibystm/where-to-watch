@@ -5,7 +5,7 @@ const languages = {
   ja: "language=ja",
 };
 
-export const requests = {
+export const endPoints = {
   configuration: `/configuration?${API_KEY_QUERY_STRINGS}`,
   discoverMovie: (genreId: number) =>
     `/discover/movie?${languages.ja}&${API_KEY_QUERY_STRINGS}&with_genres=${genreId}`,

@@ -1,5 +1,5 @@
 import { baseRepository } from "./axios";
-import { requests } from "./constants";
+import { endPoints } from "./constants";
 import { DiscoverMovieResponse } from "./types/discovers";
 import { DiscoverTVShowsResponse } from "./types/discoverTVShows";
 
@@ -8,7 +8,7 @@ export const fetchDiscoverMoviesAPI = async (
 ): Promise<DiscoverMovieResponse> => {
   try {
     const res = await baseRepository.get<DiscoverMovieResponse>(
-      `${requests.discoverMovie(genreId)}`
+      `${endPoints.discoverMovie(genreId)}`
     );
     return res.data;
   } catch (e) {
@@ -21,7 +21,7 @@ export const fetchDiscoverTVsAPI = async (
 ): Promise<DiscoverTVShowsResponse> => {
   try {
     const res = await baseRepository.get<DiscoverTVShowsResponse>(
-      `${requests.discoverTVs(genreId)}`
+      `${endPoints.discoverTVs(genreId)}`
     );
     return res.data;
   } catch (e) {

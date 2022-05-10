@@ -1,5 +1,5 @@
 import { baseRepository } from "./axios";
-import { requests } from "./constants";
+import { endPoints } from "./constants";
 import {
   GetPopularMoviesAPIResponse,
   GetPopularTVsAPIResponse,
@@ -7,11 +7,11 @@ import {
 
 export const getpopularMovies =
   async (): Promise<GetPopularMoviesAPIResponse> => {
-    const res = await baseRepository.get(requests.getPopularMovies("JP"));
+    const res = await baseRepository.get(endPoints.getPopularMovies("JP"));
     return res.data;
   };
 
 export const getPopularTVs = async (): Promise<GetPopularTVsAPIResponse> => {
-  const res = await baseRepository.get(requests.getPopularTVs("JP"));
+  const res = await baseRepository.get(endPoints.getPopularTVs("JP"));
   return res.data;
 };

@@ -1,5 +1,5 @@
 import { baseRepository } from "./axios";
-import { requests, TVURLs } from "./constants";
+import { endPoints, TVURLs } from "./constants";
 import {
   SearchMoviesResponse,
   SearchTVsResponse,
@@ -8,7 +8,7 @@ import {
 export const searchMoviesAPI = async (
   keyword: string
 ): Promise<SearchMoviesResponse> => {
-  const res = await baseRepository.get(requests.searchMovie(keyword));
+  const res = await baseRepository.get(endPoints.searchMovie(keyword));
   return res.data;
 };
 
