@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Modal,
   ModalBody,
@@ -31,6 +32,13 @@ export const ContentDetailModal: React.FC<P> = ({
         <ModalHeader marginRight="32px">{currentItem.title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
+          <Box marginBottom="2" display="flex" justifyContent="end">
+            <Text>
+              {`公開日: ${
+                currentItem.releaseDate ? currentItem.releaseDate : "不明"
+              }`}
+            </Text>
+          </Box>
           <Text>
             {currentItem.overview
               ? currentItem.overview
@@ -42,7 +50,6 @@ export const ContentDetailModal: React.FC<P> = ({
           <Button colorScheme="blue" mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button variant="ghost">Secondary Action</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
