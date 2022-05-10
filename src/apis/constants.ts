@@ -23,6 +23,10 @@ export const endPoints = {
     `/movie/popular?${languages.ja}&${API_KEY_QUERY_STRINGS}&region=${region}&page=${page}`,
   getPopularTVs: (region: ISOCodes31661, page: number = 1) =>
     `/tv/popular?${languages.ja}&${API_KEY_QUERY_STRINGS}&region=${region}&page=${page}`,
+  getMovieWatchProvider: (movieId: string) =>
+    `/movie/${movieId}/watch/providers?${API_KEY_QUERY_STRINGS}`,
+  getTVWatchProvider: (tvId: string) =>
+    `/tv/${tvId}/watch/providers?${API_KEY_QUERY_STRINGS}`,
 
   // getUpComingTVs: (page: number = 1) =>
   //   `/tv/upcoming?${languages.ja}&${API_KEY_QUERY_STRINGS}&page=${page}`,
