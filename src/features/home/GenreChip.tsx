@@ -23,10 +23,11 @@ export const GenreChip: React.FC<Props> = ({ genre }) => {
       flexShrink="0"
       color={shouldFocus ? "white" : "inherit"}
       backgroundColor={shouldFocus ? "gray.700" : "inherit"}
+      onClick={() => dispatch(contentModeActions.selectGenre(genre.id))}
       _hover={{
         backgroundColor: shouldFocus ? "gray.700" : "inherit",
       }}
-      onClick={() => dispatch(contentModeActions.selectGenre(genre.id))}
+      _focus={{ boxShadow: "none" }}
     >
       {genre.name}
     </Button>
