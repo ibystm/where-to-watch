@@ -16,11 +16,11 @@ export const store = configureStore({
   reducer: {
     contentsMode: contentsModeReducer,
     loading: loadingReducer,
-    user: userReducer,
-    discovers: discoverContentsReducer,
-    popularities: popularitiesReducer,
-    searchContents: searchContentsReducer,
     configurations: configurationsReducer,
+    user: userReducer,
+    discovers: discoverContentsReducer, // 命名をcontentsに変更する
+    searchContents: searchContentsReducer,
+    popularities: popularitiesReducer,
     genres: genresReducer,
   },
 });

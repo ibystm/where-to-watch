@@ -1,6 +1,9 @@
 import { baseRepository } from "./axios";
 import { endPoints } from "./constants";
-import { DiscoverMovieResponse } from "./types/discovers";
+import {
+  DiscoverMovieResponse,
+  GetWatchMovieProviderRespose,
+} from "./types/discovers";
 import { DiscoverTVShowsResponse } from "./types/discoverTVShows";
 
 export const fetchDiscoverMoviesAPI = async (
@@ -27,4 +30,13 @@ export const fetchDiscoverTVsAPI = async (
   } catch (e) {
     throw e;
   }
+};
+
+export const getMovieWatchProvider = async (
+  movieId: number
+): Promise<GetWatchMovieProviderRespose> => {
+  const res = await baseRepository.get<GetWatchMovieProviderRespose>(
+    `${endPoints.getMovieWatchProvider(movieId)}`
+  );
+  return res.data;
 };
