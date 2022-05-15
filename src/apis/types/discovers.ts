@@ -16,16 +16,17 @@ type ProviderDetailInfo = {
   provider_name?: string;
 };
 
-type WatchProviderResult = {
-  [countryCode: string]: {
-    link?: string;
-    flatrate?: ProviderDetailInfo[];
-    rent?: ProviderDetailInfo[];
-    buy?: ProviderDetailInfo[];
-  };
+export type WatchProviderResult = {
+  link?: string;
+  flatrate?: ProviderDetailInfo[];
+  rent?: ProviderDetailInfo[];
+  buy?: ProviderDetailInfo[];
 };
 
 export type GetWatchMovieProviderRespose = {
   id?: number;
-  results: WatchProviderResult[];
+  results: {
+    JP: WatchProviderResult;
+    [countryCode: string]: WatchProviderResult;
+  };
 };

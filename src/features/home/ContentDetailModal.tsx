@@ -11,6 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { WatchProviderResult } from "../../apis/types/discovers";
 import { commonDictionaries } from "../../commons/constants/dictionaries";
 import { ActualContentData } from "../../types/redux/discovers";
 
@@ -18,6 +19,7 @@ interface P {
   isOpen: boolean;
   onClose: () => void;
   currentItem: ActualContentData;
+  providerData?: WatchProviderResult; // searchの方も完了したらoptional外す
 }
 
 export const ContentDetailModal: React.FC<P> = ({

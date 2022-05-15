@@ -1,16 +1,19 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import React, { useMemo, VFC } from "react";
+import React, { FC, useMemo } from "react";
 import { ContentDetailModal } from "./ContentDetailModal";
 import { ContentItem } from "./ContentItem";
 import { GenreChipsArea } from "./GenreChipsArea";
+import { useContentsProvider } from "./hooks/useContentsProvider";
 import { useDisplayContentsControl } from "./hooks/useDisplayContentsControl";
 import { useModalControl } from "./hooks/useModalControl";
 import { SkeltonContentItem } from "./SkeltonContentItem";
 
-export const ContentsArea: VFC = () => {
+export const ContentsArea: FC = () => {
   const { loading, data } = useDisplayContentsControl();
   const { currentContent, handleClose, handleOpen, isOpen } = useModalControl();
-
+  const { providerData } = useContentsProvider(
+    currentContent?.id ? currentContent.id : 0
+  );
   const contents = useMemo(
     () =>
       loading
@@ -34,6 +37,7 @@ export const ContentsArea: VFC = () => {
           isOpen={isOpen}
           onClose={handleClose}
           currentItem={currentContent}
+          providerData={providerData}
         />
       )}
     </>
