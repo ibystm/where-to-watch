@@ -9,7 +9,7 @@ export type DiscoverMovieResponse = {
   total_pages?: number;
 };
 
-type ProviderDetailInfo = {
+export type ProviderDetailInfo = {
   display_priority?: number;
   logo_path?: string;
   provider_id?: number;

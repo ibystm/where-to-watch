@@ -11,7 +11,7 @@ import { SkeltonContentItem } from "./SkeltonContentItem";
 export const ContentsArea: FC = () => {
   const { loading, data } = useDisplayContentsControl();
   const { currentContent, handleClose, handleOpen, isOpen } = useModalControl();
-  const { providerData } = useContentsProvider(
+  const { providerData, resetCurrentData } = useContentsProvider(
     currentContent?.id ? currentContent.id : 0
   );
   const contents = useMemo(
@@ -23,6 +23,10 @@ export const ContentsArea: FC = () => {
           )),
     [data, handleOpen, loading]
   );
+  const handleCloseModal = (): void => {
+    resetCurrentData();
+    handleClose();
+  };
 
   return (
     <>
@@ -35,7 +39,7 @@ export const ContentsArea: FC = () => {
       {currentContent !== null && (
         <ContentDetailModal
           isOpen={isOpen}
-          onClose={handleClose}
+          onClose={handleCloseModal}
           currentItem={currentContent}
           providerData={providerData}
         />
