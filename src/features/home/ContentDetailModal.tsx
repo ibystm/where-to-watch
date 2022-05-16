@@ -50,7 +50,7 @@ export const ContentDetailModal: React.FC<P> = ({
               }`}
             </Text>
           </Box>
-          <Text>
+          <Text padding="16px">
             {currentItem.overview
               ? currentItem.overview
               : commonDictionaries.noOverview}
