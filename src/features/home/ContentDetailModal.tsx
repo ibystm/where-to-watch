@@ -69,6 +69,7 @@ export const ContentDetailModal: React.FC<P> = ({
                       boxSize="48px"
                       src={buildImagePath(item.logo_path)}
                       marginRight="16px"
+                      borderRadius="4px"
                     />
                   );
                 })
