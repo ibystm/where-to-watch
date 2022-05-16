@@ -45,7 +45,7 @@ export const ContentDetailModal: React.FC<P> = ({
         <ModalBody>
           <Box marginBottom="2" display="flex" justifyContent="end">
             <Text>
-              {`公開日: ${
+              {`${commonDictionaries.releaseDate}: ${
                 currentItem.releaseDate ? currentItem.releaseDate : "不明"
               }`}
             </Text>

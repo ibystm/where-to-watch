@@ -12,6 +12,7 @@ export const commonDictionaries = {
   popularTVs: "人気テレビドラマ",
   history: "歴史", // historyが履歴と訳された状態になってしまうため
   noOverview: "現在この作品のあらすじは見つかりません",
+  releaseDate: "公開日",
 };
 
 export const ISO_3166_1_CODES = {
