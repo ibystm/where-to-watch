@@ -78,7 +78,13 @@ export const ContentDetailModal: React.FC<P> = ({
               )}
             </Flex>
             {/* このmarginRightのとりかたは要検討 */}
-            <Text fontSize="12px" textAlign="right" marginRight="48px">
+            <Text
+              fontSize="12px"
+              textAlign="right"
+              marginRight="48px"
+              color="gray.500"
+              fontFamily="monospace"
+            >
               Data by Just Watch.
             </Text>
           </Box>
