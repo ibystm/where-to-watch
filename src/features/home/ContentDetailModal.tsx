@@ -22,7 +22,7 @@ interface P {
   isOpen: boolean;
   onClose: () => void;
   currentItem: ActualContentData;
-  providerData?: DisplayWatchProviderResult; // searchの方も完了したらoptional外す
+  providerData: DisplayWatchProviderResult;
 }
 
 export const ContentDetailModal: React.FC<P> = ({

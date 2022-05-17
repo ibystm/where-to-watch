@@ -6,11 +6,15 @@ import {
 } from "../global/header/selectors/searchContents";
 import { ContentDetailModal } from "./ContentDetailModal";
 import { ContentItem } from "./ContentItem";
+import { useContentsProvider } from "./hooks/useContentsProvider";
 import { useModalControl } from "./hooks/useModalControl";
 import { SkeltonContentItem } from "./SkeltonContentItem";
 
 export const SearchContentsArea: React.FC = () => {
   const { isOpen, handleClose, handleOpen, currentContent } = useModalControl();
+  const { providerData, resetCurrentData } = useContentsProvider(
+    currentContent?.id ? currentContent.id : 0
+  );
   const contents = useSelector(searchedContentsSelector.selectAll);
   const searchedKeyword = useSelector(searchKeywordSelector);
   const searchedContentsArea = false
@@ -18,6 +22,10 @@ export const SearchContentsArea: React.FC = () => {
     : contents.map((item, idx) => (
         <ContentItem key={idx} contentItem={item} modalOpen={handleOpen} />
       ));
+  const handleCloseModal = (): void => {
+    resetCurrentData();
+    handleClose();
+  };
 
   return (
     <>
@@ -34,8 +42,9 @@ export const SearchContentsArea: React.FC = () => {
       {currentContent !== null && (
         <ContentDetailModal
           isOpen={isOpen}
-          onClose={handleClose}
+          onClose={handleCloseModal}
           currentItem={currentContent}
+          providerData={providerData}
         />
       )}
     </>
