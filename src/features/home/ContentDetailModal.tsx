@@ -39,7 +39,7 @@ export const ContentDetailModal: React.FC<P> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent padding="16px">
         <ModalHeader marginRight="32px">{currentItem.title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -50,7 +50,7 @@ export const ContentDetailModal: React.FC<P> = ({
               }`}
             </Text>
           </Box>
-          <Text padding="16px">
+          <Text>
             {currentItem.overview
               ? currentItem.overview
               : commonDictionaries.noOverview}
@@ -77,6 +77,10 @@ export const ContentDetailModal: React.FC<P> = ({
                 <Text>現在はありません</Text>
               )}
             </Flex>
+            {/* このmarginRightのとりかたは要検討 */}
+            <Text fontSize="12px" textAlign="right" marginRight="48px">
+              Data by Just Watch.
+            </Text>
           </Box>
         </ModalBody>
 

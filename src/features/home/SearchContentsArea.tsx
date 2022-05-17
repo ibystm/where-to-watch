@@ -27,6 +27,8 @@ export const SearchContentsArea: React.FC = () => {
     handleClose();
   };
 
+  console.log({ providerData });
+
   return (
     <>
       <Box marginY="24px">
