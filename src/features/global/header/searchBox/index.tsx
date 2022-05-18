@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { Formik, FormikProps } from "formik";
 import React, { useRef } from "react";
 import { useSearchMoviesByKeyword } from "../hooks/useSearchContentsByKeyword";
@@ -13,14 +12,12 @@ export const GlobalSearchBox = () => {
   const formikRef = useRef<FormikProps<SearchMovieFormValues>>(null);
 
   return (
-    <Box width="100%">
-      <Formik
-        innerRef={formikRef}
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-      >
-        <SearchForm />
-      </Formik>
-    </Box>
+    <Formik
+      innerRef={formikRef}
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+    >
+      <SearchForm />
+    </Formik>
   );
 };

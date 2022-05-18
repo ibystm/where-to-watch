@@ -60,6 +60,7 @@ export const ContentItem: React.FC<P> = ({ contentItem, modalOpen }) => {
         />
       ) : (
         <Flex
+          marginX="auto"
           boxSize="85%"
           backgroundColor="gray.200"
           borderRadius="inherit"
