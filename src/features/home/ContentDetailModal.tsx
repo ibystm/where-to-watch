@@ -49,7 +49,9 @@ export const ContentDetailModal: React.FC<P> = ({
           <Box marginBottom="2" display="flex" justifyContent="end">
             <Text>
               {`${commonDictionaries.releaseDate}: ${
-                currentItem.releaseDate ? currentItem.releaseDate : "不明"
+                currentItem.releaseDate
+                  ? currentItem.releaseDate.replaceAll("-", "/")
+                  : "不明"
               }`}
             </Text>
           </Box>
@@ -80,7 +82,6 @@ export const ContentDetailModal: React.FC<P> = ({
                 <Text>現在はありません</Text>
               )}
             </Flex>
-            {/* このmarginRightのとりかたは要検討 */}
             {existValidData && (
               <Text
                 fontSize="12px"

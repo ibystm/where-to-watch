@@ -89,7 +89,10 @@ export const ContentItem: React.FC<P> = ({ contentItem, modalOpen }) => {
         </Text>
         <Text fontSize="sm" color="gray.600">
           {releaseDate
-            ? `${commonDictionaries.releaseDate}: ${releaseDate}`
+            ? `${commonDictionaries.releaseDate}: ${releaseDate.replaceAll(
+                "-",
+                "/"
+              )}`
             : commonDictionaries.noReleaseDate}
         </Text>
       </Box>
