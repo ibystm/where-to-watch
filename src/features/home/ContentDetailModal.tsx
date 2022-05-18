@@ -36,6 +36,9 @@ export const ContentDetailModal: React.FC<P> = ({
     if (imageDataObj === null) return "";
     return `${imageDataObj.secure_base_url}/original/${logoPath}`;
   };
+  const existValidData =
+    !!providerData?.flatrate && providerData?.flatrate.length > 0;
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -60,7 +63,7 @@ export const ContentDetailModal: React.FC<P> = ({
               <Text>視聴可能なストリーミングサービス</Text>
             </Box>
             <Flex justify="center" align="center" padding="16px">
-              {providerData?.flatrate && providerData?.flatrate.length > 0 ? (
+              {existValidData ? (
                 providerData?.flatrate.map((item) => {
                   if (!item.provider_name) return null;
 
@@ -78,15 +81,17 @@ export const ContentDetailModal: React.FC<P> = ({
               )}
             </Flex>
             {/* このmarginRightのとりかたは要検討 */}
-            <Text
-              fontSize="12px"
-              textAlign="right"
-              marginRight="48px"
-              color="gray.500"
-              fontFamily="monospace"
-            >
-              Data by Just Watch.
-            </Text>
+            {existValidData && (
+              <Text
+                fontSize="12px"
+                textAlign="center"
+                // marginRight="48px"
+                color="gray.500"
+                fontFamily="monospace"
+              >
+                Data by Just Watch.
+              </Text>
+            )}
           </Box>
         </ModalBody>
 
