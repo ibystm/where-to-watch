@@ -23,6 +23,8 @@ export const GenreChipsArea: React.FC = () => {
         fontSize="2xl"
         onClick={() => {
           if (ref.current === null) return;
+          // scrollの量を取得して、maxの時はright arrowは隠すように修正
+          console.log(`left: ${ref.current.scrollLeft}`);
           ref.current.scrollLeft += 200;
         }}
       />
