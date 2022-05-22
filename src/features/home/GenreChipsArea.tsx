@@ -16,7 +16,8 @@ export const GenreChipsArea: React.FC = () => {
   } = useGenreChipsArea(genreChipAreaRef.current);
   useResizeObserver([genreChipAreaRef], handleResize);
 
-  return displayGenres.length > 0 ? (
+  if (displayGenres.length === 0) return null;
+  return (
     <Flex w="100%" justify="space-around" alignItems="center" padding="4">
       {shouldShowPreviousButton && (
         <IconButton
@@ -42,5 +43,5 @@ export const GenreChipsArea: React.FC = () => {
         />
       )}
     </Flex>
-  ) : null;
+  );
 };
