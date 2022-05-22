@@ -21,19 +21,26 @@ export const useGenreChipsArea = (
   const tvGenres = useSelector(tvGenresSelector.selectAll);
   const genres = modeIndex === ModeType.Movie ? movieGenres : tvGenres;
   const displayGenres = [popular, ...genres];
+  const [shouldShowPreviousButton, setShouldShowPreviousButton] =
+    useState(false);
   const [shouldShowNextButton, setShouldShowButton] = useState(true);
   const [genreChipAreaWidth, setGenreChipAreaWidth] = useState(0);
   const handleResize = (entries: ResizeObserverEntry[]) => {
     const width = entries[0].contentRect.width;
     setGenreChipAreaWidth(width);
   };
-  const scrollNext = (): void => {
+  const handleScroll = (condition: "previous" | "next"): void => {
     if (genreChipAreaRef === null) return;
+
     genreChipAreaRef.scrollTo({
-      left: genreChipAreaRef.scrollLeft + 200,
+      left:
+        condition === "previous"
+          ? genreChipAreaRef.scrollLeft - 160
+          : genreChipAreaRef.scrollLeft + 160,
       behavior: "smooth",
     });
   };
+
   useEffect(() => {
     if (genreChipAreaRef === null) return;
     genreChipAreaRef.addEventListener("scroll", () => {
@@ -49,14 +56,27 @@ export const useGenreChipsArea = (
       } else {
         setShouldShowButton(true);
       }
+      console.log(`genreChipAreaWidth: ${genreChipAreaWidth}`);
+      console.log(
+        `currentAreaElement.scrollLeft: ${currentAreaElement.scrollLeft}`
+      );
+      console.log(`element.scrollWidth: ${currentAreaElement.scrollWidth}`);
+
+      if (currentAreaElement.scrollLeft === 0) {
+        setShouldShowPreviousButton(false);
+      } else {
+        setShouldShowPreviousButton(true);
+      }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [genreChipAreaRef, genreChipAreaWidth]);
 
   const res = {
     displayGenres,
     shouldShowNextButton,
+    shouldShowPreviousButton,
     handleResize,
-    scrollNext,
+    handleScroll,
   };
 
   return res;

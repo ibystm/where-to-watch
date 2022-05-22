@@ -7,20 +7,26 @@ import { useResizeObserver } from "./useResizeObserver";
 
 export const GenreChipsArea: React.FC = () => {
   const genreChipAreaRef = useRef<HTMLDivElement>(null);
-  const { displayGenres, shouldShowNextButton, handleResize, scrollNext } =
-    useGenreChipsArea(genreChipAreaRef.current);
+  const {
+    displayGenres,
+    shouldShowPreviousButton,
+    shouldShowNextButton,
+    handleResize,
+    handleScroll,
+  } = useGenreChipsArea(genreChipAreaRef.current);
   useResizeObserver([genreChipAreaRef], handleResize);
 
   return displayGenres.length > 0 ? (
     <Flex w="100%" justify="space-around" alignItems="center" padding="4">
-      <IconButton
-        marginLeft="4"
-        aria-label="next-content"
-        icon={<ChevronLeftIcon />}
-        fontSize="2xl"
-        onClick={scrollNext}
-      />
-
+      {shouldShowPreviousButton && (
+        <IconButton
+          marginLeft="4"
+          aria-label="next-content"
+          icon={<ChevronLeftIcon />}
+          fontSize="2xl"
+          onClick={() => handleScroll("previous")}
+        />
+      )}
       <Flex overflowX="hidden" gap="4" ref={genreChipAreaRef}>
         {displayGenres.map((item) => {
           return <GenreChip key={item.id} genre={item} />;
@@ -28,11 +34,11 @@ export const GenreChipsArea: React.FC = () => {
       </Flex>
       {shouldShowNextButton && (
         <IconButton
-          marginLeft="4"
+          // marginLeft="4"
           aria-label="next-content"
           icon={<ChevronRightIcon />}
           fontSize="2xl"
-          onClick={scrollNext}
+          onClick={() => handleScroll("next")}
         />
       )}
     </Flex>
