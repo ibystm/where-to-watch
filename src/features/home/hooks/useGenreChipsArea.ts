@@ -43,6 +43,8 @@ export const useGenreChipsArea = (
 
   useEffect(() => {
     if (genreChipAreaRef === null) return;
+    // TODO: 要調査
+    // 1ミリでもscroll eventが走るたびにstateの更新をしてしまうので、別の方法を模索したい
     genreChipAreaRef.addEventListener("scroll", () => {
       const currentAreaElement = genreChipAreaRef;
       if (currentAreaElement === null) return;
