@@ -53,7 +53,7 @@ export const useGenreChipsArea = (
 
       if (
         // scrollが最後まで行ったとき
-        genreChipAreaWidth + currentAreaElement.scrollLeft >=
+        genreChipAreaWidth + currentAreaElement.scrollLeft + 56 >=
         currentAreaElement.scrollWidth
       ) {
         setShouldShowButton(false);

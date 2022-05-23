@@ -21,7 +21,7 @@ export const GenreChipsArea: React.FC = () => {
     <Flex w="100%" justify="space-around" alignItems="center" padding="4">
       {shouldShowPreviousButton && (
         <IconButton
-          marginLeft="4"
+          marginRight="4"
           aria-label="next-content"
           icon={<ChevronLeftIcon />}
           fontSize="2xl"
@@ -35,7 +35,7 @@ export const GenreChipsArea: React.FC = () => {
       </Flex>
       {shouldShowNextButton && (
         <IconButton
-          // marginLeft="4"
+          marginLeft="4"
           aria-label="next-content"
           icon={<ChevronRightIcon />}
           fontSize="2xl"
