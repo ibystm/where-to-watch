@@ -18,7 +18,7 @@ export const GenreChipsArea: React.FC = () => {
 
   if (displayGenres.length === 0) return null;
   return (
-    <Flex w="100%" justify="space-around" alignItems="center" padding="4">
+    <Flex w="100%" justify="space-around" alignItems="center" paddingBlock="2">
       {shouldShowPreviousButton && (
         <IconButton
           marginRight="4"
