@@ -13,6 +13,8 @@ const popular: Genre = {
   name: commonDictionaries.popular,
 };
 
+const SCROLL_WIDTH = 240;
+
 export const useGenreChipsArea = (
   genreChipAreaRef: HTMLDivElement | null
 ): typeof res => {
@@ -35,8 +37,8 @@ export const useGenreChipsArea = (
     genreChipAreaRef.scrollTo({
       left:
         condition === "previous"
-          ? genreChipAreaRef.scrollLeft - 160
-          : genreChipAreaRef.scrollLeft + 160,
+          ? genreChipAreaRef.scrollLeft - SCROLL_WIDTH
+          : genreChipAreaRef.scrollLeft + SCROLL_WIDTH,
       behavior: "smooth",
     });
   };
