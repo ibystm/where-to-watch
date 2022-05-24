@@ -66,11 +66,12 @@ export const ContentDetailModal: React.FC<P> = ({
             </Box>
             <Flex justify="center" align="center" padding="16px">
               {existValidData ? (
-                providerData?.flatrate.map((item) => {
+                providerData?.flatrate.map((item, idx) => {
                   if (!item.provider_name) return null;
 
                   return (
                     <Image
+                      key={idx}
                       boxSize="48px"
                       src={buildImagePath(item.logo_path)}
                       marginRight="16px"
