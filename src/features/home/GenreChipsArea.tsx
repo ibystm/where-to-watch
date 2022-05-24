@@ -1,9 +1,9 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Flex, IconButton } from "@chakra-ui/react";
 import { useRef } from "react";
+import { useResizeObserver } from "../../hooks/useResizeObserver";
 import { GenreChip } from "./GenreChip";
 import { useGenreChipsArea } from "./hooks/useGenreChipsArea";
-import { useResizeObserver } from "./useResizeObserver";
 
 export const GenreChipsArea: React.FC = () => {
   const genreChipAreaRef = useRef<HTMLDivElement>(null);
