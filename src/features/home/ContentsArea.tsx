@@ -6,10 +6,12 @@ import { GenreChipsArea } from "./GenreChipsArea";
 import { useContentsProvider } from "./hooks/useContentsProvider";
 import { useDisplayContentsControl } from "./hooks/useDisplayContentsControl";
 import { useModalControl } from "./hooks/useModalControl";
+import { usePageEndScrollObserve } from "./hooks/usePageEndScrollObserve";
 import { SkeltonContentItem } from "./SkeltonContentItem";
 
 export const ContentsArea: FC = () => {
   const { loading, data } = useDisplayContentsControl();
+  usePageEndScrollObserve();
   const { currentContent, handleClose, handleOpen, isOpen } = useModalControl();
   const { providerData, resetCurrentData } = useContentsProvider(
     currentContent?.id ? currentContent.id : 0
