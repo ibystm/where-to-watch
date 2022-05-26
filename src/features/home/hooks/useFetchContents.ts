@@ -6,12 +6,15 @@ import { loadingActions } from "../../loading/slice/loading";
 import { popularitiesActions } from "../../loading/slice/popularities/index";
 import { contentsActions } from "../slice/discoverMovies";
 import { genresActions } from "../slice/genres/index";
+import { usePageEndScrollObserve } from "./usePageEndScrollObserve";
 
 export const useFetchContents = () => {
   const dispatch: AppDispatch = useDispatch();
   const { modeIndex, selectedGenreId } = useSelector(
     (state) => state.contentsMode
   );
+
+  const { currentPage } = usePageEndScrollObserve();
 
   // for Genres
   useEffect(() => {
@@ -27,11 +30,11 @@ export const useFetchContents = () => {
   useEffect(() => {
     const fetch = async (): Promise<void> => {
       if (modeIndex === ModeType.Movie) {
-        dispatch(popularitiesActions.getPopularMovies());
+        dispatch(popularitiesActions.getPopularMovies(currentPage));
         dispatch(contentsActions.fetchDiscoverMovies(selectedGenreId));
         return;
       }
-      dispatch(popularitiesActions.getPopularTVs());
+      dispatch(popularitiesActions.getPopularTVs(currentPage));
       dispatch(contentsActions.fetchDiscoverTVs(selectedGenreId));
     };
 
@@ -39,5 +42,5 @@ export const useFetchContents = () => {
     fetch().finally(() => {
       dispatch(loadingActions.endLoading());
     });
-  }, [dispatch, modeIndex, selectedGenreId]);
+  }, [currentPage, dispatch, modeIndex, selectedGenreId]);
 };

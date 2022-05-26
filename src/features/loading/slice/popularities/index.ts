@@ -4,6 +4,10 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import * as API from "../../../../apis/popularities";
+import {
+  GetPopularMoviesAPIResponse,
+  GetPopularTVsAPIResponse,
+} from "../../../../apis/types/popularities";
 import { ActualContentData } from "../../../../types/redux/discovers";
 import { reducerFormatUtil } from "../../../../utils/redux/reducerUtil";
 
@@ -42,21 +46,21 @@ const slice = createSlice({
   },
 });
 const asyncActions = {
-  getPopularMovies: createAsyncThunk(
+  getPopularMovies: createAsyncThunk<GetPopularMoviesAPIResponse, number>(
     `${SLICE_NAME}/getPopularMovies`,
-    async (_, { rejectWithValue }) => {
+    async (page, { rejectWithValue }) => {
       try {
-        return API.getpopularMovies();
+        return API.getpopularMovies(page);
       } catch (e) {
         return rejectWithValue(e);
       }
     }
   ),
-  getPopularTVs: createAsyncThunk(
+  getPopularTVs: createAsyncThunk<GetPopularTVsAPIResponse, number>(
     `${SLICE_NAME}/getPopularTVs`,
-    async (_, { rejectWithValue }) => {
+    async (page, { rejectWithValue }) => {
       try {
-        return API.getPopularTVs();
+        return API.getPopularTVs(page);
       } catch (e) {
         return rejectWithValue(e);
       }

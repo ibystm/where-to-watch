@@ -5,13 +5,16 @@ import {
   GetPopularTVsAPIResponse,
 } from "./types/popularities";
 
-export const getpopularMovies =
-  async (): Promise<GetPopularMoviesAPIResponse> => {
-    const res = await baseRepository.get(endPoints.getPopularMovies("JP"));
-    return res.data;
-  };
+export const getpopularMovies = async (
+  page: number
+): Promise<GetPopularMoviesAPIResponse> => {
+  const res = await baseRepository.get(endPoints.getPopularMovies("JP", page));
+  return res.data;
+};
 
-export const getPopularTVs = async (): Promise<GetPopularTVsAPIResponse> => {
-  const res = await baseRepository.get(endPoints.getPopularTVs("JP"));
+export const getPopularTVs = async (
+  page: number
+): Promise<GetPopularTVsAPIResponse> => {
+  const res = await baseRepository.get(endPoints.getPopularTVs("JP", page));
   return res.data;
 };
