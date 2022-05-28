@@ -20,31 +20,6 @@ const initialState = {
   movies: initialEntityState,
 };
 
-const slice = createSlice({
-  name: SLICE_NAME,
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(
-      asyncActions.getPopularMovies.fulfilled,
-      (state, { payload }) => {
-        popularitiesAdopter.setAll(
-          state.movies,
-          reducerFormatUtil.movieListResultToReduxStoreData(payload.results)
-        );
-      }
-    );
-    builder.addCase(
-      asyncActions.getPopularTVs.fulfilled,
-      (state, { payload }) => {
-        state.tvs = popularitiesAdopter.setAll(
-          state.tvs,
-          reducerFormatUtil.tvListResultToReduxStoreData(payload.results)
-        );
-      }
-    );
-  },
-});
 const asyncActions = {
   getPopularMovies: createAsyncThunk<GetPopularMoviesAPIResponse, number>(
     `${SLICE_NAME}/getPopularMovies`,
@@ -67,6 +42,32 @@ const asyncActions = {
     }
   ),
 };
+
+const slice = createSlice({
+  name: SLICE_NAME,
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(
+      asyncActions.getPopularMovies.fulfilled,
+      (state, { payload }) => {
+        popularitiesAdopter.addMany(
+          state.movies,
+          reducerFormatUtil.movieListResultToReduxStoreData(payload.results)
+        );
+      }
+    );
+    builder.addCase(
+      asyncActions.getPopularTVs.fulfilled,
+      (state, { payload }) => {
+        state.tvs = popularitiesAdopter.addMany(
+          state.tvs,
+          reducerFormatUtil.tvListResultToReduxStoreData(payload.results)
+        );
+      }
+    );
+  },
+});
 
 export const popularitiesReducer = slice.reducer;
 export const popularitiesActions = {
