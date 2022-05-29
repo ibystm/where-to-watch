@@ -28,32 +28,47 @@ export const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(searchMovie.pending, (state, { meta }) => {
-      state.searchMode = true;
-      state.keyword = meta.arg;
-    });
-    builder.addCase(searchMovie.fulfilled, (state, action) => {
-      const { results } = action.payload;
-      if (results === undefined) return;
-      const searchMovies =
-        reducerFormatUtil.movieListResultToReduxStoreData(results);
-      searchContentsAdoptor.setAll(state.searchedContents, searchMovies);
-    });
-    builder.addCase(searchMovie.rejected, (state, { payload }) => {
-      throw payload;
-    });
-    builder.addCase(searchTV.pending, (state, { meta }) => {
-      state.searchMode = true;
-      state.keyword = meta.arg;
-    });
-    builder.addCase(searchTV.fulfilled, (state, { payload }) => {
-      if (payload.results === undefined) return;
+    builder.addCase(
+      searchContentsActions.searchMovie.pending,
+      (state, { meta }) => {
+        state.searchMode = true;
+        state.keyword = meta.arg;
+      }
+    );
+    builder.addCase(
+      searchContentsActions.searchMovie.fulfilled,
+      (state, action) => {
+        const { results } = action.payload;
+        if (results === undefined) return;
+        const searchMovies =
+          reducerFormatUtil.movieListResultToReduxStoreData(results);
+        searchContentsAdoptor.setAll(state.searchedContents, searchMovies);
+      }
+    );
+    builder.addCase(
+      searchContentsActions.searchMovie.rejected,
+      (state, { payload }) => {
+        throw payload;
+      }
+    );
+    builder.addCase(
+      searchContentsActions.searchTV.pending,
+      (state, { meta }) => {
+        state.searchMode = true;
+        state.keyword = meta.arg;
+      }
+    );
+    builder.addCase(
+      searchContentsActions.searchTV.fulfilled,
+      (state, { payload }) => {
+        if (payload.results === undefined) return;
 
-      searchContentsAdoptor.setAll(
-        state.searchedContents,
-        reducerFormatUtil.tvListResultToReduxStoreData(payload.results)
-      );
-    });
+        searchContentsAdoptor.setAll(
+          state.searchedContents,
+          reducerFormatUtil.tvListResultToReduxStoreData(payload.results)
+        );
+      }
+    );
   },
 });
 const asyncActions = {
@@ -79,7 +94,7 @@ const asyncActions = {
   ),
 };
 
-export const { searchMovie, searchTV, resetSearchMode } = {
+export const searchContentsActions = {
   ...asyncActions,
   ...slice.actions,
 };
