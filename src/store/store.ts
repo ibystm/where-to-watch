@@ -3,13 +3,13 @@ import {
   TypedUseSelectorHook,
   useSelector as rawUseSelector,
 } from "react-redux";
-import { reducer as configurationsReducer } from "../features/configurations/slice/configurations";
+import { reducer as configurationsReducer } from "../features/configurations/slice";
 import { contentsModeReducer } from "../features/global/header/slice/contentsMode";
 import { searchContentsReducer } from "../features/global/header/slice/searchContents";
 import { reducer as discoverContentsReducer } from "../features/home/slice/discovers";
 import { genresReducer } from "../features/home/slice/genres/index";
 import { popularitiesReducer } from "../features/home/slice/popularities/index";
-import { reducer as loadingReducer } from "../features/loading/slice/loading";
+import { reducer as loadingReducer } from "../features/loading/slice";
 import { reducer as userReducer } from "./slices/usersSlice";
 
 export const store = configureStore({

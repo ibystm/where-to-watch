@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useSelector } from "../../../store/store";
 import { ModeType } from "../../../types/redux/contentsMode";
-import { loadingActions } from "../../loading/slice/loading";
+import { loadingActions } from "../../loading/slice";
 import { contentsActions } from "../slice/discovers";
 import { genresActions } from "../slice/genres/index";
 import { popularitiesActions } from "../slice/popularities/index";
