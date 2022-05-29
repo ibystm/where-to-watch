@@ -10,6 +10,7 @@ export const useFetchContents = () => {
     (state) => state.contentsMode
   );
 
+  // TODO: ジャンルを変えてもページの情報を引き継いでしまっているため、ジャンルごとに現在のページを保持するようにするべき
   const { currentPage } = usePageEndScrollObserve();
 
   // for Genres
@@ -27,11 +28,21 @@ export const useFetchContents = () => {
     const fetch = async (): Promise<void> => {
       if (modeIndex === ModeType.Movie) {
         dispatch(actions.getPopularMovies(currentPage));
-        dispatch(actions.fetchDiscoverMovies(selectedGenreId));
+        dispatch(
+          actions.fetchDiscoverMovies({
+            genreId: selectedGenreId,
+            page: currentPage,
+          })
+        );
         return;
       }
       dispatch(actions.getPopularTVs(currentPage));
-      dispatch(actions.fetchDiscoverTVs(selectedGenreId));
+      dispatch(
+        actions.fetchDiscoverTVs({
+          genreId: selectedGenreId,
+          page: currentPage,
+        })
+      );
     };
 
     dispatch(actions.startLoading());

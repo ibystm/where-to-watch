@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as API from "../../../../apis/fetchContents";
+import { DiscoverMovieResponse } from "../../../../apis/types/discovers";
+import { DiscoverTVShowsResponse } from "../../../../apis/types/discoverTVShows";
 import { ContentsState } from "../../../../types/redux/discovers";
 import { reducerFormatUtil } from "../../../../utils/redux/reducerUtil";
 
@@ -13,22 +15,28 @@ export const initialState: ContentsState = {
 };
 
 const asyncActions = {
-  fetchDiscoverMovies: createAsyncThunk(
+  fetchDiscoverMovies: createAsyncThunk<
+    DiscoverMovieResponse,
+    { genreId: number; page?: number }
+  >(
     `${SLICE_NAME}/fetchDiscoverMovies`,
-    async (genreId: number, { rejectWithValue }) => {
+    async ({ genreId, page }, { rejectWithValue }) => {
       try {
-        const res = await API.fetchDiscoverMoviesAPI(genreId);
+        const res = await API.fetchDiscoverMovies(genreId, page);
         return res;
       } catch (e) {
         return rejectWithValue(e);
       }
     }
   ),
-  fetchDiscoverTVs: createAsyncThunk(
+  fetchDiscoverTVs: createAsyncThunk<
+    DiscoverTVShowsResponse,
+    { genreId: number; page?: number }
+  >(
     `${SLICE_NAME}/fetchDiscoverTVs`,
-    async (genreId: number, { rejectWithValue }) => {
+    async ({ genreId, page }, { rejectWithValue }) => {
       try {
-        const res = await API.fetchDiscoverTVsAPI(genreId);
+        const res = await API.fetchDiscoverTVs(genreId, page);
         return res;
       } catch (e) {
         return rejectWithValue(e);

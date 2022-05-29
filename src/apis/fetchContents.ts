@@ -6,12 +6,13 @@ import {
 } from "./types/discovers";
 import { DiscoverTVShowsResponse } from "./types/discoverTVShows";
 
-export const fetchDiscoverMoviesAPI = async (
-  genreId: number
+export const fetchDiscoverMovies = async (
+  genreId: number,
+  page?: number
 ): Promise<DiscoverMovieResponse> => {
   try {
     const res = await baseRepository.get<DiscoverMovieResponse>(
-      `${endPoints.discoverMovie(genreId)}`
+      `${endPoints.discoverMovie(genreId, page)}`
     );
     return res.data;
   } catch (e) {
@@ -19,12 +20,13 @@ export const fetchDiscoverMoviesAPI = async (
   }
 };
 
-export const fetchDiscoverTVsAPI = async (
-  genreId: number
+export const fetchDiscoverTVs = async (
+  genreId: number,
+  page?: number
 ): Promise<DiscoverTVShowsResponse> => {
   try {
     const res = await baseRepository.get<DiscoverTVShowsResponse>(
-      `${endPoints.discoverTVs(genreId)}`
+      `${endPoints.discoverTVs(genreId, page)}`
     );
     return res.data;
   } catch (e) {
