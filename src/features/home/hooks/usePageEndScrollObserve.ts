@@ -1,9 +1,11 @@
 import throttle from "lodash.throttle";
 import { useEffect, useState } from "react";
+import { useSelector } from "../../../store";
 
 const INITIAL_PAGE = 1;
 
 export const usePageEndScrollObserve = () => {
+  const { selectedGenreId, modeIndex } = useSelector((s) => s.contentsMode);
   const [isFullyScrolled, setIsFullyScrolled] = useState(false);
   const [currentPage, setCurrentPage] = useState(INITIAL_PAGE);
   const handleScroll = throttle(() => {
@@ -23,6 +25,10 @@ export const usePageEndScrollObserve = () => {
     return () => window.removeEventListener("scroll", handleScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(INITIAL_PAGE);
+  }, [selectedGenreId, modeIndex]);
 
   const result = {
     isFullyScrolled,

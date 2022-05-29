@@ -10,7 +10,6 @@ export const useFetchContents = () => {
     (state) => state.contentsMode
   );
 
-  // TODO: ジャンルを変えてもページの情報を引き継いでしまっているため、ジャンルごとに現在のページを保持するようにするべき
   const { currentPage } = usePageEndScrollObserve();
 
   // for Genres
