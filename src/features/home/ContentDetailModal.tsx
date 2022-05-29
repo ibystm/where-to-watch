@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { commonDictionaries } from "../../commons/constants/dictionaries";
-import { useSelector } from "../../store/store";
+import { useSelector } from "../../store";
 import { ActualContentData } from "../../types/redux/discovers";
 import { DisplayWatchProviderResult } from "./hooks/useContentsProvider";
 

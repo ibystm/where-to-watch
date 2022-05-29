@@ -3,7 +3,7 @@ import { useFormikContext } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { commonDictionaries } from "../../../../commons/constants/dictionaries";
-import { useSelector } from "../../../../store/store";
+import { useSelector } from "../../../../store";
 import { ModeType } from "../../../../types/redux/contentsMode";
 import {
   resetSearchMode,

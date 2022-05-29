@@ -1,5 +1,5 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/react";
-import { useSelector } from "../../store/store";
+import { useSelector } from "../../store";
 import {
   searchedContentsSelector,
   searchKeywordSelector,

@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { auth } from "../../db/firebase";
+import { AppDispatch } from "../../store";
 import { storeUser } from "../../store/slices/usersSlice";
-import { AppDispatch } from "../../store/store";
 
 export const useSignUp = () => {
   const dispatch: AppDispatch = useDispatch();

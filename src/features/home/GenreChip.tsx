@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { forwardRef } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "../../store/store";
+import { useSelector } from "../../store";
 import { Genre } from "../../types/redux/genres";
 import { contentModeActions } from "../global/header/slice/contentsMode";
 

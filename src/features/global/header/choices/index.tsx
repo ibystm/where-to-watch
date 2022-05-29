@@ -1,6 +1,6 @@
 import { Tab, TabList, Tabs } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "../../../../store/store";
+import { useSelector } from "../../../../store";
 import { ModeIndex } from "../../../../types/redux/contentsMode";
 import { contentModeActions } from "../slice/contentsMode";
 

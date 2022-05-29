@@ -1,4 +1,4 @@
-import { RootState } from "../../../store/store";
+import { RootState } from "../../../store";
 import { popularitiesAdopter } from "../slice/popularities/index";
 
 export const popularMovieSelector = popularitiesAdopter.getSelectors(

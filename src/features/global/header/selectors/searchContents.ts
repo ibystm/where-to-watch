@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { RootState } from "../../../../store/store";
+import { RootState } from "../../../../store";
 import { searchContentsAdoptor } from "../slice/searchContents";
 
 export const searchContentsSelector = (state: RootState) =>

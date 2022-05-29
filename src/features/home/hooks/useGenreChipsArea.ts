@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { commonDictionaries } from "../../../commons/constants/dictionaries";
-import { useSelector } from "../../../store/store";
+import { useSelector } from "../../../store";
 import { ModeType } from "../../../types/redux/contentsMode";
 import { Genre } from "../../../types/redux/genres";
 import {

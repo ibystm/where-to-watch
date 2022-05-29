@@ -1,4 +1,4 @@
-import { RootState } from "../../../store/store";
+import { RootState } from "../../../store";
 
 export const configurationsSelector = {
   secureImageUrl: (state: RootState) =>

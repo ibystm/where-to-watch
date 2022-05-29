@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useNavigate, useRoutes } from "react-router-dom";
 import { useGetAuth } from "../../contexts/AuthContext";
+import { useSelector } from "../../store";
 import { userSelectors } from "../../store/selectors/users";
-import { useSelector } from "../../store/store";
 import { GlobalTop } from "../global/GlobalTop";
 import { routes } from "../routes";
 

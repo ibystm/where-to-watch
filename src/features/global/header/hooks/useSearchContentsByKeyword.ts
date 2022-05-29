@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useSelector } from "../../../../store/store";
+import { useSelector } from "../../../../store";
 import { ModeType } from "../../../../types/redux/contentsMode";
 import { searchMovie, searchTV } from "../slice/searchContents";
 

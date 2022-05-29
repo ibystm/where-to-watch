@@ -1,4 +1,4 @@
-import { RootState } from "../../../../store/store";
+import { RootState } from "../../../../store";
 import { genreAdopter } from "./index";
 
 export const movieGenresSelector = genreAdopter.getSelectors(

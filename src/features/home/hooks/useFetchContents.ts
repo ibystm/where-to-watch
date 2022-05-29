@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { AppDispatch, useSelector } from "../../../store/store";
+import { AppDispatch, useSelector } from "../../../store";
 import { ModeType } from "../../../types/redux/contentsMode";
 import { loadingActions } from "../../loading/slice";
 import { contentsActions } from "../slice/discovers";
