@@ -4,11 +4,11 @@ import {
   searchedContentsSelector,
   searchKeywordSelector,
 } from "../../global/header/selectors/searchContents";
-import { ContentDetailModal } from "../ContentDetailModal";
-import { ContentItem } from "../ContentItem";
+import { ContentItem } from "../content-item";
+import { ContentDetailModal } from "../contents-detail-modal";
 import { useContentsProvider } from "../hooks/useContentsProvider";
 import { useModalControl } from "../hooks/useModalControl";
-import { SkeltonContentItem } from "../SkeltonContentItem";
+import { SkeltonContentItem } from "../skelton-content-item";
 
 export const SearchContentsArea: React.FC = () => {
   const { isOpen, handleClose, handleOpen, currentContent } = useModalControl();

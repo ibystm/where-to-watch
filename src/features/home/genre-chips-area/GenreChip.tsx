@@ -1,9 +1,8 @@
 import { Button } from "@chakra-ui/react";
 import { forwardRef } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "../../store";
-import { actions } from "../../store/index";
-import { Genre } from "../../types/redux/genres";
+import { actions, useSelector } from "../../../store";
+import { Genre } from "../../../types/redux/genres";
 
 type Props = {
   genre: Genre;
