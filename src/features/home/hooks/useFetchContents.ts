@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { AppDispatch, useSelector } from "../../../store/store";
 import { ModeType } from "../../../types/redux/contentsMode";
 import { loadingActions } from "../../loading/slice/loading";
-import { popularitiesActions } from "../../loading/slice/popularities/index";
-import { contentsActions } from "../slice/discoverMovies";
+import { contentsActions } from "../slice/discovers";
 import { genresActions } from "../slice/genres/index";
+import { popularitiesActions } from "../slice/popularities/index";
 import { usePageEndScrollObserve } from "./usePageEndScrollObserve";
 
 export const useFetchContents = () => {

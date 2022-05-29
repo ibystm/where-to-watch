@@ -32,19 +32,16 @@ const slice = createSlice({
         genreAdopter.setAll(state.movie, payload.genres);
       }
     );
-    builder.addCase(
-      asyncActions.getMovieGenres.rejected,
-      (state, { payload }) => {
-        throw payload;
-      }
-    );
+    builder.addCase(asyncActions.getMovieGenres.rejected, (_, { payload }) => {
+      throw payload;
+    });
     builder.addCase(
       asyncActions.getTVGenres.fulfilled,
       (state, { payload }) => {
         genreAdopter.setAll(state.tv, payload.genres);
       }
     );
-    builder.addCase(asyncActions.getTVGenres.rejected, (state, { payload }) => {
+    builder.addCase(asyncActions.getTVGenres.rejected, (_, { payload }) => {
       throw payload;
     });
   },

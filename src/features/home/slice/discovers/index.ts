@@ -1,10 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  fetchDiscoverMoviesAPI,
-  fetchDiscoverTVsAPI,
-} from "../../../apis/fetchContents";
-import { ContentsState } from "../../../types/redux/discovers";
-import { reducerFormatUtil } from "../../../utils/redux/reducerUtil";
+import * as API from "../../../../apis/fetchContents";
+import { ContentsState } from "../../../../types/redux/discovers";
+import { reducerFormatUtil } from "../../../../utils/redux/reducerUtil";
 
 const SLICE_NAME = "contents";
 export const initialState: ContentsState = {
@@ -20,7 +17,7 @@ const asyncActions = {
     `${SLICE_NAME}/fetchDiscoverMovies`,
     async (genreId: number, { rejectWithValue }) => {
       try {
-        const res = await fetchDiscoverMoviesAPI(genreId);
+        const res = await API.fetchDiscoverMoviesAPI(genreId);
         return res;
       } catch (e) {
         return rejectWithValue(e);
@@ -31,7 +28,7 @@ const asyncActions = {
     `${SLICE_NAME}/fetchDiscoverTVs`,
     async (genreId: number, { rejectWithValue }) => {
       try {
-        const res = await fetchDiscoverTVsAPI(genreId);
+        const res = await API.fetchDiscoverTVsAPI(genreId);
         return res;
       } catch (e) {
         return rejectWithValue(e);
