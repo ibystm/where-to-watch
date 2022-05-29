@@ -17,7 +17,7 @@ export const Home: React.FC = () => {
   //   });
   // };
   return (
-    <Box w="100%" h="100%">
+    <Box w="100%" h="100%" paddingX="40px" paddingBottom="40px">
       <MainArea />
     </Box>
   );
