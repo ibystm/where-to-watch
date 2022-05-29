@@ -1,8 +1,7 @@
 import { Tab, TabList, Tabs } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "../../../../store";
+import { actions, useSelector } from "../../../../store";
 import { ModeIndex } from "../../../../types/redux/contentsMode";
-import { contentModeActions } from "../slice/contentsMode";
 
 export const ChoiceTabs: React.FC = () => {
   const dispatch = useDispatch();
@@ -14,8 +13,8 @@ export const ChoiceTabs: React.FC = () => {
       variant="soft-rounded"
       colorScheme="purple"
       onChange={(index) => {
-        dispatch(contentModeActions.changeMode(index as ModeIndex));
-        dispatch(contentModeActions.resetSelectedGenre());
+        dispatch(actions.changeMode(index as ModeIndex));
+        dispatch(actions.resetSelectedGenre());
       }}
       index={modeIndex}
     >

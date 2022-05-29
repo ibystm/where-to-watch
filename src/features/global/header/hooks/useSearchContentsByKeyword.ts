@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
-import { useSelector } from "../../../../store";
+import { actions, useSelector } from "../../../../store";
 import { ModeType } from "../../../../types/redux/contentsMode";
-import { searchContentsActions } from "../slice/searchContents";
 
 export type SearchMovieFormValues = {
   searchName: string;
@@ -22,9 +21,9 @@ export const useSearchMoviesByKeyword =
         return;
       }
       if (modeIndex === ModeType.Movie) {
-        dispatch(searchContentsActions.searchMovie(values.searchName));
+        dispatch(actions.searchMovie(values.searchName));
       } else {
-        dispatch(searchContentsActions.searchTV(values.searchName));
+        dispatch(actions.searchTV(values.searchName));
       }
     };
 

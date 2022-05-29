@@ -11,7 +11,10 @@ import {
   contentModeActions,
   contentsModeReducer,
 } from "../features/global/header/slice/contentsMode";
-import { searchContentsReducer } from "../features/global/header/slice/searchContents";
+import {
+  searchContentsActions,
+  searchContentsReducer,
+} from "../features/global/header/slice/searchContents";
 import {
   contentsActions,
   reducer as discoverContentsReducer,
@@ -35,7 +38,7 @@ export const actions = {
   ...configurationActions,
   ...contentsActions,
   ...popularitiesActions,
-  // ...searchContentsActions
+  ...searchContentsActions,
 };
 
 export const store = configureStore({

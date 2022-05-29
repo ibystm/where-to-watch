@@ -1,11 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { AppDispatch, useSelector } from "../../../store";
+import { actions, AppDispatch, useSelector } from "../../../store";
 import { ModeType } from "../../../types/redux/contentsMode";
-import { loadingActions } from "../../loading/slice";
-import { contentsActions } from "../slice/discovers";
-import { genresActions } from "../slice/genres/index";
-import { popularitiesActions } from "../slice/popularities/index";
 import { usePageEndScrollObserve } from "./usePageEndScrollObserve";
 
 export const useFetchContents = () => {
@@ -19,8 +15,8 @@ export const useFetchContents = () => {
   // for Genres
   useEffect(() => {
     const fetchGenres = (): void => {
-      dispatch(genresActions.getMovieGenres());
-      dispatch(genresActions.getTVGenres());
+      dispatch(actions.getMovieGenres());
+      dispatch(actions.getTVGenres());
     };
 
     fetchGenres();
@@ -30,17 +26,17 @@ export const useFetchContents = () => {
   useEffect(() => {
     const fetch = async (): Promise<void> => {
       if (modeIndex === ModeType.Movie) {
-        dispatch(popularitiesActions.getPopularMovies(currentPage));
-        dispatch(contentsActions.fetchDiscoverMovies(selectedGenreId));
+        dispatch(actions.getPopularMovies(currentPage));
+        dispatch(actions.fetchDiscoverMovies(selectedGenreId));
         return;
       }
-      dispatch(popularitiesActions.getPopularTVs(currentPage));
-      dispatch(contentsActions.fetchDiscoverTVs(selectedGenreId));
+      dispatch(actions.getPopularTVs(currentPage));
+      dispatch(actions.fetchDiscoverTVs(selectedGenreId));
     };
 
-    dispatch(loadingActions.startLoading());
+    dispatch(actions.startLoading());
     fetch().finally(() => {
-      dispatch(loadingActions.endLoading());
+      dispatch(actions.endLoading());
     });
   }, [currentPage, dispatch, modeIndex, selectedGenreId]);
 };

@@ -2,8 +2,8 @@ import { Button } from "@chakra-ui/react";
 import { forwardRef } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "../../store";
+import { actions } from "../../store/index";
 import { Genre } from "../../types/redux/genres";
-import { contentModeActions } from "../global/header/slice/contentsMode";
 
 type Props = {
   genre: Genre;
@@ -26,7 +26,7 @@ export const GenreChip = forwardRef<HTMLButtonElement, Props>(
         flexShrink="0"
         color={shouldFocus ? "white" : "inherit"}
         backgroundColor={shouldFocus ? "gray.700" : "inherit"}
-        onClick={() => dispatch(contentModeActions.selectGenre(genre.id))}
+        onClick={() => dispatch(actions.selectGenre(genre.id))}
         _hover={{
           backgroundColor: shouldFocus ? "gray.700" : "inherit",
         }}

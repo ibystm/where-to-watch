@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../store";
-import { configurationActions } from "../../configurations/slice";
+import { actions, AppDispatch } from "../../../store";
 
 export const useFetchConfigs = () => {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(configurationActions.fetchConfigurations());
+    dispatch(actions.fetchConfigurations());
   }, [dispatch]);
 };
