@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMovieWatchProvider } from "../../../apis/fetchContents";
+import { getMovieWatchProvider } from "../../../apis/contents";
 import {
   ProviderDetailInfo,
   WatchProviderResult,

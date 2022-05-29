@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchConfigurations as fetchConfigurationsAPI } from "../../../apis/fetchConfigurations";
+import { fetchConfigurations as fetchConfigurationsAPI } from "../../../apis/configurations";
 import { ImageConfigurations } from "../../../apis/types/configurations";
 import { RootState } from "../../../store";
 const SLICE_NAME = "configuration";

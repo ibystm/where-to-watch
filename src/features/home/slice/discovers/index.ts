@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import * as API from "../../../../apis/fetchContents";
+import * as API from "../../../../apis/contents";
 import { DiscoverMovieResponse } from "../../../../apis/types/discovers";
 import { DiscoverTVShowsResponse } from "../../../../apis/types/discoverTVShows";
 import { ContentsState } from "../../../../types/redux/discovers";

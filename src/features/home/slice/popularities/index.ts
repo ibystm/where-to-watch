@@ -3,7 +3,7 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import * as API from "../../../../apis/popularities";
+import * as API from "../../../../apis/contents";
 import {
   GetPopularMoviesAPIResponse,
   GetPopularTVsAPIResponse,

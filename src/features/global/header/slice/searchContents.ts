@@ -3,7 +3,7 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import { searchMoviesAPI, searchTVAPI } from "../../../../apis/searchContents";
+import { searchMoviesAPI, searchTVAPI } from "../../../../apis/search-contents";
 import { ActualContentData } from "../../../../types/redux/discovers";
 import { reducerFormatUtil } from "../../../../utils/redux/reducerUtil";
 

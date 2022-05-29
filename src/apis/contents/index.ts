@@ -1,10 +1,14 @@
-import { baseRepository } from "./axios";
-import { endPoints } from "./constants";
+import { baseRepository } from "../axios";
+import { endPoints } from "../constants";
 import {
   DiscoverMovieResponse,
   GetWatchMovieProviderRespose,
-} from "./types/discovers";
-import { DiscoverTVShowsResponse } from "./types/discoverTVShows";
+} from "../types/discovers";
+import { DiscoverTVShowsResponse } from "../types/discoverTVShows";
+import {
+  GetPopularMoviesAPIResponse,
+  GetPopularTVsAPIResponse,
+} from "../types/popularities";
 
 export const fetchDiscoverMovies = async (
   genreId: number,
@@ -32,6 +36,20 @@ export const fetchDiscoverTVs = async (
   } catch (e) {
     throw e;
   }
+};
+
+export const getpopularMovies = async (
+  page: number
+): Promise<GetPopularMoviesAPIResponse> => {
+  const res = await baseRepository.get(endPoints.getPopularMovies("JP", page));
+  return res.data;
+};
+
+export const getPopularTVs = async (
+  page: number
+): Promise<GetPopularTVsAPIResponse> => {
+  const res = await baseRepository.get(endPoints.getPopularTVs("JP", page));
+  return res.data;
 };
 
 export const getMovieWatchProvider = async (

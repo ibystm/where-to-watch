@@ -1,6 +1,6 @@
-import { baseRepository } from "./axios";
-import { endPoints } from "./constants";
-import { GetMovieGenresResponse, GetTVGenresResponse } from "./types/genres";
+import { baseRepository } from "../axios";
+import { endPoints } from "../constants";
+import { GetMovieGenresResponse, GetTVGenresResponse } from "../types/genres";
 
 export const getMovieGenres = async () => {
   const res = await baseRepository.get<GetMovieGenresResponse>(
