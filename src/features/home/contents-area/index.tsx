@@ -1,13 +1,13 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import React, { FC, useMemo } from "react";
-import { ContentDetailModal } from "./ContentDetailModal";
-import { ContentItem } from "./ContentItem";
-import { GenreChipsArea } from "./GenreChipsArea";
-import { useContentsProvider } from "./hooks/useContentsProvider";
-import { useDisplayContentsControl } from "./hooks/useDisplayContentsControl";
-import { useModalControl } from "./hooks/useModalControl";
-import { usePageEndScrollObserve } from "./hooks/usePageEndScrollObserve";
-import { SkeltonContentItem } from "./SkeltonContentItem";
+import { ContentDetailModal } from "../ContentDetailModal";
+import { ContentItem } from "../ContentItem";
+import { GenreChipsArea } from "../GenreChipsArea";
+import { useContentsProvider } from "../hooks/useContentsProvider";
+import { useDisplayContentsControl } from "../hooks/useDisplayContentsControl";
+import { useModalControl } from "../hooks/useModalControl";
+import { usePageEndScrollObserve } from "../hooks/usePageEndScrollObserve";
+import { SkeltonContentItem } from "../SkeltonContentItem";
 
 export const ContentsArea: FC = () => {
   const { loading, data } = useDisplayContentsControl();
@@ -19,8 +19,11 @@ export const ContentsArea: FC = () => {
   const contents = useMemo(
     () =>
       loading
-        ? [...Array(20)].map((_, idx) => <SkeltonContentItem key={idx} />)
+        ? [...Array(20)].map((_, idx) => {
+            return <SkeltonContentItem key={idx} />;
+          })
         : data.map((item, idx) => (
+            // eslint-disable-next-line react/jsx-no-undef
             <ContentItem key={idx} contentItem={item} modalOpen={handleOpen} />
           )),
     [data, handleOpen, loading]

@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import { useFetchConfigs } from "./hooks/useFetchConfigs";
 import { useFetchContents } from "./hooks/useFetchContents";
-import { MainContens } from "./MainContents";
+import { MainArea } from "./main-area";
 
 export const Home: React.FC = () => {
   // initial process
@@ -18,7 +18,7 @@ export const Home: React.FC = () => {
   // };
   return (
     <Box w="100%" h="100%">
-      <MainContens />
+      <MainArea />
     </Box>
   );
 };

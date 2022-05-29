@@ -1,14 +1,14 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/react";
-import { useSelector } from "../../store";
+import { useSelector } from "../../../store";
 import {
   searchedContentsSelector,
   searchKeywordSelector,
-} from "../global/header/selectors/searchContents";
-import { ContentDetailModal } from "./ContentDetailModal";
-import { ContentItem } from "./ContentItem";
-import { useContentsProvider } from "./hooks/useContentsProvider";
-import { useModalControl } from "./hooks/useModalControl";
-import { SkeltonContentItem } from "./SkeltonContentItem";
+} from "../../global/header/selectors/searchContents";
+import { ContentDetailModal } from "../ContentDetailModal";
+import { ContentItem } from "../ContentItem";
+import { useContentsProvider } from "../hooks/useContentsProvider";
+import { useModalControl } from "../hooks/useModalControl";
+import { SkeltonContentItem } from "../SkeltonContentItem";
 
 export const SearchContentsArea: React.FC = () => {
   const { isOpen, handleClose, handleOpen, currentContent } = useModalControl();

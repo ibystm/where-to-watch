@@ -1,5 +1,5 @@
 import { Navigate, RouteObject } from "react-router-dom";
-import { Home } from "./home/Home";
+import { Home } from "./home";
 import { SignUp } from "./sign-up/SignUp";
 
 export const routes = (isSignIn: boolean): RouteObject[] => [

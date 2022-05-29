@@ -1,10 +1,10 @@
 import { Box, Button, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdOutlineHideImage } from "react-icons/md";
-import { commonDictionaries } from "../../commons/constants/dictionaries";
-import { useSelector } from "../../store";
-import { ActualContentData } from "../../types/redux/discovers";
-import { configurationsSelector } from "../configurations/selectors/configurations";
+import { commonDictionaries } from "../../../commons/constants/dictionaries";
+import { useSelector } from "../../../store";
+import { ActualContentData } from "../../../types/redux/discovers";
+import { configurationsSelector } from "../../configurations/selectors/configurations";
 
 type P = {
   contentItem: ActualContentData;
