@@ -3,9 +3,12 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import { searchMoviesAPI, searchTVAPI } from "../../../../apis/search-contents";
-import { ActualContentData } from "../../../../types/redux/discovers";
-import { reducerFormatUtil } from "../../../../utils/redux/reducerUtil";
+import {
+  searchMoviesAPI,
+  searchTVAPI,
+} from "../../../../../apis/search-contents";
+import { ActualContentData } from "../../../../../types/redux/discovers";
+import { reducerFormatUtil } from "../../../../../utils/redux/reducerUtil";
 
 const SLICE_NAME = "searcContents";
 

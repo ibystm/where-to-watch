@@ -3,7 +3,7 @@ import { useSelector } from "../../../store";
 import {
   searchedContentsSelector,
   searchKeywordSelector,
-} from "../../global/header/selectors/searchContents";
+} from "../../global-top/header/selectors/searchContents";
 import { ContentItem } from "../content-item";
 import { ContentDetailModal } from "../contents-detail-modal";
 import { useContentsProvider } from "../hooks/useContentsProvider";

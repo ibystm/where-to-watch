@@ -3,7 +3,7 @@ import { useNavigate, useRoutes } from "react-router-dom";
 import { useGetAuth } from "../../contexts/AuthContext";
 import { useSelector } from "../../store";
 import { userSelectors } from "../../store/selectors/users";
-import { GlobalTop } from "../global/GlobalTop";
+import { GlobalTop } from "../global-top";
 import { routes } from "../routes";
 
 export const RoutesWrapper: React.FC = () => {

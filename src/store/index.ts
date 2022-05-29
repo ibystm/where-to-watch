@@ -10,11 +10,11 @@ import {
 import {
   contentModeActions,
   contentsModeReducer,
-} from "../features/global/header/slice/contentsMode";
+} from "../features/global-top/header/slice/contentsMode";
 import {
   searchContentsActions,
   searchContentsReducer,
-} from "../features/global/header/slice/searchContents";
+} from "../features/global-top/header/slice/searchContents";
 import {
   contentsActions,
   reducer as discoverContentsReducer,

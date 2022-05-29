@@ -3,7 +3,7 @@ import {
   ContentsMode,
   ModeIndex,
   ModeType,
-} from "../../../../types/redux/contentsMode";
+} from "../../../../../types/redux/contentsMode";
 
 export const initialState: ContentsMode = {
   modeIndex: ModeType.Movie,
