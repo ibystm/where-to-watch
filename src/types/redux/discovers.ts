@@ -1,8 +1,4 @@
 export type ContentsState = {
-  loading: {
-    isProcessing: boolean;
-    message: string | null;
-  };
   data: ActualContentData[];
 };
 

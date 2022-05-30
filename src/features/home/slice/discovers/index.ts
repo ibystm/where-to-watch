@@ -7,10 +7,6 @@ import { reducerFormatUtil } from "../../../../utils/redux/reducerUtil";
 
 const SLICE_NAME = "contents";
 export const initialState: ContentsState = {
-  loading: {
-    isProcessing: false,
-    message: null,
-  },
   data: [],
 };
 
@@ -50,9 +46,7 @@ const slice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(asyncActions.fetchDiscoverMovies.pending, (state) => {
-      state.loading.isProcessing = true;
-    });
+    builder.addCase(asyncActions.fetchDiscoverMovies.pending, (state) => {});
     builder.addCase(
       asyncActions.fetchDiscoverMovies.fulfilled,
       (state, { payload }) => {
@@ -63,19 +57,12 @@ const slice = createSlice({
               reducerFormatUtil.movieListResultToReduxStoreData(results);
           }
         }
-        state.loading.isProcessing = false;
       }
     );
-    builder.addCase(
-      asyncActions.fetchDiscoverMovies.rejected,
-      (state, payload) => {
-        state.loading.isProcessing = false;
-        throw payload;
-      }
-    );
-    builder.addCase(asyncActions.fetchDiscoverTVs.pending, (state) => {
-      state.loading.isProcessing = true;
+    builder.addCase(asyncActions.fetchDiscoverMovies.rejected, (_, payload) => {
+      throw payload;
     });
+    builder.addCase(asyncActions.fetchDiscoverTVs.pending, (state) => {});
     builder.addCase(
       asyncActions.fetchDiscoverTVs.fulfilled,
       (state, { payload }) => {
@@ -86,16 +73,11 @@ const slice = createSlice({
               reducerFormatUtil.tvListResultToReduxStoreData(results);
           }
         }
-        // state.loading.isProcessing = false;
       }
     );
-    builder.addCase(
-      asyncActions.fetchDiscoverTVs.rejected,
-      (state, payload) => {
-        state.loading.isProcessing = false;
-        throw payload;
-      }
-    );
+    builder.addCase(asyncActions.fetchDiscoverTVs.rejected, (_, payload) => {
+      throw payload;
+    });
   },
 });
 

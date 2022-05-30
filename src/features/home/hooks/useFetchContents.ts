@@ -20,7 +20,9 @@ export const useFetchContents = () => {
     };
 
     fetchGenres();
-  }, [dispatch]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // for display contents
   useEffect(() => {
@@ -48,5 +50,6 @@ export const useFetchContents = () => {
     fetch().finally(() => {
       dispatch(actions.endLoading());
     });
-  }, [currentPage, dispatch, modeIndex, selectedGenreId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, modeIndex, selectedGenreId]);
 };
