@@ -9,14 +9,23 @@ export const useFetchContents = () => {
   const { modeIndex, selectedGenreId } = useSelector(
     (state) => state.contentsMode
   );
+  const {
+    getMovieGenres,
+    getTVGenres,
+    getPopularMovies,
+    getPopularTVs,
+    fetchDiscoverMovies,
+    fetchDiscoverTVs,
+  } = actions;
 
   const { currentPage } = usePageEndScrollObserve();
+  console.log({ currentPage });
 
   // for Genres
   useEffect(() => {
     const fetchGenres = (): void => {
-      dispatch(actions.getMovieGenres());
-      dispatch(actions.getTVGenres());
+      dispatch(getMovieGenres());
+      dispatch(getTVGenres());
     };
 
     fetchGenres();
@@ -28,18 +37,18 @@ export const useFetchContents = () => {
   useEffect(() => {
     const fetch = async (): Promise<void> => {
       if (modeIndex === ModeType.Movie) {
-        dispatch(actions.getPopularMovies(currentPage));
+        dispatch(getPopularMovies(currentPage));
         dispatch(
-          actions.fetchDiscoverMovies({
+          fetchDiscoverMovies({
             genreId: selectedGenreId,
             page: currentPage,
           })
         );
         return;
       }
-      dispatch(actions.getPopularTVs(currentPage));
+      dispatch(getPopularTVs(currentPage));
       dispatch(
-        actions.fetchDiscoverTVs({
+        fetchDiscoverTVs({
           genreId: selectedGenreId,
           page: currentPage,
         })

@@ -46,7 +46,12 @@ const asyncActions = {
 const slice = createSlice({
   name: SLICE_NAME,
   initialState,
-  reducers: {},
+  reducers: {
+    resetPopularities: (state) => {
+      popularitiesAdopter.removeAll(state.movies);
+      popularitiesAdopter.removeAll(state.tvs);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       asyncActions.getPopularMovies.fulfilled,

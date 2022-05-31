@@ -1,10 +1,12 @@
 import throttle from "lodash.throttle";
 import { useEffect, useState } from "react";
-import { useSelector } from "../../../store";
+import { useDispatch } from "react-redux";
+import { actions, useSelector } from "../../../store";
 
 const INITIAL_PAGE = 1;
 
 export const usePageEndScrollObserve = () => {
+  const dispatch = useDispatch();
   const { selectedGenreId, modeIndex } = useSelector((s) => s.contentsMode);
   const [isFullyScrolled, setIsFullyScrolled] = useState(false);
   const [currentPage, setCurrentPage] = useState(INITIAL_PAGE);
@@ -26,8 +28,15 @@ export const usePageEndScrollObserve = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const resetContents = (): void => {
+    dispatch(actions.resetDiscovers());
+    dispatch(actions.resetPopularities());
+  };
+
   useEffect(() => {
+    resetContents();
     setCurrentPage(INITIAL_PAGE);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGenreId, modeIndex]);
 
   const result = {

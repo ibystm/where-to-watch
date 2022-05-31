@@ -54,7 +54,12 @@ const asyncActions = {
 const slice = createSlice({
   name: SLICE_NAME,
   initialState,
-  reducers: {},
+  reducers: {
+    resetDiscovers: (state) => {
+      discoversAdopter.removeAll(state.movies);
+      discoversAdopter.removeAll(state.tvs);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       asyncActions.fetchDiscoverMovies.fulfilled,
