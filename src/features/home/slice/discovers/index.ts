@@ -1,13 +1,23 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+} from "@reduxjs/toolkit";
 import * as API from "../../../../apis/contents";
 import { DiscoverMovieResponse } from "../../../../apis/types/discovers";
 import { DiscoverTVShowsResponse } from "../../../../apis/types/discoverTVShows";
-import { ContentsState } from "../../../../types/redux/discovers";
+import { RootState } from "../../../../store/index";
+import { ActualContentData } from "../../../../types/redux/discovers";
 import { reducerFormatUtil } from "../../../../utils/redux/reducerUtil";
 
 const SLICE_NAME = "contents";
-export const initialState: ContentsState = {
-  data: [],
+
+export const discoversAdopter = createEntityAdapter<ActualContentData>();
+const initialEntityState = discoversAdopter.getInitialState();
+
+export const initialState = {
+  tvs: initialEntityState,
+  movies: initialEntityState,
 };
 
 const asyncActions = {
@@ -46,32 +56,33 @@ const slice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(asyncActions.fetchDiscoverMovies.pending, (state) => {});
     builder.addCase(
       asyncActions.fetchDiscoverMovies.fulfilled,
       (state, { payload }) => {
         if (payload) {
           const { results } = payload;
-          if (typeof results !== "undefined") {
-            state.data =
-              reducerFormatUtil.movieListResultToReduxStoreData(results);
-          }
+          if (typeof results === "undefined") return;
+
+          discoversAdopter.addMany(
+            state.movies,
+            reducerFormatUtil.movieListResultToReduxStoreData(results)
+          );
         }
       }
     );
     builder.addCase(asyncActions.fetchDiscoverMovies.rejected, (_, payload) => {
       throw payload;
     });
-    builder.addCase(asyncActions.fetchDiscoverTVs.pending, (state) => {});
     builder.addCase(
       asyncActions.fetchDiscoverTVs.fulfilled,
       (state, { payload }) => {
         if (payload) {
           const { results } = payload;
-          if (typeof results !== "undefined") {
-            state.data =
-              reducerFormatUtil.tvListResultToReduxStoreData(results);
-          }
+          if (typeof results === "undefined") return;
+          discoversAdopter.addMany(
+            state.tvs,
+            reducerFormatUtil.tvListResultToReduxStoreData(results)
+          );
         }
       }
     );
@@ -87,3 +98,10 @@ export const contentsActions = {
 };
 
 export const { reducer } = slice;
+
+export const discoverMoviesSelector = discoversAdopter.getSelectors(
+  (state: RootState) => state.discovers.movies
+);
+export const discoverTVsSelector = discoversAdopter.getSelectors(
+  (state: RootState) => state.discovers.tvs
+);

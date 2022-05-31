@@ -5,14 +5,18 @@ import {
   popularMovieSelector,
   popularTVsSelector,
 } from "../selectors/popularities";
+import {
+  discoverMoviesSelector,
+  discoverTVsSelector,
+} from "../slice/discovers/index";
 
 export const useDisplayContentsControl = (): typeof result => {
   const { modeIndex, selectedGenreId } = useSelector(
     (state) => state.contentsMode
   );
   const loading = useSelector((s) => s.loading.isLoading);
-  const moviesByGenres = useSelector((state) => state.discovers.data);
-  const tvsByGenres = useSelector((state) => state.discovers.data);
+  const moviesByGenres = useSelector(discoverMoviesSelector.selectAll);
+  const tvsByGenres = useSelector(discoverTVsSelector.selectAll);
   const popularMovies = useSelector(popularMovieSelector.selectAll);
   const popularTVs = useSelector(popularTVsSelector.selectAll);
   const movies = selectedGenreId === 0 ? popularMovies : moviesByGenres;
