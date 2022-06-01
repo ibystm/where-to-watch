@@ -49,15 +49,15 @@ export const useFetchContents = () => {
             page: currentPage,
           })
         );
-        return;
+      } else {
+        dispatch(getPopularTVs(currentPage));
+        dispatch(
+          fetchDiscoverTVs({
+            genreId: selectedGenreId,
+            page: currentPage,
+          })
+        );
       }
-      dispatch(getPopularTVs(currentPage));
-      dispatch(
-        fetchDiscoverTVs({
-          genreId: selectedGenreId,
-          page: currentPage,
-        })
-      );
     };
 
     dispatch(actions.startLoading());
