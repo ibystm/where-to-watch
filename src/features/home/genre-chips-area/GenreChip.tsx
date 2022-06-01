@@ -13,6 +13,9 @@ export const GenreChip = forwardRef<HTMLButtonElement, Props>(
     const { selectedGenreId } = useSelector((state) => state.contentsMode);
     const dispatch = useDispatch();
     const shouldFocus = selectedGenreId === genre.id;
+    const handleClick = () => {
+      dispatch(actions.selectGenre(genre.id));
+    };
 
     return (
       <Button
@@ -25,7 +28,7 @@ export const GenreChip = forwardRef<HTMLButtonElement, Props>(
         flexShrink="0"
         color={shouldFocus ? "white" : "inherit"}
         backgroundColor={shouldFocus ? "gray.700" : "inherit"}
-        onClick={() => dispatch(actions.selectGenre(genre.id))}
+        onClick={handleClick}
         _hover={{
           backgroundColor: shouldFocus ? "gray.700" : "inherit",
         }}

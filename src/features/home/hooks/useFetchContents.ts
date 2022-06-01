@@ -3,8 +3,10 @@ import { useDispatch } from "react-redux";
 import { actions, AppDispatch, useSelector } from "../../../store";
 import { ModeType } from "../../../types/redux/contentsMode";
 import { usePageEndScrollObserve } from "./usePageEndScrollObserve";
+import { useResetContents } from "./useResetContents";
 
 export const useFetchContents = () => {
+  const { resetContents } = useResetContents();
   const dispatch: AppDispatch = useDispatch();
   const { modeIndex, selectedGenreId } = useSelector(
     (state) => state.contentsMode
@@ -19,7 +21,6 @@ export const useFetchContents = () => {
   } = actions;
 
   const { currentPage } = usePageEndScrollObserve();
-  console.log({ currentPage });
 
   // for Genres
   useEffect(() => {
@@ -32,6 +33,10 @@ export const useFetchContents = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    resetContents();
+  }, [modeIndex, resetContents, selectedGenreId]);
 
   // for display contents
   useEffect(() => {
