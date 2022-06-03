@@ -24,9 +24,9 @@ export const SearchForm: React.FC = () => {
       }
 
       if (modeIndex === ModeType.Movie) {
-        dispatch(actions.searchMovie(values.searchName));
+        dispatch(actions.searchMovie({ keyword: values.searchName }));
       } else {
-        dispatch(actions.searchTV(values.searchName));
+        dispatch(actions.searchTV({ keyword: values.searchName }));
       }
     }, 500);
 

@@ -12,7 +12,7 @@ export const endPoints = {
   discoverTVs: (genreId: number, page?: number) =>
     `/discover/tv?${languages.ja}&${API_KEY_QUERY_STRINGS}&with_genres=${genreId}&page=${page}`,
   searchMovie: (keyword: string, page?: number) =>
-    `/search/movie?${languages.ja}&${API_KEY_QUERY_STRINGS}&query=${keyword}`,
+    `/search/movie?${languages.ja}&${API_KEY_QUERY_STRINGS}&query=${keyword}&page=${page}`,
   getMovieVideos: (movieId: string) =>
     `/movie/${movieId}/videos?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
   getMovieGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
@@ -33,8 +33,8 @@ export const endPoints = {
 
 export const TVURLs = {
   discover: `/discover/tv?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
-  search: (keyword: string) =>
-    `/search/tv?${languages.ja}&${API_KEY_QUERY_STRINGS}&query=${keyword}`,
+  search: (keyword: string, page?: number) =>
+    `/search/tv?${languages.ja}&${API_KEY_QUERY_STRINGS}&query=${keyword}&page=${page}`,
   getGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
   getTVWatchProvider: (tvId: number) =>
     `/tv/${tvId}/watch/providers?${API_KEY_QUERY_STRINGS}`,

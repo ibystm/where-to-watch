@@ -7,6 +7,8 @@ import {
   searchMoviesAPI,
   searchTVAPI,
 } from "../../../../../apis/search-contents";
+import { DiscoverMovieResponse } from "../../../../../apis/types/discovers";
+import { DiscoverTVShowsResponse } from "../../../../../apis/types/discoverTVShows";
 import { ActualContentData } from "../../../../../types/redux/discovers";
 import { reducerFormatUtil } from "../../../../../utils/redux/reducerUtil";
 
@@ -35,7 +37,7 @@ export const slice = createSlice({
       searchContentsActions.searchMovie.pending,
       (state, { meta }) => {
         state.searchMode = true;
-        state.keyword = meta.arg;
+        state.keyword = meta.arg.keyword;
       }
     );
     builder.addCase(
@@ -58,7 +60,7 @@ export const slice = createSlice({
       searchContentsActions.searchTV.pending,
       (state, { meta }) => {
         state.searchMode = true;
-        state.keyword = meta.arg;
+        state.keyword = meta.arg.keyword;
       }
     );
     builder.addCase(
@@ -75,26 +77,28 @@ export const slice = createSlice({
   },
 });
 const asyncActions = {
-  searchMovie: createAsyncThunk(
-    `${SLICE_NAME}/searchMovies`,
-    async (keyword: string, { rejectWithValue }) => {
-      try {
-        return searchMoviesAPI(keyword);
-      } catch (e) {
-        return rejectWithValue(e);
-      }
+  searchMovie: createAsyncThunk<
+    DiscoverMovieResponse,
+    { keyword: string; page?: number }
+  >(`${SLICE_NAME}/searchMovies`, async (params, { rejectWithValue }) => {
+    const { keyword, page } = params;
+    try {
+      return searchMoviesAPI(keyword, page);
+    } catch (e) {
+      return rejectWithValue(e);
     }
-  ),
-  searchTV: createAsyncThunk(
-    `${SLICE_NAME}/searchTVs`,
-    async (keyword: string, { rejectWithValue }) => {
-      try {
-        return searchTVAPI(keyword);
-      } catch (e) {
-        return rejectWithValue(e);
-      }
+  }),
+  searchTV: createAsyncThunk<
+    DiscoverTVShowsResponse,
+    { keyword: string; page?: number }
+  >(`${SLICE_NAME}/searchTVs`, async (params, { rejectWithValue }) => {
+    const { keyword, page } = params;
+    try {
+      return searchTVAPI(keyword, page);
+    } catch (e) {
+      return rejectWithValue(e);
     }
-  ),
+  }),
 };
 
 export const searchContentsActions = {
