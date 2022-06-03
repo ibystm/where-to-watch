@@ -36,7 +36,8 @@ export const useFetchContents = () => {
 
   useEffect(() => {
     resetContents();
-  }, [modeIndex, resetContents, selectedGenreId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modeIndex, selectedGenreId]);
 
   // for display contents
   useEffect(() => {
