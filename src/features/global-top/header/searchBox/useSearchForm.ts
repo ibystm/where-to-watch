@@ -7,7 +7,8 @@ import { usePageEndScrollObserve } from "../../../home/hooks/usePageEndScrollObs
 import { SearchMovieFormValues } from "../hooks/useSearchContentsByKeyword";
 
 export const useSearchBox = (): typeof result => {
-  const { resetSearchMode, searchMovie, searchTV } = actions;
+  const { resetSearchMode, searchMovie, searchTV, resetSearchedContents } =
+    actions;
   const dispatch = useDispatch();
   const { values, handleChange } = useFormikContext<SearchMovieFormValues>();
   const { currentPage } = usePageEndScrollObserve();
@@ -28,7 +29,7 @@ export const useSearchBox = (): typeof result => {
       } else {
         dispatch(searchTV({ keyword: values.searchName, page: currentPage }));
       }
-    }, 500);
+    }, 1000);
 
     return () => {
       clearTimeout(timerId);
@@ -42,6 +43,11 @@ export const useSearchBox = (): typeof result => {
     searchTV,
     values.searchName,
   ]);
+
+  useEffect(() => {
+    dispatch(resetSearchedContents());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modeIndex, values.searchName]);
 
   const result = {
     handleChange,

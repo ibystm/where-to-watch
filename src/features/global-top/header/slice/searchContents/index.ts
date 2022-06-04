@@ -23,59 +23,6 @@ export const initialState = {
   searchedContents: initialSearchedContentsState,
 };
 
-export const slice = createSlice({
-  name: SLICE_NAME,
-  initialState,
-  reducers: {
-    resetSearchMode: (state) => {
-      state.searchMode = false;
-      state.keyword = "";
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(
-      searchContentsActions.searchMovie.pending,
-      (state, { meta }) => {
-        state.searchMode = true;
-        state.keyword = meta.arg.keyword;
-      }
-    );
-    builder.addCase(
-      searchContentsActions.searchMovie.fulfilled,
-      (state, action) => {
-        const { results } = action.payload;
-        if (results === undefined) return;
-        const searchMovies =
-          reducerFormatUtil.movieListResultToReduxStoreData(results);
-        searchContentsAdoptor.setAll(state.searchedContents, searchMovies);
-      }
-    );
-    builder.addCase(
-      searchContentsActions.searchMovie.rejected,
-      (state, { payload }) => {
-        throw payload;
-      }
-    );
-    builder.addCase(
-      searchContentsActions.searchTV.pending,
-      (state, { meta }) => {
-        state.searchMode = true;
-        state.keyword = meta.arg.keyword;
-      }
-    );
-    builder.addCase(
-      searchContentsActions.searchTV.fulfilled,
-      (state, { payload }) => {
-        if (payload.results === undefined) return;
-
-        searchContentsAdoptor.setAll(
-          state.searchedContents,
-          reducerFormatUtil.tvListResultToReduxStoreData(payload.results)
-        );
-      }
-    );
-  },
-});
 const asyncActions = {
   searchMovie: createAsyncThunk<
     DiscoverMovieResponse,
@@ -100,6 +47,63 @@ const asyncActions = {
     }
   }),
 };
+
+export const slice = createSlice({
+  name: SLICE_NAME,
+  initialState,
+  reducers: {
+    resetSearchMode: (state) => {
+      state.searchMode = false;
+      state.keyword = "";
+    },
+    resetSearchedContents: (state) => {
+      searchContentsAdoptor.removeAll(state.searchedContents);
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      searchContentsActions.searchMovie.pending,
+      (state, { meta }) => {
+        state.searchMode = true;
+        state.keyword = meta.arg.keyword;
+      }
+    );
+    builder.addCase(
+      searchContentsActions.searchMovie.fulfilled,
+      (state, action) => {
+        const { results } = action.payload;
+        if (results === undefined) return;
+        const searchMovies =
+          reducerFormatUtil.movieListResultToReduxStoreData(results);
+        searchContentsAdoptor.addMany(state.searchedContents, searchMovies);
+      }
+    );
+    builder.addCase(
+      searchContentsActions.searchMovie.rejected,
+      (_, { payload }) => {
+        throw payload;
+      }
+    );
+    builder.addCase(
+      searchContentsActions.searchTV.pending,
+      (state, { meta }) => {
+        state.searchMode = true;
+        state.keyword = meta.arg.keyword;
+      }
+    );
+    builder.addCase(
+      searchContentsActions.searchTV.fulfilled,
+      (state, { payload }) => {
+        if (payload.results === undefined) return;
+
+        searchContentsAdoptor.addMany(
+          state.searchedContents,
+          reducerFormatUtil.tvListResultToReduxStoreData(payload.results)
+        );
+      }
+    );
+  },
+});
 
 export const searchContentsActions = {
   ...asyncActions,

@@ -9,6 +9,7 @@ export type SearchMovieFormValues = {
 
 export const SearchForm: React.FC = () => {
   const { handleChange, searchKeyword } = useSearchBox();
+
   return (
     <Input
       placeholder={commonDictionaries.titleName}
