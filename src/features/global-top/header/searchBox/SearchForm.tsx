@@ -1,46 +1,19 @@
 import { Input } from "@chakra-ui/react";
-import { useFormikContext } from "formik";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import { commonDictionaries } from "../../../../commons/constants/dictionaries";
-import { actions, useSelector } from "../../../../store";
-import { ModeType } from "../../../../types/redux/contentsMode";
+import { useSearchBox } from "./useSearchForm";
 
 export type SearchMovieFormValues = {
   searchName: string;
 };
 
 export const SearchForm: React.FC = () => {
-  const dispatch = useDispatch();
-  const { values, handleChange } = useFormikContext<SearchMovieFormValues>();
-  const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
-
-  useEffect(() => {
-    // 0.5秒以上入力がない場合に、search requestをする
-    const timerId = setTimeout(() => {
-      if (values.searchName === "") {
-        dispatch(actions.resetSearchMode());
-        return;
-      }
-
-      if (modeIndex === ModeType.Movie) {
-        dispatch(actions.searchMovie({ keyword: values.searchName }));
-      } else {
-        dispatch(actions.searchTV({ keyword: values.searchName }));
-      }
-    }, 500);
-
-    return () => {
-      console.log(`timerid ${timerId} is cleared!`);
-      clearTimeout(timerId);
-    };
-  }, [dispatch, modeIndex, values.searchName]);
-
+  const { handleChange, searchKeyword } = useSearchBox();
   return (
     <Input
       placeholder={commonDictionaries.titleName}
       name="searchName"
-      value={values.searchName}
+      value={searchKeyword}
       onChange={handleChange}
       focusBorderColor="purple.300"
       boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"

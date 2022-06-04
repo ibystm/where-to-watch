@@ -1,6 +1,5 @@
 import { Formik, FormikProps } from "formik";
 import React, { useRef } from "react";
-import { useSearchMoviesByKeyword } from "../hooks/useSearchContentsByKeyword";
 import { SearchForm, SearchMovieFormValues } from "./SearchForm";
 
 const initialValues = {
@@ -8,14 +7,14 @@ const initialValues = {
 };
 
 export const GlobalSearchBox = () => {
-  const { handleSubmit } = useSearchMoviesByKeyword();
+  // const { handleSubmit } = useSearchMoviesByKeyword();
   const formikRef = useRef<FormikProps<SearchMovieFormValues>>(null);
 
   return (
     <Formik
       innerRef={formikRef}
       initialValues={initialValues}
-      onSubmit={handleSubmit}
+      onSubmit={() => {}}
     >
       <SearchForm />
     </Formik>

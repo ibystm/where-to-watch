@@ -6,6 +6,8 @@ const INITIAL_PAGE = 1;
 
 export const usePageEndScrollObserve = () => {
   const { selectedGenreId, modeIndex } = useSelector((s) => s.contentsMode);
+  const keyword = useSelector((s) => s.searchContents.keyword);
+  const searchMode = useSelector((s) => s.searchContents.searchMode);
   const [isFullyScrolled, setIsFullyScrolled] = useState(false);
   const [currentPage, setCurrentPage] = useState(INITIAL_PAGE);
   const handleScroll = throttle(() => {
@@ -29,7 +31,7 @@ export const usePageEndScrollObserve = () => {
   useEffect(() => {
     setCurrentPage(INITIAL_PAGE);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedGenreId, modeIndex]);
+  }, [selectedGenreId, modeIndex, keyword, searchMode]);
 
   const result = {
     isFullyScrolled,
