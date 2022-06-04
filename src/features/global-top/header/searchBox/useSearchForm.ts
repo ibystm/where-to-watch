@@ -12,6 +12,7 @@ export const useSearchBox = (): typeof result => {
   const dispatch = useDispatch();
   const { values, handleChange } = useFormikContext<SearchMovieFormValues>();
   const { currentPage } = usePageEndScrollObserve();
+
   const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
 
   useEffect(() => {

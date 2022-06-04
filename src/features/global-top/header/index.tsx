@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { DropDownMenu } from "../menu";
 import { ChoiceTabs } from "./choices/index";
 import { useSwitchAuthButton } from "./hooks/useSwitchAuthButton";
 import { GlobalSearchBox } from "./searchBox";
@@ -47,6 +48,7 @@ export const Header: React.FC = () => {
           {buttonText}
         </Button> */}
         <ChoiceTabs />
+        <DropDownMenu />
       </Flex>
     </Box>
   );
