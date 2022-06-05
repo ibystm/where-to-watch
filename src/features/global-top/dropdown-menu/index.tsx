@@ -17,10 +17,10 @@ export const DropDownMenu: React.FC = () => (
       variant="outline"
     />
     <MenuList>
-      <MenuItem command="⌘T">New Tab</MenuItem>
-      <MenuItem command="⌘N">New Window</MenuItem>
-      <MenuItem command="⌘⇧N">Open Closed Tab</MenuItem>
-      <MenuItem command="⌘O">Open File...</MenuItem>
+      <MenuItem>サインイン</MenuItem>
+      <MenuItem>Where to watchについて</MenuItem>
+      <MenuItem>Lisence</MenuItem>
+      <MenuItem>アカウント</MenuItem>
     </MenuList>
   </Menu>
 );
