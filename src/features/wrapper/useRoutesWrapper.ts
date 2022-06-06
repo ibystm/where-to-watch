@@ -5,7 +5,7 @@ import { useGetAuth } from "../../contexts/AuthContext";
 import { userSelectors } from "../../store/selectors/users";
 import { routes } from "../routes";
 
-const shouldHideheaderPathList = ["/lisence", "/about"];
+const shouldHideheaderPathList = ["/credits", "/about"];
 
 export const useRoutesWrapper = (): typeof result => {
   useGetAuth();
