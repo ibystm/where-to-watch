@@ -21,7 +21,7 @@ export const Credits: React.FC = () => {
           <Text>All data in this web site is providered by</Text>
         </Box>
         <Box ml="4">
-          <Image src={TBDBLogo} alt="tmdb image" width="80px" />
+          <Image src={TBDBLogo} alt="tmdb image" width="64px" />
         </Box>
       </Flex>
       <Button w="120px" mt="40px" p="24px" onClick={() => navigate(-1)}>
