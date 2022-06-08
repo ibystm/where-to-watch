@@ -1,10 +1,11 @@
 import { baseRepository } from "../axios";
-import { endPoints } from "../constants";
+import { endPoints, TVURLs } from "../constants";
 import {
   DiscoverMovieResponse,
   GetWatchMovieProviderRespose,
 } from "../types/discovers";
 import { DiscoverTVShowsResponse } from "../types/discoverTVShows";
+import { FetchVideoApiResponse } from "../types/getVideos";
 import {
   GetPopularMoviesAPIResponse,
   GetPopularTVsAPIResponse,
@@ -57,6 +58,20 @@ export const getMovieWatchProvider = async (
 ): Promise<GetWatchMovieProviderRespose> => {
   const res = await baseRepository.get<GetWatchMovieProviderRespose>(
     `${endPoints.getMovieWatchProvider(movieId)}`
+  );
+  return res.data;
+};
+
+export const getMovieVideos = async (movieId: number) => {
+  const res = await baseRepository.get<FetchVideoApiResponse>(
+    `${endPoints.getVideos(movieId)}`
+  );
+  return res.data;
+};
+
+export const getTvVideos = async (movieId: number) => {
+  const res = await baseRepository.get<FetchVideoApiResponse>(
+    `${TVURLs.getVideos(movieId)}`
   );
   return res.data;
 };
