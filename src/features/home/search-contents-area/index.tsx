@@ -18,21 +18,23 @@ export const SearchContentsArea: React.FC = () => {
     isOpen,
     currentContent,
     loading,
+    currentMode,
   } = useSearchContentsArea();
 
   return (
     <>
       <Box marginY="24px">
         {contents.length > 0 ? (
-          <Box marginLeft="32px">
+          <Box marginLeft="32px" paddingY="16px">
             <Text fontSize="2xl" fontWeight="bold" color="gray.800">
-              {`${searchedKeyword} の検索結果`}
+              キーワード: {`${searchedKeyword} の検索結果`}
             </Text>
           </Box>
         ) : (
           <Flex justifyContent="center" pt="100px">
             <Text fontSize="xl">
-              {`${searchedKeyword}に一致する結果はありませんでした。`}
+              キーワード:{" "}
+              {`${searchedKeyword}に一致する${currentMode}の結果はありませんでした。`}
             </Text>
           </Flex>
         )}

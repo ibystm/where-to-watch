@@ -1,4 +1,5 @@
 import { useSelector } from "../../../store";
+import { ModeType } from "../../../types/redux/contentsMode";
 import {
   searchedContentsSelector,
   searchKeywordSelector,
@@ -8,6 +9,7 @@ import { useModalControl } from "../hooks/useModalControl";
 
 export const useSearchContentsArea = (): typeof result => {
   const loading = useSelector((s) => s.loading.isLoading);
+  const modeIndex = useSelector((s) => s.contentsMode.modeIndex);
   const contents = useSelector(searchedContentsSelector.selectAll);
   const searchedKeyword = useSelector(searchKeywordSelector);
   const { isOpen, handleClose, handleOpen, currentContent } = useModalControl();
@@ -19,6 +21,7 @@ export const useSearchContentsArea = (): typeof result => {
     resetCurrentData();
     handleClose();
   };
+  const currentMode = modeIndex === ModeType.Movie ? "映画" : "ドラマ";
 
   const result = {
     handleCloseModal,
@@ -29,6 +32,7 @@ export const useSearchContentsArea = (): typeof result => {
     contents,
     currentContent,
     loading,
+    currentMode,
   };
   return result;
 };
