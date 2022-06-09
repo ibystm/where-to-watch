@@ -63,7 +63,7 @@ export const getMovieWatchProvider = async (
 };
 
 export const getMovieVideos = async (movieId: number) => {
-  baseRepository
+  return baseRepository
     .get<FetchVideoApiResponse>(`${endPoints.getVideos(movieId)}`)
     .then((res) => res.data)
     .catch((e) => {
@@ -72,7 +72,7 @@ export const getMovieVideos = async (movieId: number) => {
 };
 
 export const getTvVideos = async (movieId: number) => {
-  baseRepository
+  return baseRepository
     .get<FetchVideoApiResponse>(`${TVURLs.getVideos(movieId)}`)
     .then((res) => res.data)
     .catch((e) => {

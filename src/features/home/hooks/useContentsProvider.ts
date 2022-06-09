@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { getMovieWatchProvider } from "../../../apis/contents";
+import { getMovieVideos, getMovieWatchProvider } from "../../../apis/contents";
+import { getTvVideos } from "../../../apis/contents/index";
 import {
   ProviderDetailInfo,
   WatchProviderResult,
 } from "../../../apis/types/discovers";
+import { useSelector } from "../../../store";
+import { ModeType } from "../../../types/redux/contentsMode";
 
 export type DisplayWatchProviderResult = {
   link: string;
@@ -16,8 +19,10 @@ const initialData: DisplayWatchProviderResult = {
 };
 
 export const useContentsProvider = (contentsId: number): typeof result => {
+  const modeIndex = useSelector((s) => s.contentsMode.modeIndex);
   const [providerData, setProviderData] =
     useState<DisplayWatchProviderResult>(initialData);
+  const [videoData, setVideoData] = useState<unknown>();
   const convertWatchProviderResult = (
     item: WatchProviderResult
   ): DisplayWatchProviderResult => {
@@ -36,11 +41,27 @@ export const useContentsProvider = (contentsId: number): typeof result => {
       console.error(e);
     }
   };
+  const getVideos = async () => {
+    try {
+      if (modeIndex === ModeType.Movie) {
+        return await getMovieVideos(contentsId);
+      } else {
+        return await getTvVideos(contentsId);
+      }
+    } catch (e) {
+      // TODO 後で
+      console.error(e);
+    }
+  };
 
   useEffect(() => {
-    if (contentsId) {
-      getProvider();
-    }
+    if (!contentsId) return;
+    getProvider();
+    getVideos().then((res) => {
+      if (typeof res?.results === "undefined") return;
+      setVideoData(res.results);
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contentsId]);
 
