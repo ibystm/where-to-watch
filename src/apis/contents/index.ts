@@ -63,15 +63,19 @@ export const getMovieWatchProvider = async (
 };
 
 export const getMovieVideos = async (movieId: number) => {
-  const res = await baseRepository.get<FetchVideoApiResponse>(
-    `${endPoints.getVideos(movieId)}`
-  );
-  return res.data;
+  baseRepository
+    .get<FetchVideoApiResponse>(`${endPoints.getVideos(movieId)}`)
+    .then((res) => res.data)
+    .catch((e) => {
+      throw e;
+    });
 };
 
 export const getTvVideos = async (movieId: number) => {
-  const res = await baseRepository.get<FetchVideoApiResponse>(
-    `${TVURLs.getVideos(movieId)}`
-  );
-  return res.data;
+  baseRepository
+    .get<FetchVideoApiResponse>(`${TVURLs.getVideos(movieId)}`)
+    .then((res) => res.data)
+    .catch((e) => {
+      throw e;
+    });
 };
