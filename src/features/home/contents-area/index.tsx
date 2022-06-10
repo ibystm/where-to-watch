@@ -19,6 +19,7 @@ export const ContentsArea: FC = () => {
     resultContents,
     currentContent,
     providerData,
+    youtubeUrl,
   } = useContentsArea();
 
   return (
@@ -43,6 +44,7 @@ export const ContentsArea: FC = () => {
           onClose={handleCloseModal}
           currentItem={currentContent}
           providerData={providerData}
+          youtubeUrl={youtubeUrl}
         />
       )}
     </>

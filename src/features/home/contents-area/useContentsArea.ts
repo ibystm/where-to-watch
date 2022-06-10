@@ -23,7 +23,7 @@ export const useContentsArea = (): typeof result => {
   const resultContents = modeIndex === 0 ? movies : tvs;
 
   const { currentContent, handleClose, handleOpen, isOpen } = useModalControl();
-  const { providerData, resetCurrentData } = useContentsProvider(
+  const { providerData, resetCurrentData, youtubeUrl } = useContentsProvider(
     currentContent?.id ? currentContent.id : 0
   );
 
@@ -40,6 +40,7 @@ export const useContentsArea = (): typeof result => {
     isOpen,
     isLoading,
     currentContent,
+    youtubeUrl,
   };
   return result;
 };

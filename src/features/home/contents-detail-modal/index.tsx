@@ -23,6 +23,7 @@ interface P {
   onClose: () => void;
   currentItem: ActualContentData;
   providerData: DisplayWatchProviderResult;
+  youtubeUrl?: string;
 }
 
 export const ContentDetailModal: React.FC<P> = ({
@@ -30,6 +31,7 @@ export const ContentDetailModal: React.FC<P> = ({
   onClose,
   currentItem,
   providerData,
+  youtubeUrl,
 }) => {
   const imageDataObj = useSelector((s) => s.configurations.images);
   const buildImagePath = (logoPath: string = ""): string => {
@@ -95,6 +97,9 @@ export const ContentDetailModal: React.FC<P> = ({
               </Text>
             )}
           </Box>
+          {youtubeUrl && (
+            <iframe src={youtubeUrl} title={currentItem.original_title} />
+          )}
         </ModalBody>
 
         <ModalFooter>
