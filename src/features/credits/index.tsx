@@ -16,7 +16,7 @@ export const Credits: React.FC = () => {
       <Heading as="h1" size="sm" p="4">
         This product uses the TMDb API but is not endorsed or certified by TMDb.
       </Heading>
-      <Flex>
+      <Flex pb="4">
         <Box>
           <Text>All data in this web site is providered by</Text>
         </Box>
@@ -24,7 +24,7 @@ export const Credits: React.FC = () => {
           <Image src={TBDBLogo} alt="tmdb image" width="64px" />
         </Box>
       </Flex>
-      <Button w="120px" mt="40px" p="24px" onClick={() => navigate(-1)}>
+      <Button size="lg" onClick={() => navigate(-1)} colorScheme="purple">
         Go back
       </Button>
     </Box>
