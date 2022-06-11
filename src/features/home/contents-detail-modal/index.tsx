@@ -44,7 +44,7 @@ export const ContentDetailModal: React.FC<P> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent padding="16px">
+      <ModalContent padding="16px" w="90%" minH="60%">
         <ModalHeader marginRight="32px">{currentItem.title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -97,9 +97,16 @@ export const ContentDetailModal: React.FC<P> = ({
               </Text>
             )}
           </Box>
-          {youtubeUrl && (
-            <iframe src={youtubeUrl} title={currentItem.original_title} />
-          )}
+          <Flex justifyContent="center" alignItems="center" h="200px">
+            {youtubeUrl && (
+              <iframe
+                src={youtubeUrl}
+                title={currentItem.original_title}
+                height="100%"
+                width="100%"
+              />
+            )}
+          </Flex>
         </ModalBody>
 
         <ModalFooter>
