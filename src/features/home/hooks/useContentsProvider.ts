@@ -75,6 +75,7 @@ export const useContentsProvider = (contentsId: number): typeof result => {
 
   const resetCurrentData = (): void => {
     setProviderData(initialData);
+    setYoutubeUrl(undefined);
   };
 
   const result = {

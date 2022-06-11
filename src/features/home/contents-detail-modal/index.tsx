@@ -42,9 +42,9 @@ export const ContentDetailModal: React.FC<P> = ({
     !!providerData?.flatrate && providerData?.flatrate.length > 0;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size="3xl">
       <ModalOverlay />
-      <ModalContent padding="16px" w="90%" minH="60%">
+      <ModalContent padding="16px" overflowY="auto">
         <ModalHeader marginRight="32px">{currentItem.title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -97,13 +97,18 @@ export const ContentDetailModal: React.FC<P> = ({
               </Text>
             )}
           </Box>
-          <Flex justifyContent="center" alignItems="center" h="200px">
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            // position="relative"
+            // width="100%"
+          >
             {youtubeUrl && (
               <iframe
                 src={youtubeUrl}
                 title={currentItem.original_title}
-                height="100%"
-                width="100%"
+                height="324px"
+                width="576px"
               />
             )}
           </Flex>
