@@ -1,3 +1,3 @@
 export const siteUrls = {
-  youtube: "https://www.youtube.com/embed/gVDOXk41hdY",
+  youtube: "https://www.youtube.com",
 } as const;

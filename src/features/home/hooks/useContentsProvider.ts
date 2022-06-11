@@ -5,7 +5,6 @@ import {
   ProviderDetailInfo,
   WatchProviderResult,
 } from "../../../apis/types/discovers";
-import { GetVideoResult } from "../../../apis/types/getVideos";
 import { siteUrls } from "../../../commons/constants/siteUrls";
 import { useSelector } from "../../../store";
 import { ModeType } from "../../../types/redux/contentsMode";
@@ -15,7 +14,6 @@ export type DisplayWatchProviderResult = {
   // 生のデータは他にもあるけど一旦これだけ定義
   flatrate: ProviderDetailInfo[];
 };
-type VideoData = GetVideoResult;
 
 const initialData: DisplayWatchProviderResult = {
   link: "",
@@ -26,8 +24,7 @@ export const useContentsProvider = (contentsId: number): typeof result => {
   const modeIndex = useSelector((s) => s.contentsMode.modeIndex);
   const [providerData, setProviderData] =
     useState<DisplayWatchProviderResult>(initialData);
-  // 現状youtubeの動画しか取得しないが、一旦名前は汎用的にしておく
-  const [videoData, setVideoData] = useState<VideoData | null>(null);
+  const [youtubeUrl, setYoutubeUrl] = useState<string>();
   const convertWatchProviderResult = (
     item: WatchProviderResult
   ): DisplayWatchProviderResult => {
@@ -68,8 +65,9 @@ export const useContentsProvider = (contentsId: number): typeof result => {
         // TODO siteがYouTube以外増えたら定数で管理する
         return res.site === "YouTube";
       });
-      if (typeof item === "undefined") return;
-      setVideoData(item);
+      if (typeof item === "undefined" || typeof item.key === "undefined")
+        return;
+      setYoutubeUrl(`${siteUrls.youtube}/embed/${item.key}`);
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,7 +80,7 @@ export const useContentsProvider = (contentsId: number): typeof result => {
   const result = {
     providerData,
     resetCurrentData,
-    youtubeUrl: siteUrls.youtube,
+    youtubeUrl,
   };
 
   return result;
