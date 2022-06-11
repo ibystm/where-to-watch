@@ -65,8 +65,10 @@ export const useContentsProvider = (contentsId: number): typeof result => {
         // TODO siteがYouTube以外増えたら定数で管理する
         return res.site === "YouTube";
       });
+
       if (typeof item === "undefined" || typeof item.key === "undefined")
         return;
+      // TODO: urlだけじゃなくて、typeも返してあげる方が良さそう
       setYoutubeUrl(`${siteUrls.youtube}/embed/${item.key}`);
     });
 

@@ -57,12 +57,18 @@ export const ContentDetailModal: React.FC<P> = ({
               }`}
             </Text>
           </Box>
-          <Text>
+          <Text paddingY="8">
             {currentItem.overview
               ? currentItem.overview
               : commonDictionaries.noOverview}
           </Text>
-          <Box padding="16px">
+          <Box
+            borderBottom="1px"
+            borderColor="gray.300"
+            // width="90%"
+            marginX="auto"
+          />
+          <Box p="8">
             <Box textAlign="center" fontWeight="bold" mb="8px">
               <Text>視聴可能なストリーミングサービス</Text>
             </Box>
@@ -97,19 +103,27 @@ export const ContentDetailModal: React.FC<P> = ({
               </Text>
             )}
           </Box>
+
           <Flex
+            flexDirection="column"
             justifyContent="center"
             alignItems="center"
-            // position="relative"
-            // width="100%"
           >
             {youtubeUrl && (
-              <iframe
-                src={youtubeUrl}
-                title={currentItem.original_title}
-                height="324px"
-                width="576px"
-              />
+              <>
+                <Box p="4">
+                  <iframe
+                    src={youtubeUrl}
+                    title={currentItem.original_title}
+                    height="324px"
+                    width="576px"
+                    allowFullScreen
+                  />
+                </Box>
+                <Box p="2">
+                  <Text fontWeight="bold">Trailer video</Text>
+                </Box>
+              </>
             )}
           </Flex>
         </ModalBody>
