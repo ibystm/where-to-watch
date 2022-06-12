@@ -62,6 +62,14 @@ export const getMovieWatchProvider = async (
   return res.data;
 };
 
+export const getTVWatchProvider = async (
+  movieId: number
+): Promise<GetWatchMovieProviderRespose> => {
+  return baseRepository
+    .get<GetWatchMovieProviderRespose>(`${TVURLs.getTVWatchProvider(movieId)}`)
+    .then((res) => res.data);
+};
+
 export const getMovieVideos = async (movieId: number) => {
   return baseRepository
     .get<FetchVideoApiResponse>(`${endPoints.getVideos(movieId)}`)

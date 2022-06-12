@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMovieVideos, getMovieWatchProvider } from "../../../apis/contents";
-import { getTvVideos } from "../../../apis/contents/index";
+import { getTvVideos, getTVWatchProvider } from "../../../apis/contents/index";
 import {
   ProviderDetailInfo,
   WatchProviderResult,
@@ -35,12 +35,13 @@ export const useContentsProvider = (contentsId: number): typeof result => {
   };
   const getProvider = async () => {
     try {
-      const { results } = await getMovieWatchProvider(contentsId);
-      if ("JP" in results) {
-        setProviderData(convertWatchProviderResult(results.JP));
+      if (modeIndex === ModeType.Movie) {
+        return await getMovieWatchProvider(contentsId);
+      } else {
+        return await getTVWatchProvider(contentsId);
       }
     } catch (e) {
-      console.error(e);
+      throw e;
     }
   };
   const getVideos = async () => {
@@ -58,7 +59,11 @@ export const useContentsProvider = (contentsId: number): typeof result => {
 
   useEffect(() => {
     if (!contentsId) return;
-    getProvider();
+    getProvider().then(({ results }) => {
+      if ("JP" in results) {
+        setProviderData(convertWatchProviderResult(results.JP));
+      }
+    });
     getVideos().then((res) => {
       if (typeof res?.results === "undefined") return;
       const item = res.results.find((res) => {
