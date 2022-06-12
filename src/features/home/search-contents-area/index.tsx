@@ -19,6 +19,7 @@ export const SearchContentsArea: React.FC = () => {
     currentContent,
     loading,
     currentMode,
+    youtubeUrl,
   } = useSearchContentsArea();
 
   return (
@@ -57,6 +58,7 @@ export const SearchContentsArea: React.FC = () => {
           onClose={handleCloseModal}
           currentItem={currentContent}
           providerData={providerData}
+          youtubeUrl={youtubeUrl}
         />
       )}
     </>

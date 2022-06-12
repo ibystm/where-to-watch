@@ -13,7 +13,7 @@ export const useSearchContentsArea = (): typeof result => {
   const contents = useSelector(searchedContentsSelector.selectAll);
   const searchedKeyword = useSelector(searchKeywordSelector);
   const { isOpen, handleClose, handleOpen, currentContent } = useModalControl();
-  const { providerData, resetCurrentData } = useContentsProvider(
+  const { providerData, resetCurrentData, youtubeUrl } = useContentsProvider(
     currentContent?.id ? currentContent.id : 0
   );
 
@@ -33,6 +33,7 @@ export const useSearchContentsArea = (): typeof result => {
     currentContent,
     loading,
     currentMode,
+    youtubeUrl,
   };
   return result;
 };

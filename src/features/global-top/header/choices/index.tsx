@@ -6,7 +6,7 @@ import { ModeIndex } from "../../../../types/redux/contentsMode";
 export const ChoiceTabs: React.FC = () => {
   const dispatch = useDispatch();
   const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
-  const modes = ["映画", "ドラマ"];
+  const modes = ["映画", "ドラマ・TV番組"] as const;
 
   return (
     <Tabs
