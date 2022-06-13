@@ -1,5 +1,5 @@
 import { baseRepository } from "../axios";
-import { endPoints, TVURLs } from "../constants";
+import { endPoints, TVURLs } from "../endPoints";
 import {
   SearchMoviesResponse,
   SearchTVsResponse,

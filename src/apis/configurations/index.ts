@@ -1,5 +1,5 @@
 import { baseRepository } from "../axios";
-import { endPoints } from "../constants";
+import { endPoints } from "../endPoints";
 import { FetchConfigurationResponse } from "../types/configurations";
 
 export const fetchConfigurations =

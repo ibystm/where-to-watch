@@ -1,5 +1,5 @@
 import { baseRepository } from "../axios";
-import { endPoints } from "../constants";
+import { endPoints } from "../endPoints";
 import { GetMovieGenresResponse, GetTVGenresResponse } from "../types/genres";
 
 export const getMovieGenres = async () => {
