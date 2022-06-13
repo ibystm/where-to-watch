@@ -16,8 +16,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { ErrorMessage } from "../error-message/ErrorMessage";
-import { useHandleFBErrors } from "../hooks/useHandleFBErrors";
-import { useSignUp } from "../hooks/useSignUp";
+import { useHandleFBErrors } from "../sign-in/useHandleFBErrors";
+import { useSignUp } from "./useSignUp";
 
 type SignUpValue = {
   username: string;
