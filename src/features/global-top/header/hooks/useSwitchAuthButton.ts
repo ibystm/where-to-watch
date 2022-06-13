@@ -1,9 +1,8 @@
-import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { userSelectors } from "../../../../store/selectors/users";
+import { useSelector } from "../../../../store";
 
 export const useSwitchAuthButton = () => {
-  const userId = useSelector(userSelectors.id);
+  const userId = useSelector((s) => s.user.id);
   const location = useLocation();
   const navigate = useNavigate();
 

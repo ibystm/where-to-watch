@@ -5,7 +5,7 @@ import {
   ProviderDetailInfo,
   WatchProviderResult,
 } from "../../../apis/types/discovers";
-import { siteUrls } from "../../../commons/constants/siteUrls";
+import { externalSiteUrls } from "../../../commons/constants/externalUrls";
 import { useSelector } from "../../../store";
 import { ModeType } from "../../../types/redux/contentsMode";
 
@@ -74,7 +74,7 @@ export const useContentsProvider = (contentsId: number): typeof result => {
       if (typeof item === "undefined" || typeof item.key === "undefined")
         return;
       // TODO: urlだけじゃなくて、typeも返してあげる方が良さそう
-      setYoutubeUrl(`${siteUrls.youtube}/embed/${item.key}`);
+      setYoutubeUrl(`${externalSiteUrls.youtube}/embed/${item.key}`);
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LoadingState } from "../../../types/loading/loading";
+import { LoadingState } from "../../../types/redux/loading";
 
 const SLICE_NAME = "loading";
 

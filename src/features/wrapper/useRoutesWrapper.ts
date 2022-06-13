@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useLocation, useRoutes } from "react-router-dom";
 import { useGetAuth } from "../../contexts/AuthContext";
-import { userSelectors } from "../../store/selectors/users";
+import { useSelector } from "../../store";
 import { routes } from "../routes";
 
 const shouldHideheaderPathList = ["/credits", "/about"];
 
 export const useRoutesWrapper = (): typeof result => {
   useGetAuth();
-  const userId = useSelector(userSelectors.id);
+  const userId = useSelector((s) => s.user.id);
   const routingList = useRoutes(routes(!!userId));
   const location = useLocation();
   const [shouldShowHeader, setShouldShowHeader] = useState(false);
