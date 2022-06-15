@@ -1,13 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import { useFetchConfigs } from "./hooks/useFetchConfigs";
-import { useFetchContents } from "./hooks/useFetchContents";
 import { MainArea } from "./main-area";
+import { useHome } from "./useHome";
 
 export const Home: React.FC = () => {
-  // initial process
-  useFetchContents();
-  useFetchConfigs();
+  useHome();
 
   // TODO
   // const {signOut} = useSignOut();
