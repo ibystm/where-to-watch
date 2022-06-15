@@ -3,10 +3,8 @@ import { useDispatch } from "react-redux";
 import { actions, AppDispatch, useSelector } from "../../store";
 import { ModeType } from "../../types/redux/contentsMode";
 import { usePageEndScrollObserve } from "./hooks/usePageEndScrollObserve";
-import { useResetContents } from "./hooks/useResetContents";
 
 export const useHome = () => {
-  const { resetContents } = useResetContents();
   const dispatch: AppDispatch = useDispatch();
   const { modeIndex, selectedGenreId } = useSelector(
     (state) => state.contentsMode
@@ -19,9 +17,16 @@ export const useHome = () => {
     fetchDiscoverMovies,
     fetchDiscoverTVs,
     fetchConfigurations,
+    resetDiscovers,
+    resetPopularities,
   } = actions;
 
   const { currentPage } = usePageEndScrollObserve();
+
+  const resetContents = (): void => {
+    dispatch(resetDiscovers());
+    dispatch(resetPopularities());
+  };
 
   // fetch configs
   useEffect(() => {

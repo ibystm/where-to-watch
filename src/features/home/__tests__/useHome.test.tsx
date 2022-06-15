@@ -1,15 +1,15 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { useDispatch } from "react-redux";
-import { useFetchContents } from "../useFetchContents";
+import { useHome } from "../useHome";
 
 jest.mock("react-redux");
 
-describe("useFetchContents", () => {
-  it("render時にdispatchが2回走ること", () => {
+describe("useFetchConfig", () => {
+  it("render時に1度dispatchが呼ばれること", () => {
     const dummyDispatchFn = jest.fn();
     (useDispatch as jest.Mock).mockReturnValue(dummyDispatchFn);
 
-    renderHook(() => useFetchContents());
+    renderHook(() => useHome());
     expect(dummyDispatchFn).toHaveBeenCalledTimes(2);
   });
 });
