@@ -1,10 +1,12 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import { MainArea } from "./main-area";
+import { ContentsArea } from "./contents-area";
+import { SearchContentsArea } from "./search-contents-area";
+import { wrapperStyleProps } from "./style";
 import { useHome } from "./useHome";
 
 export const Home: React.FC = () => {
-  useHome();
+  const { isSearchMode } = useHome();
 
   // TODO
   // const {signOut} = useSignOut();
@@ -14,8 +16,8 @@ export const Home: React.FC = () => {
   //   });
   // };
   return (
-    <Box w="100%" h="100%" paddingX="40px" paddingBottom="40px">
-      <MainArea />
+    <Box {...wrapperStyleProps}>
+      {isSearchMode ? <SearchContentsArea /> : <ContentsArea />}
     </Box>
   );
 };

@@ -4,11 +4,12 @@ import { actions, AppDispatch, useSelector } from "../../store";
 import { ModeType } from "../../types/redux/contentsMode";
 import { usePageEndScrollObserve } from "./hooks/usePageEndScrollObserve";
 
-export const useHome = () => {
+export const useHome = (): typeof result => {
   const dispatch: AppDispatch = useDispatch();
   const { modeIndex, selectedGenreId } = useSelector(
     (state) => state.contentsMode
   );
+  const isSearchMode = useSelector((s) => s.searchContents.searchMode);
   const {
     getMovieGenres,
     getTVGenres,
@@ -79,4 +80,9 @@ export const useHome = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, modeIndex, selectedGenreId]);
+
+  const result = {
+    isSearchMode,
+  };
+  return result;
 };
