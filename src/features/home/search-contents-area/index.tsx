@@ -1,7 +1,8 @@
-import { Box, Flex, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import { ContentItem } from "../content-item";
 import { ContentDetailModal } from "../contents-detail-modal";
 import { SkeltonContentItem } from "../skelton-content-item";
+import { SearchResultHelperTextArea } from "./searchResultHelperTextArea";
 import { useSearchContentsArea } from "./useSearchContentsArea";
 
 const dummyLoadingSkeltons = [...Array(100)].map((_, idx) => (
@@ -24,22 +25,12 @@ export const SearchContentsArea: React.FC = () => {
 
   return (
     <>
-      <Box marginY="24px">
-        {contents.length > 0 ? (
-          <Box marginLeft="32px" paddingY="16px">
-            <Text fontSize="2xl" fontWeight="bold" color="gray.800">
-              キーワード: {`${searchedKeyword} の検索結果`}
-            </Text>
-          </Box>
-        ) : (
-          <Flex justifyContent="center" pt="100px">
-            <Text fontSize="xl">
-              キーワード:{" "}
-              {`${searchedKeyword}に一致する${currentMode}の結果はありませんでした。`}
-            </Text>
-          </Flex>
-        )}
-
+      <Box my="24px">
+        <SearchResultHelperTextArea
+          contents={contents}
+          searchedKeyword={searchedKeyword}
+          currentMode={currentMode}
+        />
         <SimpleGrid minChildWidth="240px" spacing="24px" marginTop="8px">
           {loading
             ? dummyLoadingSkeltons
