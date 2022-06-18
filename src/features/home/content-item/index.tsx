@@ -4,7 +4,10 @@ import { MdOutlineHideImage } from "react-icons/md";
 import { commonDictionaries } from "../../../commons/constants/dictionaries";
 import { useSelector } from "../../../store";
 import { ActualContentData } from "../../../types/redux/discovers";
-import { configurationsSelector } from "../../configurations/selectors/configurations";
+import {
+  selectPosterSizes,
+  selectSecureBaseUrl,
+} from "../../configurations/slice";
 
 type P = {
   contentItem: ActualContentData;
@@ -14,8 +17,8 @@ type P = {
 export const ContentItem: React.FC<P> = ({ contentItem, modalOpen }) => {
   const { title, poster_path, releaseDate } = contentItem;
   const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
-  const imageUrl = useSelector(configurationsSelector.secureImageUrl);
-  const posterSizes = useSelector(configurationsSelector.posterSizes);
+  const imageUrl = useSelector(selectSecureBaseUrl);
+  const posterSizes = useSelector(selectPosterSizes);
   const pathBuilder = (): string | undefined => {
     if (!posterSizes || !imageUrl) return;
     const size = posterSizes.slice(-1)[0];
