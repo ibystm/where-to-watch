@@ -8,6 +8,7 @@ export type SearchMovieFormValues = {
 
 export const useSearchMoviesByKeyword = (): typeof result => {
   const dispatch = useDispatch();
+  const { searchMovie, searchTV } = actions;
   const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
 
   const handleSubmit = (values: SearchMovieFormValues): void => {
@@ -15,9 +16,9 @@ export const useSearchMoviesByKeyword = (): typeof result => {
       return;
     }
     if (modeIndex === ModeType.Movie) {
-      dispatch(actions.searchMovie({ keyword: values.searchName }));
+      dispatch(searchMovie({ keyword: values.searchName }));
     } else {
-      dispatch(actions.searchTV({ keyword: values.searchName }));
+      dispatch(searchTV({ keyword: values.searchName }));
     }
   };
 

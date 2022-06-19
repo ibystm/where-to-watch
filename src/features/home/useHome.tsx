@@ -20,6 +20,8 @@ export const useHome = (): typeof result => {
     fetchConfigurations,
     resetDiscovers,
     resetPopularities,
+    startLoading,
+    endLoading,
   } = actions;
 
   const { currentPage } = usePageEndScrollObserve();
@@ -74,9 +76,9 @@ export const useHome = (): typeof result => {
       }
     };
 
-    dispatch(actions.startLoading());
+    dispatch(startLoading());
     fetch().finally(() => {
-      dispatch(actions.endLoading());
+      dispatch(endLoading());
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, modeIndex, selectedGenreId]);
