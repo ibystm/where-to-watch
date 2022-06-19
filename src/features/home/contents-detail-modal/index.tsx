@@ -43,12 +43,16 @@ export const ContentDetailModal: React.FC<P> = ({
     !!providerData?.flatrate && providerData?.flatrate.length > 0;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="3xl">
-      <ModalOverlay />
-      <ModalContent padding="16px" overflowY="auto">
+    <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <ModalOverlay
+        backdropFilter="auto"
+        backdropInvert="10%"
+        backdropBlur="4px"
+      />
+      <ModalContent padding="16px">
         <ModalHeader marginRight="32px">{title}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody overflowY="auto">
           <Box marginBottom="2" display="flex" justifyContent="end">
             <Text>
               {`${commonDictionaries.releaseDate}: ${
@@ -59,12 +63,7 @@ export const ContentDetailModal: React.FC<P> = ({
           <Text paddingY="8">
             {overview ? overview : commonDictionaries.noOverview}
           </Text>
-          <Box
-            borderBottom="1px"
-            borderColor="gray.300"
-            // width="90%"
-            marginX="auto"
-          />
+          <Box borderBottom="1px" borderColor="gray.300" marginX="auto" />
           <Box p="8">
             <Box textAlign="center" fontWeight="bold" mb="8px">
               <Text>視聴可能なストリーミングサービス</Text>
