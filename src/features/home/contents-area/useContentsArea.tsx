@@ -1,10 +1,12 @@
 import { useSelector } from "../../../store";
+import { ContentItem } from "../content-item";
 import { useContentsProvider } from "../hooks/useContentsProvider";
 import { useModalControl } from "../hooks/useModalControl";
 import {
   popularMovieSelector,
   popularTVsSelector,
 } from "../selectors/popularities";
+import { SkeltonContentItem } from "../skelton-content-item";
 import {
   discoverMoviesSelector,
   discoverTVsSelector,
@@ -32,6 +34,15 @@ export const useContentsArea = (): typeof result => {
     handleClose();
   };
 
+  const renderContents = () =>
+    isLoading
+      ? [...Array(20)].map((_, idx) => {
+          return <SkeltonContentItem key={idx} />;
+        })
+      : resultContents.map((item, idx) => (
+          <ContentItem key={idx} contentItem={item} modalOpen={handleOpen} />
+        ));
+
   const result = {
     resultContents,
     providerData,
@@ -41,6 +52,7 @@ export const useContentsArea = (): typeof result => {
     isLoading,
     currentContent,
     youtubeUrl,
+    renderContents,
   };
   return result;
 };

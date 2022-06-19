@@ -1,26 +1,19 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import { ContentItem } from "../content-item";
 import { ContentDetailModal } from "../contents-detail-modal";
-import { SkeltonContentItem } from "../skelton-content-item";
 import { SearchResultHelperTextArea } from "./searchResultHelperTextArea";
 import { useSearchContentsArea } from "./useSearchContentsArea";
-
-const dummyLoadingSkeltons = [...Array(100)].map((_, idx) => (
-  <SkeltonContentItem key={idx} />
-));
 
 export const SearchContentsArea: React.FC = () => {
   const {
     searchedKeyword,
-    handleOpen,
     handleCloseModal,
     contents,
     providerData,
     isOpen,
     currentContent,
-    loading,
     currentMode,
     youtubeUrl,
+    renderContents,
   } = useSearchContentsArea();
 
   return (
@@ -32,15 +25,7 @@ export const SearchContentsArea: React.FC = () => {
           currentMode={currentMode}
         />
         <SimpleGrid minChildWidth="240px" spacing="24px" marginTop="8px">
-          {loading
-            ? dummyLoadingSkeltons
-            : contents.map((item, idx) => (
-                <ContentItem
-                  key={idx}
-                  contentItem={item}
-                  modalOpen={handleOpen}
-                />
-              ))}
+          {renderContents()}
         </SimpleGrid>
       </Box>
       {currentContent !== null && (

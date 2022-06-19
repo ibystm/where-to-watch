@@ -4,8 +4,10 @@ import {
   searchedContentsSelector,
   searchKeywordSelector,
 } from "../../global-top/header/selectors/searchContents";
+import { ContentItem } from "../content-item/index";
 import { useContentsProvider } from "../hooks/useContentsProvider";
 import { useModalControl } from "../hooks/useModalControl";
+import { SkeltonContentItem } from "../skelton-content-item/index";
 
 export const useSearchContentsArea = (): typeof result => {
   const loading = useSelector((s) => s.loading.isLoading);
@@ -23,17 +25,25 @@ export const useSearchContentsArea = (): typeof result => {
   };
   const currentMode = modeIndex === ModeType.Movie ? "映画" : "ドラマ";
 
+  const renderContents = () =>
+    loading
+      ? [...Array(20)].map((_, idx) => {
+          return <SkeltonContentItem key={idx} />;
+        })
+      : contents.map((item, idx) => (
+          <ContentItem key={idx} contentItem={item} modalOpen={handleOpen} />
+        ));
+
   const result = {
     handleCloseModal,
     isOpen,
-    handleOpen,
+    contents,
     providerData,
     searchedKeyword,
-    contents,
     currentContent,
-    loading,
     currentMode,
     youtubeUrl,
+    renderContents,
   };
   return result;
 };
