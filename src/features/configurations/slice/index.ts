@@ -70,4 +70,4 @@ export const selectConfigurations = (state: RootState) => state.configurations;
 export const selectSecureBaseUrl = (state: RootState) =>
   state.configurations.images?.secure_base_url;
 export const selectPosterSizes = (state: RootState) =>
-  state.configurations.images?.secure_base_url;
+  state.configurations.images?.poster_sizes;
