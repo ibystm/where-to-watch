@@ -33,34 +33,31 @@ export const ContentDetailModal: React.FC<P> = ({
   providerData,
   youtubeUrl,
 }) => {
+  const { title, releaseDate, original_title, overview } = currentItem;
   const imageDataObj = useSelector((s) => s.configurations.images);
   const buildImagePath = (logoPath: string = ""): string => {
     if (imageDataObj === null) return "";
     return `${imageDataObj.secure_base_url}/original/${logoPath}`;
   };
-  const existValidData =
+  const existsValidData =
     !!providerData?.flatrate && providerData?.flatrate.length > 0;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="3xl">
       <ModalOverlay />
       <ModalContent padding="16px" overflowY="auto">
-        <ModalHeader marginRight="32px">{currentItem.title}</ModalHeader>
+        <ModalHeader marginRight="32px">{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Box marginBottom="2" display="flex" justifyContent="end">
             <Text>
               {`${commonDictionaries.releaseDate}: ${
-                currentItem.releaseDate
-                  ? currentItem.releaseDate.replaceAll("-", "/")
-                  : "不明"
+                releaseDate ? releaseDate.replaceAll("-", "/") : "不明"
               }`}
             </Text>
           </Box>
           <Text paddingY="8">
-            {currentItem.overview
-              ? currentItem.overview
-              : commonDictionaries.noOverview}
+            {overview ? overview : commonDictionaries.noOverview}
           </Text>
           <Box
             borderBottom="1px"
@@ -73,7 +70,7 @@ export const ContentDetailModal: React.FC<P> = ({
               <Text>視聴可能なストリーミングサービス</Text>
             </Box>
             <Flex justify="center" align="center" padding="16px">
-              {existValidData ? (
+              {existsValidData ? (
                 providerData?.flatrate.map((item, idx) => {
                   if (!item.provider_name) return null;
 
@@ -91,7 +88,7 @@ export const ContentDetailModal: React.FC<P> = ({
                 <Text>現在はありません</Text>
               )}
             </Flex>
-            {existValidData && (
+            {existsValidData && (
               <Text
                 fontSize="12px"
                 textAlign="center"
@@ -114,7 +111,7 @@ export const ContentDetailModal: React.FC<P> = ({
                 <Box p="4">
                   <iframe
                     src={youtubeUrl}
-                    title={currentItem.original_title}
+                    title={original_title}
                     height="324px"
                     width="576px"
                     allowFullScreen
