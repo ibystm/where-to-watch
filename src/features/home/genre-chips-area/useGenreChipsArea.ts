@@ -25,7 +25,7 @@ export const useGenreChipsArea = (
   const displayGenres = [popular, ...genres];
   const [shouldShowPreviousButton, setShouldShowPreviousButton] =
     useState(false);
-  const [shouldShowNextButton, setShouldShowButton] = useState(true);
+  const [shouldShowNextButton, setShouldShowNextButton] = useState(true);
   const [genreChipAreaWidth, setGenreChipAreaWidth] = useState(0);
   const handleResize = (entries: ResizeObserverEntry[]) => {
     const width = entries[0].contentRect.width;
@@ -56,15 +56,10 @@ export const useGenreChipsArea = (
         genreChipAreaWidth + currentAreaElement.scrollLeft + 56 >=
         currentAreaElement.scrollWidth
       ) {
-        setShouldShowButton(false);
+        setShouldShowNextButton(false);
       } else {
-        setShouldShowButton(true);
+        setShouldShowNextButton(true);
       }
-      console.log(`genreChipAreaWidth: ${genreChipAreaWidth}`);
-      console.log(
-        `currentAreaElement.scrollLeft: ${currentAreaElement.scrollLeft}`
-      );
-      console.log(`element.scrollWidth: ${currentAreaElement.scrollWidth}`);
 
       if (currentAreaElement.scrollLeft === 0) {
         setShouldShowPreviousButton(false);
