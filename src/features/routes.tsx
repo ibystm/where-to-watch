@@ -7,7 +7,7 @@ import { SignUp } from "./sign-up/SignUp";
 export const routes = (isSignIn: boolean): RouteObject[] => [
   {
     path: "/",
-    element: !isSignIn ? <Navigate to="/signin" /> : <Home />,
+    element: !isSignIn ? <Home /> : <Home />,
   },
   {
     path: "/signin",

@@ -9,9 +9,10 @@ export const useDropDownMenu = (): typeof result => {
   const createMenuItems = (): JSX.Element => {
     return (
       <MenuList>
-        {user.id === null && (
+        {/* TODO */}
+        {/* {user.id === null && (
           <MenuItem onClick={() => navigate("/signin")}>サインイン</MenuItem>
-        )}
+        )} */}
         <MenuItem onClick={() => navigate("/about")}>
           Where to watchについて
         </MenuItem>

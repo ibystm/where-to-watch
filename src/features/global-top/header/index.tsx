@@ -24,11 +24,12 @@ export const Header: React.FC = () => {
         alignItems="center"
       >
         <Button
-          onClick={() => navigate("/signup")}
+          // TODO ユーザー管理できたら後で直す
+          onClick={() => navigate("/")}
           backgroundColor="white"
           height="70%"
         >
-          <Heading size="lg">Where to watch ?</Heading>
+          <Heading size="lg">Where to watch.</Heading>
         </Button>
         <Flex
           minW="400px"
