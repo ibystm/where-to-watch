@@ -35,7 +35,6 @@ export const Header: React.FC = () => {
           minW="400px"
           boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
           borderRadius="20px"
-          position="relative"
         >
           <GlobalSearchBox />
         </Flex>
