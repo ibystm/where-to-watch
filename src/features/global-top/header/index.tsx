@@ -3,11 +3,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { DropDownMenu } from "../dropdown-menu";
 import { ChoiceTabs } from "./choices/index";
-import { useSwitchAuthButton } from "./hooks/useSwitchAuthButton";
+// import { useSwitchAuthButton } from "./hooks/useSwitchAuthButton";
 import { GlobalSearchBox } from "./searchBox";
 
 export const Header: React.FC = () => {
-  const { buttonText, onPressButton } = useSwitchAuthButton();
+  // TODO
+  // const { buttonText, onPressButton } = useSwitchAuthButton();
   const navigate = useNavigate();
 
   return (
