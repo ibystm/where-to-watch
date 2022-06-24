@@ -3,7 +3,7 @@ export const commonDictionaries = {
   noTitle: "タイトルなし",
   noReleaseDate: "リリース日不明",
   noImageIcon: "No Image",
-  titleName: "タイトル名",
+  titleName: "title name",
   discoverMovie: "Discover/映画",
   discoverTVShows: "Discover/テレビ・ドラマ",
   upconmingMovies: "近日公開予定映画",
