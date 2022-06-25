@@ -7,8 +7,12 @@ export type SearchMovieFormValues = {
   searchName: string;
 };
 
-export const SearchForm: React.FC = () => {
-  const { handleChange, searchKeyword } = useSearchBox();
+type P = {
+  onCloseModal: () => void;
+};
+
+export const SearchForm: React.FC<P> = ({ onCloseModal }) => {
+  const { handleChange, searchKeyword, handleSubmit } = useSearchBox();
 
   return (
     <Input
@@ -16,9 +20,17 @@ export const SearchForm: React.FC = () => {
       name="searchName"
       value={searchKeyword}
       onChange={handleChange}
-      focusBorderColor="purple.300"
-      boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
-      borderRadius="inherit"
+      onFocus={() => {}}
+      _focus={{
+        border: "none",
+      }}
+      onKeyPress={(e) => {
+        if (e.key === "Enter") {
+          onCloseModal();
+          handleSubmit();
+        }
+      }}
+      border="none"
       type="search"
     />
   );

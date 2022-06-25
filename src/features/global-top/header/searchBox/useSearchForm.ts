@@ -10,7 +10,8 @@ export const useSearchBox = (): typeof result => {
   const { resetSearchMode, searchMovie, searchTV, resetSearchedContents } =
     actions;
   const dispatch = useDispatch();
-  const { values, handleChange } = useFormikContext<SearchMovieFormValues>();
+  const { values, handleChange, handleSubmit } =
+    useFormikContext<SearchMovieFormValues>();
   const { currentPage } = usePageEndScrollObserve();
 
   const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
@@ -53,6 +54,7 @@ export const useSearchBox = (): typeof result => {
   const result = {
     handleChange,
     searchKeyword: values.searchName,
+    handleSubmit,
   };
   return result;
 };
