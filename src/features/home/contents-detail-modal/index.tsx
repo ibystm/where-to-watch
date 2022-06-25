@@ -43,7 +43,7 @@ export const ContentDetailModal: React.FC<P> = ({
     !!providerData?.flatrate && providerData?.flatrate.length > 0;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+    <Modal isOpen={isOpen} onClose={onClose} size="3xl">
       <ModalOverlay
         backdropFilter="auto"
         backdropInvert="10%"
@@ -111,8 +111,8 @@ export const ContentDetailModal: React.FC<P> = ({
                   <iframe
                     src={youtubeUrl}
                     title={original_title}
-                    height="324px"
-                    width="576px"
+                    height="270px"
+                    width="480px"
                     allowFullScreen
                   />
                 </Box>
