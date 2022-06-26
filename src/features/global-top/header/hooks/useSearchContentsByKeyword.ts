@@ -1,3 +1,4 @@
+import { useDisclosure } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { actions, useSelector } from "../../../../store";
 import { ModeType } from "../../../../types/redux/contentsMode";
@@ -10,6 +11,7 @@ export const useSearchMoviesByKeyword = (): typeof result => {
   const dispatch = useDispatch();
   const { searchMovie, searchTV } = actions;
   const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   const handleSubmit = (values: SearchMovieFormValues): void => {
     if (values.searchName.length === 0) {
@@ -20,10 +22,14 @@ export const useSearchMoviesByKeyword = (): typeof result => {
     } else {
       dispatch(searchTV({ keyword: values.searchName }));
     }
+    onClose();
   };
 
   const result = {
     handleSubmit,
+    isOpen,
+    onOpen,
+    onClose,
   };
 
   return result;
