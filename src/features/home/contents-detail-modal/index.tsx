@@ -1,4 +1,5 @@
 import {
+  AspectRatio,
   Box,
   Button,
   Flex,
@@ -107,15 +108,13 @@ export const ContentDetailModal: React.FC<P> = ({
           >
             {youtubeUrl && (
               <>
-                <Box p="4">
+                <AspectRatio ratio={16 / 9} w="100%">
                   <iframe
                     src={youtubeUrl}
                     title={original_title}
-                    height="270px"
-                    width="480px"
                     allowFullScreen
                   />
-                </Box>
+                </AspectRatio>
                 <Box p="2">
                   <Text fontWeight="bold">Trailer video</Text>
                 </Box>
