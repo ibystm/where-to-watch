@@ -2,6 +2,7 @@ import {
   AspectRatio,
   Box,
   Button,
+  Divider,
   Flex,
   Image,
   Modal,
@@ -64,7 +65,7 @@ export const ContentDetailModal: React.FC<P> = ({
           <Text paddingY="8">
             {overview ? overview : commonDictionaries.noOverview}
           </Text>
-          <Box borderBottom="1px" borderColor="gray.300" marginX="auto" />
+          <Divider borderColor="gray.300" />
           <Box p="8">
             <Box textAlign="center" fontWeight="bold" mb="8px">
               <Text>視聴可能なストリーミングサービス</Text>
