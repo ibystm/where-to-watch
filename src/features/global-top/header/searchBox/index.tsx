@@ -14,6 +14,7 @@ import {
 import { Formik, FormikProps } from "formik";
 import { useRef } from "react";
 import { commonDictionaries } from "../../../../commons/constants/dictionaries";
+import { checkIsMacOS } from "../../../../utils/checkOS";
 import {
   SearchMovieFormValues,
   useSearchMoviesByKeyword,
@@ -48,7 +49,7 @@ export const GlobalSearchBox = () => {
         </Flex>
         <Box>
           <span>
-            <Kbd>⌘</Kbd> + <Kbd>K</Kbd>
+            {checkIsMacOS() ? <Kbd>⌘</Kbd> : <Kbd>Ctrl</Kbd>} + <Kbd>K</Kbd>
           </span>
         </Box>
       </Button>
