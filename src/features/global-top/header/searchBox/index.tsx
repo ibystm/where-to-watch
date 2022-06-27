@@ -1,7 +1,10 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Button,
+  Flex,
   Icon,
+  Kbd,
   Modal,
   ModalBody,
   ModalContent,
@@ -11,8 +14,11 @@ import {
 import { Formik, FormikProps } from "formik";
 import { useRef } from "react";
 import { commonDictionaries } from "../../../../commons/constants/dictionaries";
-import { useSearchMoviesByKeyword } from "../hooks/useSearchContentsByKeyword";
-import { SearchForm, SearchMovieFormValues } from "./SearchForm";
+import {
+  SearchMovieFormValues,
+  useSearchMoviesByKeyword,
+} from "../hooks/useSearchContentsByKeyword";
+import { SearchForm } from "./SearchForm";
 
 const initialValues = {
   searchName: "",
@@ -32,12 +38,19 @@ export const GlobalSearchBox = () => {
         borderRadius="inherit"
         display="flex"
         columnGap="2"
-        justifyContent="left"
+        justifyContent="space-between"
         onClick={onOpen}
         color="gray.400"
       >
-        <Icon as={SearchIcon} color="gray.400" />
-        <Text>{commonDictionaries.titleName}</Text>
+        <Flex>
+          <Icon as={SearchIcon} color="gray.400" />
+          <Text ml="2">{commonDictionaries.titleName}</Text>
+        </Flex>
+        <Box>
+          <span>
+            <Kbd>⌘</Kbd> + <Kbd>K</Kbd>
+          </span>
+        </Box>
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
