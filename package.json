@@ -23,8 +23,6 @@
     "firebase": "^9.6.2",
     "formik": "^2.2.9",
     "framer-motion": "^5.5.7",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
     "lodash.throttle": "^4.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -41,7 +39,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "fix": "npm run format && npm run lint:fix",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'"
   },
   "eslintConfig": {
     "extends": [
@@ -61,18 +63,19 @@
       "last 1 safari version"
     ]
   },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "npm run fix"
+    ]
+  },
   "devDependencies": {
     "@types/lodash.throttle": "^4.1.7",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write"
-    ]
   }
 }
