@@ -9,20 +9,17 @@ export const useHotKeys = (
 ) => {
   const executeHandler = useCallback(
     (ev: KeyboardEvent): void => {
-      if (useMetaKey && ev.key === key) {
+      if (ev.key !== key) return;
+      if (useMetaKey) {
         if (checkIsMacOS() && ev.metaKey) {
           handler();
           return;
         }
-        if (!checkIsMacOS() && ev.ctrlKey) {
-          handler();
-          return;
-        }
+        if (!ev.ctrlKey) return;
+        return handler();
       }
 
-      if (ev.key === key) {
-        handler();
-      }
+      handler();
     },
     [handler, key, useMetaKey]
   );
