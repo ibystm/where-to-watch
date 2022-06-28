@@ -1,6 +1,6 @@
 import { useDisclosure } from "@chakra-ui/react";
-import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useHotKeys } from "../../../../hooks/useHotkeys";
 import { actions, useSelector } from "../../../../store";
 import { ModeType } from "../../../../types/redux/contentsMode";
 
@@ -13,19 +13,7 @@ export const useSearchMoviesByKeyword = (): typeof result => {
   const { searchMovie, searchTV } = actions;
   const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const handler = useCallback(
-    (ev: KeyboardEvent) => {
-      if (ev.metaKey && ev.key === "k") {
-        onOpen();
-      }
-    },
-    [onOpen]
-  );
-  useEffect(() => {
-    document.addEventListener("keydown", handler);
-
-    return () => document.removeEventListener("keydown", handler);
-  }, [handler]);
+  useHotKeys("k", onOpen, true);
 
   const handleSubmit = (values: SearchMovieFormValues): void => {
     if (values.searchName.length === 0) {
