@@ -19,6 +19,7 @@ export const useSearchMoviesByKeyword = (): typeof result => {
     if (values.searchName.length === 0) {
       return;
     }
+
     if (modeIndex === ModeType.Movie) {
       dispatch(searchMovie({ keyword: values.searchName }));
     } else {
