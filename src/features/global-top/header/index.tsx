@@ -13,12 +13,7 @@ export const Header: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Box
-      w="100%"
-      boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
-      borderColor="purple.100"
-      mb="8px"
-    >
+    <Box w="100%" borderColor="purple.100" mb="2">
       <Flex
         h="100px"
         marginX="48px"
@@ -28,22 +23,17 @@ export const Header: React.FC = () => {
         <Button
           // TODO ユーザー管理できたら後で直す
           onClick={() => navigate("/")}
-          backgroundColor="white"
+          backgroundColor="inherit"
           height="70%"
         >
           <Heading size="lg">Where to watch.</Heading>
         </Button>
-        <Flex
-          minW="400px"
-          boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
-          borderRadius="20px"
-        >
+        <Flex minW="400px" borderRadius="20px">
           <GlobalSearchBox />
         </Flex>
         {/* <Button // ログインを実装するか要検討
           colorScheme="purple"
           variant="outline"
-          boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
           onClick={onPressButton}
           color="purple.500"
         >

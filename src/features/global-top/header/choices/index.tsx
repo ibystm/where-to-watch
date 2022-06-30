@@ -14,15 +14,7 @@ export const ChoiceTabs: React.FC = () => {
     >
       <TabList>
         {modes.map((m, index) => (
-          <Tab
-            key={m}
-            boxShadow={
-              index === modeIndex
-                ? "10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
-                : undefined
-            }
-            _focus={{ boxShadow: "none" }}
-          >
+          <Tab key={m} _focus={{ boxShadow: "none" }}>
             {m}
           </Tab>
         ))}

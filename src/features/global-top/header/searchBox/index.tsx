@@ -35,7 +35,6 @@ export const GlobalSearchBox = () => {
         w="100%"
         h="100%"
         p="4"
-        boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
         borderRadius="inherit"
         display="flex"
         columnGap="2"

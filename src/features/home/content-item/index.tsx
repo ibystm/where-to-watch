@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Icon, Image, Text } from "@chakra-ui/react";
+import { Button, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdOutlineHideImage } from "react-icons/md";
 import { commonDictionaries } from "../../../commons/constants/dictionaries";
@@ -38,9 +38,8 @@ export const ContentItem: React.FC<P> = ({ contentItem, modalOpen }) => {
       variant="unstyled"
       borderRadius="24px"
       padding="8px 8px"
-      backgroundColor="white"
+      backgroundColor="inherit"
       marginRight="24px"
-      boxShadow="10px 10px 24px #e6e6e6, -10px -10px 24px #ffffff"
       _focus={{ boxShadow: "none" }}
       _hover={{
         transition: "all 0.5s 0.5s",
@@ -80,26 +79,25 @@ export const ContentItem: React.FC<P> = ({ contentItem, modalOpen }) => {
           <Text color="gray.400">{commonDictionaries.noImageIcon}</Text>
         </Flex>
       )}
-      <Box w="100%" mt="4px">
-        <Text
-          fontSize="sm"
-          fontWeight="bold"
-          textOverflow="ellipsis"
-          whiteSpace="nowrap"
-          overflow="hidden"
-          color="gray.600"
-        >
-          {title ? title : commonDictionaries.noTitle}
-        </Text>
-        <Text fontSize="sm" color="gray.600">
-          {releaseDate
-            ? `${commonDictionaries.releaseDate}: ${releaseDate.replaceAll(
-                "-",
-                "/"
-              )}`
-            : commonDictionaries.noReleaseDate}
-        </Text>
-      </Box>
+
+      <Text
+        mt="1"
+        fontSize="sm"
+        fontWeight="bold"
+        textOverflow="ellipsis"
+        whiteSpace="nowrap"
+        overflow="hidden"
+      >
+        {title ? title : commonDictionaries.noTitle}
+      </Text>
+      <Text fontSize="sm">
+        {releaseDate
+          ? `${commonDictionaries.releaseDate}: ${releaseDate.replaceAll(
+              "-",
+              "/"
+            )}`
+          : commonDictionaries.noReleaseDate}
+      </Text>
     </Button>
   );
 };
