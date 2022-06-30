@@ -7,6 +7,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { App } from "./App";
+import theme from "./commons/color-mode/theme";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./store";
 
@@ -15,6 +16,7 @@ ReactDOM.render(
     <Provider store={store}>
       <ColorModeScript />
       <ChakraProvider theme={defaultTheme}>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <App />
       </ChakraProvider>
     </Provider>

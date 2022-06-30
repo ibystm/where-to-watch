@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, useColorMode } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { DropDownMenu } from "../dropdown-menu";
@@ -10,6 +10,7 @@ export const Header: React.FC = () => {
   // TODO
   // const { buttonText, onPressButton } = useSwitchAuthButton();
   const navigate = useNavigate();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Box
@@ -48,6 +49,9 @@ export const Header: React.FC = () => {
         >
           {buttonText}
         </Button> */}
+        <Button onClick={toggleColorMode}>
+          Toggle {colorMode === "light" ? "dark" : "light"}
+        </Button>
         <ChoiceTabs />
         <DropDownMenu />
       </Flex>
