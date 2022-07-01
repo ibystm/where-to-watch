@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { DropDownMenu } from "../dropdown-menu";
 import { ChoiceTabs } from "./choices/index";
+import { DarkModeChangeButton } from "./dark-mode-change-button";
 // import { useSwitchAuthButton } from "./hooks/useSwitchAuthButton";
 import { GlobalSearchBox } from "./searchBox";
 
@@ -28,7 +29,7 @@ export const Header: React.FC = () => {
         >
           <Heading size="lg">Where to watch.</Heading>
         </Button>
-        <Flex minW="400px" borderRadius="20px">
+        <Flex maxW="400px" borderRadius="20px" flexGrow="1">
           <GlobalSearchBox />
         </Flex>
         {/* <Button // ログインを実装するか要検討
@@ -39,10 +40,10 @@ export const Header: React.FC = () => {
         >
           {buttonText}
         </Button> */}
-        <Button onClick={toggleColorMode}>
-          Toggle {colorMode === "light" ? "dark" : "light"}
-        </Button>
-        <ChoiceTabs />
+        <Flex gap="4" marginInline="4">
+          <ChoiceTabs />
+          <DarkModeChangeButton />
+        </Flex>
         <DropDownMenu />
       </Flex>
     </Box>

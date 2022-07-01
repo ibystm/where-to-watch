@@ -32,8 +32,8 @@ export const GlobalSearchBox = () => {
   return (
     <>
       <Button
-        w="100%"
         h="100%"
+        w="100%"
         p="4"
         borderRadius="inherit"
         display="flex"
@@ -41,6 +41,7 @@ export const GlobalSearchBox = () => {
         justifyContent="space-between"
         onClick={onOpen}
         color="gray.400"
+        flexGrow="1"
       >
         <Flex>
           <Icon as={SearchIcon} color="gray.400" />
@@ -54,7 +55,7 @@ export const GlobalSearchBox = () => {
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent backgroundColor="white" borderRadius="20px">
+        <ModalContent borderRadius="20px">
           <ModalBody>
             <Formik
               innerRef={formikRef}
