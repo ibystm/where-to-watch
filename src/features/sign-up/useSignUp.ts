@@ -6,7 +6,8 @@ import { storeUser } from "../../store/slices/usersSlice";
 export const useSignUp = () => {
   const dispatch: AppDispatch = useDispatch();
   const signUp = async (email: string, password: string) => {
-    await auth.createUserWithEmailAndPassword(email, password).then((res) => {
+    const res = await auth.createUserWithEmailAndPassword(email, password);
+    if (res) {
       const fbUser = res.user;
       if (fbUser === null) {
         throw new Error("No user found.");
@@ -18,7 +19,7 @@ export const useSignUp = () => {
           userName: fbUser.displayName,
         })
       );
-    });
+    }
   };
   return { signUp };
 };
