@@ -109,6 +109,9 @@ export const ContentDetailModal: React.FC<P> = ({
           >
             {youtubeUrl && (
               <>
+                <Box p="4">
+                  <Text fontWeight="semibold">Trailer video</Text>
+                </Box>
                 <AspectRatio ratio={16 / 9} w="100%">
                   <iframe
                     src={youtubeUrl}
@@ -116,9 +119,6 @@ export const ContentDetailModal: React.FC<P> = ({
                     allowFullScreen
                   />
                 </AspectRatio>
-                <Box p="2">
-                  <Text fontWeight="bold">Trailer video</Text>
-                </Box>
               </>
             )}
           </Flex>
