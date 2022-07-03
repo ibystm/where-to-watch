@@ -10,9 +10,9 @@ export const useDropDownMenu = (): typeof result => {
     return (
       <MenuList>
         {/* TODO */}
-        {/* {user.id === null && (
+        {user.id === null && (
           <MenuItem onClick={() => navigate("/signin")}>サインイン</MenuItem>
-        )} */}
+        )}
         <MenuItem onClick={() => navigate("/about")}>
           Where to watchについて
         </MenuItem>
