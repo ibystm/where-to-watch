@@ -115,13 +115,7 @@ export const SignUp: React.FC = () => {
           >
             {({ values, handleChange, touched, errors, handleBlur }) => (
               <Form>
-                <Stack
-                  spacing={6}
-                  p="1rem"
-                  backgroundColor="whiteAlpha.900"
-                  boxShadow="2xl"
-                  borderRadius="20px"
-                >
+                <Stack spacing={6} p="1rem" boxShadow="2xl" borderRadius="20px">
                   <FormControl
                     isInvalid={!!errors.username && !!touched.username}
                   >

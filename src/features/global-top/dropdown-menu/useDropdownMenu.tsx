@@ -1,10 +1,12 @@
 import { MenuItem, MenuList } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "../../../store";
+import { useSignOut } from "../../sign-in/useSignOut";
 
 export const useDropDownMenu = (): typeof result => {
   const navigate = useNavigate();
   const user = useSelector((s) => s.user);
+  const { signOut } = useSignOut();
 
   const createMenuItems = (): JSX.Element => {
     return (
@@ -18,7 +20,9 @@ export const useDropDownMenu = (): typeof result => {
         </MenuItem>
         <MenuItem onClick={() => navigate("/credits")}>Credits</MenuItem>
         {typeof user.id === "string" && <MenuItem>アカウント</MenuItem>}
-        {typeof user.id === "string" && <MenuItem>サインアウト</MenuItem>}
+        {typeof user.id === "string" && (
+          <MenuItem onClick={signOut}>サインアウト</MenuItem>
+        )}
       </MenuList>
     );
   };
