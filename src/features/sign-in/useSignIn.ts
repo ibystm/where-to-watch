@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { auth } from "../../db/firebase";
+import { useActions } from "../../hooks/useActions";
+import { actions } from "../../store/index";
 import { storeUser } from "../../store/slices/usersSlice";
 type UseSignInRes = {
   signIn: (email: string, password: string) => Promise<void>;
@@ -7,11 +9,11 @@ type UseSignInRes = {
 
 export const useSignIn = (): UseSignInRes => {
   const dispatch = useDispatch();
+  const { startLoading, endLoading } = useActions(actions);
   const signIn = async (email: string, password: string) => {
-    auth.signInWithEmailAndPassword(email, password).then((res) => {
-      if (!res.user) {
-        throw new Error("Not found user!");
-      }
+    startLoading();
+    const res = await auth.signInWithEmailAndPassword(email, password);
+    if (res.user) {
       dispatch(
         storeUser({
           email: res.user.email,
@@ -19,7 +21,8 @@ export const useSignIn = (): UseSignInRes => {
           id: res.user.uid,
         })
       );
-    });
+    }
+    endLoading();
   };
 
   return { signIn };
