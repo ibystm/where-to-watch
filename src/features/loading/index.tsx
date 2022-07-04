@@ -8,10 +8,8 @@ export const Spinner: React.FC<P> = (props) => {
   const { masked, ...rest } = props;
   return masked ? (
     <Box
-      h="100vh"
-      w="100vw"
       zIndex="modal"
-      backgroundColor="gray.100"
+      backgroundColor="gray.200"
       opacity="0.6"
       position="absolute"
       top="0"
