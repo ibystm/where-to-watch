@@ -6,7 +6,7 @@ import { useSignOut } from "../../sign-in/useSignOut";
 export const useDropDownMenu = (): typeof result => {
   const navigate = useNavigate();
   const user = useSelector((s) => s.user);
-  const { signOut } = useSignOut();
+  const { signOut, isOpen, onClose } = useSignOut();
 
   const createMenuItems = (): JSX.Element => {
     return (
@@ -27,6 +27,6 @@ export const useDropDownMenu = (): typeof result => {
     );
   };
 
-  const result = { createMenuItems };
+  const result = { createMenuItems, isOpen, onClose };
   return result;
 };
