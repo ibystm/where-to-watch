@@ -44,20 +44,18 @@ export const SiginIn: React.FC = () => {
   const { signIn } = useSignIn();
   const handleShowClick = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
-  const toSignUpPage = () => {
-    navigate("/signup");
-  };
+
   const handleSubmit = async () => {
     if (errors.email && errors.password) {
       return;
     }
     await signIn(values.email, values.password).catch((e) => {
-      console.log(typeof e.code);
       if (e.code && e.code === 400) {
         const msg = handleErrorByCodes(e.code);
         setErrorMessage(msg);
       }
     });
+    navigate("/");
   };
 
   return (
@@ -144,7 +142,13 @@ export const SiginIn: React.FC = () => {
       </Stack>
       <Box>
         New to use ?{" "}
-        <Button color="purple.500" onClick={toSignUpPage} variant="link">
+        <Button
+          color="purple.500"
+          onClick={() => {
+            navigate("/signup");
+          }}
+          variant="link"
+        >
           Sign Up
         </Button>
       </Box>
