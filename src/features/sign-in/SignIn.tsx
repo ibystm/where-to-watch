@@ -57,6 +57,10 @@ export const SiginIn: React.FC = () => {
     });
     navigate("/");
   };
+  const onKeyDownEnter = (event: React.KeyboardEvent) => {
+    if (event.key !== "Enter") return;
+    handleSubmit();
+  };
 
   return (
     <Flex
@@ -109,6 +113,7 @@ export const SiginIn: React.FC = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     borderRadius="20px"
+                    onKeyDown={onKeyDownEnter}
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
