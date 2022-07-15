@@ -10,6 +10,7 @@ import {
   InputLeftElement,
   InputRightElement,
   Stack,
+  VStack,
 } from "@chakra-ui/react";
 import { Form, Formik, FormikErrors } from "formik";
 import React, { useState } from "react";
@@ -219,12 +220,15 @@ export const SignUp: React.FC = () => {
           </Formik>
         </Box>
       </Stack>
-      <Box>
-        You have a account ?{" "}
+      <VStack>
         <Button color="purple.500" onClick={toSignInPage} variant="link">
           Sign In
         </Button>
-      </Box>
+        <Box>Or</Box>
+        <Button onClick={() => navigate("/")} variant="link">
+          Use without account
+        </Button>
+      </VStack>
     </Flex>
   );
 };

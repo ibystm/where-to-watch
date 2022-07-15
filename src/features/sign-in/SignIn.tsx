@@ -141,17 +141,27 @@ export const SiginIn: React.FC = () => {
         </Box>
       </Stack>
       <Box>
-        New to use ?{" "}
         <Button
           color="purple.500"
           onClick={() => {
             navigate("/signup");
           }}
           variant="link"
+          p={1}
         >
           Sign Up
         </Button>
       </Box>
+      <Box>Or</Box>
+      <Button
+        onClick={() => {
+          navigate("/");
+        }}
+        variant="link"
+        p={1}
+      >
+        Use without account
+      </Button>
     </Flex>
   );
 };
