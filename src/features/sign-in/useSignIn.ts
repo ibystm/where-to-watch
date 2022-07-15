@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-import { auth } from "../../db/firebase";
+import { auth } from "../../app/firebase";
+
 import { useActions } from "../../hooks/useActions";
 import { actions } from "../../store/index";
 import { storeUser } from "../../store/slices/usersSlice";

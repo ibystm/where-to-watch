@@ -12,8 +12,8 @@ import {
   Stack,
   VStack,
 } from "@chakra-ui/react";
-import { Form, Formik, FormikErrors } from "formik";
-import React, { useState } from "react";
+import { Form, Formik, FormikErrors, FormikProps } from "formik";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { ErrorMessage } from "../error-message/ErrorMessage";
@@ -67,9 +67,6 @@ export const SignUp: React.FC = () => {
   const { signUp } = useSignUp();
   const handleShowClick = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
-  const toSignInPage = () => {
-    navigate("/signin");
-  };
   const hasError = (errors: FormikErrors<SignUpValue>): boolean => {
     return (
       !!errors.confirmPassword ||
@@ -89,6 +86,11 @@ export const SignUp: React.FC = () => {
         }
         console.log(e);
       });
+  };
+  const formikRef = useRef<FormikProps<SignUpValue>>(null);
+  const submitOnEnter = (event: React.KeyboardEvent) => {
+    if (event.key !== "Enter") return;
+    formikRef.current?.handleSubmit();
   };
 
   return (
@@ -110,6 +112,7 @@ export const SignUp: React.FC = () => {
         </Heading>
         <Box minW={{ base: "90%", md: "468px" }}>
           <Formik
+            innerRef={formikRef}
             initialValues={initialValues}
             validationSchema={validationScheme}
             onSubmit={onSubmit}
@@ -190,6 +193,7 @@ export const SignUp: React.FC = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         borderRadius="20px"
+                        onKeyDown={submitOnEnter}
                       />
                       <InputRightElement width="4.5rem">
                         <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -221,7 +225,11 @@ export const SignUp: React.FC = () => {
         </Box>
       </Stack>
       <VStack>
-        <Button color="purple.500" onClick={toSignInPage} variant="link">
+        <Button
+          color="purple.500"
+          onClick={() => navigate("/signin")}
+          variant="link"
+        >
           Sign In
         </Button>
         <Box>Or</Box>

@@ -1,7 +1,7 @@
 import firebase from "firebase/compat/app";
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { auth } from "../db/firebase";
+import { auth } from "../app/firebase";
 import { storeUser } from "../store/slices/usersSlice";
 
 type AuthContextType = {

@@ -1,6 +1,6 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
-import { auth } from "../../db/firebase";
+import { auth } from "../../app/firebase";
 import { actions } from "../../store";
 import { signOutUser } from "../../store/slices/usersSlice";
 
