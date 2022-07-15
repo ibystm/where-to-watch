@@ -9,7 +9,7 @@ export const Spinner: React.FC<P> = (props) => {
   return masked ? (
     <Box
       zIndex="modal"
-      backgroundColor="gray.200"
+      backgroundColor="gray.300"
       opacity="0.6"
       position="absolute"
       top="0"
@@ -20,7 +20,7 @@ export const Spinner: React.FC<P> = (props) => {
       <ChakraSpinner
         {...rest}
         size="xl"
-        colorScheme="purple"
+        color="purple.500"
         thickness="3px"
         position="absolute"
         left="50%"
