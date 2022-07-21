@@ -1,5 +1,10 @@
 import { FirestoreTypesCommon } from "./firestoreTypesCommon";
 
-export type FirestoreTypesUsers = {
+export type BasicUserData = {
   userId: string;
-} & FirestoreTypesCommon;
+  email: string;
+  name: string;
+  deleted: boolean;
+};
+
+export type FirestoreUser = BasicUserData & FirestoreTypesCommon;
