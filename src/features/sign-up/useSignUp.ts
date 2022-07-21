@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { auth } from "../../app/firebase";
+import { addFirestoreUser } from "../../db/users";
 import { useActions } from "../../hooks/useActions";
 import { AppDispatch } from "../../store";
 import { actions } from "../../store/index";
@@ -12,15 +13,19 @@ export const useSignUp = () => {
     startLoading();
     const res = await auth.createUserWithEmailAndPassword(email, password);
     if (res) {
-      const fbUser = res.user;
-      if (fbUser === null) {
+      if (res.user === null) {
         throw new Error("No user found.");
       }
+      await addFirestoreUser({
+        userId: res.user.uid,
+        name: res.user.displayName ?? "",
+        email: res.user.email ?? "",
+      });
       dispatch(
         storeUser({
-          id: fbUser.uid,
-          email: fbUser.email,
-          userName: fbUser.displayName,
+          id: res.user.uid,
+          email: res.user.email,
+          userName: res.user.displayName,
         })
       );
     }
