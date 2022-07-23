@@ -76,16 +76,13 @@ export const SignUp: React.FC = () => {
     );
   };
   const onSubmit = async (values: SignUpValue) => {
-    await signUp(values.email, values.password)
-      .then(() => {
-        navigate("/");
-      })
-      .catch((e) => {
-        if (e.code && typeof e.code) {
-          setSubmitError(handleErrorByCodes(e.code));
-        }
-        console.log(e);
-      });
+    await signUp(values.email, values.password).catch((e) => {
+      if (e.code && typeof e.code) {
+        setSubmitError(handleErrorByCodes(e.code));
+      }
+      console.error(e);
+    });
+    navigate("/");
   };
   const formikRef = useRef<FormikProps<SignUpValue>>(null);
   const submitOnEnter = (event: React.KeyboardEvent) => {
