@@ -11,21 +11,21 @@ export const useSignUp = () => {
   const { startLoading, endLoading } = useActions(actions);
   const signUp = async (email: string, password: string) => {
     startLoading();
-    const res = await auth.createUserWithEmailAndPassword(email, password);
-    if (res) {
-      if (res.user === null) {
+    const { user } = await auth.createUserWithEmailAndPassword(email, password);
+    if (user) {
+      if (user === null) {
         throw new Error("No user found.");
       }
       await addFirestoreUser({
-        userId: res.user.uid,
-        name: res.user.displayName ?? "",
-        email: res.user.email ?? "",
+        userId: user.uid,
+        name: user.displayName ?? "",
+        email: user.email ?? "",
       });
       dispatch(
         storeUser({
-          id: res.user.uid,
-          email: res.user.email,
-          userName: res.user.displayName,
+          id: user.uid,
+          email: user.email,
+          userName: user.displayName,
         })
       );
     }
