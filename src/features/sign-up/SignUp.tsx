@@ -21,7 +21,7 @@ import { useHandleFBErrors } from "../sign-in/useHandleFBErrors";
 import { useSignUp } from "./useSignUp";
 
 type SignUpValue = {
-  username: string;
+  userName: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -29,7 +29,7 @@ type SignUpValue = {
 
 const passwordRegex = /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/;
 const validationScheme = Yup.object().shape({
-  username: Yup.string()
+  userName: Yup.string()
     .required("必須です")
     .min(5, "5文字以上にしてください")
     .max(8, "12文字以下にしてください"),
@@ -55,7 +55,7 @@ const validationScheme = Yup.object().shape({
 });
 
 const initialValues: SignUpValue = {
-  username: "",
+  userName: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -73,11 +73,15 @@ export const SignUp: React.FC = () => {
       !!errors.confirmPassword ||
       !!errors.email ||
       !!errors.password ||
-      !!errors.username
+      !!errors.userName
     );
   };
   const onSubmit = async (values: SignUpValue) => {
-    await signUp(values.email, values.password).catch((e) => {
+    await signUp({
+      email: values.email,
+      password: values.password,
+      userName: values.userName,
+    }).catch((e) => {
       if (e.code && typeof e.code) {
         setSubmitError(handleErrorByCodes(e.code));
       }
@@ -119,21 +123,21 @@ export const SignUp: React.FC = () => {
               <Form>
                 <Stack spacing={6} p="1rem" boxShadow="2xl" borderRadius="20px">
                   <FormControl
-                    isInvalid={!!errors.username && !!touched.username}
+                    isInvalid={!!errors.userName && !!touched.userName}
                   >
                     <InputGroup>
                       <InputLeftElement pointerEvents="none" />
                       <Input
-                        value={values.username}
-                        id="username"
+                        value={values.userName}
+                        id="userName"
                         placeholder="User name"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         borderRadius="20px"
                       />
                     </InputGroup>
-                    {touched.username && errors.username && (
-                      <FormErrorMessage>{errors.username}</FormErrorMessage>
+                    {touched.userName && errors.userName && (
+                      <FormErrorMessage>{errors.userName}</FormErrorMessage>
                     )}
                   </FormControl>
                   <FormControl isInvalid={!!(errors.email && touched.email)}>

@@ -1,7 +1,7 @@
 import { addDoc, collection } from "firebase/firestore";
-import db from "..";
-import { BasicUserData } from "../../types/db/firestoreTypesUsers";
-import { collectionList } from "../constants/index";
+import db from "../..";
+import { BasicUserData } from "../../../types/db/firestoreTypesUsers";
+import { collectionList } from "../../constants/index";
 
 type AddUserData = Omit<BasicUserData, "deleted">;
 
@@ -12,6 +12,6 @@ export const addFirestoreUser = async (params: AddUserData) => {
       deleted: false,
     });
   } catch (e) {
-    console.error(e);
+    throw e;
   }
 };
