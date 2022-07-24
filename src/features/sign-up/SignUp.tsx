@@ -27,7 +27,7 @@ type SignUpValue = {
   confirmPassword: string;
 };
 
-const passwordRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[!-~]{10,}$/;
+const passwordRegex = /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/;
 const validationScheme = Yup.object().shape({
   username: Yup.string()
     .required("必須です")
