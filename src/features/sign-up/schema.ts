@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+
 const passwordRegex = /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/;
 export const validationScheme = Yup.object().shape({
   userName: Yup.string()

@@ -3,7 +3,7 @@ import { About } from "./about";
 import { Credits } from "./credits";
 import { Home } from "./home";
 import { SiginIn } from "./sign-in/SignIn";
-import { SignUp } from "./sign-up/SignUp";
+import { SignUp } from "./sign-up";
 
 export const routes = (isSignIn: boolean): RouteObject[] => [
   {

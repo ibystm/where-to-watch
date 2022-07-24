@@ -12,22 +12,13 @@ import {
   Stack,
   VStack,
 } from "@chakra-ui/react";
-import { Form, Formik, FormikErrors, FormikProps } from "formik";
-import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Form, Formik, FormikProps } from "formik";
+import React, { useRef } from "react";
 import { ErrorMessage } from "../error-message/ErrorMessage";
-import { useHandleFBErrors } from "../sign-in/useHandleFBErrors";
 import { validationScheme } from "./schema";
-import { useSignUp } from "./useSignUp";
+import { SignUpValue, useSignUp } from "./useSignUp";
 
-type SignUpValue = {
-  userName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
-
-const initialValues: SignUpValue = {
+const initialValues = {
   userName: "",
   email: "",
   password: "",
@@ -35,37 +26,20 @@ const initialValues: SignUpValue = {
 };
 
 export const SignUp: React.FC = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [submitError, setSubmitError] = useState<string>("");
-  const { handleErrorByCodes } = useHandleFBErrors();
-  const { signUp } = useSignUp();
-  const handleShowClick = () => setShowPassword(!showPassword);
-  const navigate = useNavigate();
-  const hasError = (errors: FormikErrors<SignUpValue>): boolean => {
-    return (
-      !!errors.confirmPassword ||
-      !!errors.email ||
-      !!errors.password ||
-      !!errors.userName
-    );
-  };
-  const onSubmit = async (values: SignUpValue) => {
-    await signUp({
-      email: values.email,
-      password: values.password,
-      userName: values.userName,
-    }).catch((e) => {
-      if (e.code && typeof e.code) {
-        setSubmitError(handleErrorByCodes(e.code));
-      }
-      console.error(e);
-    });
-    navigate("/");
-  };
+  const {
+    onSubmit,
+    submitError,
+    showPassword,
+    handleShowClick,
+    hasError,
+    navigate,
+  } = useSignUp();
+
   const formikRef = useRef<FormikProps<SignUpValue>>(null);
   const submitOnEnter = (event: React.KeyboardEvent) => {
-    if (event.key !== "Enter") return;
-    formikRef.current?.handleSubmit();
+    console.log("submitted!!");
+    if (event.key === "Enter") return;
+    // handleSubmit();
   };
 
   return (
