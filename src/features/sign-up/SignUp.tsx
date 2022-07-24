@@ -49,8 +49,9 @@ const validationScheme = Yup.object().shape({
     .max(24, "24文字以下にしてください")
     .matches(
       passwordRegex,
-      'message: "大文字・小文字・数字を含むパスワードを指定してください'
-    ),
+      "大文字・小文字・数字を含むパスワードを指定してください"
+    )
+    .oneOf([Yup.ref("password")], "パスワードが一致しません"),
 });
 
 const initialValues: SignUpValue = {
