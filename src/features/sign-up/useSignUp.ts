@@ -8,7 +8,7 @@ import { useActions } from "../../hooks/useActions";
 import { AppDispatch } from "../../store";
 import { actions } from "../../store/index";
 import { storeUser } from "../../store/slices/usersSlice";
-import { useHandleFBErrors } from "../sign-in/useHandleFBErrors";
+import { handleErrorByCodes } from "../../utils/firebase/handleError";
 
 export type SignUpValue = {
   userName: string;
@@ -22,7 +22,6 @@ export const useSignUp = () => {
   const { startLoading, endLoading } = useActions(actions);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string>("");
-  const { handleErrorByCodes } = useHandleFBErrors();
   const handleShowClick = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
   const hasError = (errors: FormikErrors<SignUpValue>): boolean => {

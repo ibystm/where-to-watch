@@ -16,9 +16,9 @@ import {
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { handleErrorByCodes } from "../../utils/firebase/handleError";
 import { ErrorMessage } from "../error-message/ErrorMessage";
 import { schema } from "./schema";
-import { useHandleFBErrors } from "./useHandleFBErrors";
 import { useSignIn } from "./useSignIn";
 
 export const SiginIn: React.FC = () => {
@@ -26,7 +26,6 @@ export const SiginIn: React.FC = () => {
     useFormik(schema);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const { handleErrorByCodes } = useHandleFBErrors();
   const { signIn } = useSignIn();
   const handleShowClick = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
@@ -53,7 +52,6 @@ export const SiginIn: React.FC = () => {
       flexDirection="column"
       width="100wh"
       height="100vh"
-      // backgroundColor="gray.200"
       justifyContent="center"
       alignItems="center"
     >
