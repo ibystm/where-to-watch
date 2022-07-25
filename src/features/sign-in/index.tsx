@@ -13,39 +13,25 @@ import {
   Link,
   Stack,
 } from "@chakra-ui/react";
-import { useFormik } from "formik";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { handleErrorByCodes } from "../../utils/firebase/handleError";
+import React from "react";
 import { ErrorMessage } from "../error-message/ErrorMessage";
-import { schema } from "./schema";
 import { useSignIn } from "./useSignIn";
 
 export const SiginIn: React.FC = () => {
-  const { errors, isValid, touched, values, handleChange, handleBlur } =
-    useFormik(schema);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const { signIn } = useSignIn();
-  const handleShowClick = () => setShowPassword(!showPassword);
-  const navigate = useNavigate();
-
-  const handleSubmit = async () => {
-    if (errors.email && errors.password) {
-      return;
-    }
-    await signIn(values.email, values.password).catch((e) => {
-      if (e.code && e.code === 400) {
-        const msg = handleErrorByCodes(e.code);
-        setErrorMessage(msg);
-      }
-    });
-    navigate("/");
-  };
-  const onKeyDownEnter = (event: React.KeyboardEvent) => {
-    if (event.key !== "Enter") return;
-    handleSubmit();
-  };
+  const {
+    errors,
+    values,
+    touched,
+    handleBlur,
+    handleChange,
+    handleShowClick,
+    showPassword,
+    onKeyDownEnter,
+    isValid,
+    navigate,
+    handleSubmit,
+    errorMessage,
+  } = useSignIn();
 
   return (
     <Flex
