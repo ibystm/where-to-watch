@@ -16,28 +16,14 @@ import {
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as Yup from "yup";
 import { ErrorMessage } from "../error-message/ErrorMessage";
+import { schema } from "./schema";
 import { useHandleFBErrors } from "./useHandleFBErrors";
 import { useSignIn } from "./useSignIn";
 
-const validationScheme = {
-  initialValues: {
-    email: "",
-    password: "",
-  },
-  validationSchema: Yup.object({
-    email: Yup.string().email().required(),
-    password: Yup.string().required().min(8, "8文字以上にしてください"),
-  }),
-  onSubmit: () => {
-    console.log("submit is Done!!");
-  },
-};
-
 export const SiginIn: React.FC = () => {
   const { errors, isValid, touched, values, handleChange, handleBlur } =
-    useFormik(validationScheme);
+    useFormik(schema);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const { handleErrorByCodes } = useHandleFBErrors();
