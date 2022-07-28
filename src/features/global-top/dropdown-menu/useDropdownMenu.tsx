@@ -19,7 +19,9 @@ export const useDropDownMenu = (): typeof result => {
           Where to watchについて
         </MenuItem>
         <MenuItem onClick={() => navigate("/credits")}>Credits</MenuItem>
-        {typeof user.id === "string" && <MenuItem>アカウント</MenuItem>}
+        {typeof user.id === "string" && (
+          <MenuItem onClick={() => navigate("/account")}>アカウント</MenuItem>
+        )}
         {typeof user.id === "string" && (
           <MenuItem onClick={signOut}>サインアウト</MenuItem>
         )}
