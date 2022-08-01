@@ -20,7 +20,7 @@ export const useDropDownMenu = (): typeof result => {
         </MenuItem>
         <MenuItem onClick={() => navigate("/credits")}>Credits</MenuItem>
         {typeof user.id === "string" && (
-          <MenuItem onClick={() => navigate("/account")}>アカウント</MenuItem>
+          <MenuItem onClick={() => navigate("/myprofile")}>アカウント</MenuItem>
         )}
         {typeof user.id === "string" && (
           <MenuItem onClick={signOut}>サインアウト</MenuItem>
