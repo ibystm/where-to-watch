@@ -10,7 +10,7 @@ const shouldHideheaderPathList = [
   "/about",
   "/signin",
   "/signup",
-  "/account",
+  "/myprofile",
 ];
 
 export const useRoutesWrapper = (): typeof result => {

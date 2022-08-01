@@ -1,8 +1,8 @@
 import { Navigate, RouteObject } from "react-router-dom";
 import { About } from "./about";
-import { AccountInfo } from "./account-info";
 import { Credits } from "./credits";
 import { Home } from "./home";
+import { MyProfile } from "./my-profile";
 import { SiginIn } from "./sign-in";
 import { SignUp } from "./sign-up";
 
@@ -28,8 +28,8 @@ export const routes = (isSignIn: boolean): RouteObject[] => [
     element: <About />,
   },
   {
-    path: "/account",
-    element: <AccountInfo />,
+    path: "/myprofile",
+    element: <MyProfile />,
   },
   {
     path: "/*",
