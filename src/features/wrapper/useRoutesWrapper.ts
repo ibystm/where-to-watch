@@ -4,7 +4,14 @@ import { useGetAuth } from "../../contexts/AuthContext";
 import { useSelector } from "../../store";
 import { routes } from "../routes";
 
-const shouldHideheaderPathList = ["/credits", "/about", "/signin", "/signup"];
+// TODO: ハードコーディングを直す
+const shouldHideheaderPathList = [
+  "/credits",
+  "/about",
+  "/signin",
+  "/signup",
+  "/account",
+];
 
 export const useRoutesWrapper = (): typeof result => {
   useGetAuth();
