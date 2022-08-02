@@ -1,7 +1,5 @@
-import { collection, CollectionReference } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { collectionList } from "../../db/constants/index";
-import db from "../../db/index";
+import { collectionReferences } from "../../db/constants/collectionReferences";
 import { useSelector } from "../../store";
 import { FirestoreUser } from "../../types/db/firestoreTypesUsers";
 import { getDocs } from "../../utils/firebase/firestore/documentsHelper";
@@ -11,11 +9,6 @@ type AccountInfoState = {
   loading: boolean;
   error: any;
 };
-
-const usersRef = collection(
-  db,
-  collectionList.users
-) as CollectionReference<FirestoreUser>;
 
 export const useAccountInfo = (): typeof res => {
   const userId = useSelector((s) => s.user.id);
@@ -27,7 +20,7 @@ export const useAccountInfo = (): typeof res => {
 
   useEffect(() => {
     if (userId === null) return;
-    getDocs(usersRef)
+    getDocs(collectionReferences.users)
       .then((docs) => {
         const doc = docs.find((d) => d.userId === userId);
         if (typeof doc === "undefined") return;
