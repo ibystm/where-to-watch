@@ -1,7 +1,7 @@
 import { addDoc, collection } from "firebase/firestore";
 import db from "../..";
 import { BasicUserData } from "../../../types/db/firestoreTypesUsers";
-import { collectionList } from "../../constants/index";
+import { collectionList } from "../../constants/collectionList";
 
 type AddUserData = Omit<BasicUserData, "deleted">;
 
