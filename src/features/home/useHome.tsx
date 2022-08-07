@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useCollection } from "react-firebase-hooks/firestore";
+import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
 import { useDispatch } from "react-redux";
 import { collectionReferences } from "../../db/constants/collectionReferences";
 import { actions, AppDispatch, useSelector } from "../../store";
@@ -29,8 +29,8 @@ export const useHome = (): typeof result => {
   } = actions;
 
   const { currentPage } = usePageEndScrollObserve();
-  const [hideHeaderPathsSnapshot] =
-    useCollection<FirestoreTypesHideHeaderPaths>(
+  const [hideHeaderPathsDocs] =
+    useCollectionDataOnce<FirestoreTypesHideHeaderPaths>(
       collectionReferences.hideHeaderPaths
     );
 
@@ -46,13 +46,11 @@ export const useHome = (): typeof result => {
   }, []);
 
   useEffect(() => {
-    if (typeof hideHeaderPathsSnapshot === "undefined") return;
-    const dataList = hideHeaderPathsSnapshot.docs
-      .map((d) => d.data())
-      .map((d) => d.name);
+    if (typeof hideHeaderPathsDocs === "undefined") return;
+    const dataList = hideHeaderPathsDocs;
     dispatch(addHeaderHidePaths(dataList));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addHeaderHidePaths, dispatch]);
+  }, [hideHeaderPathsDocs]);
 
   // fetch genres
   useEffect(() => {
