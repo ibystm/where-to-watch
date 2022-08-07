@@ -32,7 +32,11 @@ const asyncActions = {
 const slice = createSlice({
   name: SLICE_NAME,
   initialState,
-  reducers: {},
+  reducers: {
+    addHeaderHidePaths: (state, { payload }) => {
+      state.hideHeaderPaths = [state, ...payload];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       asyncActions.fetchConfigurations.fulfilled,
@@ -56,6 +60,7 @@ const slice = createSlice({
 });
 
 export const configurationActions = {
+  ...slice.actions,
   ...asyncActions,
 };
 
