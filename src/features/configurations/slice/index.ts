@@ -34,7 +34,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     addHeaderHidePaths: (state, { payload }) => {
-      state.hideHeaderPaths = [...state.hideHeaderPaths, ...payload];
+      state.hideHeaderPaths = payload;
     },
   },
   extraReducers: (builder) => {

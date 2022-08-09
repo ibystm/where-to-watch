@@ -47,7 +47,7 @@ export const useHome = (): typeof result => {
 
   useEffect(() => {
     if (typeof hideHeaderPathsDocs === "undefined") return;
-    const dataList = hideHeaderPathsDocs;
+    const dataList = hideHeaderPathsDocs.map((d) => d.name);
     dispatch(addHeaderHidePaths(dataList));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hideHeaderPathsDocs]);

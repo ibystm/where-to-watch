@@ -4,18 +4,10 @@ import { useGetAuth } from "../../contexts/AuthContext";
 import { useSelector } from "../../store";
 import { routes } from "../routes";
 
-// TODO: ハードコーディングを直す
-const shouldHideheaderPathList = [
-  "/credits",
-  "/about",
-  "/signin",
-  "/signup",
-  "/myprofile",
-];
-
 export const useRoutesWrapper = (): typeof result => {
   useGetAuth();
   const userId = useSelector((s) => s.user.id);
+  const hideHeaderPaths = useSelector((s) => s.configurations.hideHeaderPaths);
   const routingList = useRoutes(routes(!!userId));
   const location = useLocation();
   const [shouldShowHeader, setShouldShowHeader] = useState(false);
@@ -30,12 +22,12 @@ export const useRoutesWrapper = (): typeof result => {
   }, []);
 
   useEffect(() => {
-    if (shouldHideheaderPathList.includes(location.pathname)) {
+    if (hideHeaderPaths.includes(location.pathname)) {
       setShouldShowHeader(false);
       return;
     }
     setShouldShowHeader(true);
-  }, [location.pathname]);
+  }, [location.pathname, hideHeaderPaths]);
 
   const result = {
     routingList,
