@@ -11,23 +11,15 @@ import {
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
-import { Formik, FormikProps } from "formik";
-import { useRef } from "react";
+import { Formik } from "formik";
 import { commonDictionaries } from "../../../../commons/constants/dictionaries";
 import { checkIsMacOS } from "../../../../utils/checkOS";
-import {
-  SearchMovieFormValues,
-  useSearchMoviesByKeyword,
-} from "../hooks/useSearchContentsByKeyword";
+import { useSearchMoviesByKeyword } from "../hooks/useSearchContentsByKeyword";
 import { SearchForm } from "./SearchForm";
 
-const initialValues = {
-  searchName: "",
-};
-
 export const GlobalSearchBox = () => {
-  const formikRef = useRef<FormikProps<SearchMovieFormValues>>(null);
-  const { handleSubmit, isOpen, onClose, onOpen } = useSearchMoviesByKeyword();
+  const { handleSubmit, isOpen, onClose, onOpen, getInitialValue } =
+    useSearchMoviesByKeyword();
 
   return (
     <>
@@ -57,11 +49,7 @@ export const GlobalSearchBox = () => {
         <ModalOverlay />
         <ModalContent borderRadius="20px">
           <ModalBody>
-            <Formik
-              innerRef={formikRef}
-              initialValues={initialValues}
-              onSubmit={handleSubmit}
-            >
+            <Formik initialValues={getInitialValue()} onSubmit={handleSubmit}>
               <SearchForm onCloseModal={onClose} />
             </Formik>
           </ModalBody>

@@ -7,13 +7,24 @@ import { ModeType } from "../../../../types/redux/contentsMode";
 export type SearchMovieFormValues = {
   searchName: string;
 };
+const initialValues: SearchMovieFormValues = {
+  searchName: "",
+};
 
 export const useSearchMoviesByKeyword = (): typeof result => {
   const dispatch = useDispatch();
   const { searchMovie, searchTV } = actions;
   const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
+  const keyword = useSelector((s) => s.searchContents.keyword);
   const { isOpen, onClose, onOpen } = useDisclosure();
   useHotKeys("k", onOpen, true);
+
+  const getInitialValue = (): SearchMovieFormValues => {
+    if (keyword.length === 0) return initialValues;
+    return {
+      searchName: keyword,
+    };
+  };
 
   const handleSubmit = (values: SearchMovieFormValues): void => {
     if (values.searchName.length === 0) {
@@ -33,6 +44,7 @@ export const useSearchMoviesByKeyword = (): typeof result => {
     isOpen,
     onOpen,
     onClose,
+    getInitialValue,
   };
 
   return result;

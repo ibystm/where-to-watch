@@ -7,14 +7,14 @@ import { usePageEndScrollObserve } from "../../../home/hooks/usePageEndScrollObs
 import { SearchMovieFormValues } from "../hooks/useSearchContentsByKeyword";
 
 export const useSearchBox = (): typeof result => {
-  const { resetSearchMode, searchMovie, searchTV, resetSearchedContents } =
+  const { resetSearchedContents, resetSearchMode, searchMovie, searchTV } =
     actions;
   const dispatch = useDispatch();
   const { values, handleChange, handleSubmit } =
     useFormikContext<SearchMovieFormValues>();
   const { currentPage } = usePageEndScrollObserve();
 
-  const modeIndex = useSelector((state) => state.contentsMode.modeIndex);
+  const modeIndex = useSelector((s) => s.contentsMode.modeIndex);
 
   useEffect(() => {
     // 0.5秒以上入力がない場合に、search requestをする
