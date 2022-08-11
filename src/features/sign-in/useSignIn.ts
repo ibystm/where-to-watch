@@ -26,17 +26,16 @@ export const useSignIn = (): typeof res => {
     if (errors.email || errors.password) {
       return;
     }
+    setErrorMessage("");
     startLoading();
-    await signIn(values.email, values.password).catch((e) => {
-      console.log({ code: e });
+    const res = await signIn(values.email, values.password).catch((e) => {
       if (e.code) {
         const msg = handleErrorByCodes(e.code);
         setErrorMessage(msg);
       }
     });
-    console.log({ res });
     endLoading();
-    // navigate("/");
+    if (res) return navigate("/");
   };
   const onKeyDownEnter = (event: React.KeyboardEvent) => {
     if (event.key !== "Enter") return;
@@ -53,7 +52,9 @@ export const useSignIn = (): typeof res => {
           id: res.user.uid,
         })
       );
+      return true;
     }
+    return false;
   };
 
   const res = {
