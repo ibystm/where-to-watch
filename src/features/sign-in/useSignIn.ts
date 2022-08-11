@@ -44,17 +44,15 @@ export const useSignIn = (): typeof res => {
 
   const signIn = async (email: string, password: string) => {
     const res = await auth.signInWithEmailAndPassword(email, password);
-    if (res.user) {
-      dispatch(
-        storeUser({
-          email: res.user.email,
-          userName: "",
-          id: res.user.uid,
-        })
-      );
-      return true;
-    }
-    return false;
+    if (!res.user) return;
+    dispatch(
+      storeUser({
+        email: res.user.email,
+        userName: "",
+        id: res.user.uid,
+      })
+    );
+    return res;
   };
 
   const res = {
