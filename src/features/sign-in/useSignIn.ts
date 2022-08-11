@@ -26,13 +26,17 @@ export const useSignIn = (): typeof res => {
     if (errors.email || errors.password) {
       return;
     }
+    startLoading();
     await signIn(values.email, values.password).catch((e) => {
-      if (e.code && e.code === 400) {
+      console.log({ code: e });
+      if (e.code) {
         const msg = handleErrorByCodes(e.code);
         setErrorMessage(msg);
       }
     });
-    navigate("/");
+    console.log({ res });
+    endLoading();
+    // navigate("/");
   };
   const onKeyDownEnter = (event: React.KeyboardEvent) => {
     if (event.key !== "Enter") return;
@@ -40,7 +44,6 @@ export const useSignIn = (): typeof res => {
   };
 
   const signIn = async (email: string, password: string) => {
-    startLoading();
     const res = await auth.signInWithEmailAndPassword(email, password);
     if (res.user) {
       dispatch(
@@ -51,7 +54,6 @@ export const useSignIn = (): typeof res => {
         })
       );
     }
-    endLoading();
   };
 
   const res = {

@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 
 type P = {
@@ -8,8 +8,10 @@ type P = {
 export const ErrorMessage: React.FC<P> = (props) => {
   const { message } = props;
   return (
-    <Text color="red" fontSize="12px" textAlign="right" mt="4px" mr="8px">
-      {message}
-    </Text>
+    <Box>
+      <Text color="red" fontSize="14px" textAlign="right" mr="2">
+        {`エラー: ${message}`}
+      </Text>
+    </Box>
   );
 };
