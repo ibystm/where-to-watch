@@ -1,9 +1,6 @@
 import { useEffect } from "react";
-import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
 import { useDispatch } from "react-redux";
-import { collectionReferences } from "../../db/constants/collectionReferences";
 import { actions, AppDispatch, useSelector } from "../../store";
-import { FirestoreTypesHideHeaderPaths } from "../../types/db/firestoreTypesHideHeaderPaths";
 import { ModeType } from "../../types/redux/contentsMode";
 import { usePageEndScrollObserve } from "./hooks/usePageEndScrollObserve";
 
@@ -25,14 +22,9 @@ export const useHome = (): typeof result => {
     resetPopularities,
     startLoading,
     endLoading,
-    addHeaderHidePaths,
   } = actions;
 
   const { currentPage } = usePageEndScrollObserve();
-  const [hideHeaderPathsDocs] =
-    useCollectionDataOnce<FirestoreTypesHideHeaderPaths>(
-      collectionReferences.hideHeaderPaths
-    );
 
   const resetContents = (): void => {
     dispatch(resetDiscovers());
@@ -44,13 +36,6 @@ export const useHome = (): typeof result => {
     dispatch(fetchConfigurations());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (typeof hideHeaderPathsDocs === "undefined") return;
-    const dataList = hideHeaderPathsDocs.map((d) => d.name);
-    dispatch(addHeaderHidePaths(dataList));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hideHeaderPathsDocs]);
 
   // fetch genres
   useEffect(() => {
