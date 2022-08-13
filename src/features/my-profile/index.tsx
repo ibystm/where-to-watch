@@ -1,9 +1,15 @@
-import { Box, Flex, Heading, Text, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useAccountInfo } from "./useMyProfile";
 
-// TODO
 export const MyProfile: React.FC = () => {
-  const { accountData } = useAccountInfo();
+  const { accountData, handleClickDeleteButton } = useAccountInfo();
   const { colorMode } = useColorMode();
   const { value } = accountData;
   return (
@@ -42,6 +48,11 @@ export const MyProfile: React.FC = () => {
             <Text fontSize="large" fontWeight="bold">
               {value?.createdAt ?? "不明"}
             </Text>
+          </Flex>
+          <Flex p="10" justifyContent="center">
+            <Button bg="red" onClick={handleClickDeleteButton}>
+              アカウントを削除
+            </Button>
           </Flex>
         </Box>
       </Box>

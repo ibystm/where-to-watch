@@ -1,3 +1,4 @@
+import { deleteUser, getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { collectionReferences } from "../../db/constants/collectionReferences";
 import { useSelector } from "../../store";
@@ -17,6 +18,23 @@ export const useAccountInfo = (): typeof res => {
     loading: false,
     error: null,
   });
+  const handleClickDeleteButton = async (): Promise<void> => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (user === null) {
+      alert("ユーザーが見つかりません。");
+      return;
+    }
+    deleteUser(user)
+      .then((res) => {
+        // TODO
+        // モーダルを表示
+      })
+      .catch((e) => {
+        // エラハンTODO
+        console.error(e);
+      });
+  };
 
   useEffect(() => {
     if (userId === null) return;
@@ -39,6 +57,7 @@ export const useAccountInfo = (): typeof res => {
 
   const res = {
     accountData,
+    handleClickDeleteButton,
   };
   return res;
 };
