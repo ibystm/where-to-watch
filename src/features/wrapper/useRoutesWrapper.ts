@@ -39,11 +39,11 @@ export const useRoutesWrapper = (): typeof result => {
   }, []);
 
   useEffect(() => {
-    if (hideHeaderPaths.includes(location.pathname)) {
+    if (!hideHeaderPaths.includes(location.pathname)) {
+      setShouldShowHeader(true);
+    } else {
       setShouldShowHeader(false);
-      return;
     }
-    setShouldShowHeader(true);
   }, [location.pathname, hideHeaderPaths]);
 
   const result = {
