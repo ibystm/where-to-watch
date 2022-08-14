@@ -1,5 +1,6 @@
 import { deleteUser, getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { collectionReferences } from "../../db/constants/collectionReferences";
 import { useSelector } from "../../store";
 import { FirestoreUser } from "../../types/db/firestoreTypesUsers";
@@ -12,6 +13,7 @@ type AccountInfoState = {
 };
 
 export const useAccountInfo = (): typeof res => {
+  const navigate = useNavigate();
   const userId = useSelector((s) => s.user.id);
   const [accountData, setAccountData] = useState<AccountInfoState>({
     value: null,
@@ -55,9 +57,12 @@ export const useAccountInfo = (): typeof res => {
       });
   }, [userId]);
 
+  const handleClickBack = () => navigate(-1);
+
   const res = {
     accountData,
     handleClickDeleteButton,
+    handleClickBack,
   };
   return res;
 };

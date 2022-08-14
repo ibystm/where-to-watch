@@ -9,14 +9,21 @@ import {
 import { useAccountInfo } from "./useMyProfile";
 
 export const MyProfile: React.FC = () => {
-  const { accountData, handleClickDeleteButton } = useAccountInfo();
+  const { accountData, handleClickDeleteButton, handleClickBack } =
+    useAccountInfo();
   const { colorMode } = useColorMode();
   const { value } = accountData;
   return (
-    <Flex w="100vw" h="100vh" alignItems="center" justifyContent="center">
+    <Flex
+      w="100vw"
+      h="100vh"
+      alignItems="center"
+      justifyContent="center"
+      flexDirection="column"
+    >
       <Box
         w="60%"
-        h="85%"
+        h="80%"
         borderRadius="20px"
         boxShadow="lg"
         borderWidth="1px"
@@ -45,6 +52,11 @@ export const MyProfile: React.FC = () => {
             </Button>
           </Flex>
         </Box>
+      </Box>
+      <Box p="4">
+        <Button onClick={handleClickBack} colorScheme="purple" size="lg">
+          Go back
+        </Button>
       </Box>
     </Flex>
   );
