@@ -24,9 +24,11 @@ export const Credits: React.FC = () => {
           <Image src={TBDBLogo} alt="tmdb image" width="64px" />
         </Box>
       </Flex>
-      <Button size="lg" onClick={() => navigate(-1)} colorScheme="purple">
-        Go back
-      </Button>
+      <Box p="6">
+        <Button onClick={() => navigate(-1)} colorScheme="purple">
+          Go back
+        </Button>
+      </Box>
     </Box>
   );
 };

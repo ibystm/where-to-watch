@@ -47,14 +47,14 @@ export const MyProfile: React.FC = () => {
             <Text fontWeight="bold">{value?.createdAt ?? "不明"}</Text>
           </Flex>
           <Flex p="10" justifyContent="center">
-            <Button bg="red" onClick={handleClickDeleteButton}>
+            <Button bg="red" onClick={handleClickDeleteButton} color="white">
               アカウントを削除
             </Button>
           </Flex>
         </Box>
       </Box>
-      <Box p="4">
-        <Button onClick={handleClickBack} colorScheme="purple" size="lg">
+      <Box p="6">
+        <Button onClick={handleClickBack} colorScheme="purple">
           Go back
         </Button>
       </Box>
