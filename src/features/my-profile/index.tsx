@@ -23,31 +23,21 @@ export const MyProfile: React.FC = () => {
         borderStyle="solid"
         borderColor={colorMode === "dark" ? "gray.600" : undefined}
       >
-        <Heading p="8">アカウント情報</Heading>
+        <Heading size="lg" p="8">
+          アカウント情報
+        </Heading>
         <Box p="8">
           <Flex p="4" gap="96px">
-            <Text fontSize="large" fontWeight="bold">
-              ユーザーネーム
-            </Text>
-            <Text fontSize="large" fontWeight="bold">
-              {value?.name ?? "なし"}
-            </Text>
+            <Text fontWeight="bold">ユーザーネーム</Text>
+            <Text fontWeight="bold">{value?.name ?? "なし"}</Text>
           </Flex>
           <Flex p="4" gap="96px">
-            <Text fontSize="large" fontWeight="bold">
-              メールアドレス
-            </Text>
-            <Text fontSize="large" fontWeight="bold">
-              {value?.email ?? "なし"}
-            </Text>
+            <Text fontWeight="bold">メールアドレス</Text>
+            <Text fontWeight="bold">{value?.email ?? "なし"}</Text>
           </Flex>
           <Flex p="4" gap="96px">
-            <Text fontSize="large" fontWeight="bold">
-              アカウント登録日
-            </Text>
-            <Text fontSize="large" fontWeight="bold">
-              {value?.createdAt ?? "不明"}
-            </Text>
+            <Text fontWeight="bold">アカウント登録日</Text>
+            <Text fontWeight="bold">{value?.createdAt ?? "不明"}</Text>
           </Flex>
           <Flex p="10" justifyContent="center">
             <Button bg="red" onClick={handleClickDeleteButton}>
