@@ -1,5 +1,7 @@
 import {
+  Box,
   Button,
+  Checkbox,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -7,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import { deleteUser, getAuth } from "firebase/auth";
@@ -31,6 +34,9 @@ export const useAccountInfo = (): typeof res => {
     value: null,
     loading: false,
     error: null,
+  });
+  const [checkedList, setCheckedList] = useState({
+    first: false,
   });
   const handleClickDeleteButton = async (): Promise<void> => {
     const auth = getAuth();
@@ -72,18 +78,43 @@ export const useAccountInfo = (): typeof res => {
 
   const handleClickBack = () => navigate(-1);
 
+  const handleOpenModal = (): void => {
+    setCheckedList((cur) => ({
+      first: false,
+    }));
+    onOpen();
+  };
   const delteUserConfirmModal = () => (
     <Modal isOpen={isOpen} onClose={onClose} size="2xl">
       <ModalOverlay />
       <ModalContent>
         <ModalCloseButton />
-        <ModalHeader>確認</ModalHeader>
-        <ModalBody>本当にユーザーを削除しますか？</ModalBody>
+        <ModalHeader>アカウントを削除</ModalHeader>
+        <ModalBody>
+          <Box>
+            <Text p="6">
+              アカウントを削除すると、次に同意したことになります。
+            </Text>
+            <Checkbox
+              checked={checkedList.first}
+              onChange={() =>
+                setCheckedList((cur) => ({ ...cur, first: !cur.first }))
+              }
+            >
+              ユーザー情報は完全に削除されます
+            </Checkbox>
+            {/* <Checkbox>登録したブックマークは完全に削除されます</Checkbox> */}
+          </Box>
+        </ModalBody>
         <ModalFooter>
           <Button colorScheme="gray" mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button colorScheme="red" onClick={handleClickDeleteButton}>
+          <Button
+            colorScheme="red"
+            onClick={handleClickDeleteButton}
+            disabled={!checkedList.first}
+          >
             アカウントを削除
           </Button>
         </ModalFooter>
@@ -96,7 +127,7 @@ export const useAccountInfo = (): typeof res => {
     handleClickDeleteButton,
     handleClickBack,
     delteUserConfirmModal,
-    onOpen,
+    handleOpenModal,
   };
   return res;
 };

@@ -9,8 +9,12 @@ import {
 import { useAccountInfo } from "./useMyProfile";
 
 export const MyProfile: React.FC = () => {
-  const { accountData, handleClickBack, delteUserConfirmModal, onOpen } =
-    useAccountInfo();
+  const {
+    accountData,
+    handleClickBack,
+    delteUserConfirmModal,
+    handleOpenModal,
+  } = useAccountInfo();
   const { colorMode } = useColorMode();
   const { value } = accountData;
   return (
@@ -48,7 +52,7 @@ export const MyProfile: React.FC = () => {
               <Text fontWeight="bold">{value?.createdAt ?? "不明"}</Text>
             </Flex>
             <Flex p="10" justifyContent="center">
-              <Button colorScheme="red" onClick={onOpen}>
+              <Button colorScheme="red" onClick={handleOpenModal}>
                 アカウントを削除
               </Button>
             </Flex>
