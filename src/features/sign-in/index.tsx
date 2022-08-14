@@ -110,7 +110,7 @@ export const SiginIn: React.FC = () => {
               >
                 Signin
               </Button>
-              <ErrorMessage message={errorMessage} />
+              {errorMessage && <ErrorMessage message={errorMessage} />}
             </Stack>
           </form>
         </Box>
