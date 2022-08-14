@@ -1,3 +1,14 @@
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { deleteUser, getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +25,7 @@ type AccountInfoState = {
 
 export const useAccountInfo = (): typeof res => {
   const navigate = useNavigate();
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const userId = useSelector((s) => s.user.id);
   const [accountData, setAccountData] = useState<AccountInfoState>({
     value: null,
@@ -24,6 +36,7 @@ export const useAccountInfo = (): typeof res => {
     const auth = getAuth();
     const user = auth.currentUser;
     if (user === null) {
+      onClose();
       alert("ユーザーが見つかりません。");
       return;
     }
@@ -59,10 +72,31 @@ export const useAccountInfo = (): typeof res => {
 
   const handleClickBack = () => navigate(-1);
 
+  const delteUserConfirmModal = () => (
+    <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <ModalOverlay />
+      <ModalContent>
+        <ModalCloseButton />
+        <ModalHeader>確認</ModalHeader>
+        <ModalBody>本当にユーザーを削除しますか？</ModalBody>
+        <ModalFooter>
+          <Button colorScheme="gray" mr={3} onClick={onClose}>
+            Close
+          </Button>
+          <Button colorScheme="red" onClick={handleClickDeleteButton}>
+            アカウントを削除
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
+
   const res = {
     accountData,
     handleClickDeleteButton,
     handleClickBack,
+    delteUserConfirmModal,
+    onOpen,
   };
   return res;
 };
