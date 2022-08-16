@@ -12,11 +12,12 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { deleteUser, getAuth } from "firebase/auth";
+import { deleteUser, EmailAuthProvider, getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collectionReferences } from "../../db/constants/collectionReferences";
-import { useSelector } from "../../store";
+import { useActions } from "../../hooks/useActions";
+import { actions, useSelector } from "../../store";
 import { FirestoreUser } from "../../types/db/firestoreTypesUsers";
 import { getDocs } from "../../utils/firebase/firestore/documentsHelper";
 
@@ -29,7 +30,9 @@ type AccountInfoState = {
 export const useAccountInfo = (): typeof res => {
   const navigate = useNavigate();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const userId = useSelector((s) => s.user.id);
+  const { startLoading, endLoading } = useActions(actions);
+  const { id, email } = useSelector((s) => s.user);
+
   const [accountData, setAccountData] = useState<AccountInfoState>({
     value: null,
     loading: false,
@@ -41,12 +44,18 @@ export const useAccountInfo = (): typeof res => {
   const handleClickDeleteButton = async (): Promise<void> => {
     const auth = getAuth();
     const user = auth.currentUser;
-    if (user === null) {
+    if (user === null || email === null) {
       onClose();
       alert("ユーザーが見つかりません。");
       return;
     }
-    deleteUser(user)
+
+    startLoading();
+
+    // TODO
+    const credential = EmailAuthProvider.credential(email, "");
+    // reauthenticateWithCredential
+    await deleteUser(user)
       .then((res) => {
         // TODO
         // モーダルを表示
@@ -55,13 +64,15 @@ export const useAccountInfo = (): typeof res => {
         // エラハンTODO
         console.error(e);
       });
+    onClose();
+    endLoading();
   };
 
   useEffect(() => {
-    if (userId === null) return;
+    if (id === null) return;
     getDocs(collectionReferences.users)
       .then((docs) => {
-        const doc = docs.find((d) => d.userId === userId);
+        const doc = docs.find((d) => d.userId === id);
         if (typeof doc === "undefined") return;
         setAccountData((pre) => ({
           ...pre,
@@ -74,7 +85,7 @@ export const useAccountInfo = (): typeof res => {
           error: e,
         }));
       });
-  }, [userId]);
+  }, [id]);
 
   const handleClickBack = () => navigate(-1);
 
