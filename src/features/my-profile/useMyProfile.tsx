@@ -27,6 +27,7 @@ type AccountInfoState = {
   error: any;
 };
 
+// 遊びでこのページだけreact-hook-form使ってみる。
 export const useAccountInfo = (): typeof res => {
   const navigate = useNavigate();
   const { isOpen, onClose, onOpen } = useDisclosure();
