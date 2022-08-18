@@ -1,7 +1,7 @@
 import {
   Box,
   Button,
-  Checkbox,
+  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -27,6 +27,7 @@ type AccountInfoState = {
   error: any;
 };
 
+// https://react-hook-form.com/jp/
 // 遊びでこのページだけreact-hook-form使ってみる。
 export const useAccountInfo = (): typeof res => {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ export const useAccountInfo = (): typeof res => {
   const [checkedList, setCheckedList] = useState({
     first: false,
   });
+  const [password, setPassword] = useState("");
   const handleClickDeleteButton = async (): Promise<void> => {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -54,7 +56,7 @@ export const useAccountInfo = (): typeof res => {
     startLoading();
 
     // TODO
-    const credential = EmailAuthProvider.credential(email, "");
+    const credential = EmailAuthProvider.credential(email, password);
     // reauthenticateWithCredential
     await deleteUser(user)
       .then((res) => {
@@ -103,18 +105,20 @@ export const useAccountInfo = (): typeof res => {
         <ModalCloseButton />
         <ModalHeader>アカウントを削除</ModalHeader>
         <ModalBody>
-          <Box>
-            <Text p="6">
-              アカウントを削除すると、次に同意したことになります。
+          <Box p="2">
+            <Text>
+              アカウントを削除すると、ユーザー情報が完全に削除されます。
             </Text>
-            <Checkbox
-              checked={checkedList.first}
-              onChange={() =>
-                setCheckedList((cur) => ({ ...cur, first: !cur.first }))
-              }
-            >
-              ユーザー情報は完全に削除されます
-            </Checkbox>
+            <Text pt="2">削除するにはパスワードを入力してください。</Text>
+            <Box pt="4">
+              <form>
+                <Input
+                  type="password"
+                  placeholder="ログインパスワード"
+                  onChange={(e) => setPassword(e.currentTarget.value)}
+                />
+              </form>
+            </Box>
             {/* <Checkbox>登録したブックマークは完全に削除されます</Checkbox> */}
           </Box>
         </ModalBody>
@@ -125,7 +129,7 @@ export const useAccountInfo = (): typeof res => {
           <Button
             colorScheme="red"
             onClick={handleClickDeleteButton}
-            disabled={!checkedList.first}
+            disabled={password.length === 0}
           >
             アカウントを削除
           </Button>
