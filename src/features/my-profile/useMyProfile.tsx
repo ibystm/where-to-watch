@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { deleteUser, EmailAuthProvider, getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { collectionReferences } from "../../db/constants/collectionReferences";
 import { useActions } from "../../hooks/useActions";
@@ -27,11 +28,21 @@ type AccountInfoState = {
   error: any;
 };
 
+type FormValue = {
+  password: string;
+};
+
 // https://react-hook-form.com/jp/
 // 遊びでこのページだけreact-hook-form使ってみる。
 export const useAccountInfo = (): typeof res => {
   const navigate = useNavigate();
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const { handleSubmit, register, reset, watch } = useForm<FormValue>({
+    defaultValues: {
+      password: "",
+    },
+  });
+  const watchPassword = watch("password");
   const { startLoading, endLoading } = useActions(actions);
   const { id, email } = useSelector((s) => s.user);
 
@@ -40,10 +51,6 @@ export const useAccountInfo = (): typeof res => {
     loading: false,
     error: null,
   });
-  const [checkedList, setCheckedList] = useState({
-    first: false,
-  });
-  const [password, setPassword] = useState("");
   const handleClickDeleteButton = async (): Promise<void> => {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -56,7 +63,7 @@ export const useAccountInfo = (): typeof res => {
     startLoading();
 
     // TODO
-    const credential = EmailAuthProvider.credential(email, password);
+    const credential = EmailAuthProvider.credential(email, "");
     // reauthenticateWithCredential
     await deleteUser(user)
       .then((res) => {
@@ -93,54 +100,57 @@ export const useAccountInfo = (): typeof res => {
   const handleClickBack = () => navigate(-1);
 
   const handleOpenModal = (): void => {
-    setCheckedList((cur) => ({
-      first: false,
-    }));
+    reset();
     onOpen();
+  };
+  const submitHandler: SubmitHandler<FormValue> = (data) => {
+    console.log({ data });
+    reset();
   };
   const delteUserConfirmModal = () => (
     <Modal isOpen={isOpen} onClose={onClose} size="2xl">
       <ModalOverlay />
       <ModalContent>
-        <ModalCloseButton />
-        <ModalHeader>アカウントを削除</ModalHeader>
-        <ModalBody>
-          <Box p="2">
-            <Text>
-              アカウントを削除すると、ユーザー情報が完全に削除されます。
-            </Text>
-            <Text pt="2">削除するにはパスワードを入力してください。</Text>
-            <Box pt="4">
-              <form>
+        <form onSubmit={handleSubmit(submitHandler)}>
+          <ModalCloseButton />
+          <ModalHeader>アカウントを削除</ModalHeader>
+          <ModalBody>
+            <Box p="2">
+              <Text>
+                アカウントを削除すると、ユーザー情報が完全に削除されます。
+              </Text>
+              <Text pt="2">
+                削除するには、ログインパスワードを入力してください。
+              </Text>
+              <Box pt="4">
                 <Input
+                  {...register("password")}
                   type="password"
                   placeholder="ログインパスワード"
-                  onChange={(e) => setPassword(e.currentTarget.value)}
                 />
-              </form>
+              </Box>
             </Box>
-            {/* <Checkbox>登録したブックマークは完全に削除されます</Checkbox> */}
-          </Box>
-        </ModalBody>
-        <ModalFooter>
-          <Button colorScheme="gray" mr={3} onClick={onClose}>
-            Close
-          </Button>
-          <Button
-            colorScheme="red"
-            onClick={handleClickDeleteButton}
-            disabled={password.length === 0}
-          >
-            アカウントを削除
-          </Button>
-        </ModalFooter>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="gray" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button
+              type="submit"
+              colorScheme="red"
+              // onClick={handleClickDeleteButton}
+              disabled={watchPassword.length === 0}
+            >
+              アカウントを削除
+            </Button>
+          </ModalFooter>
+        </form>
       </ModalContent>
     </Modal>
   );
 
   const res = {
     accountData,
-    handleClickDeleteButton,
     handleClickBack,
     delteUserConfirmModal,
     handleOpenModal,
