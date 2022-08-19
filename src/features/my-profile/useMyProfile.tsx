@@ -12,7 +12,12 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { deleteUser, EmailAuthProvider, getAuth } from "firebase/auth";
+import {
+  deleteUser,
+  EmailAuthProvider,
+  getAuth,
+  reauthenticateWithCredential,
+} from "firebase/auth";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -31,6 +36,12 @@ type AccountInfoState = {
 type FormValue = {
   password: string;
 };
+
+const MODAL_STATE = {
+  CONFIRM: "CONFIRM",
+  COMPLETE: "COMPLETE",
+} as const;
+type ModalState = typeof MODAL_STATE.CONFIRM | typeof MODAL_STATE.COMPLETE;
 
 // https://react-hook-form.com/jp/
 // 遊びでこのページだけreact-hook-form使ってみる。
@@ -51,7 +62,9 @@ export const useAccountInfo = (): typeof res => {
     loading: false,
     error: null,
   });
-  const handleClickDeleteButton = async (): Promise<void> => {
+  const [modalState, setModalState] = useState<ModalState>("CONFIRM");
+
+  const handleDeleteUser = async (password: string): Promise<void> => {
     const auth = getAuth();
     const user = auth.currentUser;
     if (user === null || email === null) {
@@ -60,21 +73,21 @@ export const useAccountInfo = (): typeof res => {
       return;
     }
 
+    const credential = EmailAuthProvider.credential(email, password);
     startLoading();
-
-    // TODO
-    const credential = EmailAuthProvider.credential(email, "");
-    // reauthenticateWithCredential
-    await deleteUser(user)
-      .then((res) => {
-        // TODO
-        // モーダルを表示
-      })
-      .catch((e) => {
-        // エラハンTODO
-        console.error(e);
-      });
-    onClose();
+    const reauthResult = await reauthenticateWithCredential(
+      user,
+      credential
+    ).catch((e) => {
+      console.log({ e });
+    });
+    if (!reauthResult) {
+      return;
+    }
+    await deleteUser(user).catch((e) => {
+      // エラハンTODO
+      console.error(e);
+    });
     endLoading();
   };
 
@@ -96,6 +109,11 @@ export const useAccountInfo = (): typeof res => {
         }));
       });
   }, [id]);
+  useEffect(() => {
+    if (!isOpen) {
+      setModalState("CONFIRM");
+    }
+  }, [isOpen]);
 
   const handleClickBack = () => navigate(-1);
 
@@ -103,17 +121,21 @@ export const useAccountInfo = (): typeof res => {
     reset();
     onOpen();
   };
-  const submitHandler: SubmitHandler<FormValue> = (data) => {
-    console.log({ data });
+  const submitHandler: SubmitHandler<FormValue> = async ({
+    password,
+  }): Promise<void> => {
+    await handleDeleteUser(password);
+    setModalState("COMPLETE");
     reset();
+    navigate("/");
   };
-  const delteUserConfirmModal = () => (
+  const delteConfirmModal = (): JSX.Element => (
     <Modal isOpen={isOpen} onClose={onClose} size="2xl">
       <ModalOverlay />
       <ModalContent>
         <form onSubmit={handleSubmit(submitHandler)}>
           <ModalCloseButton />
-          <ModalHeader>アカウントを削除</ModalHeader>
+          <ModalHeader>アカウントの削除</ModalHeader>
           <ModalBody>
             <Box p="2">
               <Text>
@@ -138,7 +160,6 @@ export const useAccountInfo = (): typeof res => {
             <Button
               type="submit"
               colorScheme="red"
-              // onClick={handleClickDeleteButton}
               disabled={watchPassword.length === 0}
             >
               アカウントを削除
@@ -148,11 +169,34 @@ export const useAccountInfo = (): typeof res => {
       </ModalContent>
     </Modal>
   );
+  const delteCompleteModal = (): JSX.Element => (
+    <Modal isOpen={isOpen} onClose={onClose} size="sm">
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>確認</ModalHeader>
+        <ModalBody>
+          <Box p="4">アカウントを削除しました。</Box>
+        </ModalBody>
+        <ModalFooter>
+          <Button colorScheme="gray" onClick={onClose}>
+            Close
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
+  const renderModal = (): JSX.Element => {
+    if (modalState === "CONFIRM") {
+      return delteConfirmModal();
+    } else {
+      return delteCompleteModal();
+    }
+  };
 
   const res = {
     accountData,
     handleClickBack,
-    delteUserConfirmModal,
+    renderModal,
     handleOpenModal,
   };
   return res;

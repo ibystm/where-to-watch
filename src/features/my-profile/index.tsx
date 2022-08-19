@@ -9,12 +9,8 @@ import {
 import { useAccountInfo } from "./useMyProfile";
 
 export const MyProfile: React.FC = () => {
-  const {
-    accountData,
-    handleClickBack,
-    delteUserConfirmModal,
-    handleOpenModal,
-  } = useAccountInfo();
+  const { accountData, handleClickBack, renderModal, handleOpenModal } =
+    useAccountInfo();
   const { colorMode } = useColorMode();
   const { value } = accountData;
   return (
@@ -64,7 +60,7 @@ export const MyProfile: React.FC = () => {
           </Button>
         </Box>
       </Flex>
-      {delteUserConfirmModal()}
+      {renderModal()}
     </>
   );
 };
