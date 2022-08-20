@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { collectionReferences } from "../../db/constants/collectionReferences";
+import { delteFirestoreUser } from "../../db/firestore/users";
 import { useActions } from "../../hooks/useActions";
 import { actions, useSelector } from "../../store";
 import { FirestoreUser } from "../../types/db/firestoreTypesUsers";
@@ -124,7 +125,10 @@ export const useAccountInfo = (): typeof res => {
   const submitHandler: SubmitHandler<FormValue> = async ({
     password,
   }): Promise<void> => {
-    await handleDeleteUser(password);
+    // await handleDeleteUser(password);
+    if (id) {
+      await delteFirestoreUser(id);
+    }
     setModalState("COMPLETE");
     reset();
     navigate("/");
