@@ -45,7 +45,9 @@ export const MyProfile: React.FC = () => {
             </Flex>
             <Flex p="4" gap="96px">
               <Text fontWeight="bold">アカウント登録日</Text>
-              <Text fontWeight="bold">{value?.createdAt ?? "不明"}</Text>
+              <Text fontWeight="bold">
+                {value?.createdAt.toDate().toDateString() ?? "不明"}
+              </Text>
             </Flex>
             <Flex p="10" justifyContent="center">
               <Button colorScheme="red" onClick={handleOpenModal}>
