@@ -85,10 +85,9 @@ export const useAccountInfo = (): typeof res => {
     if (!reauthResult) {
       return;
     }
-    await deleteUser(user).catch((e) => {
-      // エラハンTODO
-      console.error(e);
-    });
+    // delete from firebase & firestore.
+    await deleteUser(user);
+    await delteFirestoreUser(user.uid);
     endLoading();
   };
 
@@ -125,10 +124,8 @@ export const useAccountInfo = (): typeof res => {
   const submitHandler: SubmitHandler<FormValue> = async ({
     password,
   }): Promise<void> => {
-    // await handleDeleteUser(password);
-    if (id) {
-      await delteFirestoreUser(id);
-    }
+    await handleDeleteUser(password);
+
     setModalState("COMPLETE");
     reset();
     navigate("/");
