@@ -1,17 +1,15 @@
 import { useDisclosure } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
 import { auth } from "../../app/firebase";
+import { useActions } from "../../hooks/useActions";
 import { actions } from "../../store";
-import { signOutUser } from "../../store/slices/usersSlice";
 
 export const useSignOut = (): typeof result => {
-  const dispatch = useDispatch();
-  const { startLoading, endLoading } = actions;
+  const { startLoading, endLoading, signOutUser } = useActions(actions);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const signOut = async () => {
     startLoading();
     await auth.signOut();
-    dispatch(signOutUser());
+    signOutUser();
     onOpen();
     endLoading();
   };

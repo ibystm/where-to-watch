@@ -1,18 +1,15 @@
 import { useFormik } from "formik";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../app/firebase";
 
 import { useActions } from "../../hooks/useActions";
 import { actions } from "../../store/index";
-import { storeUser } from "../../store/slices/usersSlice";
 import { handleErrorByCodes } from "../../utils/firebase/handleError";
 import { schema } from "./schema";
 
 export const useSignIn = (): typeof res => {
-  const dispatch = useDispatch();
-  const { startLoading, endLoading } = useActions(actions);
+  const { startLoading, endLoading, storeUser } = useActions(actions);
 
   const { errors, isValid, touched, values, handleChange, handleBlur } =
     useFormik(schema);
@@ -45,13 +42,11 @@ export const useSignIn = (): typeof res => {
   const signIn = async (email: string, password: string) => {
     const res = await auth.signInWithEmailAndPassword(email, password);
     if (!res.user) return;
-    dispatch(
-      storeUser({
-        email: res.user.email,
-        userName: "",
-        id: res.user.uid,
-      })
-    );
+    storeUser({
+      email: res.user.email,
+      userName: "",
+      id: res.user.uid,
+    });
     return res;
   };
 

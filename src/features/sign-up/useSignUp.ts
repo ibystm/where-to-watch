@@ -1,13 +1,10 @@
 import { FormikErrors } from "formik";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../app/firebase";
 import { addFirestoreUser } from "../../db/firestore/users";
 import { useActions } from "../../hooks/useActions";
-import { AppDispatch } from "../../store";
 import { actions } from "../../store/index";
-import { storeUser } from "../../store/slices/usersSlice";
 import { handleErrorByCodes } from "../../utils/firebase/handleError";
 
 export type SignUpValue = {
@@ -18,8 +15,7 @@ export type SignUpValue = {
 };
 
 export const useSignUp = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const { startLoading, endLoading } = useActions(actions);
+  const { startLoading, endLoading, storeUser } = useActions(actions);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string>("");
   const handleShowClick = () => setShowPassword(!showPassword);
@@ -64,13 +60,12 @@ export const useSignUp = () => {
       name: userName,
       email: user.email ?? "",
     });
-    dispatch(
-      storeUser({
-        id: user.uid,
-        email: user.email,
-        userName: userName,
-      })
-    );
+
+    storeUser({
+      id: user.uid,
+      email: user.email,
+      userName: userName,
+    });
 
     endLoading();
   };

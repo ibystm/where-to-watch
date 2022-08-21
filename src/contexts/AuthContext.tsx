@@ -1,8 +1,8 @@
 import firebase from "firebase/compat/app";
 import React, { useContext, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { auth } from "../app/firebase";
-import { storeUser } from "../store/slices/usersSlice";
+import { useActions } from "../hooks/useActions";
+import { actions } from "../store";
 
 type AuthContextType = {
   currentUser: firebase.User | null;
@@ -35,20 +35,19 @@ export const useAuth = () => {
 };
 
 export const useGetAuth = () => {
-  const dispatch = useDispatch();
+  const { storeUser } = useActions(actions);
 
   useEffect(() => {
     const unscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        dispatch(
-          storeUser({
-            email: user.email,
-            id: user.uid,
-            userName: user.displayName,
-          })
-        );
+        storeUser({
+          email: user.email,
+          id: user.uid,
+          userName: user.displayName,
+        });
       }
     });
     return () => unscribe();
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };
