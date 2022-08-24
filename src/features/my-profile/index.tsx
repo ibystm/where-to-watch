@@ -3,14 +3,34 @@ import {
   Button,
   Flex,
   Heading,
+  Skeleton,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
 import { useAccountInfo } from "./useMyProfile";
 
+const renderSkelton = () => (
+  <>
+    <Box p="4">
+      <Skeleton w="100%" h="6" />
+    </Box>
+    <Box p="4">
+      <Skeleton w="100%" h="6" />
+    </Box>
+    <Box p="4">
+      <Skeleton w="100%" h="6" />
+    </Box>
+  </>
+);
+
 export const MyProfile: React.FC = () => {
-  const { accountData, handleClickBack, renderModal, handleOpenModal } =
-    useAccountInfo();
+  const {
+    accountData,
+    handleClickBack,
+    renderModal,
+    handleOpenModal,
+    isFetching,
+  } = useAccountInfo();
   const { colorMode } = useColorMode();
   const { value } = accountData;
   return (
@@ -35,25 +55,35 @@ export const MyProfile: React.FC = () => {
             アカウント情報
           </Heading>
           <Box p="8">
-            <Flex p="4" gap="96px">
-              <Text fontWeight="bold">ユーザーネーム</Text>
-              <Text fontWeight="bold">{value?.name ?? "なし"}</Text>
-            </Flex>
-            <Flex p="4" gap="96px">
-              <Text fontWeight="bold">メールアドレス</Text>
-              <Text fontWeight="bold">{value?.email ?? "なし"}</Text>
-            </Flex>
-            <Flex p="4" gap="96px">
-              <Text fontWeight="bold">アカウント登録日</Text>
-              <Text fontWeight="bold">
-                {value?.createdAt.toDate().toDateString() ?? "不明"}
-              </Text>
-            </Flex>
-            <Flex p="10" justifyContent="center">
-              <Button colorScheme="red" onClick={handleOpenModal}>
-                アカウントを削除
-              </Button>
-            </Flex>
+            {isFetching ? (
+              renderSkelton()
+            ) : (
+              <>
+                <Flex p="4" gap="96px">
+                  <Text fontWeight="bold">ユーザーネーム</Text>
+                  <Text fontWeight="bold">{value?.name ?? "なし"}</Text>
+                </Flex>
+                <Flex p="4" gap="96px">
+                  <Text fontWeight="bold">メールアドレス</Text>
+                  <Text fontWeight="bold">{value?.email ?? "なし"}</Text>
+                </Flex>
+                <Flex p="4" gap="96px">
+                  <Text fontWeight="bold">アカウント登録日</Text>
+                  <Text fontWeight="bold">
+                    {value?.createdAt.toDate().toDateString() ?? "不明"}
+                  </Text>
+                </Flex>
+                <Flex p="10" justifyContent="center">
+                  <Button
+                    colorScheme="red"
+                    onClick={handleOpenModal}
+                    disabled={isFetching}
+                  >
+                    アカウントを削除
+                  </Button>
+                </Flex>
+              </>
+            )}
           </Box>
         </Box>
         <Box p="6">

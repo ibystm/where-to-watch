@@ -64,6 +64,7 @@ export const useAccountInfo = (): typeof res => {
     error: null,
   });
   const [modalState, setModalState] = useState<ModalState>("CONFIRM");
+  const [isFetching, setIsFetching] = useState(false);
 
   const handleDeleteUser = async (password: string): Promise<void> => {
     const auth = getAuth();
@@ -93,6 +94,7 @@ export const useAccountInfo = (): typeof res => {
 
   useEffect(() => {
     if (id === null) return;
+    setIsFetching(true);
     getDocs(collectionReferences.users)
       .then((docs) => {
         const doc = docs.find((d) => d.userId === id);
@@ -107,6 +109,9 @@ export const useAccountInfo = (): typeof res => {
           ...pre,
           error: e,
         }));
+      })
+      .finally(() => {
+        setIsFetching(false);
       });
   }, [id]);
   useEffect(() => {
@@ -199,6 +204,7 @@ export const useAccountInfo = (): typeof res => {
     handleClickBack,
     renderModal,
     handleOpenModal,
+    isFetching,
   };
   return res;
 };
