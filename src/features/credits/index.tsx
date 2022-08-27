@@ -1,6 +1,7 @@
-import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import TBDBLogo from "../../../src/assets/images/tmdbLogo.svg";
+import { PagebackButton } from "../../commons/comoponents/page-back-button/PageBackButton";
 
 export const Credits: React.FC = () => {
   const navigate = useNavigate();
@@ -25,9 +26,7 @@ export const Credits: React.FC = () => {
         </Box>
       </Flex>
       <Box p="6">
-        <Button onClick={() => navigate(-1)} colorScheme="purple">
-          Go back
-        </Button>
+        <PagebackButton />
       </Box>
     </Box>
   );

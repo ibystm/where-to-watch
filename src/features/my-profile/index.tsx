@@ -7,6 +7,7 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
+import { PagebackButton } from "../../commons/comoponents/page-back-button/PageBackButton";
 import { useAccountInfo } from "./useMyProfile";
 
 const renderSkelton = () => (
@@ -87,9 +88,7 @@ export const MyProfile: React.FC = () => {
           </Box>
         </Box>
         <Box p="6">
-          <Button onClick={handleClickBack} colorScheme="purple">
-            Go back
-          </Button>
+          <PagebackButton />
         </Box>
       </Flex>
       {renderModal()}
