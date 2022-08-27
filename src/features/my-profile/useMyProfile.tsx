@@ -66,30 +66,31 @@ export const useAccountInfo = (): typeof res => {
   const [modalState, setModalState] = useState<ModalState>("CONFIRM");
   const [isFetching, setIsFetching] = useState(false);
 
-  const handleDeleteUser = async (password: string): Promise<void> => {
+  const handleDeleteUser = async (password: string): Promise<boolean> => {
     const auth = getAuth();
     const user = auth.currentUser;
     if (user === null || email === null) {
       onClose();
       alert("ユーザーが見つかりません。");
-      return;
+      return false;
     }
-
-    const credential = EmailAuthProvider.credential(email, password);
     startLoading();
-    const reauthResult = await reauthenticateWithCredential(
-      user,
-      credential
-    ).catch((e) => {
-      console.log({ e });
-    });
-    if (!reauthResult) {
-      return;
+    try {
+      const credential = EmailAuthProvider.credential(email, password);
+      const reauthResult = await reauthenticateWithCredential(user, credential);
+      if (!reauthResult) {
+        return false;
+      }
+      // delete from firebase & firestore.
+      await deleteUser(user);
+      await delteFirestoreUser(user.uid);
+      return true;
+    } catch (e) {
+      console.error(e);
+      return false;
+    } finally {
+      endLoading();
     }
-    // delete from firebase & firestore.
-    await deleteUser(user);
-    await delteFirestoreUser(user.uid);
-    endLoading();
   };
 
   useEffect(() => {
@@ -129,13 +130,13 @@ export const useAccountInfo = (): typeof res => {
   const submitHandler: SubmitHandler<FormValue> = async ({
     password,
   }): Promise<void> => {
-    await handleDeleteUser(password);
-
+    const res = await handleDeleteUser(password);
+    if (!res) return; // TODO: エラハンちゃんとする
     setModalState("COMPLETE");
     reset();
     navigate("/");
   };
-  const delteConfirmModal = (): JSX.Element => (
+  const deleteConfirmModal = (): JSX.Element => (
     <Modal isOpen={isOpen} onClose={onClose} size="2xl">
       <ModalOverlay />
       <ModalContent>
@@ -175,7 +176,7 @@ export const useAccountInfo = (): typeof res => {
       </ModalContent>
     </Modal>
   );
-  const delteCompleteModal = (): JSX.Element => (
+  const deleteCompleteModal = (): JSX.Element => (
     <Modal isOpen={isOpen} onClose={onClose} size="sm">
       <ModalOverlay />
       <ModalContent>
@@ -193,9 +194,9 @@ export const useAccountInfo = (): typeof res => {
   );
   const renderModal = (): JSX.Element => {
     if (modalState === "CONFIRM") {
-      return delteConfirmModal();
+      return deleteConfirmModal();
     } else {
-      return delteCompleteModal();
+      return deleteCompleteModal();
     }
   };
 
