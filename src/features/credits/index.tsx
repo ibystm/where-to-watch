@@ -1,10 +1,8 @@
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 import TBDBLogo from "../../../src/assets/images/tmdbLogo.svg";
 import { PagebackButton } from "../../commons/comoponents/page-back-button/PageBackButton";
 
 export const Credits: React.FC = () => {
-  const navigate = useNavigate();
   return (
     <Box
       p="4"
