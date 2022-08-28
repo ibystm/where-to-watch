@@ -1,5 +1,11 @@
 import { Icon, MenuItem, MenuList } from "@chakra-ui/react";
-import { FiCreditCard, FiInfo, FiLogOut, FiUser } from "react-icons/fi";
+import {
+  FiCreditCard,
+  FiInfo,
+  FiLogIn,
+  FiLogOut,
+  FiUser,
+} from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "../../../store";
 import { useSignOut } from "../../sign-in/useSignOut";
@@ -12,10 +18,6 @@ export const useDropDownMenu = (): typeof result => {
   const createMenuItems = (): JSX.Element => {
     return (
       <MenuList>
-        {/* TODO */}
-        {user.id === null && (
-          <MenuItem onClick={() => navigate("/signin")}>サインイン</MenuItem>
-        )}
         <MenuItem onClick={() => navigate("/about")}>
           <Icon as={FiInfo} mr="2" />
           Where to watchについて
@@ -24,6 +26,12 @@ export const useDropDownMenu = (): typeof result => {
           <Icon as={FiCreditCard} mr="2" />
           Credits
         </MenuItem>
+        {user.id === null && (
+          <MenuItem onClick={() => navigate("/signin")}>
+            <Icon as={FiLogIn} mr="2" />
+            サインイン
+          </MenuItem>
+        )}
         {typeof user.id === "string" && (
           <MenuItem onClick={() => navigate("/myprofile")}>
             <Icon as={FiUser} mr="2" />
