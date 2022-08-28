@@ -10,7 +10,7 @@ export const SearchResultHelperTextArea: React.FC<{
   return contents.length > 0 ? (
     <Box marginLeft="32px" paddingY="16px" display="flex" gap="3">
       <Text fontSize="2xl" fontWeight="bold">
-        キーワード: {`${searchedKeyword} の検索結果`}
+        キーワード: {`"${searchedKeyword}" 、${currentMode}での検索結果`}
       </Text>
       <ResetButton />
     </Box>
