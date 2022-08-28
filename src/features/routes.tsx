@@ -1,5 +1,6 @@
 import { Navigate, RouteObject } from "react-router-dom";
 import { About } from "./about";
+import { BookMarks } from "./book-marks/index";
 import { Credits } from "./credits";
 import { Home } from "./home";
 import { MyProfile } from "./my-profile";
@@ -31,6 +32,11 @@ export const routes = (isSignIn: boolean): RouteObject[] => [
     path: "/myprofile",
     element: <MyProfile />,
   },
+  {
+    path: "/bookmarks",
+    element: <BookMarks />,
+  },
+
   {
     path: "/*",
     element: isSignIn ? <Navigate to="/" /> : <Navigate to="signin" />,

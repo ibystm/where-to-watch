@@ -1,5 +1,6 @@
 import { Icon, MenuItem, MenuList } from "@chakra-ui/react";
 import {
+  FiBookmark,
   FiCreditCard,
   FiInfo,
   FiLogIn,
@@ -32,6 +33,12 @@ export const useDropDownMenu = (): typeof result => {
             サインイン
           </MenuItem>
         )}
+        {
+          <MenuItem onClick={() => navigate("/bookmarks")}>
+            <Icon as={FiBookmark} mr="2" />
+            ブックマーク
+          </MenuItem>
+        }
         {typeof user.id === "string" && (
           <MenuItem onClick={() => navigate("/myprofile")}>
             <Icon as={FiUser} mr="2" />
