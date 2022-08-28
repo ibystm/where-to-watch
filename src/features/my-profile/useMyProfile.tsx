@@ -1,6 +1,8 @@
+import { WarningTwoIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
+  Icon,
   Input,
   Modal,
   ModalBody,
@@ -142,7 +144,10 @@ export const useAccountInfo = (): typeof res => {
       <ModalContent>
         <form onSubmit={handleSubmit(submitHandler)}>
           <ModalCloseButton />
-          <ModalHeader>アカウントの削除</ModalHeader>
+          <ModalHeader>
+            <Icon as={WarningTwoIcon} mr="1" />
+            アカウントの削除
+          </ModalHeader>
           <ModalBody>
             <Box p="2">
               <Text>
