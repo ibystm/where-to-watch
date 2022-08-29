@@ -14,7 +14,7 @@ export const reducerFormatUtil = {
       poster_path: item.poster_path ?? null,
       backdrop_path: item.backdrop_path ?? null,
       video: item.video,
-      releaseDate: item.release_date,
+      release_date: item.release_date,
       voteCoun: item.vote_count,
       voteAverage: item.vote_average,
       genre_ids: item.genre_ids,
@@ -31,7 +31,7 @@ export const reducerFormatUtil = {
           genre_ids: item.genre_ids,
           title: item.name,
           poster_path: item.poster_path,
-          releaseDate: item.first_air_date,
+          release_date: item.first_air_date,
           overview: item.overview,
         } as ActualContentData)
     );

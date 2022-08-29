@@ -15,6 +15,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { ContentDetail } from "../../../apis/types/ContentDetails";
 import { commonDictionaries } from "../../../commons/constants/dictionaries";
 import { useSelector } from "../../../store";
 import { ActualContentData } from "../../../types/redux/discovers";
@@ -23,7 +24,7 @@ import { DisplayWatchProviderResult } from "../hooks/useContentsProvider";
 interface P {
   isOpen: boolean;
   onClose: () => void;
-  currentItem: ActualContentData;
+  currentItem: ActualContentData | ContentDetail;
   providerData: DisplayWatchProviderResult;
   youtubeUrl?: string;
 }
@@ -35,7 +36,7 @@ export const ContentDetailModal: React.FC<P> = ({
   providerData,
   youtubeUrl,
 }) => {
-  const { title, releaseDate, original_title, overview } = currentItem;
+  const { title, release_date, original_title, overview } = currentItem;
   const imageDataObj = useSelector((s) => s.configurations.images);
   const buildImagePath = (logoPath: string = ""): string => {
     if (imageDataObj === null) return "";
@@ -58,7 +59,7 @@ export const ContentDetailModal: React.FC<P> = ({
           <Box marginBottom="2" display="flex" justifyContent="end">
             <Text>
               {`${commonDictionaries.releaseDate}: ${
-                releaseDate ? releaseDate.replaceAll("-", "/") : "不明"
+                release_date ? release_date.replaceAll("-", "/") : "不明"
               }`}
             </Text>
           </Box>

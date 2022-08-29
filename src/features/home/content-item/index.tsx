@@ -3,19 +3,19 @@ import { useState } from "react";
 import { MdOutlineHideImage } from "react-icons/md";
 import { commonDictionaries } from "../../../commons/constants/dictionaries";
 import { useSelector } from "../../../store";
-import { ActualContentData } from "../../../types/redux/discovers";
+import { Content } from "../../../types/contentsItem";
 import {
   selectPosterSizes,
   selectSecureBaseUrl,
 } from "../../configurations/slice";
 
 type P = {
-  contentItem: ActualContentData;
-  modalOpen: (contentItem: ActualContentData) => void;
+  contentItem: Content;
+  modalOpen: (contentItem: Content) => void;
 };
 
 export const ContentItem: React.FC<P> = ({ contentItem, modalOpen }) => {
-  const { title, poster_path, releaseDate } = contentItem;
+  const { title, poster_path, release_date } = contentItem;
   const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
   const imageUrl = useSelector(selectSecureBaseUrl);
   const posterSizes = useSelector(selectPosterSizes);
@@ -91,8 +91,8 @@ export const ContentItem: React.FC<P> = ({ contentItem, modalOpen }) => {
         {title ? title : commonDictionaries.noTitle}
       </Text>
       <Text fontSize="sm">
-        {releaseDate
-          ? `${commonDictionaries.releaseDate}: ${releaseDate.replaceAll(
+        {release_date
+          ? `${commonDictionaries.releaseDate}: ${release_date.replaceAll(
               "-",
               "/"
             )}`
