@@ -25,10 +25,8 @@ export const endPoints = {
     `/tv/popular?${languages.ja}&${API_KEY_QUERY_STRINGS}&region=${region}&page=${page}`,
   getMovieWatchProvider: (movieId: number) =>
     `/movie/${movieId}/watch/providers?${API_KEY_QUERY_STRINGS}`,
-
-  // getUpComingTVs: (page: number = 1) =>
-  //   `/tv/upcoming?${languages.ja}&${API_KEY_QUERY_STRINGS}&page=${page}`,
-  // getTrendings: (mediaType: MediaType, timeWindow: TimeWindow) => `/trending/${mediaType}/`
+  getMovieDetail: (movieId: number) =>
+    `/movie/${movieId}?${API_KEY_QUERY_STRINGS}&${languages.ja}`,
 };
 
 export const TVURLs = {
