@@ -9,7 +9,7 @@ export const searchMoviesAPI = async (
   keyword: string,
   page?: number
 ): Promise<SearchMoviesResponse> => {
-  const res = await baseRepository.get(movieUrls.searchMovie(keyword, page));
+  const res = await baseRepository.get(movieUrls.search(keyword, page));
   return res.data;
 };
 

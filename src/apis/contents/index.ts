@@ -17,7 +17,7 @@ export const fetchDiscoverMovies = async (
 ): Promise<DiscoverMovieResponse> => {
   try {
     const res = await baseRepository.get<DiscoverMovieResponse>(
-      `${movieUrls.discoverMovie(genreId, page)}`
+      `${movieUrls.discover(genreId, page)}`
     );
     return res.data;
   } catch (e) {
@@ -31,7 +31,7 @@ export const fetchDiscoverTVs = async (
 ): Promise<DiscoverTVShowsResponse> => {
   try {
     const res = await baseRepository.get<DiscoverTVShowsResponse>(
-      `${movieUrls.discoverTVs(genreId, page)}`
+      `${TvUrls.discover(genreId, page)}`
     );
     return res.data;
   } catch (e) {
@@ -42,14 +42,14 @@ export const fetchDiscoverTVs = async (
 export const getpopularMovies = async (
   page: number
 ): Promise<GetPopularMoviesAPIResponse> => {
-  const res = await baseRepository.get(movieUrls.getPopularMovies("JP", page));
+  const res = await baseRepository.get(movieUrls.getPopulars("JP", page));
   return res.data;
 };
 
 export const getPopularTVs = async (
   page: number
 ): Promise<GetPopularTVsAPIResponse> => {
-  const res = await baseRepository.get(movieUrls.getPopularTVs("JP", page));
+  const res = await baseRepository.get(TvUrls.getPopulars("JP", page));
   return res.data;
 };
 
@@ -57,7 +57,7 @@ export const getMovieWatchProvider = async (
   movieId: number
 ): Promise<GetWatchMovieProviderRespose> => {
   const res = await baseRepository.get<GetWatchMovieProviderRespose>(
-    `${movieUrls.getMovieWatchProvider(movieId)}`
+    `${movieUrls.getWatchProvider(movieId)}`
   );
   return res.data;
 };
@@ -66,7 +66,7 @@ export const getTVWatchProvider = async (
   movieId: number
 ): Promise<GetWatchMovieProviderRespose> => {
   return baseRepository
-    .get<GetWatchMovieProviderRespose>(`${TvUrls.getTVWatchProvider(movieId)}`)
+    .get<GetWatchMovieProviderRespose>(`${TvUrls.getWatchProvider(movieId)}`)
     .then((res) => res.data);
 };
 

@@ -5,34 +5,35 @@ const languages = {
   ja: "language=ja",
 };
 
-export const movieUrls = {
+export const commons = {
   configuration: `/configuration?${API_KEY_QUERY_STRINGS}`,
-  discoverMovie: (genreId: number, page?: number) =>
+};
+
+export const movieUrls = {
+  discover: (genreId: number, page?: number) =>
     `/discover/movie?${languages.ja}&${API_KEY_QUERY_STRINGS}&with_genres=${genreId}&page=${page}`,
-  discoverTVs: (genreId: number, page?: number) =>
-    `/discover/tv?${languages.ja}&${API_KEY_QUERY_STRINGS}&with_genres=${genreId}&page=${page}`,
-  searchMovie: (keyword: string, page?: number) =>
+  search: (keyword: string, page?: number) =>
     `/search/movie?${languages.ja}&${API_KEY_QUERY_STRINGS}&query=${keyword}&page=${page}`,
   getVideos: (movieId: number) =>
     `/movie/${movieId}/videos?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
-  getMovieGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
-  getTVGenres: `/genre/tv/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
-  getPopularMovies: (region: ISOCodes31661, page: number = 1) =>
+  getGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
+  getPopulars: (region: ISOCodes31661, page: number = 1) =>
     `/movie/popular?${languages.ja}&${API_KEY_QUERY_STRINGS}&region=${region}&page=${page}`,
-  getPopularTVs: (region: ISOCodes31661, page: number = 1) =>
-    `/tv/popular?${languages.ja}&${API_KEY_QUERY_STRINGS}&region=${region}&page=${page}`,
-  getMovieWatchProvider: (movieId: number) =>
+  getWatchProvider: (movieId: number) =>
     `/movie/${movieId}/watch/providers?${API_KEY_QUERY_STRINGS}`,
   getDetail: (movieId: number) =>
     `/movie/${movieId}?${API_KEY_QUERY_STRINGS}&${languages.ja}`,
 };
 
 export const TvUrls = {
-  discover: `/discover/tv?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
+  discover: (genreId: number, page?: number) =>
+    `/discover/tv?${languages.ja}&${API_KEY_QUERY_STRINGS}&with_genres=${genreId}&page=${page}`,
   search: (keyword: string, page?: number) =>
     `/search/tv?${languages.ja}&${API_KEY_QUERY_STRINGS}&query=${keyword}&page=${page}`,
-  getGenres: `/genre/movie/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
-  getTVWatchProvider: (tvId: number) =>
+  getGenres: `/genre/tv/list?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
+  getPopulars: (region: ISOCodes31661, page: number = 1) =>
+    `/tv/popular?${languages.ja}&${API_KEY_QUERY_STRINGS}&region=${region}&page=${page}`,
+  getWatchProvider: (tvId: number) =>
     `/tv/${tvId}/watch/providers?${API_KEY_QUERY_STRINGS}`,
   getVideos: (tvId: number) =>
     `/tv/${tvId}/videos?${languages.ja}&${API_KEY_QUERY_STRINGS}`,
