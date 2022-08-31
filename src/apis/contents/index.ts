@@ -1,5 +1,5 @@
 import { baseRepository } from "../axios";
-import { endPoints, TVURLs } from "../endPoints";
+import { movieUrls, TvUrls } from "../endPoints";
 import {
   DiscoverMovieResponse,
   GetWatchMovieProviderRespose,
@@ -17,7 +17,7 @@ export const fetchDiscoverMovies = async (
 ): Promise<DiscoverMovieResponse> => {
   try {
     const res = await baseRepository.get<DiscoverMovieResponse>(
-      `${endPoints.discoverMovie(genreId, page)}`
+      `${movieUrls.discoverMovie(genreId, page)}`
     );
     return res.data;
   } catch (e) {
@@ -31,7 +31,7 @@ export const fetchDiscoverTVs = async (
 ): Promise<DiscoverTVShowsResponse> => {
   try {
     const res = await baseRepository.get<DiscoverTVShowsResponse>(
-      `${endPoints.discoverTVs(genreId, page)}`
+      `${movieUrls.discoverTVs(genreId, page)}`
     );
     return res.data;
   } catch (e) {
@@ -42,14 +42,14 @@ export const fetchDiscoverTVs = async (
 export const getpopularMovies = async (
   page: number
 ): Promise<GetPopularMoviesAPIResponse> => {
-  const res = await baseRepository.get(endPoints.getPopularMovies("JP", page));
+  const res = await baseRepository.get(movieUrls.getPopularMovies("JP", page));
   return res.data;
 };
 
 export const getPopularTVs = async (
   page: number
 ): Promise<GetPopularTVsAPIResponse> => {
-  const res = await baseRepository.get(endPoints.getPopularTVs("JP", page));
+  const res = await baseRepository.get(movieUrls.getPopularTVs("JP", page));
   return res.data;
 };
 
@@ -57,7 +57,7 @@ export const getMovieWatchProvider = async (
   movieId: number
 ): Promise<GetWatchMovieProviderRespose> => {
   const res = await baseRepository.get<GetWatchMovieProviderRespose>(
-    `${endPoints.getMovieWatchProvider(movieId)}`
+    `${movieUrls.getMovieWatchProvider(movieId)}`
   );
   return res.data;
 };
@@ -66,13 +66,13 @@ export const getTVWatchProvider = async (
   movieId: number
 ): Promise<GetWatchMovieProviderRespose> => {
   return baseRepository
-    .get<GetWatchMovieProviderRespose>(`${TVURLs.getTVWatchProvider(movieId)}`)
+    .get<GetWatchMovieProviderRespose>(`${TvUrls.getTVWatchProvider(movieId)}`)
     .then((res) => res.data);
 };
 
 export const getMovieVideos = async (movieId: number) => {
   return baseRepository
-    .get<FetchVideoApiResponse>(`${endPoints.getVideos(movieId)}`)
+    .get<FetchVideoApiResponse>(`${movieUrls.getVideos(movieId)}`)
     .then((res) => res.data)
     .catch((e) => {
       throw e;
@@ -81,7 +81,7 @@ export const getMovieVideos = async (movieId: number) => {
 
 export const getTvVideos = async (movieId: number) => {
   return baseRepository
-    .get<FetchVideoApiResponse>(`${TVURLs.getVideos(movieId)}`)
+    .get<FetchVideoApiResponse>(`${TvUrls.getVideos(movieId)}`)
     .then((res) => res.data)
     .catch((e) => {
       throw e;

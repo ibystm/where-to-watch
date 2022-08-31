@@ -1,17 +1,17 @@
 import { baseRepository } from "../axios";
-import { endPoints } from "../endPoints";
+import { movieUrls } from "../endPoints";
 import { GetMovieGenresResponse, GetTVGenresResponse } from "../types/genres";
 
 export const getMovieGenres = async () => {
   const res = await baseRepository.get<GetMovieGenresResponse>(
-    endPoints.getMovieGenres
+    movieUrls.getMovieGenres
   );
   return res.data;
 };
 
 export const getTVGenres = async () => {
   const res = await baseRepository.get<GetTVGenresResponse>(
-    endPoints.getTVGenres
+    movieUrls.getTVGenres
   );
   return res.data;
 };

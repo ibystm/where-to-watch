@@ -1,5 +1,5 @@
 import { baseRepository } from "../axios";
-import { endPoints, TVURLs } from "../endPoints";
+import { movieUrls, TvUrls } from "../endPoints";
 import {
   SearchMoviesResponse,
   SearchTVsResponse,
@@ -9,7 +9,7 @@ export const searchMoviesAPI = async (
   keyword: string,
   page?: number
 ): Promise<SearchMoviesResponse> => {
-  const res = await baseRepository.get(endPoints.searchMovie(keyword, page));
+  const res = await baseRepository.get(movieUrls.searchMovie(keyword, page));
   return res.data;
 };
 
@@ -17,6 +17,6 @@ export const searchTVAPI = async (
   keyword: string,
   page?: number
 ): Promise<SearchTVsResponse> => {
-  const res = await baseRepository.get(TVURLs.search(keyword, page));
+  const res = await baseRepository.get(TvUrls.search(keyword, page));
   return res.data;
 };

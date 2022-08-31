@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { baseRepository } from "../../apis/axios";
-import { endPoints } from "../../apis/endPoints";
+import { movieUrls } from "../../apis/endPoints";
 import { ContentDetail } from "../../apis/types/ContentDetails";
 import { collectionReferences } from "../../db/constants/collectionReferences";
 import { useSelector } from "../../store";
@@ -8,6 +8,7 @@ import { getDocs } from "../../utils/firebase/firestore/documentsHelper";
 
 export const useBookmark = (): typeof result => {
   const userId = useSelector((s) => s.user.id);
+  const modeIndex = useSelector((s) => s.contentsMode.modeIndex);
   const [loading, setLoading] = useState(false);
   const [bookmarkList, setBookmarkList] = useState<ContentDetail[]>([]);
   const hasBookMarkList = bookmarkList.length > 0;
@@ -18,7 +19,7 @@ export const useBookmark = (): typeof result => {
     const id = Number(tmdbId);
     try {
       return await (
-        await baseRepository.get(endPoints.getMovieDetail(Number(id)))
+        await baseRepository.get(movieUrls.getDetail(Number(id)))
       ).data;
     } catch (e) {
       throw e;
