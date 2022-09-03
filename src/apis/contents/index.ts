@@ -1,5 +1,6 @@
 import { baseRepository } from "../axios";
 import { movieUrls, TvUrls } from "../endPoints";
+import { ContentDetail } from "../types/ContentDetails";
 import {
   DiscoverMovieResponse,
   GetWatchMovieProviderRespose,
@@ -86,4 +87,28 @@ export const getTvVideos = async (movieId: number) => {
     .catch((e) => {
       throw e;
     });
+};
+
+export const fetchMovieDetail = async (
+  tmdbId: string
+): Promise<ContentDetail> => {
+  const id = Number(tmdbId);
+  try {
+    return await (
+      await baseRepository.get(movieUrls.getDetail(Number(id)))
+    ).data;
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const fetchTvDetail = async (tmdbId: string): Promise<ContentDetail> => {
+  const id = Number(tmdbId);
+  try {
+    return await (
+      await baseRepository.get(TvUrls.getDetail(Number(id)))
+    ).data;
+  } catch (e) {
+    throw e;
+  }
 };
