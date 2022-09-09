@@ -20,7 +20,7 @@ export const ContentItem: React.FC<P> = ({ contentItem, modalOpen }) => {
   const imageUrl = useSelector(selectSecureBaseUrl);
   const posterSizes = useSelector(selectPosterSizes);
   const pathBuilder = (): string | undefined => {
-    if (!posterSizes || !imageUrl) return;
+    if (!posterSizes || !imageUrl || !poster_path) return;
     const size = posterSizes.slice(-1)[0];
 
     return `${imageUrl}/${size}/${poster_path}`;
