@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 import { ContentItem } from "../home/content-item";
 import { SkeltonContentItem } from "../home/skelton-content-item";
 import { useBookmark } from "./useBookmarks";
@@ -23,5 +23,14 @@ export const BookMarks: React.FC = () => {
     );
   }
 
-  return <> {renderContents()}</>;
+  return (
+    <VStack p="8" w="100%" h="100%">
+      <Heading size="lg" marginLeft="4">
+        ブックマークされた作品
+      </Heading>
+      <Box p="5" w="100%">
+        {renderContents()}
+      </Box>
+    </VStack>
+  );
 };
