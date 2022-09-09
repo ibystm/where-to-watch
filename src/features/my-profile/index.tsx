@@ -8,7 +8,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { PagebackButton } from "../../commons/comoponents/page-back-button/PageBackButton";
-import { useAccountInfo } from "./useMyProfile";
+import { useMyProfile } from "./useMyProfile";
 
 const renderSkelton = () => (
   <>
@@ -31,7 +31,7 @@ export const MyProfile: React.FC = () => {
     renderModal,
     handleOpenModal,
     isFetching,
-  } = useAccountInfo();
+  } = useMyProfile();
   const { colorMode } = useColorMode();
   const { value } = accountData;
   return (

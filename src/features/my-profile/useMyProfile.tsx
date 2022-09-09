@@ -48,7 +48,7 @@ type ModalState = typeof MODAL_STATE.CONFIRM | typeof MODAL_STATE.COMPLETE;
 
 // https://react-hook-form.com/jp/
 // 遊びでこのページだけreact-hook-form使ってみる。
-export const useAccountInfo = (): typeof res => {
+export const useMyProfile = (): typeof res => {
   const navigate = useNavigate();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { handleSubmit, register, reset, watch } = useForm<FormValue>({
