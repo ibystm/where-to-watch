@@ -1,4 +1,5 @@
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import { PagebackButton } from "../../commons/comoponents/page-back-button/PageBackButton";
 import { ContentItem } from "../home/content-item";
 import { SkeltonContentItem } from "../home/skelton-content-item";
 import { useBookmark } from "./useBookmarks";
@@ -17,9 +18,12 @@ export const BookMarks: React.FC = () => {
 
   if (!hasBookMarkList) {
     return (
-      <Box p="100">
-        <Text fontSize="xl">まだブックマークされた作品がありません</Text>
-      </Box>
+      <VStack p="100">
+        <Text fontSize="xl" p="10">
+          まだブックマークされた作品がありません
+        </Text>
+        <PagebackButton />
+      </VStack>
     );
   }
 
@@ -31,6 +35,7 @@ export const BookMarks: React.FC = () => {
       <Box p="5" w="100%">
         {renderContents()}
       </Box>
+      <PagebackButton />
     </VStack>
   );
 };
