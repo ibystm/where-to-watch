@@ -4,6 +4,7 @@ import {
   Button,
   Divider,
   Flex,
+  IconButton,
   Image,
   Modal,
   ModalBody,
@@ -15,6 +16,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { FiBookmark } from "react-icons/fi";
 import { ContentDetail } from "../../../apis/types/ContentDetails";
 import { commonDictionaries } from "../../../commons/constants/dictionaries";
 import { useSelector } from "../../../store";
@@ -56,13 +58,19 @@ export const ContentDetailModal: React.FC<P> = ({
         <ModalHeader marginRight="32px">{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody overflowY="auto">
-          <Box marginBottom="2" display="flex" justifyContent="end">
+          <Flex
+            marginBottom="2"
+            gap="3"
+            justifyContent="end"
+            alignItems="center"
+          >
             <Text>
               {`${commonDictionaries.releaseDate}: ${
                 release_date ? release_date.replaceAll("-", "/") : "不明"
               }`}
             </Text>
-          </Box>
+            <IconButton aria-label="Search database" icon={<FiBookmark />} />
+          </Flex>
           <Text paddingY="8">
             {overview ? overview : commonDictionaries.noOverview}
           </Text>
