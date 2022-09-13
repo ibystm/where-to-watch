@@ -14,6 +14,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  Tooltip,
 } from "@chakra-ui/react";
 import React from "react";
 import { FiBookmark } from "react-icons/fi";
@@ -69,7 +70,9 @@ export const ContentDetailModal: React.FC<P> = ({
                 release_date ? release_date.replaceAll("-", "/") : "不明"
               }`}
             </Text>
-            <IconButton aria-label="Search database" icon={<FiBookmark />} />
+            <Tooltip label="ブックマークに追加する">
+              <IconButton aria-label="Search database" icon={<FiBookmark />} />
+            </Tooltip>
           </Flex>
           <Text paddingY="8">
             {overview ? overview : commonDictionaries.noOverview}
