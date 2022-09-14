@@ -1,8 +1,10 @@
 import { ModeIndex } from "../redux/contentsMode";
 import { FirestoreTypesCommon } from "./firestoreTypesCommon";
 
-export type FirestoreTypesBookMark = {
+export type BookMark = {
   name: string;
   modeIndex: ModeIndex;
   tmdbId: string;
-} & FirestoreTypesCommon;
+};
+
+export type FirestoreTypesBookMark = BookMark & FirestoreTypesCommon;
