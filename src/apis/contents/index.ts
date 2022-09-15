@@ -90,7 +90,7 @@ export const getTvVideos = async (movieId: number) => {
 };
 
 export const fetchMovieDetail = async (
-  tmdbId: string
+  tmdbId: number
 ): Promise<ContentDetail> => {
   const id = Number(tmdbId);
   try {
@@ -102,7 +102,7 @@ export const fetchMovieDetail = async (
   }
 };
 
-export const fetchTvDetail = async (tmdbId: string): Promise<ContentDetail> => {
+export const fetchTvDetail = async (tmdbId: number): Promise<ContentDetail> => {
   const id = Number(tmdbId);
   try {
     return await (

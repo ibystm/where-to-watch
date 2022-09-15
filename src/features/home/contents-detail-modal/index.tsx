@@ -23,6 +23,7 @@ import { commonDictionaries } from "../../../commons/constants/dictionaries";
 import { useSelector } from "../../../store";
 import { ActualContentData } from "../../../types/redux/discovers";
 import { DisplayWatchProviderResult } from "../hooks/useContentsProvider";
+import { useContentDeteilModal } from "./useContentDeteilModal";
 
 interface P {
   isOpen: boolean;
@@ -39,7 +40,9 @@ export const ContentDetailModal: React.FC<P> = ({
   providerData,
   youtubeUrl,
 }) => {
-  const { title, release_date, original_title, overview } = currentItem;
+  const { title, release_date, original_title, overview, id } = currentItem;
+  const { handleClickBookMark } = useContentDeteilModal();
+
   const imageDataObj = useSelector((s) => s.configurations.images);
   const buildImagePath = (logoPath: string = ""): string => {
     if (imageDataObj === null) return "";
@@ -71,7 +74,13 @@ export const ContentDetailModal: React.FC<P> = ({
               }`}
             </Text>
             <Tooltip label="ブックマークに追加する">
-              <IconButton aria-label="Search database" icon={<FiBookmark />} />
+              <IconButton
+                aria-label="Search database"
+                icon={<FiBookmark />}
+                onClick={() =>
+                  handleClickBookMark({ name: title ?? "", tmdbId: id })
+                }
+              />
             </Tooltip>
           </Flex>
           <Text paddingY="8">
