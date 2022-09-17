@@ -17,7 +17,7 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 import React from "react";
-import { FiBookmark } from "react-icons/fi";
+import { FiBookmark, FiCheckSquare } from "react-icons/fi";
 import { ContentDetail } from "../../../apis/types/ContentDetails";
 import { commonDictionaries } from "../../../commons/constants/dictionaries";
 import { useSelector } from "../../../store";
@@ -41,7 +41,7 @@ export const ContentDetailModal: React.FC<P> = ({
   youtubeUrl,
 }) => {
   const { title, release_date, original_title, overview, id } = currentItem;
-  const { handleClickBookMark } = useContentDeteilModal();
+  const { handleClickBookMark, isAlreadyBookmarked } = useContentDeteilModal();
 
   const imageDataObj = useSelector((s) => s.configurations.images);
   const buildImagePath = (logoPath: string = ""): string => {
@@ -73,10 +73,16 @@ export const ContentDetailModal: React.FC<P> = ({
                 release_date ? release_date.replaceAll("-", "/") : "不明"
               }`}
             </Text>
-            <Tooltip label="ブックマークに追加する">
+            <Tooltip
+              label={
+                isAlreadyBookmarked
+                  ? "ブックマークから削除する"
+                  : "ブックマークに追加する"
+              }
+            >
               <IconButton
                 aria-label="Search database"
-                icon={<FiBookmark />}
+                icon={isAlreadyBookmarked ? <FiCheckSquare /> : <FiBookmark />}
                 onClick={() =>
                   handleClickBookMark({ name: title ?? "", tmdbId: id })
                 }
