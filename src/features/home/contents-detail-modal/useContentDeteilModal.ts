@@ -1,8 +1,10 @@
 import { useToast, UseToastOptions } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { collectionReferences } from "../../../db/constants/collectionReferences";
 import { addBookMark as addBookMarkToFirestore } from "../../../db/firestore/users/bookmarks";
 import { useSelector } from "../../../store";
 import { BookMark } from "../../../types/db/firestoreTypesBookMarks";
+import { getDocs } from "../../../utils/firebase/firestore/documentsHelper";
 
 type Param = Omit<BookMark, "modeIndex">;
 
@@ -19,7 +21,7 @@ const toastOption: UseToastOptions = {
   },
 };
 
-export const useContentDeteilModal = (): typeof result => {
+export const useContentDeteilModal = (tmdbId: number): typeof result => {
   const userId = useSelector((s) => s.user.id);
   const modeIndex = useSelector((s) => s.contentsMode.modeIndex);
   const toast = useToast();
@@ -35,9 +37,15 @@ export const useContentDeteilModal = (): typeof result => {
   };
 
   useEffect(() => {
-    // TODO
-    // FirestoreからbookmarkのDocsを取得して、すでに登録済みのBookmarkであるかの状態を管理
-  }, []);
+    if (userId === null) return;
+    getDocs(collectionReferences.bookmarks(userId)).then(async (data) => {
+      if (!data) {
+        return;
+      }
+      const res = await Promise.all(data);
+      setIsAlreadyBookmarked(!!res.find((r) => r.tmdbId === tmdbId));
+    });
+  }, [userId, tmdbId]);
 
   const result = {
     handleClickBookMark,

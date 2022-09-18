@@ -41,7 +41,8 @@ export const ContentDetailModal: React.FC<P> = ({
   youtubeUrl,
 }) => {
   const { title, release_date, original_title, overview, id } = currentItem;
-  const { handleClickBookMark, isAlreadyBookmarked } = useContentDeteilModal();
+  const { handleClickBookMark, isAlreadyBookmarked } =
+    useContentDeteilModal(id);
 
   const imageDataObj = useSelector((s) => s.configurations.images);
   const buildImagePath = (logoPath: string = ""): string => {
