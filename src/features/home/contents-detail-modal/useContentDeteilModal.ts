@@ -30,7 +30,7 @@ export const useContentDeteilModal = (tmdbId: number): typeof result => {
   const toast = useToast();
   const [isAlreadyBookmarked, setIsAlreadyBookmarked] = useState(false);
 
-  const handleClickBookMark = async (param: Param) => {
+  const addBookMark = async (param: Param) => {
     if (userId === null) return;
     await addBookMarkToFirestore(userId, {
       modeIndex,
@@ -56,7 +56,7 @@ export const useContentDeteilModal = (tmdbId: number): typeof result => {
   }, [userId, tmdbId]);
 
   const result = {
-    handleClickBookMark,
+    addBookMark,
     deleteBookMark,
     isAlreadyBookmarked,
   };

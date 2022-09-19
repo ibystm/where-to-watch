@@ -41,7 +41,7 @@ export const ContentDetailModal: React.FC<P> = ({
   youtubeUrl,
 }) => {
   const { title, release_date, original_title, overview, id } = currentItem;
-  const { handleClickBookMark, deleteBookMark, isAlreadyBookmarked } =
+  const { addBookMark, deleteBookMark, isAlreadyBookmarked } =
     useContentDeteilModal(id);
 
   const imageDataObj = useSelector((s) => s.configurations.images);
@@ -87,7 +87,7 @@ export const ContentDetailModal: React.FC<P> = ({
                 onClick={() =>
                   isAlreadyBookmarked
                     ? deleteBookMark(id)
-                    : handleClickBookMark({ name: title ?? "", tmdbId: id })
+                    : addBookMark({ name: title ?? "", tmdbId: id })
                 }
               />
             </Tooltip>
