@@ -1,7 +1,10 @@
 import { useToast, UseToastOptions } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { collectionReferences } from "../../../db/constants/collectionReferences";
-import { addBookMark as addBookMarkToFirestore } from "../../../db/firestore/users/bookmarks";
+import {
+  addBookMark as addBookMarkToFirestore,
+  deleteBookMark as deleteBookMarkFromFirestore,
+} from "../../../db/firestore/users/bookmarks";
 import { useSelector } from "../../../store";
 import { BookMark } from "../../../types/db/firestoreTypesBookMarks";
 import { getDocs } from "../../../utils/firebase/firestore/documentsHelper";
@@ -36,6 +39,11 @@ export const useContentDeteilModal = (tmdbId: number): typeof result => {
     toast(toastOption);
   };
 
+  const deleteBookMark = async (tmdbId: number): Promise<void> => {
+    if (userId === null) return;
+    await deleteBookMarkFromFirestore(userId, tmdbId);
+  };
+
   useEffect(() => {
     if (userId === null) return;
     getDocs(collectionReferences.bookmarks(userId)).then(async (data) => {
@@ -49,6 +57,7 @@ export const useContentDeteilModal = (tmdbId: number): typeof result => {
 
   const result = {
     handleClickBookMark,
+    deleteBookMark,
     isAlreadyBookmarked,
   };
   return result;

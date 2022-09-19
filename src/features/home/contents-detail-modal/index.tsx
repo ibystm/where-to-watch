@@ -41,7 +41,7 @@ export const ContentDetailModal: React.FC<P> = ({
   youtubeUrl,
 }) => {
   const { title, release_date, original_title, overview, id } = currentItem;
-  const { handleClickBookMark, isAlreadyBookmarked } =
+  const { handleClickBookMark, deleteBookMark, isAlreadyBookmarked } =
     useContentDeteilModal(id);
 
   const imageDataObj = useSelector((s) => s.configurations.images);
@@ -85,7 +85,9 @@ export const ContentDetailModal: React.FC<P> = ({
                 aria-label="Search database"
                 icon={isAlreadyBookmarked ? <FiCheckSquare /> : <FiBookmark />}
                 onClick={() =>
-                  handleClickBookMark({ name: title ?? "", tmdbId: id })
+                  isAlreadyBookmarked
+                    ? deleteBookMark(id)
+                    : handleClickBookMark({ name: title ?? "", tmdbId: id })
                 }
               />
             </Tooltip>
