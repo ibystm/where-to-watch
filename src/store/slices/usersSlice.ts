@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // TODO 後でファイルごとdirectory移動
 
-type UserState = {
+export type UserState = {
   id: string | null;
   userName: string | null;
   email: string | null;
