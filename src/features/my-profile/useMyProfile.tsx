@@ -122,8 +122,6 @@ export const useMyProfile = (): typeof res => {
     }
   }, [isOpen]);
 
-  const handleClickBack = () => navigate(-1);
-
   const handleOpenModal = (): void => {
     reset();
     onOpen();
@@ -206,7 +204,6 @@ export const useMyProfile = (): typeof res => {
 
   const res = {
     accountData,
-    handleClickBack,
     renderModal,
     handleOpenModal,
     isFetching,

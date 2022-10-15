@@ -25,15 +25,11 @@ const renderSkelton = () => (
 );
 
 export const MyProfile: React.FC = () => {
-  const {
-    accountData,
-    handleClickBack,
-    renderModal,
-    handleOpenModal,
-    isFetching,
-  } = useMyProfile();
+  const { accountData, renderModal, handleOpenModal, isFetching } =
+    useMyProfile();
   const { colorMode } = useColorMode();
   const { value } = accountData;
+
   return (
     <>
       <Flex
