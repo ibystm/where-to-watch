@@ -1,3 +1,4 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { FormikErrors } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -49,7 +50,11 @@ export const useSignUp = () => {
   }) => {
     const { email, password, userName } = params;
     startLoading();
-    const { user } = await auth.createUserWithEmailAndPassword(email, password);
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     if (user === null) {
       endLoading();
       throw new Error("No user found.");

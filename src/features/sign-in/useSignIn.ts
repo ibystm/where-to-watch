@@ -1,3 +1,4 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -40,7 +41,7 @@ export const useSignIn = (): typeof res => {
   };
 
   const signIn = async (email: string, password: string) => {
-    const res = await auth.signInWithEmailAndPassword(email, password);
+    const res = await signInWithEmailAndPassword(auth, email, password);
     if (!res.user) return;
     storeUser({
       email: res.user.email,

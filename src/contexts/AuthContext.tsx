@@ -1,17 +1,17 @@
-import firebase from "firebase/compat/app";
+import { User } from "firebase/auth";
 import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../app/firebase";
 import { useActions } from "../hooks/useActions";
 import { actions } from "../store";
 
 type AuthContextType = {
-  currentUser: firebase.User | null;
+  currentUser: User | null;
 };
 
 const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const value = {
     currentUser,
   };
