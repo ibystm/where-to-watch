@@ -17,12 +17,12 @@ import {
 import {
   deleteUser,
   EmailAuthProvider,
-  getAuth,
   reauthenticateWithCredential,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../app/firebase";
 import { collectionReferences } from "../../db/constants/collectionReferences";
 import { delteFirestoreUser } from "../../db/firestore/users";
 import { useActions } from "../../hooks/useActions";
@@ -69,7 +69,6 @@ export const useMyProfile = (): typeof res => {
   const [isFetching, setIsFetching] = useState(false);
 
   const handleDeleteUser = async (password: string): Promise<boolean> => {
-    const auth = getAuth();
     const user = auth.currentUser;
     if (user === null || email === null) {
       onClose();
