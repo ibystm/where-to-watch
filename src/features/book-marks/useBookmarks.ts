@@ -33,6 +33,7 @@ export const useBookmark = (): typeof result => {
   }, [userId]);
 
   const result = {
+    userId,
     loading,
     bookmarkList,
     hasBookMarkList,
