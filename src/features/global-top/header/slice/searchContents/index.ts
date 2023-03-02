@@ -28,7 +28,7 @@ const asyncActions = {
     DiscoverMovieResponse,
     { keyword: string; page?: number }
   >(`${SLICE_NAME}/searchMovies`, async (params, { rejectWithValue }) => {
-    const { keyword, page } = params;
+    const { keyword, page = 1 } = params;
     try {
       return searchMoviesAPI(keyword, page);
     } catch (e) {
@@ -39,7 +39,7 @@ const asyncActions = {
     DiscoverTVShowsResponse,
     { keyword: string; page?: number }
   >(`${SLICE_NAME}/searchTVs`, async (params, { rejectWithValue }) => {
-    const { keyword, page } = params;
+    const { keyword, page = 1 } = params;
     try {
       return searchTVAPI(keyword, page);
     } catch (e) {

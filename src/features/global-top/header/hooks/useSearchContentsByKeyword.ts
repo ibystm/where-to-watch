@@ -1,5 +1,6 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useHotKeys } from "../../../../hooks/useHotkeys";
 import { actions, useSelector } from "../../../../store";
 import { ModeType } from "../../../../types/redux/contentsMode";
@@ -19,6 +20,8 @@ export const useSearchMoviesByKeyword = (): typeof result => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   useHotKeys("k", onOpen, true);
 
+  const navigate = useNavigate();
+
   const getInitialValue = (): SearchMovieFormValues => {
     if (keyword.length === 0) return initialValues;
     return {
@@ -37,6 +40,8 @@ export const useSearchMoviesByKeyword = (): typeof result => {
       dispatch(searchTV({ keyword: values.searchName }));
     }
     onClose();
+    // どこの画面からでも、検索ワードを入力して検索を実行できるようにするため、検索実行時にかならず一覧画面へ戻す
+    navigate("/");
   };
 
   const result = {
