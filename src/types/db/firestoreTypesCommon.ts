@@ -1,6 +1,7 @@
+import { Timestamp } from "firebase/firestore";
+
 export type FirestoreTypesCommon = {
-  id: string;
-  createdAt: number;
-  updatedAt: number;
-  deletedAt: number;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+  deletedAt?: Timestamp;
 };

@@ -4,6 +4,7 @@ import {
   Button,
   Divider,
   Flex,
+  IconButton,
   Image,
   Modal,
   ModalBody,
@@ -13,17 +14,21 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  Tooltip,
 } from "@chakra-ui/react";
 import React from "react";
+import { FiBookmark, FiCheckSquare } from "react-icons/fi";
+import { ContentDetail } from "../../../apis/types/ContentDetails";
 import { commonDictionaries } from "../../../commons/constants/dictionaries";
 import { useSelector } from "../../../store";
 import { ActualContentData } from "../../../types/redux/discovers";
 import { DisplayWatchProviderResult } from "../hooks/useContentsProvider";
+import { useContentDeteilModal } from "./useContentDeteilModal";
 
 interface P {
   isOpen: boolean;
   onClose: () => void;
-  currentItem: ActualContentData;
+  currentItem: ActualContentData | ContentDetail;
   providerData: DisplayWatchProviderResult;
   youtubeUrl?: string;
 }
@@ -35,7 +40,10 @@ export const ContentDetailModal: React.FC<P> = ({
   providerData,
   youtubeUrl,
 }) => {
-  const { title, releaseDate, original_title, overview } = currentItem;
+  const { title, release_date, original_title, overview, id } = currentItem;
+  const { addBookMark, deleteBookMark, isAlreadyBookmarked } =
+    useContentDeteilModal(id);
+
   const imageDataObj = useSelector((s) => s.configurations.images);
   const buildImagePath = (logoPath: string = ""): string => {
     if (imageDataObj === null) return "";
@@ -55,13 +63,35 @@ export const ContentDetailModal: React.FC<P> = ({
         <ModalHeader marginRight="32px">{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody overflowY="auto">
-          <Box marginBottom="2" display="flex" justifyContent="end">
+          <Flex
+            marginBottom="2"
+            gap="3"
+            justifyContent="end"
+            alignItems="center"
+          >
             <Text>
               {`${commonDictionaries.releaseDate}: ${
-                releaseDate ? releaseDate.replaceAll("-", "/") : "不明"
+                release_date ? release_date.replaceAll("-", "/") : "不明"
               }`}
             </Text>
-          </Box>
+            <Tooltip
+              label={
+                isAlreadyBookmarked
+                  ? "ブックマークから削除する"
+                  : "ブックマークに追加する"
+              }
+            >
+              <IconButton
+                aria-label="Search database"
+                icon={isAlreadyBookmarked ? <FiCheckSquare /> : <FiBookmark />}
+                onClick={() =>
+                  isAlreadyBookmarked
+                    ? deleteBookMark(id)
+                    : addBookMark({ name: title ?? "", tmdbId: id })
+                }
+              />
+            </Tooltip>
+          </Flex>
           <Text paddingY="8">
             {overview ? overview : commonDictionaries.noOverview}
           </Text>
@@ -109,6 +139,9 @@ export const ContentDetailModal: React.FC<P> = ({
           >
             {youtubeUrl && (
               <>
+                <Box p="4">
+                  <Text fontWeight="semibold">Trailer video</Text>
+                </Box>
                 <AspectRatio ratio={16 / 9} w="100%">
                   <iframe
                     src={youtubeUrl}
@@ -116,9 +149,6 @@ export const ContentDetailModal: React.FC<P> = ({
                     allowFullScreen
                   />
                 </AspectRatio>
-                <Box p="2">
-                  <Text fontWeight="bold">Trailer video</Text>
-                </Box>
               </>
             )}
           </Flex>

@@ -10,84 +10,36 @@ import {
   InputLeftElement,
   InputRightElement,
   Stack,
+  VStack,
 } from "@chakra-ui/react";
-import { Form, Formik, FormikErrors } from "formik";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import * as Yup from "yup";
+import { Form, Formik, FormikProps } from "formik";
+import React, { useRef } from "react";
 import { ErrorMessage } from "../error-message/ErrorMessage";
-import { useHandleFBErrors } from "../sign-in/useHandleFBErrors";
-import { useSignUp } from "./useSignUp";
+import { validationScheme } from "./schema";
+import { SignUpValue, useSignUp } from "./useSignUp";
 
-type SignUpValue = {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
-
-const passwordRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[!-~]{10,}$/;
-const validationScheme = Yup.object().shape({
-  username: Yup.string()
-    .required("必須です")
-    .min(5, "5文字以上にしてください")
-    .max(8, "12文字以下にしてください"),
-  email: Yup.string()
-    .email("正しい形式のemailを設定してください")
-    .required("必須です"),
-  password: Yup.string()
-    .required("必須です")
-    .min(8, "8文字以上にしてください")
-    .max(24, "24文字以下にしてください")
-    .matches(passwordRegex, {
-      message: "大文字・小文字・数字を含むパスワードを指定してください",
-    }),
-  confirmPassword: Yup.string()
-    .required("必須です")
-    .min(8, "8文字以上にしてください")
-    .max(24, "24文字以下にしてください")
-    .matches(
-      passwordRegex,
-      'message: "大文字・小文字・数字を含むパスワードを指定してください'
-    ),
-});
-
-const initialValues: SignUpValue = {
-  username: "",
+const initialValues = {
+  userName: "",
   email: "",
   password: "",
   confirmPassword: "",
 };
 
 export const SignUp: React.FC = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [submitError, setSubmitError] = useState<string>("");
-  const { handleErrorByCodes } = useHandleFBErrors();
-  const { signUp } = useSignUp();
-  const handleShowClick = () => setShowPassword(!showPassword);
-  const navigate = useNavigate();
-  const toSignInPage = () => {
-    navigate("/signin");
-  };
-  const hasError = (errors: FormikErrors<SignUpValue>): boolean => {
-    return (
-      !!errors.confirmPassword ||
-      !!errors.email ||
-      !!errors.password ||
-      !!errors.username
-    );
-  };
-  const onSubmit = async (values: SignUpValue) => {
-    await signUp(values.email, values.password)
-      .then(() => {
-        navigate("/");
-      })
-      .catch((e) => {
-        if (e.code && typeof e.code) {
-          setSubmitError(handleErrorByCodes(e.code));
-        }
-        console.log(e);
-      });
+  const {
+    onSubmit,
+    submitError,
+    showPassword,
+    handleShowClick,
+    hasError,
+    navigate,
+  } = useSignUp();
+
+  const formikRef = useRef<FormikProps<SignUpValue>>(null);
+  const submitOnEnter = (event: React.KeyboardEvent) => {
+    console.log("submitted!!");
+    if (event.key === "Enter") return;
+    // handleSubmit();
   };
 
   return (
@@ -109,35 +61,30 @@ export const SignUp: React.FC = () => {
         </Heading>
         <Box minW={{ base: "90%", md: "468px" }}>
           <Formik
+            innerRef={formikRef}
             initialValues={initialValues}
             validationSchema={validationScheme}
             onSubmit={onSubmit}
           >
             {({ values, handleChange, touched, errors, handleBlur }) => (
               <Form>
-                <Stack
-                  spacing={6}
-                  p="1rem"
-                  backgroundColor="whiteAlpha.900"
-                  boxShadow="2xl"
-                  borderRadius="20px"
-                >
+                <Stack spacing={6} p="1rem" boxShadow="2xl" borderRadius="20px">
                   <FormControl
-                    isInvalid={!!errors.username && !!touched.username}
+                    isInvalid={!!errors.userName && !!touched.userName}
                   >
                     <InputGroup>
                       <InputLeftElement pointerEvents="none" />
                       <Input
-                        value={values.username}
-                        id="username"
+                        value={values.userName}
+                        id="userName"
                         placeholder="User name"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         borderRadius="20px"
                       />
                     </InputGroup>
-                    {touched.username && errors.username && (
-                      <FormErrorMessage>{errors.username}</FormErrorMessage>
+                    {touched.userName && errors.userName && (
+                      <FormErrorMessage>{errors.userName}</FormErrorMessage>
                     )}
                   </FormControl>
                   <FormControl isInvalid={!!(errors.email && touched.email)}>
@@ -195,6 +142,7 @@ export const SignUp: React.FC = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         borderRadius="20px"
+                        onKeyDown={submitOnEnter}
                       />
                       <InputRightElement width="4.5rem">
                         <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -225,12 +173,19 @@ export const SignUp: React.FC = () => {
           </Formik>
         </Box>
       </Stack>
-      <Box>
-        You have a account ?{" "}
-        <Button color="purple.500" onClick={toSignInPage} variant="link">
+      <VStack>
+        <Button
+          color="purple.500"
+          onClick={() => navigate("/signin")}
+          variant="link"
+        >
           Sign In
         </Button>
-      </Box>
+        <Box>Or</Box>
+        <Button onClick={() => navigate("/")} variant="link">
+          Use without account
+        </Button>
+      </VStack>
     </Flex>
   );
 };

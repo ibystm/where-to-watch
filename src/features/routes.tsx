@@ -1,8 +1,11 @@
 import { Navigate, RouteObject } from "react-router-dom";
 import { About } from "./about";
+import { BookMarks } from "./book-marks/index";
 import { Credits } from "./credits";
 import { Home } from "./home";
-import { SignUp } from "./sign-up/SignUp";
+import { MyProfile } from "./my-profile";
+import { SiginIn } from "./sign-in";
+import { SignUp } from "./sign-up";
 
 export const routes = (isSignIn: boolean): RouteObject[] => [
   {
@@ -11,7 +14,7 @@ export const routes = (isSignIn: boolean): RouteObject[] => [
   },
   {
     path: "/signin",
-    element: <Home />,
+    element: <SiginIn />,
   },
   {
     path: "/signup",
@@ -25,6 +28,15 @@ export const routes = (isSignIn: boolean): RouteObject[] => [
     path: "/about",
     element: <About />,
   },
+  {
+    path: "/myprofile",
+    element: <MyProfile />,
+  },
+  {
+    path: "/bookmarks",
+    element: <BookMarks />,
+  },
+
   {
     path: "/*",
     element: isSignIn ? <Navigate to="/" /> : <Navigate to="signin" />,

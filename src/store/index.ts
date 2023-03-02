@@ -29,7 +29,7 @@ import {
 } from "../features/home/slice/popularities/index";
 import { reducer as loadingReducer } from "../features/loading/slice";
 import { loadingActions } from "../features/loading/slice/index";
-import { reducer as userReducer } from "./slices/usersSlice";
+import { reducer as userReducer, userActions } from "./slices/usersSlice";
 
 export const actions = {
   ...contentModeActions,
@@ -39,6 +39,7 @@ export const actions = {
   ...contentsActions,
   ...popularitiesActions,
   ...searchContentsActions,
+  ...userActions,
 };
 
 export const store = configureStore({

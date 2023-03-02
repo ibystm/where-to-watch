@@ -1,17 +1,17 @@
-import firebase from "firebase/compat/app";
+import { User } from "firebase/auth";
 import React, { useContext, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { auth } from "../db/firebase";
-import { storeUser } from "../store/slices/usersSlice";
+import { auth } from "../app/firebase";
+import { useActions } from "../hooks/useActions";
+import { actions } from "../store";
 
 type AuthContextType = {
-  currentUser: firebase.User | null;
+  currentUser: User | null;
 };
 
 const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const value = {
     currentUser,
   };
@@ -35,20 +35,19 @@ export const useAuth = () => {
 };
 
 export const useGetAuth = () => {
-  const dispatch = useDispatch();
+  const { storeUser } = useActions(actions);
 
   useEffect(() => {
     const unscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        dispatch(
-          storeUser({
-            email: user.email,
-            id: user.uid,
-            userName: user.displayName,
-          })
-        );
+        storeUser({
+          email: user.email,
+          id: user.uid,
+          userName: user.displayName,
+        });
       }
     });
     return () => unscribe();
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };

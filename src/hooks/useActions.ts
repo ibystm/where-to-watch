@@ -16,7 +16,7 @@ export type BindedActionCreators<AC extends ActionCreatorsMapObject> = {
 
 export const useActions = <ActionCreators extends ActionCreatorsMapObject>(
   actions: ActionCreators,
-  deps: ActionCreators[]
+  deps: ActionCreators[] = []
 ): BindedActionCreators<ActionCreators> => {
   const dispatch = useDispatch();
   return useMemo(

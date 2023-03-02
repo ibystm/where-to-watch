@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, useColorMode } from "@chakra-ui/react";
 import { forwardRef } from "react";
 import { useDispatch } from "react-redux";
 import { actions, useSelector } from "../../../store";
@@ -16,6 +16,21 @@ export const GenreChip = forwardRef<HTMLButtonElement, Props>(
     const handleClick = () => {
       dispatch(actions.selectGenre(genre.id));
     };
+    const { colorMode } = useColorMode();
+    const defineBg = (): string => {
+      if (colorMode === "light") {
+        if (shouldFocus) return "gray.700";
+      }
+      if (shouldFocus) return "white";
+      return "inherit";
+    };
+    const defineColor = (): string => {
+      if (colorMode === "light") {
+        if (shouldFocus) return "white";
+      }
+      if (shouldFocus) return "black";
+      return "inherit";
+    };
 
     return (
       <Button
@@ -26,8 +41,8 @@ export const GenreChip = forwardRef<HTMLButtonElement, Props>(
         borderRadius="20px"
         padding="8px 16px"
         flexShrink="0"
-        color={shouldFocus ? "white" : "inherit"}
-        backgroundColor={shouldFocus ? "gray.700" : "inherit"}
+        color={defineColor()}
+        bg={defineBg()}
         onClick={handleClick}
         _hover={{
           backgroundColor: shouldFocus ? "gray.700" : "inherit",

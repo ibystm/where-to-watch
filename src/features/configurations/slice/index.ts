@@ -5,15 +5,15 @@ import { RootState } from "../../../store";
 const SLICE_NAME = "configuration";
 
 type ConfigurationState = {
-  loading: boolean;
   images: ImageConfigurations | null;
   changeKeys: string[];
+  hideHeaderPaths: string[];
 };
 
 export const initialState: ConfigurationState = {
   images: null,
   changeKeys: [],
-  loading: false,
+  hideHeaderPaths: [],
 };
 
 const asyncActions = {
@@ -32,11 +32,12 @@ const asyncActions = {
 const slice = createSlice({
   name: SLICE_NAME,
   initialState,
-  reducers: {},
+  reducers: {
+    addHeaderHidePaths: (state, { payload }) => {
+      state.hideHeaderPaths = payload;
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(asyncActions.fetchConfigurations.pending, (state) => {
-      state.loading = true;
-    });
     builder.addCase(
       asyncActions.fetchConfigurations.fulfilled,
       (state, { payload }) => {
@@ -47,13 +48,11 @@ const slice = createSlice({
         if (change_keys) {
           state.changeKeys = change_keys;
         }
-        state.loading = false;
       }
     );
     builder.addCase(
       asyncActions.fetchConfigurations.rejected,
-      (state, { payload }) => {
-        state.loading = false;
+      (_, { payload }) => {
         throw payload;
       }
     );
@@ -61,6 +60,7 @@ const slice = createSlice({
 });
 
 export const configurationActions = {
+  ...slice.actions,
   ...asyncActions,
 };
 

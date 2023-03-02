@@ -20,7 +20,6 @@ export const SearchForm: React.FC<P> = ({ onCloseModal }) => {
       name="searchName"
       value={searchKeyword}
       onChange={handleChange}
-      onFocus={() => {}}
       _focus={{
         border: "none",
       }}

@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
           backgroundColor="inherit"
           height="70%"
         >
-          <Heading size="lg">Where to watch.</Heading>
+          <Heading size="md">Where to watch.</Heading>
         </Button>
         <Flex maxW="400px" borderRadius="20px" flexGrow="1">
           <GlobalSearchBox />

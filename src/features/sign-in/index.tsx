@@ -13,58 +13,31 @@ import {
   Link,
   Stack,
 } from "@chakra-ui/react";
-import { useFormik } from "formik";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import * as Yup from "yup";
+import React from "react";
 import { ErrorMessage } from "../error-message/ErrorMessage";
-import { useHandleFBErrors } from "./useHandleFBErrors";
 import { useSignIn } from "./useSignIn";
 
-const validationScheme = {
-  initialValues: {
-    email: "",
-    password: "",
-  },
-  validationSchema: Yup.object({
-    email: Yup.string().email().required(),
-    password: Yup.string().required().min(8, "8文字以上にしてください"),
-  }),
-  onSubmit: () => {
-    console.log("submit is Done!!");
-  },
-};
-
 export const SiginIn: React.FC = () => {
-  const formik = useFormik(validationScheme);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const { handleErrorByCodes } = useHandleFBErrors();
-  const { signIn } = useSignIn();
-  const handleShowClick = () => setShowPassword(!showPassword);
-  const navigate = useNavigate();
-  const toSignUpPage = () => {
-    navigate("/signup");
-  };
-  const handleSubmit = async () => {
-    if (formik.errors.email && formik.errors.password) {
-      return;
-    }
-    await signIn(formik.values.email, formik.values.password).catch((e) => {
-      console.log(typeof e.code);
-      if (e.code && e.code === 400) {
-        const msg = handleErrorByCodes(e.code);
-        setErrorMessage(msg);
-      }
-    });
-  };
+  const {
+    errors,
+    values,
+    touched,
+    handleBlur,
+    handleChange,
+    handleShowClick,
+    showPassword,
+    onKeyDownEnter,
+    isValid,
+    navigate,
+    handleSubmit,
+    errorMessage,
+  } = useSignIn();
 
   return (
     <Flex
       flexDirection="column"
       width="100wh"
       height="100vh"
-      // backgroundColor="gray.200"
       justifyContent="center"
       alignItems="center"
     >
@@ -80,36 +53,37 @@ export const SiginIn: React.FC = () => {
         <Box minW={{ base: "90%", md: "468px" }}>
           <form>
             <Stack spacing={8} p="1rem" boxShadow="2xl" borderRadius="20px">
-              <FormControl isInvalid={!!formik.errors.email}>
+              <FormControl isInvalid={!!errors.email && !!touched.email}>
                 <InputGroup>
                   <InputLeftElement pointerEvents="none" />
                   <Input
                     id="email"
-                    value={formik.values.email}
+                    value={values.email}
                     type="email"
                     placeholder="email address"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     borderRadius="20px"
                   />
                 </InputGroup>
-                {formik.errors.email && formik.touched.email && (
+                {errors.email && touched.email && (
                   <FormErrorMessage fontSize="14px">
-                    {formik.errors.email}
+                    {errors.email}
                   </FormErrorMessage>
                 )}
               </FormControl>
-              <FormControl isInvalid={!!formik.errors.password}>
+              <FormControl isInvalid={!!errors.password && !!touched.password}>
                 <InputGroup>
                   <InputLeftElement pointerEvents="none" color="gray.300" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     borderRadius="20px"
+                    onKeyDown={onKeyDownEnter}
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -117,9 +91,9 @@ export const SiginIn: React.FC = () => {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
-                {formik.errors.password && formik.touched.password && (
+                {errors.password && touched.password && (
                   <FormErrorMessage fontSize="14px">
-                    {formik.errors.password}
+                    {errors.password}
                   </FormErrorMessage>
                 )}
                 <FormHelperText textAlign="right">
@@ -132,21 +106,37 @@ export const SiginIn: React.FC = () => {
                 colorScheme="purple"
                 width="full"
                 onClick={handleSubmit}
-                disabled={!formik.isValid}
+                disabled={!isValid}
               >
                 Signin
               </Button>
-              <ErrorMessage message={errorMessage} />
+              {errorMessage && <ErrorMessage message={errorMessage} />}
             </Stack>
           </form>
         </Box>
       </Stack>
       <Box>
-        New to use ?{" "}
-        <Button color="purple.500" onClick={toSignUpPage} variant="link">
+        <Button
+          color="purple.500"
+          onClick={() => {
+            navigate("/signup");
+          }}
+          variant="link"
+          p={1}
+        >
           Sign Up
         </Button>
       </Box>
+      <Box>Or</Box>
+      <Button
+        onClick={() => {
+          navigate("/");
+        }}
+        variant="link"
+        p={1}
+      >
+        Use without account
+      </Button>
     </Flex>
   );
 };
