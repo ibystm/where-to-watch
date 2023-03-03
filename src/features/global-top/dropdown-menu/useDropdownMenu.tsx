@@ -19,10 +19,11 @@ export const useDropDownMenu = (): typeof result => {
   const createMenuItems = (): JSX.Element => {
     return (
       <MenuList>
-        <MenuItem onClick={() => navigate("/about")}>
+        {/* TODO: about pageを作成するかは別途検討 */}
+        {/* <MenuItem onClick={() => navigate("/about")}>
           <Icon as={FiInfo} mr="2" />
           Where to watchについて
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem onClick={() => navigate("/credits")}>
           <Icon as={FiCreditCard} mr="2" />
           Credits
